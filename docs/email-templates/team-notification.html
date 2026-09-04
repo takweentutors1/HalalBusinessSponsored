@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Application — {{business_name}}</title>
+</head>
+<body style="margin:0; padding:0; background-color:#F9FAFB; font-family: Georgia, 'Times New Roman', serif;">
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+    New application from {{business_name}} ({{business_type}}) — review at {{admin_link}}
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F9FAFB; padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px; width:100%; background-color:#FFFFFF; border-radius:8px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%); padding:28px 40px; border-bottom:3px solid #10B981;">
+              <div style="font-family: Georgia, 'EB Garamond', serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#059669; font-weight:700; margin-bottom:6px;">
+                {{brand_name}} · Internal Notification
+              </div>
+              <h1 style="margin:0; font-family: Georgia, 'EB Garamond', serif; font-size:22px; font-weight:700; color:#111827;">
+                New Application: {{business_name}}
+              </h1>
+            </td>
+          </tr>
+
+          <!-- Quick actions -->
+          <tr>
+            <td style="padding:24px 40px 8px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background-color:#10B981; border-radius:6px;">
+                    <a href="{{admin_link}}" style="display:inline-block; padding:12px 24px; color:#FFFFFF; font-family:Georgia,serif; font-weight:700; font-size:14px; text-decoration:none;">
+                      Review in Admin →
+                    </a>
+                  </td>
+                  <td style="width:12px;"></td>
+                  <td style="font-size:13px; color:#6B7280; padding-left:4px;">
+                    Ref: {{application_id}} &nbsp;·&nbsp; Submitted {{submitted_at}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Business snapshot -->
+          <tr>
+            <td style="padding:24px 40px 8px 40px;">
+              <p style="margin:0 0 8px 0; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#059669;">Business</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#374151; border-collapse:collapse;">
+                <tr><td style="padding:6px 0; width:180px; color:#6B7280;">Business name</td><td style="padding:6px 0; font-weight:700; color:#111827;">{{business_name}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Business type</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{business_type}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Years operating</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{years_operating}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Website</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{current_website_url}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Instagram</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{instagram_handle}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Facebook</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{facebook_handle}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Social activity level</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{activity_level}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Google profile</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{google_profile_url}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Google review count</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{google_review_count}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Credentials</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{credentials}}</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Narrative fields -->
+          <tr>
+            <td style="padding:20px 40px 8px 40px;">
+              <p style="margin:0 0 8px 0; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#059669;">In their words</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F9FAFB; border-radius:6px;">
+                <tr>
+                  <td style="padding:14px 16px; font-size:14px; color:#374151; line-height:1.6;">
+                    <p style="margin:0 0 4px 0; font-weight:700; color:#111827;">Services description</p>
+                    <p style="margin:0 0 14px 0;">{{services_description}}</p>
+                    <p style="margin:0 0 4px 0; font-weight:700; color:#111827;">Biggest challenge</p>
+                    <p style="margin:0 0 14px 0;">{{biggest_challenge}}</p>
+                    <p style="margin:0 0 4px 0; font-weight:700; color:#111827;">Content readiness</p>
+                    <p style="margin:0;">{{content_readiness}}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Contact -->
+          <tr>
+            <td style="padding:20px 40px 8px 40px;">
+              <p style="margin:0 0 8px 0; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#059669;">Contact</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#374151; border-collapse:collapse;">
+                <tr><td style="padding:6px 0; width:180px; color:#6B7280;">Name</td><td style="padding:6px 0; font-weight:700; color:#111827;">{{contact_name}}</td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Email</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;"><a href="mailto:{{contact_email}}" style="color:#059669;">{{contact_email}}</a></td></tr>
+                <tr><td style="padding:6px 0; color:#6B7280; border-top:1px solid #F3F4F6;">Phone</td><td style="padding:6px 0; border-top:1px solid #F3F4F6;">{{contact_phone}}</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Consent badges -->
+          <tr>
+            <td style="padding:20px 40px 28px 40px;">
+              <p style="margin:0 0 8px 0; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#059669;">Consent</p>
+              <span style="display:inline-block; padding:6px 14px; border-radius:9999px; font-size:13px; font-weight:700; background-color:#DCFCE7; color:#15803D; margin-right:8px;">
+                Terms: {{consent_terms}}
+              </span>
+              <span style="display:inline-block; padding:6px 14px; border-radius:9999px; font-size:13px; font-weight:700; background-color:#DCFCE7; color:#15803D;">
+                Feedback: {{consent_feedback}}
+              </span>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#F9FAFB; padding:20px 40px; text-align:center; border-top:1px solid #E5E7EB;">
+              <p style="margin:0; font-size:12px; color:#9CA3AF;">
+                Automated notification from the {{brand_name}} application system · sent via the Hostinger mailbox
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
