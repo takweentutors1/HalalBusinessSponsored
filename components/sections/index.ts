@@ -6,3 +6,4 @@ export { ProcessSteps } from "./ProcessSteps";
 export { PortfolioAndTestimonials } from "./PortfolioAndTestimonials";
 export { FAQ } from "./FAQ";
 export { FinalCta } from "./FinalCta";
+export { TermsList } from "./TermsList";
