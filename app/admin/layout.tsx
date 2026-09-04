@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Admin | Halal Business Initiative",
+  title: "Admin",
   robots: { index: false, follow: false },
 };
 
@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       >
         <Link
           href="/admin/applications"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--color-primary-dark)" }}
+          style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--color-primary-accessible)" }}
         >
           Halal Business Initiative — Admin
         </Link>

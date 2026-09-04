@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { ApplicationForm } from "@/components/forms/ApplicationForm";
 
 export const metadata: Metadata = {
-  title: "Apply | Halal Business Initiative",
+  title: "Apply",
   description: "Apply for a free, professional sponsored website build.",
+  // Reachable (a real applicant might bookmark/share it), but not part of
+  // the indexable site — see §8.
+  robots: { index: false, follow: true },
 };
 
 export default function ApplyPage() {

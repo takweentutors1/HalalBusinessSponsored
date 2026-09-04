@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Halal Business Sponsored Website
 
-## Getting Started
+Next.js app for Takween Digital Services' Halal Business Initiative — a
+sponsored landing page, Programme Terms page, and application system. Deployed
+to Cloudflare Workers via `@opennextjs/cloudflare`. Full architecture and
+decisions are documented in [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 22+
+- A Cloudflare account with `wrangler` logged in (`npx wrangler login`)
+
+## Setup
+
+```bash
+npm install                    # also runs patch-package via postinstall
+cp .dev.vars.example .dev.vars # fill in real values — see below
+```
+
+`.dev.vars` is gitignored. Every value in `.dev.vars.example` is optional for
+local dev **except** `ADMIN_USERNAME`/`ADMIN_PASSWORD` — the admin area fails
+closed (401s everything) if those two aren't set.
+
+### Provisioning Cloudflare resources (first time only)
+
+D1 database and KV namespace already exist for this project
+(`halal-business-db`, `RATE_LIMIT_KV` — see `wrangler.jsonc` for IDs). To
+recreate them from scratch on a different account:
+
+```bash
+npx wrangler d1 create halal-business-db
+npx wrangler kv namespace create RATE_LIMIT_KV
+# then update the IDs in wrangler.jsonc
+npm run db:migrate:local   # applies drizzle/*.sql to local D1
+```
+
+## Running locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This uses plain `next dev` (fast refresh), with `initOpenNextCloudflareForDev()`
+in `next.config.ts` proxying Cloudflare bindings (D1, KV) so they work under
+Node too. **Exception:** anything touching `worker-mailer` (SMTP sending) only
+works under a real Workers runtime — see the note in `lib/email/client.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To test against the actual Workers runtime (needed for real email-sending
+behavior, or before deploying):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run preview   # opennextjs-cloudflare build && preview via wrangler
+```
 
-## Learn More
+## Database migrations
 
-To learn more about Next.js, take a look at the following resources:
+Schema lives in `lib/db/schema.ts` (Drizzle). After changing it:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run db:generate        # generates drizzle/*.sql from the schema
+npm run db:migrate:local   # applies to local D1
+npm run db:migrate:remote  # applies to the real, deployed D1 — confirm first
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Email templates
 
-## Deploy on Vercel
+`docs/email-templates/*.html` are the source mockups (open directly in a
+browser to preview with `{{placeholders}}` visible). `lib/email/templates/*.ts`
+are the generated runtime versions Workers actually sends — regenerate after
+editing the source:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run sync-email-templates
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploying
+
+```bash
+npm run deploy   # opennextjs-cloudflare build && deploy via wrangler
+```
+
+Secrets (Turnstile, Hostinger SMTP, admin Basic Auth) are set per-environment
+via `wrangler secret put <NAME>` — never committed, never in `wrangler.jsonc`.
+
+## Known limitations
+
+- **Email sending doesn't work yet.** `lib/email/client.ts` documents a
+  confirmed, unresolved conflict between OpenNext's single-file Worker
+  bundling and `worker-mailer`'s use of `cloudflare:sockets` — matches an
+  abandoned upstream PR. Submissions still save to D1 and show the applicant
+  a confirmation regardless; email failures are logged, not fatal.
+- **`/admin/*` uses HTTP Basic Auth**, not Cloudflare Access — Access needs a
+  Zero Trust org already provisioned on the account. See
+  `docs/IMPLEMENTATION_PLAN.md` §2/§10 item 5.
+- **`[Halal Brand]` name/domain aren't decided yet** (brief's open dependency).
+  `lib/config.ts`'s `brand.name`/`brand.domain` are placeholders; `siteUrl`
+  points at the current `*.workers.dev` staging URL until a real domain is
+  bound.

@@ -1,0 +1,28 @@
+# Halal Business Initiative
+
+> A sponsored programme operated by Takween Digital Services, offering a free,
+> professional starter website each month to a limited number of selected,
+> established Muslim-owned businesses — in exchange for a real portfolio
+> project, honest feedback, and permission to use the results as a case study.
+
+This is a genuine exchange, not a promotional trial: the build itself is £0,
+places are limited, and every accepted business is expected to give honest
+completion feedback (a positive review is never required).
+
+## Key pages
+
+- [Home](/): the offer, who it's for, what's included/excluded, how the
+  process works, and the application call to action.
+- [Programme Terms](/programme-terms): the detailed rules — scope, revision
+  limits, content/hosting responsibilities, feedback and portfolio consent
+  wording, close-out window, and cancellation conditions.
+- [Apply](/apply): the application form for interested businesses.
+
+## Notes for automated tools
+
+- The disclosure that this programme is operated by Takween Digital Services
+  is stated in the footer of every page, at the top of the Programme Terms
+  page, and directly above the application form's submit button — never
+  hidden.
+- `/admin/*` is an internal, authenticated review area — not part of the
+  public site and excluded from indexing.

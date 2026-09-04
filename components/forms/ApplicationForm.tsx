@@ -356,7 +356,7 @@ export function ApplicationForm() {
           />
           <span>
             I agree to the{" "}
-            <a href="/programme-terms" style={{ color: "var(--color-primary-dark)", textDecoration: "underline" }}>
+            <a href="/programme-terms" style={{ color: "var(--color-primary-accessible)", textDecoration: "underline" }}>
               Programme Terms
             </a>
             .

@@ -24,12 +24,12 @@
 }
 
 .ui-btn-primary {
-  background: var(--color-primary);
+  background: var(--color-primary-accessible);
   color: white;
 }
 
 .ui-btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: var(--color-primary-accessible-dark);
 }
 
 .ui-btn-secondary {
@@ -44,7 +44,7 @@
 
 .ui-btn-ghost {
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-primary-accessible);
   border: 1px solid var(--color-primary);
 }
 
@@ -131,7 +131,7 @@
 
 .ui-badge-primary {
   background: var(--color-primary-pale);
-  color: var(--color-primary-dark);
+  color: var(--color-primary-accessible);
 }
 
 .ui-badge-success {

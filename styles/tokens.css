@@ -15,6 +15,19 @@
   --color-primary-dark: #059669;
   --color-primary-light: #a7f3d0;
   --color-primary-pale: #ecfdf5;
+  /*
+   * Neither --color-primary nor --color-primary-dark meets WCAG AA
+   * (4.5:1) for body-sized text or white-on-color button labels —
+   * confirmed by axe-core: white on --color-primary is 2.54:1, white on
+   * --color-primary-dark is 3.77:1, --color-primary-dark on white/pale
+   * backgrounds is ~3.6-3.8:1. They're fine for headings (large text only
+   * needs 3:1) and for non-text decoration (checkmarks, borders,
+   * backgrounds). These two extra shades exist specifically for text that
+   * needs to pass AA at body size — not part of the original ported
+   * palette, added to satisfy §9's accessibility requirement.
+   */
+  --color-primary-accessible: #047857;
+  --color-primary-accessible-dark: #036450;
 
   /* Semantic colors */
   --color-success: #10b981;

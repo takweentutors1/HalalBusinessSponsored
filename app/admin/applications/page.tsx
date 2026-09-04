@@ -38,7 +38,7 @@ export default async function AdminApplicationsPage() {
                   <td style={{ padding: "var(--space-3)" }}>
                     <Link
                       href={`/admin/applications/${application.id}`}
-                      style={{ color: "var(--color-primary-dark)", fontWeight: 600, textDecoration: "underline" }}
+                      style={{ color: "var(--color-primary-accessible)", fontWeight: 600, textDecoration: "underline" }}
                     >
                       {application.businessName}
                     </Link>
