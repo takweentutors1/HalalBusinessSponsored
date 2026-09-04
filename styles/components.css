@@ -1,0 +1,168 @@
+/**
+ * Component styles ported 1:1 from docs/Halal Business Design System.html
+ * (Buttons, Form Inputs, Badges, Cards sections). Uses the tokens defined
+ * in styles/tokens.css. Element selectors from the source (bare `button`,
+ * `input`, `textarea`, `label`) are scoped to `.ui-*` classes here so they
+ * don't leak onto elements outside the component library.
+ */
+
+/* Buttons */
+.ui-btn {
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  transition: all 300ms ease-in-out;
+}
+
+.ui-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ui-btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.ui-btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.ui-btn-secondary {
+  background: var(--color-neutral-100);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+}
+
+.ui-btn-secondary:hover:not(:disabled) {
+  background: var(--color-neutral-200);
+}
+
+.ui-btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.ui-btn-ghost:hover:not(:disabled) {
+  background: var(--color-primary-pale);
+}
+
+/* Form inputs */
+.ui-form-group {
+  margin-bottom: var(--space-6);
+}
+
+.ui-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-primary);
+}
+
+.ui-input,
+.ui-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  background: var(--color-surface-base);
+}
+
+.ui-textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.ui-input:focus,
+.ui-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.ui-input[aria-invalid="true"],
+.ui-textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.ui-input[aria-invalid="true"]:focus,
+.ui-textarea[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.ui-hint {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.ui-error {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.ui-required {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+/* Badges */
+.ui-badge {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  margin-right: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.ui-badge-primary {
+  background: var(--color-primary-pale);
+  color: var(--color-primary-dark);
+}
+
+.ui-badge-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.ui-badge-warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.ui-badge-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Cards */
+.ui-card {
+  background: var(--color-surface-base);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-card h1,
+.ui-card h2,
+.ui-card h3,
+.ui-card h4 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-3);
+}
