@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Halal Business Design System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #10B981; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #10B981; z-index: 9999; }
+    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_placeholder { color: #999; font-size: 14px; }
+  </style>
+  <noscript>
+    <style>#__bundler_loading { display: none; }</style>
+    <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
+      This page requires JavaScript to display.
+    </div>
+  </noscript>
+</head>
+<body>
+  <div id="__bundler_thumbnail">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#10B981"></rect>
+      <text x="600" y="400" font-family="serif" font-size="120" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">HB</text>
+      <rect x="900" y="0" width="300" height="200" fill="#ECFDF5"></rect>
+      <rect x="900" y="200" width="300" height="200" fill="#10B981"></rect>
+      <rect x="900" y="400" width="300" height="200" fill="#059669"></rect>
+      <rect x="900" y="600" width="300" height="200" fill="#111827"></rect>
+    </svg>
+  </div>
+  <div id="__bundler_loading">Unpacking...</div>
+
+  <script>
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
+  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
+  function toBase64(bytes) {
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    // Failed resource loads (CSP-blocked links, scripts, images) fire plain
+    // events at the element — warn only; real JS errors carry message/error.
+    if (!e.message && !e.error && e.target && e.target !== window) {
+      console.warn('[bundle] resource failed to load:',
+        e.target.tagName, String(e.target.src || e.target.href || ''));
+      return;
+    }
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    // Nested page bundles (iframe targets). Each ships ONCE, in the ROOT
+    // document's manifest; frame srcs carry an about:blank#<uuid> marker
+    // instead of a substitutable uuid. Every document mints the blobs for
+    // its OWN frames — from local text at the root, or text obtained from
+    // its DIRECT parent over the relay protocol below — so each frame
+    // navigation stays same-origin with its initiator and a deduped page
+    // loads at any depth on any host, including a file:// download's
+    // opaque origins (where a blob minted by one document cannot be
+    // navigated to by another).
+    const pageOrderEl = document.querySelector('script[type="__bundler/page_order"]');
+    const pageOrder = pageOrderEl ? JSON.parse(pageOrderEl.textContent) : [];
+    const pageSet = new Set(pageOrder);
+    const pageTexts = {};
+
+    // ── Nested-page text protocol (parent-chain relay) ──
+    // Page bundles ship once, in the ROOT document's manifest. Every
+    // document mints the blobs for its OWN frames, obtaining page text
+    // through a strict parent-chain relay: a document only ever SENDS to
+    // its direct parent (which, for every document the publisher's own
+    // runtime minted, is another publisher document) and only ACCEPTS
+    // text from that direct parent; requests from below are honored only
+    // for the document's own child frames, and the ROOT never sends
+    // upward at all. That last rule is load-bearing: the artifact host's
+    // frame-ancestors allows claude.ai (and friends) to frame an
+    // artifact, so window.top can be a FOREIGN document — a top-addressed
+    // protocol would hand page uuids to that ancestor and accept forged
+    // "page text" from it, minting attacker HTML as an artifact-origin
+    // blob document. The chain never touches the ancestor: requests stop
+    // at the root, replies are origin-addressed per hop (never '*' when
+    // an origin exists), and both directions are origin-gated (on https
+    // a foreign sender's origin can never equal this document's; in
+    // opaque contexts — file:// — everything serializes as 'null', where
+    // an embedded EXTERNAL frame still fails the gate by carrying its
+    // own real origin, and a sandboxed child of such a frame is excluded
+    // by the own-child-frames check plus uuid unguessability). Shape is
+    // deny-by-default: one request form, one reply form, no error
+    // replies.
+    // window.origin is the SERIALIZED SECURITY origin ('null' in opaque
+    // contexts such as a sandboxed preview iframe) — location.origin is
+    // computed from the URL and stays 'https://…' even when the document
+    // is sandboxed, which would misgate every opaque chain.
+    const OWN_TARGET = /^https?:[/][/]/.test(window.origin || '')
+      ? window.origin
+      : '*';
+    function trustedOrigin(e) {
+      if (e.origin === window.origin) return true; // https chains; opaque==opaque
+      // file:// trees: Chrome serializes the file document's origin as
+      // 'file://' while the blob: documents it mints serialize as 'null',
+      // so the two legitimate shapes can never string-match — accept the
+      // pair in both directions. https origins never serialize as either,
+      // and sender identity (own child frame / direct parent) is checked
+      // separately.
+      return (
+        (e.origin === 'null' &&
+          (window.origin === 'file://' ||
+            window.location.protocol === 'file:')) ||
+        (/^file:/.test(e.origin) && window.origin === 'null')
+      );
+    }
+    // Non-empty only in the root document (nested bundles ship an empty
+    // island), so it doubles as the root marker: the root answers from
+    // local text and treats a miss as authoritative — never relaying to
+    // its (possibly foreign) parent.
+    const isPageRoot = pageOrder.length > 0;
+    const blobUrls = {};
+    const resourceBlobs = {};
+    const UUID_SHAPE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    const pendingFrames = {}; // uuid -> [{el, frag}] awaiting text for own frames
+    const pendingRelays = {}; // uuid -> [childWindow] awaiting text to pass down
+    function mountPage(el, frag, text) {
+      const pageBlob = new Blob([text], { type: 'text/html' });
+      const u = URL.createObjectURL(pageBlob);
+      resourceBlobs[u] = pageBlob;
+      el.src = u + frag;
+    }
+    function deliverPage(uuid, text) {
+      const frames = pendingFrames[uuid];
+      delete pendingFrames[uuid];
+      if (frames) for (const f of frames) mountPage(f.el, f.frag, text);
+      const relays = pendingRelays[uuid];
+      delete pendingRelays[uuid];
+      if (relays) {
+        for (const cw of relays) {
+          try { cw.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
+        }
+      }
+    }
+    function ownFrameWindows() {
+      const out = [];
+      for (const f of Array.from(document.querySelectorAll('iframe'))) {
+        try { if (f.contentWindow) out.push(f.contentWindow); } catch (err) { /* detached */ }
+      }
+      return out;
+    }
+    window.addEventListener('message', function (e) {
+      const d = e.data;
+      if (!d || typeof d !== 'object' || !e.source) return;
+      // Origin gate first; the structural checks below (own-child-frames
+      // for requests, direct-parent + solicited-uuid for replies, the
+      // root's never-relay rule) are what hold in fully opaque chains
+      // where origin strings can't discriminate — a sandboxed root's
+      // FOREIGN wrapper still fails all three even though both serialize
+      // as real-vs-'null' rather than matching.
+      if (!trustedOrigin(e)) return;
+      if (typeof d.__bundler_need === 'string' && UUID_SHAPE.test(d.__bundler_need)) {
+        // Requests are honored only for this document's own child frames.
+        if (ownFrameWindows().indexOf(e.source) < 0) return;
+        const uuid = d.__bundler_need;
+        const text = pageTexts[uuid];
+        if (typeof text === 'string') {
+          try { e.source.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
+          return;
+        }
+        if (isPageRoot || window.parent === window) return; // authoritative miss
+        const waiting = pendingRelays[uuid];
+        if (waiting) {
+          if (waiting.indexOf(e.source) < 0) waiting.push(e.source);
+          return;
+        }
+        // Never-answered uuids would otherwise accumulate forever under a
+        // request spray; past the cap (far above any real page count) new
+        // relays are dropped rather than remembered.
+        if (Object.keys(pendingRelays).length >= 128) return;
+        pendingRelays[uuid] = [e.source];
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+      } else if (
+        typeof d.__bundler_page === 'string' &&
+        UUID_SHAPE.test(d.__bundler_page) &&
+        typeof d.__bundler_text === 'string'
+      ) {
+        // The shape test is load-bearing beyond tidiness: the solicited
+        // check below uses the in operator, which matches prototype keys
+        // ('__proto__', 'constructor') — an unshaped key would reach
+        // deliverPage and throw, painting the error banner.
+        // Text is accepted only from the direct parent — the document
+        // that minted this one.
+        if (e.source !== window.parent || window.parent === window) return;
+        if (!(d.__bundler_page in pendingFrames) && !(d.__bundler_page in pendingRelays)) return;
+        deliverPage(d.__bundler_page, d.__bundler_text);
+      }
+    });
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        if (pageSet.has(uuid)) {
+          pageTexts[uuid] = new TextDecoder().decode(finalBytes);
+          return;
+        }
+        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
+          // Strict artifact hosts allow font-src data: but not blob:.
+          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
+            (entry.compressed ? toBase64(finalBytes) : entry.data);
+        } else {
+          const blob = new Blob([finalBytes], { type: entry.mime });
+          blobUrls[uuid] = URL.createObjectURL(blob);
+          resourceBlobs[blobUrls[uuid]] = blob;
+        }
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        const blob = new Blob([], { type: entry.mime });
+        blobUrls[uuid] = URL.createObjectURL(blob);
+        resourceBlobs[blobUrls[uuid]] = blob;
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    // Artifact-host CSP (connect-src 'self') refuses fetch() of blob: URLs —
+    // consumers read these Blobs directly. Survives the swap like the error sink.
+    window.__resourceBlobs = resourceBlobs;
+
+    setStatus('Rendering...');
+    // Page uuids have no blob here — they ride inside about:blank#<uuid>
+    // frame markers the pass below resolves after the swap.
+    for (const uuid of uuids) {
+      if (pageSet.has(uuid)) continue;
+      template = template.split(uuid).join(blobUrls[uuid]);
+    }
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).replace(/<\//g, '<\\/') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+
+    // Resolve page-frame markers: mint this document's own blob for each
+    // framed page — from local text when this is the root, otherwise by
+    // asking the direct parent over the relay protocol above. An
+    // unanswered request leaves the frame on about:blank, the same
+    // degraded state as a refused embed.
+    {
+      const MARKER = /^about:blank#([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(#.*)?$/;
+      const needed = [];
+      for (const el of Array.from(document.querySelectorAll('iframe'))) {
+        const m = MARKER.exec(el.getAttribute('src') || '');
+        if (!m) continue;
+        const text = pageTexts[m[1]];
+        if (typeof text === 'string') {
+          mountPage(el, m[2] || '', text);
+        } else if (window.parent !== window && !isPageRoot) {
+          const had = pendingFrames[m[1]];
+          (pendingFrames[m[1]] = had || []).push({ el: el, frag: m[2] || '' });
+          if (!had) needed.push(m[1]);
+        }
+      }
+      for (const uuid of needed) {
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+      }
+    }
+
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: read and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const pre = resourceBlobs[s.src.split('#')[0]];
+        s.textContent = pre ? await pre.text() : await (await fetch(s.src)).text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  </script>
+
+  <script type="__bundler/manifest">
+{}
+  </script>
+
+  <script type="__bundler/ext_resources">
+[]
+  </script>
+
+  <script type="__bundler/page_order">
+[]
+  </script>
+
+  <script type="__bundler/template">
+"<!DOCTYPE html>\n<html lang=\"en\"><head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Halal Business Design System<\u002Ftitle>\n  \n  <style>\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    \n    :root {\n      --color-primary: #10B981;\n      --color-primary-dark: #059669;\n      --color-primary-light: #A7F3D0;\n      --color-primary-pale: #ECFDF5;\n      --color-success: #10B981;\n      --color-warning: #F59E0B;\n      --color-error: #DC2626;\n      --color-info: #3B82F6;\n      --color-neutral-900: #111827;\n      --color-neutral-800: #1F2937;\n      --color-neutral-700: #374151;\n      --color-neutral-600: #4B5563;\n      --color-neutral-500: #6B7280;\n      --color-neutral-400: #9CA3AF;\n      --color-neutral-300: #D1D5DB;\n      --color-neutral-200: #E5E7EB;\n      --color-neutral-100: #F3F4F6;\n      --color-neutral-50: #F9FAFB;\n      --color-text-primary: var(--color-neutral-900);\n      --color-text-secondary: var(--color-neutral-600);\n      --color-text-tertiary: var(--color-neutral-500);\n      --color-surface-base: #FFFFFF;\n      --color-surface-elevated: var(--color-neutral-50);\n      --color-border-light: var(--color-neutral-200);\n      --color-border-medium: var(--color-neutral-300);\n      --font-display: 'Georgia', 'EB Garamond', serif;\n      --font-body: 'Georgia', serif;\n      --font-mono: 'Courier New', monospace;\n      --font-size-xs: 0.75rem;\n      --font-size-sm: 0.875rem;\n      --font-size-base: 1rem;\n      --font-size-lg: 1.125rem;\n      --font-size-xl: 1.25rem;\n      --font-size-2xl: 1.5rem;\n      --font-size-3xl: 1.875rem;\n      --font-size-4xl: 2.25rem;\n      --font-size-5xl: 3rem;\n      --space-2: 0.5rem;\n      --space-3: 0.75rem;\n      --space-4: 1rem;\n      --space-6: 1.5rem;\n      --space-8: 2rem;\n      --space-12: 3rem;\n      --space-16: 4rem;\n      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);\n      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);\n      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);\n      --radius-md: 0.375rem;\n      --radius-lg: 0.5rem;\n      --radius-full: 9999px;\n    }\n\n    body {\n      font-family: var(--font-body);\n      color: var(--color-text-primary);\n      background: var(--color-surface-elevated);\n      line-height: 1.5;\n    }\n\n    .container {\n      max-width: 1200px;\n      margin: 0 auto;\n      padding: var(--space-8);\n    }\n\n    header {\n      background: linear-gradient(135deg, var(--color-primary-pale) 0%, var(--color-surface-base) 100%);\n      padding: var(--space-16) var(--space-8);\n      text-align: center;\n      margin-bottom: var(--space-12);\n      border-radius: var(--radius-lg);\n    }\n\n    header h1 {\n      font-family: var(--font-display);\n      font-size: var(--font-size-5xl);\n      font-weight: 700;\n      margin-bottom: var(--space-3);\n    }\n\n    header p {\n      font-size: var(--font-size-lg);\n      color: var(--color-text-secondary);\n    }\n\n    section {\n      margin-bottom: var(--space-16);\n    }\n\n    h2 {\n      font-family: var(--font-display);\n      font-size: var(--font-size-3xl);\n      margin-bottom: var(--space-6);\n      color: var(--color-primary);\n    }\n\n    h3 {\n      font-family: var(--font-display);\n      font-size: var(--font-size-2xl);\n      margin-top: var(--space-8);\n      margin-bottom: var(--space-3);\n    }\n\n    .grid {\n      display: grid;\n      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n      gap: var(--space-8);\n    }\n\n    .card {\n      background: var(--color-surface-base);\n      border: 1px solid var(--color-border-light);\n      border-radius: var(--radius-lg);\n      padding: var(--space-8);\n      box-shadow: var(--shadow-sm);\n    }\n\n    .card h4 {\n      font-family: var(--font-display);\n      font-size: var(--font-size-xl);\n      margin-bottom: var(--space-3);\n    }\n\n    .swatches {\n      display: grid;\n      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n      gap: var(--space-6);\n      margin-bottom: var(--space-8);\n    }\n\n    .swatch {\n      border-radius: var(--radius-lg);\n      padding: var(--space-6);\n      color: white;\n      font-weight: 600;\n      box-shadow: var(--shadow-md);\n      text-align: center;\n    }\n\n    .swatch-label {\n      display: block;\n      font-size: var(--font-size-xs);\n      opacity: 0.9;\n      margin-top: var(--space-2);\n    }\n\n    .buttons-demo {\n      display: flex;\n      gap: var(--space-4);\n      flex-wrap: wrap;\n      margin-bottom: var(--space-6);\n    }\n\n    button {\n      padding: var(--space-3) var(--space-6);\n      border-radius: var(--radius-md);\n      border: none;\n      font-family: var(--font-body);\n      font-weight: 600;\n      cursor: pointer;\n      font-size: var(--font-size-base);\n      transition: all 300ms ease-in-out;\n    }\n\n    .btn-primary {\n      background: var(--color-primary);\n      color: white;\n    }\n\n    .btn-primary:hover {\n      background: var(--color-primary-dark);\n    }\n\n    .btn-secondary {\n      background: var(--color-neutral-100);\n      color: var(--color-text-primary);\n      border: 1px solid var(--color-border-light);\n    }\n\n    .btn-secondary:hover {\n      background: var(--color-neutral-200);\n    }\n\n    .btn-ghost {\n      background: transparent;\n      color: var(--color-primary);\n      border: 1px solid var(--color-primary);\n    }\n\n    .btn-ghost:hover {\n      background: var(--color-primary-pale);\n    }\n\n    .form-group {\n      margin-bottom: var(--space-6);\n    }\n\n    label {\n      display: block;\n      font-size: var(--font-size-sm);\n      font-weight: 600;\n      margin-bottom: var(--space-2);\n    }\n\n    input, textarea {\n      width: 100%;\n      padding: var(--space-3) var(--space-4);\n      font-family: var(--font-body);\n      font-size: var(--font-size-base);\n      border: 1px solid var(--color-border-light);\n      border-radius: var(--radius-md);\n      box-sizing: border-box;\n    }\n\n    input:focus, textarea:focus {\n      outline: none;\n      border-color: var(--color-primary);\n      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);\n    }\n\n    .badge {\n      display: inline-block;\n      padding: var(--space-2) var(--space-4);\n      border-radius: var(--radius-full);\n      font-weight: 600;\n      font-size: var(--font-size-sm);\n      margin-right: var(--space-2);\n      margin-bottom: var(--space-2);\n    }\n\n    .badge-primary {\n      background: var(--color-primary-pale);\n      color: var(--color-primary-dark);\n    }\n\n    .badge-success {\n      background: #DCFCE7;\n      color: #15803D;\n    }\n\n    .badge-warning {\n      background: #FEF3C7;\n      color: #B45309;\n    }\n\n    .badge-error {\n      background: #FEE2E2;\n      color: #991B1B;\n    }\n\n    .highlight {\n      background: var(--color-primary-pale);\n      padding: var(--space-4);\n      border-left: 4px solid var(--color-primary);\n      border-radius: var(--radius-md);\n      margin-bottom: var(--space-6);\n    }\n\n    .feature-list {\n      list-style: none;\n      padding: 0;\n    }\n\n    .feature-list li {\n      padding: var(--space-3) 0;\n      padding-left: var(--space-6);\n      position: relative;\n    }\n\n    .feature-list li:before {\n      content: \"✓\";\n      position: absolute;\n      left: 0;\n      color: var(--color-primary);\n      font-weight: 700;\n    }\n\n    footer {\n      border-top: 1px solid var(--color-border-light);\n      padding-top: var(--space-8);\n      text-align: center;\n      font-size: var(--font-size-sm);\n      color: var(--color-text-secondary);\n    }\n  <\u002Fstyle>\n<\u002Fhead>\n<body>\n  <div class=\"container\">\n    <header>\n      <h1>Halal Business Design System<\u002Fh1>\n      <p>Professional, values-aligned design for Muslim-owned businesses<\u002Fp>\n    <\u002Fheader>\n\n    <section>\n      <h2>Overview<\u002Fh2>\n      <p>This design system powers the Halal Business Initiative—a programme providing free, professional websites to selected Muslim-owned businesses. Built on principles of integrity, community trust, and ethical practice.<\u002Fp>\n      <div class=\"highlight\">\n        <strong>Design Philosophy:<\u002Fstrong> Traditional + Elegant. Serif typography, emerald green accents, generous whitespace. Built for trust.\n      <\u002Fdiv>\n    <\u002Fsection>\n\n    <section>\n      <h2>Color System<\u002Fh2>\n      <h3>Primary Palette<\u002Fh3>\n      <div class=\"swatches\">\n        <div class=\"swatch\" style=\"background: var(--color-primary)\">\n          Primary\n          <span class=\"swatch-label\">#10B981<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-primary-dark)\">\n          Dark\n          <span class=\"swatch-label\">#059669<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-primary-light); color: var(--color-text-primary)\">\n          Light\n          <span class=\"swatch-label\">#A7F3D0<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-primary-pale); color: var(--color-text-primary)\">\n          Pale\n          <span class=\"swatch-label\">#ECFDF5<\u002Fspan>\n        <\u002Fdiv>\n      <\u002Fdiv>\n\n      <h3>Semantic Colors<\u002Fh3>\n      <div class=\"swatches\">\n        <div class=\"swatch\" style=\"background: var(--color-success)\">\n          Success\n          <span class=\"swatch-label\">Approval<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-warning); color: var(--color-text-primary)\">\n          Warning\n          <span class=\"swatch-label\">Caution<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-error)\">\n          Error\n          <span class=\"swatch-label\">Danger<\u002Fspan>\n        <\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-info)\">\n          Info\n          <span class=\"swatch-label\">Information<\u002Fspan>\n        <\u002Fdiv>\n      <\u002Fdiv>\n\n      <h3>Neutral Scale<\u002Fh3>\n      <div class=\"swatches\">\n        <div class=\"swatch\" style=\"background: var(--color-neutral-900)\">900<\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-neutral-700)\">700<\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-neutral-500); color: var(--color-text-primary)\">500<\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-neutral-300); color: var(--color-text-primary)\">300<\u002Fdiv>\n        <div class=\"swatch\" style=\"background: var(--color-neutral-100); color: var(--color-text-primary)\">100<\u002Fdiv>\n      <\u002Fdiv>\n    <\u002Fsection>\n\n    <section>\n      <h2>Typography<\u002Fh2>\n      <div class=\"grid\">\n        <div class=\"card\">\n          <h4 style=\"font-family: var(--font-display); font-size: 3rem\">Heading 1<\u002Fh4>\n          <p style=\"font-size: var(--font-size-sm); color: var(--color-text-secondary)\">EB Garamond • 3rem • 700 weight<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <h4 style=\"font-family: var(--font-display); font-size: 2.25rem\">Heading 2<\u002Fh4>\n          <p style=\"font-size: var(--font-size-sm); color: var(--color-text-secondary)\">EB Garamond • 2.25rem • 600 weight<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <p style=\"font-size: var(--font-size-lg)\">Body Large Text<\u002Fp>\n          <p style=\"font-size: var(--font-size-sm); color: var(--color-text-secondary)\">Merriweather • 1.125rem<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <p style=\"font-size: var(--font-size-base)\">Body Base Text<\u002Fp>\n          <p style=\"font-size: var(--font-size-sm); color: var(--color-text-secondary)\">Merriweather • 1rem<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <p style=\"font-size: var(--font-size-sm)\">Body Small Text<\u002Fp>\n          <p style=\"font-size: var(--font-size-xs); color: var(--color-text-secondary)\">Merriweather • 0.875rem<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <p style=\"font-size: var(--font-size-xs); color: var(--color-text-secondary)\">CAPTION TEXT<\u002Fp>\n          <p style=\"font-size: var(--font-size-xs); color: var(--color-text-secondary)\">0.75rem • secondary color<\u002Fp>\n        <\u002Fdiv>\n      <\u002Fdiv>\n    <\u002Fsection>\n\n    <section>\n      <h2>Components<\u002Fh2>\n\n      <h3>Buttons<\u002Fh3>\n      <div class=\"buttons-demo\">\n        <button class=\"btn-primary\">Primary Button<\u002Fbutton>\n        <button class=\"btn-secondary\">Secondary Button<\u002Fbutton>\n        <button class=\"btn-ghost\">Ghost Button<\u002Fbutton>\n      <\u002Fdiv>\n\n      <h3>Form Inputs<\u002Fh3>\n      <div style=\"max-width: 400px\">\n        <div class=\"form-group\">\n          <label>Name<\u002Flabel>\n          <input type=\"text\" placeholder=\"Enter your name\">\n        <\u002Fdiv>\n        <div class=\"form-group\">\n          <label>Email<\u002Flabel>\n          <input type=\"email\" placeholder=\"you@example.com\">\n        <\u002Fdiv>\n        <div class=\"form-group\">\n          <label>Message<\u002Flabel>\n          <textarea placeholder=\"Tell us about your business\" rows=\"4\"><\u002Ftextarea>\n        <\u002Fdiv>\n      <\u002Fdiv>\n\n      <h3>Badges<\u002Fh3>\n      <div style=\"margin-top: var(--space-6)\">\n        <span class=\"badge badge-primary\">Featured<\u002Fspan>\n        <span class=\"badge badge-success\">Approved<\u002Fspan>\n        <span class=\"badge badge-warning\">Pending<\u002Fspan>\n        <span class=\"badge badge-error\">Rejected<\u002Fspan>\n      <\u002Fdiv>\n\n      <h3>Cards<\u002Fh3>\n      <div class=\"grid\" style=\"margin-top: var(--space-6)\">\n        <div class=\"card\">\n          <h4>Feature One<\u002Fh4>\n          <p>Professional presence and credibility for your business online.<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <h4>Feature Two<\u002Fh4>\n          <p>Ethical growth strategies aligned with Islamic values.<\u002Fp>\n        <\u002Fdiv>\n        <div class=\"card\">\n          <h4>Feature Three<\u002Fh4>\n          <p>Your success story helps other Muslim entrepreneurs.<\u002Fp>\n        <\u002Fdiv>\n      <\u002Fdiv>\n    <\u002Fsection>\n\n    <section>\n      <h2>Key Features<\u002Fh2>\n      <ul class=\"feature-list\">\n        <li><strong>129 CSS Tokens<\u002Fstrong> organized by category (colors, typography, spacing, shadows, transitions)<\u002Fli>\n        <li><strong>Reusable Components<\u002Fstrong> — Button, Input, Card, Badge with multiple variants<\u002Fli>\n        <li><strong>Professional Typography<\u002Fstrong> — EB Garamond (display) + Merriweather (body) from Google Fonts<\u002Fli>\n        <li><strong>Semantic Color System<\u002Fstrong> — Primary emerald green + success, warning, error, info states<\u002Fli>\n        <li><strong>Values-Aligned Design<\u002Fstrong> — Tone, copy, and visual language respect Islamic principles<\u002Fli>\n        <li><strong>Complete UI Kits<\u002Fstrong> — Landing page, application form, and programme terms ready to customize<\u002Fli>\n        <li><strong>Accessibility-First<\u002Fstrong> — Clear typography, high contrast, focus states, semantic HTML<\u002Fli>\n        <li><strong>Comprehensive Documentation<\u002Fstrong> — Design philosophy, token reference, component usage, content standards<\u002Fli>\n      <\u002Ful>\n    <\u002Fsection>\n\n    <section>\n      <h2>Design Philosophy<\u002Fh2>\n      <div class=\"card\">\n        <h4>Honest &amp; Community-Focused<\u002Fh4>\n        <p>No hype or manipulation. Clear communication that emphasizes shared mission and mutual benefit.<\u002Fp>\n      <\u002Fdiv>\n      <div class=\"card\" style=\"margin-top: var(--space-4)\">\n        <h4>Traditional &amp; Elegant<\u002Fh4>\n        <p>Serif typography and generous whitespace signal professionalism and heritage—key for building trust.<\u002Fp>\n      <\u002Fdiv>\n      <div class=\"card\" style=\"margin-top: var(--space-4)\">\n        <h4>Respectful of Faith<\u002Fh4>\n        <p>Language and design acknowledge Islamic values without tokenizing. Emphasizes ethical practice and community integrity.<\u002Fp>\n      <\u002Fdiv>\n    <\u002Fsection>\n\n    <section>\n      <h2>Usage Guidelines<\u002Fh2>\n      <div class=\"highlight\">\n        <strong>For Consuming Projects:<\u002Fstrong>\n        <ol style=\"margin-left: var(--space-6); margin-top: var(--space-3)\">\n          <li>Link the stylesheet: <code>styles.css<\u002Fcode><\u002Fli>\n          <li>Load the component bundle: <code>_ds_bundle.js<\u002Fcode><\u002Fli>\n          <li>Use components via <code>window.HalalBusinessDesignSystem_c60dc4.Button<\u002Fcode>, etc.<\u002Fli>\n          <li>Customize by overriding CSS tokens in your project<\u002Fli>\n        <\u002Fol>\n      <\u002Fdiv>\n      <p style=\"margin-top: var(--space-6)\"><strong>Read the full README.md<\u002Fstrong> in the design system project for comprehensive documentation, token reference, and content standards.<\u002Fp>\n    <\u002Fsection>\n\n    <footer>\n      <p><strong>Halal Business Design System<\u002Fstrong> v1.0<\u002Fp>\n      <p>Built by Takween Digital Services for the Halal Business Initiative<\u002Fp>\n      <p style=\"margin-top: var(--space-4); opacity: 0.7\">Empowering Muslim-owned businesses with ethical, professional design.<\u002Fp>\n    <\u002Ffooter>\n  <\u002Fdiv>\n\n<\u002Fbody><\u002Fhtml>"
+  </script>
+</body>
+</html>
