@@ -1,20 +1,26 @@
-import type { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SharedProps {
   variant?: ButtonVariant;
 }
 
-export function Button({
-  variant = "primary",
-  className,
-  type = "button",
-  ...props
-}: ButtonProps) {
-  const classes = ["ui-btn", `ui-btn-${variant}`, className]
-    .filter(Boolean)
-    .join(" ");
+export type ButtonProps = SharedProps &
+  (
+    | ({ href: string } & AnchorHTMLAttributes<HTMLAnchorElement>)
+    | ({ href?: undefined } & ButtonHTMLAttributes<HTMLButtonElement>)
+  );
 
-  return <button type={type} className={classes} {...props} />;
+export function Button({ variant = "primary", className, ...props }: ButtonProps) {
+  const classes = ["ui-btn", `ui-btn-${variant}`, className].filter(Boolean).join(" ");
+
+  if (props.href !== undefined) {
+    const { href, ...rest } = props as { href: string } & AnchorHTMLAttributes<HTMLAnchorElement>;
+    return <Link href={href} className={classes} {...rest} />;
+  }
+
+  const { type = "button", ...rest } = props as ButtonHTMLAttributes<HTMLButtonElement>;
+  return <button type={type} className={classes} {...rest} />;
 }

@@ -43,3 +43,12 @@ export const disclosure = {
 
 export const costLine =
   "The build is £0. Domain and hosting remain your own, separate cost.";
+
+/**
+ * Real site key comes from Cloudflare Turnstile (§10 item — provision
+ * alongside D1/KV) via NEXT_PUBLIC_TURNSTILE_SITE_KEY. Falls back to
+ * Cloudflare's public "always passes" test key so the form works in local
+ * dev before that's provisioned — never use this fallback in production.
+ */
+export const turnstileSiteKey =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA";

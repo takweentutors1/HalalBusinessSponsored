@@ -1,0 +1,11 @@
+# Copy to .dev.vars (gitignored) and fill in real values for local dev.
+# Production values are set via `wrangler secret put <NAME>` — never committed.
+
+# Cloudflare Turnstile secret key. Optional locally — app/api/apply/route.ts
+# falls back to Cloudflare's public "always passes" test secret when unset.
+TURNSTILE_SECRET_KEY=
+
+# Public site key read at build/runtime via NEXT_PUBLIC_TURNSTILE_SITE_KEY
+# (see lib/config.ts). Optional locally — falls back to the matching public
+# test site key.
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=

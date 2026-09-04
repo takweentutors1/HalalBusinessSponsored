@@ -29,7 +29,9 @@ export function FinalCta() {
             </li>
           ))}
         </ul>
-        <Button variant="primary">{finalCta.ctaLabel}</Button>
+        <Button href="/apply" variant="primary">
+          {finalCta.ctaLabel}
+        </Button>
       </div>
     </section>
   );

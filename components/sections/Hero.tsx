@@ -43,7 +43,9 @@ export function Hero() {
           {hero.costLine}
         </p>
 
-        <Button variant="primary">{hero.ctaLabel}</Button>
+        <Button href="/apply" variant="primary">
+          {hero.ctaLabel}
+        </Button>
 
         <div style={{ marginTop: "var(--space-6)" }}>
           <Disclosure text={hero.disclosureLine} />
