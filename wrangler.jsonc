@@ -1,0 +1,42 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "halal-business-website",
+	"compatibility_date": "2026-09-04",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding, the service name must match the worker name
+			// see https://opennext.js.org/cloudflare/caching
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "halal-business-website"
+		}
+	],
+
+	// D1: applications table (see IMPLEMENTATION_PLAN.md §4)
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "halal-business-db",
+			"database_id": "a98cddd4-d0f9-4503-a928-5cd48210525e",
+			"migrations_dir": "./drizzle"
+		}
+	],
+
+	// KV: rate-limit counter fallback on /api/apply (see IMPLEMENTATION_PLAN.md §2)
+	"kv_namespaces": [
+		{
+			"binding": "RATE_LIMIT_KV",
+			"id": "bad8de9e1b194b82b99c053bf1cca330"
+		}
+	],
+
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	}
+}
