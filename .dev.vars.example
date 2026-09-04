@@ -9,3 +9,17 @@ TURNSTILE_SECRET_KEY=
 # (see lib/config.ts). Optional locally — falls back to the matching public
 # test site key.
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+
+# Hostinger (Titan Mail) SMTP — optional locally, sending is skipped (not
+# faked) when unset. See lib/email/client.ts.
+HOSTINGER_SMTP_HOST=
+HOSTINGER_SMTP_PORT=
+HOSTINGER_SMTP_USER=
+HOSTINGER_SMTP_PASSWORD=
+TEAM_NOTIFICATION_EMAIL=
+
+# HTTP Basic Auth gating /admin/* (middleware.ts). REQUIRED — unlike the
+# others above, there's no safe fallback; every /admin request 401s until
+# both are set.
+ADMIN_USERNAME=
+ADMIN_PASSWORD=

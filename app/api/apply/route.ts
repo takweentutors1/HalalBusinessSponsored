@@ -2,6 +2,7 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db/client";
 import { applications } from "@/lib/db/schema";
+import { sendApplicationEmails } from "@/lib/email/send";
 import { HONEYPOT_FIELD_NAME, applicationSchema } from "@/lib/validation/application";
 
 /**
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const secret = env.TURNSTILE_SECRET_KEY ?? TURNSTILE_TEST_SECRET;
+  const secret = env.TURNSTILE_SECRET_KEY || TURNSTILE_TEST_SECRET;
   const remoteIp = request.headers.get("cf-connecting-ip");
   const verified = await verifyTurnstile(turnstileToken, secret, remoteIp);
   if (!verified) {
@@ -93,8 +94,17 @@ export async function POST(request: Request) {
     consentFeedback: data.consent_feedback,
   });
 
-  // TODO(Hour 8): fire team-notification + applicant-confirmation emails
-  // via the Hostinger SMTP client once it exists.
+  // Best-effort: email failures never fail the submission — the D1 row
+  // above is already the source of truth. Log so failures are visible in
+  // `wrangler tail` without blocking the applicant's confirmation.
+  const emailResults = await sendApplicationEmails(env, id, data);
+  for (const result of emailResults) {
+    if (result.status === "rejected") {
+      console.error("[email] send failed:", result.reason);
+    } else if (!result.value.sent) {
+      console.warn("[email] send skipped:", result.value.reason);
+    }
+  }
 
   return NextResponse.json({ success: true, id });
 }

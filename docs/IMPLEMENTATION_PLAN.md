@@ -13,12 +13,12 @@ Cloudflare-hosted build plan, derived from `Brief_HalalBusinessSponsoredWebsite_
 |---|---|---|
 | Framework hosting | Next.js App Router on **Cloudflare Workers via `@opennextjs/cloudflare`** | Cloudflare's current-recommended path for full Next.js (Server Actions/Route Handlers, ISR, middleware). The older `@cloudflare/next-on-pages` is in maintenance mode and drops features this app needs (API routes with Node-ish deps for email). |
 | Database | **Cloudflare D1** (SQLite), accessed via **Drizzle ORM** | Satisfies the brief's "stored durably" requirement natively in-stack; free tier covers this volume (≤5 accepted/month) easily; schema migrations via `drizzle-kit`. |
-| Team review workflow | D1 as source of truth + a minimal password-free **admin list page at `/admin/applications`, gated by Cloudflare Access** | Brief explicitly leaves "spreadsheet vs. review screen" open; this plan selects the review screen (§10 item 5) — avoids a Google service-account credential to manage and lets `status`/`internal_score`/`internal_notes`/`reviewer` be edited in place. |
+| Team review workflow | D1 as source of truth + an **admin list page at `/admin/applications`, gated by HTTP Basic Auth middleware** | Brief explicitly leaves "spreadsheet vs. review screen" open; this plan selects the review screen (§10 item 5) — avoids a Google service-account credential to manage and lets `status`/`internal_score`/`internal_notes`/`reviewer` be edited in place. |
 | Bot/spam protection | **Cloudflare Turnstile** (managed widget) + honeypot field | Native to Cloudflare, free, no CAPTCHA UX tax. Satisfies "basic spam protection." |
 | Rate limiting | Cloudflare **Rate Limiting rule** on `/api/apply`, backed by a KV counter as fallback | Belt-and-suspenders against scripted submission spam. |
 | Transactional email | **Hostinger mailbox (Titan Mail) via SMTP**, sent from the Worker using Cloudflare's TCP Sockets API (`cloudflare:sockets`) through a thin SMTP client such as `worker-mailer` | Team already owns a Hostinger-hosted mailbox on the project domain — no separate email-service account/API key to provision. Hostinger has no HTTP send API (unlike Resend), so the Worker opens an authenticated STARTTLS (port 587) or SMTPS (port 465) connection directly. Two branded HTML templates (team notification + applicant confirmation) — see §5a. |
 | Analytics | **Cloudflare Web Analytics** | Cookie-free, so the brief's "cookie consent if used" clause becomes moot — avoids building a consent banner. Swap for GA4 only if the team specifically wants it (then a consent banner is mandatory). |
-| Admin auth | **Cloudflare Access** (Zero Trust) in front of `/admin/*` | No custom auth system to build/secure — matches "no auth system... on this site" for the *public* site while still letting the internal team review privately. |
+| Admin auth | **HTTP Basic Auth** via Next.js middleware, checked against `ADMIN_USERNAME`/`ADMIN_PASSWORD` Worker secrets | Originally planned as Cloudflare Access (Zero Trust), but that needs a Zero Trust org already provisioned on the account. Basic Auth is a code-only equivalent — fails closed if secrets are unset, no dashboard dependency — and still matches "no auth system... on this site" for the *public* site while keeping `/admin/*` private. Revisit if Zero Trust gets set up later; the two aren't mutually exclusive (Access can front Basic Auth too). |
 | DNS / domain | Cloudflare DNS, custom domain bound to the Worker once `[Halal Brand]` domain is finalized | Blocks Milestone 3 only, per brief. |
 | Secrets | `wrangler secret put` per environment; `.dev.vars` for local dev, gitignored | Matches the brief's "no API keys or secrets committed to GitHub" rule. |
 
@@ -33,7 +33,7 @@ app/
   api/
     apply/route.ts           # POST handler: validate → Turnstile verify → D1 insert → emails
   admin/
-    applications/page.tsx    # Cloudflare Access-gated review screen
+    applications/page.tsx    # Basic Auth-gated review screen (middleware.ts)
     applications/[id]/page.tsx
   sitemap.ts
   robots.ts
@@ -121,7 +121,7 @@ Landing sections 1–16 and Terms items 1–14 map one-to-one to the brief's tab
 - No fabricated testimonials: portfolio/testimonial section is conditionally rendered — renders nothing (not placeholder content) until real, consented entries exist in D1/CMS.
 - Disclosure visible pre-submission: rendered directly above the Turnstile/submit control on `/apply`, not just linked.
 - Consent capture: `consent_terms` + `consent_feedback` both required booleans, stored per-record, tied to the exact wording from the brief (§14) — the review-permission checkbox (Decision 5's Google-review ask) stored as a separate optional field, never merged into the required consent checkbox.
-- Secrets: Turnstile secret key, Hostinger SMTP credentials, D1/KV bindings all via `wrangler secret` / dashboard env vars — nothing in the repo. `.dev.vars` is gitignored.
+- Secrets: Turnstile secret key, Hostinger SMTP credentials, admin Basic Auth credentials, D1/KV bindings all via `wrangler secret` / dashboard env vars — nothing in the repo. `.dev.vars` is gitignored.
 
 ## 8. Analytics & SEO
 
@@ -151,7 +151,7 @@ These are content/business calls, not this plan's to make — recommendation ado
 
 Technical calls this plan makes directly, so build isn't blocked waiting on them:
 
-5. **Admin review workflow → selected: Cloudflare Access-gated `/admin/applications` screen over D1.** Rejected the Google Sheets sync alternative — it would add a service-account credential to manage (a secrets-hygiene risk in itself) for no gain, since D1 already needs to be the source of truth and the screen supports inline `status`/`internal_score`/`internal_notes`/`reviewer` editing the brief calls for. Only revisit if the team finds the screen actively worse than their spreadsheet after using it in Milestone 2.
+5. **Admin review workflow → selected: `/admin/applications` screen over D1, gated by HTTP Basic Auth middleware (originally planned as Cloudflare Access — switched during build since Access needs a Zero Trust org already on the account; see §2's Admin auth row).** Rejected the Google Sheets sync alternative — it would add a service-account credential to manage (a secrets-hygiene risk in itself) for no gain, since D1 already needs to be the source of truth and the screen supports inline `status`/`internal_score`/`internal_notes`/`reviewer` editing the brief calls for. Only revisit if the team finds the screen actively worse than their spreadsheet after using it in Milestone 2.
 6. **Hostinger mailbox → selected: send from a dedicated address on the project's Hostinger-hosted domain** (e.g. `apply@[Halal Brand domain]`, not a personal inbox — keeps replies and deliverability reputation scoped to the programme). What's left is provisioning, not a decision: SMTP credentials (or app-specific password) via `wrangler secret put`, and confirming SPF/DKIM/DMARC are correctly set in Hostinger's DNS — tracked as a pre-Milestone-2 checklist item.
 7. **Cloudflare account/zone access → resolved.** Logged in via `wrangler` as `takweencentreuk@gmail.com` (Account ID `8696616de833631acaef3e2d03464394`), token scoped for D1, Workers, KV, Pages, zone (read), SSL certs, email routing/sending, and challenge widgets (Turnstile) — covers every binding/service this plan needs. No further access to arrange.
 8. **SMTP-over-Workers → selected: `worker-mailer` over `cloudflare:sockets` as the default transport**, not a fork in the road. Still run a short validation spike early in Milestone 2 (confirm it authenticates to Hostinger and delivers both templates reliably) before depending on it in production, but that's a build task, not a blocking decision. The serverless-relay fallback stays documented in case the spike fails — out of scope otherwise.
@@ -186,7 +186,7 @@ Assumes what's already done: design tokens + both email templates built (§5a), 
 | 6 | Application form UI (`/apply`) — all 20 fields, Zod schema shared client/server, Turnstile widget + honeypot field, disclosure rendered directly above the submit control | Form renders; client-side validation and Turnstile both work | §5, §7 |
 | 7 | D1 schema + `drizzle-kit` migration (§4 table); `/api/apply` route — re-validate server-side → verify Turnstile siteverify → honeypot check → insert → return success; client shows confirmation state | End-to-end submit writes a row to D1 | §4, §5 |
 | 8 | `lib/email/client.ts` (`worker-mailer` over `cloudflare:sockets`, Hostinger SMTP secrets in `.dev.vars`); wire both branded templates from `docs/email-templates/` with merge-field interpolation; fire both emails from `/api/apply` | Test submission triggers both emails | §5, §5a, §10 item 8 |
-| 9 | `/admin/applications` list + `[id]` detail page reading D1 directly (status/score/notes editable); gate the route with a Cloudflare Access policy (dashboard config, ~10 min — not code) | Team can review the test submission live | §2, §10 item 5 |
+| 9 | `/admin/applications` list + `[id]` detail page reading D1 directly (status/score/notes editable); gate the route with HTTP Basic Auth middleware (`ADMIN_USERNAME`/`ADMIN_PASSWORD` secrets — code, not dashboard config) | Team can review the test submission live | §2, §10 item 5 |
 | 10 | Deploy to a Workers staging URL via GitHub-connected Workers Builds; add `sitemap.ts` / `robots.ts` / per-page `metadata`; run one full submit → email → admin smoke test; spot-check contrast and keyboard nav; write `.dev.vars.example` + a short setup README | Shareable staging link; brief's QA checklist run once, end-to-end | §8, §9, §12 |
 
 **Deferred past hour 10** (called out on purpose, not silently dropped):
