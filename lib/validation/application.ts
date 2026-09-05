@@ -101,6 +101,52 @@ export const applicationSchema = z.object({
 export type ApplicationInput = z.infer<typeof applicationSchema>;
 
 /**
+ * Groups the form's fields into the multi-step wizard's steps — the single
+ * source of truth for both per-step Zod validation (via .pick()) and the
+ * step UI/labels, so they can't drift apart. Order matters: consent lives
+ * on the last step alongside Turnstile and the disclosure line, since both
+ * need to sit right before the actual submit per the brief's rules.
+ */
+export const APPLICATION_STEPS = [
+  {
+    title: "Your Business",
+    fields: ["business_name", "business_type", "years_operating", "current_website_url"],
+  },
+  {
+    title: "Online Presence",
+    fields: [
+      "instagram_handle",
+      "facebook_handle",
+      "activity_level",
+      "google_profile_url",
+      "google_review_count",
+      "credentials",
+    ],
+  },
+  {
+    title: "Tell Us More",
+    fields: ["services_description", "biggest_challenge", "content_readiness"],
+  },
+  {
+    title: "Your Details",
+    fields: ["contact_name", "contact_email", "contact_phone"],
+  },
+  {
+    title: "Review & Submit",
+    fields: ["consent_terms", "consent_feedback"],
+  },
+] satisfies { title: string; fields: (keyof ApplicationInput)[] }[];
+
+export function validateStep(stepIndex: number, payload: Record<string, unknown>) {
+  const fields = APPLICATION_STEPS[stepIndex].fields;
+  const shape = Object.fromEntries(fields.map((field) => [field, true])) as Record<
+    (typeof fields)[number],
+    true
+  >;
+  return applicationSchema.pick(shape).safeParse(payload);
+}
+
+/**
  * Honeypot field name — kept out of applicationSchema deliberately.
  * A non-empty value means a bot filled it in; the server route rejects
  * silently (still returns 200) rather than surfacing a validation error

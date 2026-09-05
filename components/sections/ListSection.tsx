@@ -12,6 +12,12 @@ interface ListSectionProps extends ListSectionContent {
   /** "grid" suits short, scannable facts; "stack" (default) suits longer lists. */
   variant?: "stack" | "grid";
   tone?: SectionTone;
+  /**
+   * "negative" swaps the green checkmark for a muted dash — for exclusion
+   * lists like "What's Outside Scope", where a checkmark would misread as
+   * "this is included".
+   */
+  polarity?: "positive" | "negative";
 }
 
 export function ListSection({
@@ -21,7 +27,13 @@ export function ListSection({
   note,
   variant = "stack",
   tone = "plain",
+  polarity = "positive",
 }: ListSectionProps) {
+  const marker = polarity === "negative" ? "–" : "✓";
+  const markerColor =
+    polarity === "negative" ? "var(--color-text-tertiary)" : "var(--color-primary-accessible)";
+  const gridColumns = variant === "grid" && polarity === "negative" ? 280 : 240;
+
   return (
     <section style={{ background: TONE_BACKGROUND[tone] }}>
       <div
@@ -58,7 +70,7 @@ export function ListSection({
               listStyle: "none",
               padding: 0,
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns: `repeat(auto-fit, minmax(${gridColumns}px, 1fr))`,
               gap: "var(--space-4)",
             }}
           >
@@ -74,8 +86,8 @@ export function ListSection({
                   gap: "var(--space-2)",
                 }}
               >
-                <span aria-hidden="true" style={{ color: "var(--color-primary-accessible)", fontWeight: 700 }}>
-                  ✓
+                <span aria-hidden="true" style={{ color: markerColor, fontWeight: 700 }}>
+                  {marker}
                 </span>
                 <span>{item}</span>
               </li>
@@ -97,11 +109,11 @@ export function ListSection({
                   style={{
                     position: "absolute",
                     left: 0,
-                    color: "var(--color-primary-accessible)",
+                    color: markerColor,
                     fontWeight: 700,
                   }}
                 >
-                  ✓
+                  {marker}
                 </span>
                 {item}
               </li>

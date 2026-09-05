@@ -139,25 +139,40 @@ export const whatsIncluded: CategorizedSection = {
   note: "Development cost: £0.",
 };
 
-export const whatsOutsideScope: ListSection = {
+export const whatsOutsideScope: CategorizedSection = {
   id: "whats-outside-scope",
   number: 7,
   title: "What's Outside Scope",
-  items: [
-    "Ecommerce or large catalogues",
-    "Online ordering",
-    "Advanced booking",
-    "Payment integrations",
-    "LMS or student portals",
-    "Membership systems",
-    "CRM",
-    "Automation or AI integrations",
-    "Custom dashboards or software",
-    "Advanced SEO campaigns",
-    "Ongoing marketing",
-    "Unlimited revisions",
-    "Ongoing maintenance",
-    "Future pages or functionality after completion",
+  categories: [
+    {
+      title: "Commerce & Bookings",
+      items: [
+        "Ecommerce or large catalogues",
+        "Online ordering",
+        "Advanced booking",
+        "Payment integrations",
+      ],
+    },
+    {
+      title: "Platforms & Software",
+      items: [
+        "LMS or student portals",
+        "Membership systems",
+        "CRM",
+        "Automation or AI integrations",
+        "Custom dashboards or software",
+      ],
+    },
+    {
+      title: "Ongoing Work",
+      items: [
+        "Advanced SEO campaigns",
+        "Ongoing marketing",
+        "Unlimited revisions",
+        "Ongoing maintenance",
+        "Future pages or functionality after completion",
+      ],
+    },
   ],
   note: "That isn't part of the free starter scope, but we're happy to scope and quote it separately — you'll always see the price before any paid work begins.",
 };

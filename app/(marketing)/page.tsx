@@ -33,9 +33,9 @@ export default function LandingPage() {
       <ListSection {...whatTheWebsiteSolves} variant="grid" tone="tint" />
       <WhySponsored />
       <CategorizedSection {...whatsIncluded} />
-      <ListSection {...whatsOutsideScope} />
-      <ListSection {...domainHostingCosts} tone="muted" />
-      <ListSection {...whatHappensAfterLaunch} />
+      <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" />
+      <ListSection {...domainHostingCosts} variant="grid" tone="muted" />
+      <ListSection {...whatHappensAfterLaunch} variant="grid" />
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
       <LimitedCapacity />
       <ProcessSteps />

@@ -1,8 +1,29 @@
 import type { CategorizedSection as CategorizedSectionContent } from "@/lib/content/landing";
 
-export function CategorizedSection({ title, categories, note }: CategorizedSectionContent) {
+interface CategorizedSectionProps extends CategorizedSectionContent {
+  /** "negative" swaps the green checkmark for a muted dash — for exclusion
+   * lists like "What's Outside Scope", where a checkmark would misread as
+   * "this is included". */
+  polarity?: "positive" | "negative";
+  /** "muted" (default, matches original behavior) = white section. "plain"
+   * = transparent section (shows the page's gray), white cards for contrast —
+   * used to keep the alternating section-background rhythm going. */
+  tone?: "muted" | "plain";
+}
+
+export function CategorizedSection({
+  title,
+  categories,
+  note,
+  polarity = "positive",
+  tone = "muted",
+}: CategorizedSectionProps) {
+  const marker = polarity === "negative" ? "–" : "✓";
+  const markerColor =
+    polarity === "negative" ? "var(--color-text-tertiary)" : "var(--color-primary-accessible)";
+
   return (
-    <section style={{ background: "var(--color-surface-base)" }}>
+    <section style={{ background: tone === "muted" ? "var(--color-surface-base)" : undefined }}>
       <div
         style={{
           maxWidth: 960,
@@ -33,6 +54,7 @@ export function CategorizedSection({ title, categories, note }: CategorizedSecti
                 border: "1px solid var(--color-border-light)",
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-6)",
+                background: "var(--color-surface-base)",
               }}
             >
               <h3 style={{ fontFamily: "var(--font-display)", marginBottom: "var(--space-4)" }}>
@@ -53,11 +75,11 @@ export function CategorizedSection({ title, categories, note }: CategorizedSecti
                       style={{
                         position: "absolute",
                         left: 0,
-                        color: "var(--color-primary-accessible)",
+                        color: markerColor,
                         fontWeight: 700,
                       }}
                     >
-                      ✓
+                      {marker}
                     </span>
                     {item}
                   </li>
