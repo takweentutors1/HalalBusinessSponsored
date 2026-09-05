@@ -175,3 +175,63 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
+
+/* Logo (components/shared/Logo.tsx) */
+@keyframes ui-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-logo-spin {
+  transform-origin: 50% 50%;
+  animation: ui-logo-spin 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-logo-spin {
+    animation: none;
+  }
+}
+
+/* Multi-step form (components/forms/ApplicationForm.tsx) */
+@keyframes ui-step-enter {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ui-step-enter {
+  animation: ui-step-enter 280ms ease-out;
+}
+
+.ui-step-progress-fill {
+  transition: width 300ms ease;
+}
+
+.ui-step-content {
+  outline: none;
+}
+
+.ui-step-content:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-step-enter {
+    animation: none;
+  }
+  .ui-step-progress-fill {
+    transition: none;
+  }
+}

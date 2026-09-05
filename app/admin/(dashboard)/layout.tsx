@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Badge } from "@/components/ui";
+import { Logo } from "@/components/shared/Logo";
 import { logout } from "../login/actions";
 
 export const metadata: Metadata = {
@@ -19,16 +21,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           justifyContent: "space-between",
         }}
       >
-        <Link
-          href="/admin/applications"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            color: "var(--color-primary-accessible)",
-          }}
-        >
-          Halal Business Initiative — Admin
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
+          <Link href="/admin/applications" aria-label="Halal Business Initiative — Admin, home">
+            <Logo size={28} />
+          </Link>
+          <Badge variant="primary">Admin</Badge>
+        </div>
         <form action={logout}>
           <button
             type="submit"

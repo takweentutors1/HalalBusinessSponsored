@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { disclosure } from "@/lib/config";
 import { Disclosure } from "./Disclosure";
+import { Logo } from "./Logo";
 
 /**
  * Site-wide footer. Wires the shared Disclosure component (Decision 1's
@@ -11,6 +12,9 @@ import { Disclosure } from "./Disclosure";
 export function Footer() {
   return (
     <footer className="ui-footer">
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "var(--space-4)" }}>
+        <Logo size={28} showWordmark={false} />
+      </div>
       <Disclosure text={disclosure.footer} />
       <p style={{ marginTop: "var(--space-2)" }}>
         <Link

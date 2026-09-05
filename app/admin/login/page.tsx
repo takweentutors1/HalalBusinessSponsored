@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Button, Card, FormField, Input } from "@/components/ui";
+import { Logo } from "@/components/shared/Logo";
 import { login } from "./actions";
 
 export const metadata: Metadata = {
@@ -35,21 +36,8 @@ export default async function AdminLoginPage({
     >
       <Card style={{ maxWidth: 400, width: "100%" }}>
         <div style={{ textAlign: "center", marginBottom: "var(--space-6)" }}>
-          <div
-            aria-hidden="true"
-            style={{
-              width: 48,
-              height: 48,
-              borderRadius: "var(--radius-full)",
-              background: "var(--color-primary-pale)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto var(--space-4)",
-              fontSize: "1.5rem",
-            }}
-          >
-            🔒
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "var(--space-4)" }}>
+            <Logo size={56} showWordmark={false} animated />
           </div>
           <h1 style={{ fontSize: "var(--font-size-2xl)", marginBottom: "var(--space-2)" }}>
             Admin Login

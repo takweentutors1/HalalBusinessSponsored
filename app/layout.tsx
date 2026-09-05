@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/shared/Footer";
 import { siteUrl } from "@/lib/config";
 import "./globals.css";
@@ -20,6 +20,10 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#047857",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

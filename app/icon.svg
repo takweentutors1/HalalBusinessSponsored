@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="markGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#036450"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="url(#markGradient)"/>
+  <polygon
+    fill="#ffffff"
+    points="50,4 57.65,31.52 82.53,17.47 68.48,42.35 96,50 68.48,57.65 82.53,82.53 57.65,68.48 50,96 42.35,68.48 17.47,82.53 31.52,57.65 4,50 31.52,42.35 17.47,17.47 42.35,31.52"
+  />
+  <circle cx="50" cy="50" r="9" fill="url(#markGradient)"/>
+</svg>

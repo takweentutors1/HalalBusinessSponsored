@@ -5,6 +5,8 @@ Cloudflare-hosted build plan, derived from `Brief_HalalBusinessSponsoredWebsite_
 
 **Brief** — Next.js, no auth, no payments. Two pages (landing + Programme Terms) plus an application form. 16 landing sections, 14 Terms items, a 20-field application data model, 8 non-negotiable rules, and a 3-milestone build order with an explicit QA checklist. Open dependency: sub-brand name/logo/domain (`[Halal Brand]`) not yet decided — blocks Milestone 3 only.
 
+A provisional mark (`components/shared/Logo.tsx`, `public/icons/`, favicons/manifest) was built ahead of that decision — an 8-pointed geometric star (a decorative Islamic architectural/tile motif, not a religious symbol) in the emerald palette, used in the site header, footer, and admin. Treat as a placeholder consistent with the "Halal Business Initiative" working name; swap once `[Halal Brand]`'s real name/logo is decided.
+
 **Design system** — CSS-custom-property token system already fully specified: emerald palette (`--color-primary: #10B981` family), Georgia/EB Garamond display + Merriweather body, spacing/shadow/radius scale, and working Button/Input/Card/Badge components. This plan treats it as the source of truth for styling — port the tokens verbatim rather than re-deriving them or introducing Tailwind's own scale.
 
 ## 2. Stack decisions (Cloudflare-specific)
