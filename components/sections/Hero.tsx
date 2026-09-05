@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui";
 import { Disclosure } from "@/components/shared/Disclosure";
 import { hero } from "@/lib/content/landing";
+import { HeroVideo } from "./HeroVideo";
 
 export function Hero() {
   return (
@@ -50,6 +51,8 @@ export function Hero() {
         <div style={{ marginTop: "var(--space-6)" }}>
           <Disclosure text={hero.disclosureLine} />
         </div>
+
+        <HeroVideo />
       </div>
     </section>
   );
