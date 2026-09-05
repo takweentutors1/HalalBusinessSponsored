@@ -340,3 +340,75 @@
     animation: none;
   }
 }
+
+/* Apply form — thank-you character (components/forms/ThankYouCharacter.tsx) */
+@keyframes ui-thankyou-pop-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ui-thankyou-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ui-thankyou-pop-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ui-thankyou-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.ui-thankyou-bob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ui-thankyou-bob 2.4s ease-in-out 450ms infinite;
+}
+
+@keyframes ui-thankyou-sparkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ui-thankyou-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ui-thankyou-sparkle 1.8s ease-in-out infinite;
+}
+
+.ui-thankyou-sparkle-1 {
+  animation-delay: 0s;
+}
+
+.ui-thankyou-sparkle-2 {
+  animation-delay: 0.4s;
+}
+
+.ui-thankyou-sparkle-3 {
+  animation-delay: 0.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-thankyou-pop,
+  .ui-thankyou-bob,
+  .ui-thankyou-sparkle {
+    animation: none;
+  }
+}

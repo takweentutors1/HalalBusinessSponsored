@@ -15,6 +15,7 @@ import { StepBusiness } from "./steps/StepBusiness";
 import { StepContact } from "./steps/StepContact";
 import { StepOnlinePresence } from "./steps/StepOnlinePresence";
 import { StepReview } from "./steps/StepReview";
+import { ThankYouCharacter } from "./ThankYouCharacter";
 import { initialFormState, type FieldErrors, type FormState } from "./types";
 
 function toPayload(state: FormState) {
@@ -52,6 +53,7 @@ export function ApplicationForm() {
     "idle" | "submitting" | "submitted" | "needs-verification" | "error"
   >("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const stepHeadingRef = useRef<HTMLDivElement>(null);
 
@@ -137,7 +139,7 @@ export function ApplicationForm() {
           turnstileToken,
         }),
       });
-      const data = (await res.json()) as { success: boolean };
+      const data = (await res.json()) as { success: boolean; id?: string };
 
       if (!res.ok || !data.success) {
         setSubmitError(
@@ -147,6 +149,7 @@ export function ApplicationForm() {
         return;
       }
 
+      setApplicationId(data.id ?? null);
       setStatus("submitted");
     } catch {
       setSubmitError("Couldn't reach the server. Check your connection and try again.");
@@ -156,14 +159,25 @@ export function ApplicationForm() {
 
   if (status === "submitted") {
     return (
-      <Card role="status">
-        <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-3)" }}>
-          Application received
+      <Card role="status" style={{ textAlign: "center" }}>
+        <ThankYouCharacter />
+        <h2
+          style={{
+            color: "var(--color-primary-dark)",
+            margin: "var(--space-6) 0 var(--space-3)",
+          }}
+        >
+          Application received!
         </h2>
-        <p style={{ color: "var(--color-text-secondary)" }}>
+        <p style={{ color: "var(--color-text-secondary)", marginBottom: "var(--space-4)" }}>
           Thank you — we&apos;ve received your application and it&apos;s now with our review
           team. We&apos;ll email you either way once a decision is made.
         </p>
+        {applicationId && (
+          <p style={{ color: "var(--color-text-tertiary)", fontSize: "var(--font-size-sm)" }}>
+            Reference: {applicationId.slice(0, 8).toUpperCase()}
+          </p>
+        )}
       </Card>
     );
   }
