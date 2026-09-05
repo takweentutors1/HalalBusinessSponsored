@@ -20,7 +20,7 @@ export async function saveReview(id: string, formData: FormData) {
   const internalNotes = notesRaw === "" ? null : notesRaw;
 
   const reviewerRaw = String(formData.get("reviewer") ?? "").trim();
-  // Falls back to the Basic Auth username middleware.ts forwards as
+  // Falls back to the logged-in username proxy.ts forwards as
   // x-admin-user when the field is left blank, so reviewer attribution
   // doesn't rely on someone remembering to type their own name in.
   const requestHeaders = await headers();

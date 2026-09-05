@@ -30,14 +30,21 @@ declare global {
     TEAM_NOTIFICATION_EMAIL?: string;
 
     /**
-     * HTTP Basic Auth credentials gating /admin/* (middleware.ts) — the
-     * code-only alternative to Cloudflare Access actually used (§10 item
-     * 5's original pick assumed a Zero Trust org already on the account).
-     * Unlike other secrets here, there's no safe test-value fallback:
-     * middleware.ts fails closed (401s everything) if either is unset.
+     * Admin login credentials — checked by app/admin/login against a
+     * signed session cookie (lib/admin/auth.ts), the code-only alternative
+     * to Cloudflare Access actually used (§10 item 5's original pick
+     * assumed a Zero Trust org already on the account). Unlike other
+     * secrets here, there's no safe test-value fallback: proxy.ts fails
+     * closed (redirects to login, which always rejects) if either is unset.
      */
     ADMIN_USERNAME?: string;
     ADMIN_PASSWORD?: string;
+    /**
+     * Signs the session cookie. Optional — falls back to ADMIN_PASSWORD
+     * if unset (see lib/admin/auth.ts). Set a dedicated value for real
+     * separation between the login password and the cookie-signing key.
+     */
+    ADMIN_SESSION_SECRET?: string;
   }
 }
 

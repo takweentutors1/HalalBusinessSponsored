@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // Basic Auth already blocks crawlers here (see proxy.ts) — this is
+      // The login gate already blocks crawlers here (see proxy.ts) — this is
       // just standard defense-in-depth hygiene for an admin area.
       disallow: "/admin",
     },

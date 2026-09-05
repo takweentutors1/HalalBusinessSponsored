@@ -18,8 +18,8 @@ cp .dev.vars.example .dev.vars # fill in real values — see below
 ```
 
 `.dev.vars` is gitignored. Every value in `.dev.vars.example` is optional for
-local dev **except** `ADMIN_USERNAME`/`ADMIN_PASSWORD` — the admin area fails
-closed (401s everything) if those two aren't set.
+local dev **except** `ADMIN_USERNAME`/`ADMIN_PASSWORD` — the admin login
+(`/admin/login`) fails closed (rejects every attempt) if those two aren't set.
 
 ### Provisioning Cloudflare resources (first time only)
 
@@ -79,7 +79,7 @@ npm run sync-email-templates
 npm run deploy   # opennextjs-cloudflare build && deploy via wrangler
 ```
 
-Secrets (Turnstile, Hostinger SMTP, admin Basic Auth) are set per-environment
+Secrets (Turnstile, Hostinger SMTP, admin login) are set per-environment
 via `wrangler secret put <NAME>` — never committed, never in `wrangler.jsonc`.
 
 ## Known limitations
@@ -89,9 +89,9 @@ via `wrangler secret put <NAME>` — never committed, never in `wrangler.jsonc`.
   bundling and `worker-mailer`'s use of `cloudflare:sockets` — matches an
   abandoned upstream PR. Submissions still save to D1 and show the applicant
   a confirmation regardless; email failures are logged, not fatal.
-- **`/admin/*` uses HTTP Basic Auth**, not Cloudflare Access — Access needs a
-  Zero Trust org already provisioned on the account. See
-  `docs/IMPLEMENTATION_PLAN.md` §2/§10 item 5.
+- **`/admin/*` uses a signed session cookie set by `/admin/login`**, not
+  Cloudflare Access — Access needs a Zero Trust org already provisioned on
+  the account. See `docs/IMPLEMENTATION_PLAN.md` §2/§10 item 5.
 - **`[Halal Brand]` name/domain aren't decided yet** (brief's open dependency).
   `lib/config.ts`'s `brand.name`/`brand.domain` are placeholders; `siteUrl`
   points at the current `*.workers.dev` staging URL until a real domain is

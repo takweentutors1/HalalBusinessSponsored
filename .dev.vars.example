@@ -18,8 +18,10 @@ HOSTINGER_SMTP_USER=
 HOSTINGER_SMTP_PASSWORD=
 TEAM_NOTIFICATION_EMAIL=
 
-# HTTP Basic Auth gating /admin/* (middleware.ts). REQUIRED — unlike the
-# others above, there's no safe fallback; every /admin request 401s until
-# both are set.
+# Admin login (/admin/login, see lib/admin/auth.ts). REQUIRED — unlike the
+# others above, there's no safe fallback; login always rejects until both
+# are set.
 ADMIN_USERNAME=
 ADMIN_PASSWORD=
+# Optional — signs the session cookie. Falls back to ADMIN_PASSWORD if unset.
+ADMIN_SESSION_SECRET=
