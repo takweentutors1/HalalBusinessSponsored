@@ -71,9 +71,19 @@ export async function verifySessionCookieValue(
   const secret = getSigningSecret(env);
   if (!secret) return null;
 
-  const parts = value.split(".");
-  if (parts.length !== 3) return null;
-  const [username, expiresAtRaw, signature] = parts;
+  // Split from the right: usernames are often email addresses and can
+  // contain their own "." characters, so this can't assume exactly 3
+  // dot-delimited parts — only the trailing signature and expiry are
+  // guaranteed dot-free, everything before them is the username.
+  const lastDot = value.lastIndexOf(".");
+  if (lastDot === -1) return null;
+  const signature = value.slice(lastDot + 1);
+  const payload = value.slice(0, lastDot);
+
+  const secondLastDot = payload.lastIndexOf(".");
+  if (secondLastDot === -1) return null;
+  const username = payload.slice(0, secondLastDot);
+  const expiresAtRaw = payload.slice(secondLastDot + 1);
 
   const expiresAt = Number(expiresAtRaw);
   if (!Number.isFinite(expiresAt) || Date.now() > expiresAt) return null;
