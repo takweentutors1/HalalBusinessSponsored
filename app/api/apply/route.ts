@@ -5,12 +5,6 @@ import { applications } from "@/lib/db/schema";
 import { sendApplicationEmails } from "@/lib/email/send";
 import { HONEYPOT_FIELD_NAME, applicationSchema } from "@/lib/validation/application";
 
-/**
- * Cloudflare's public "always passes" test secret — pairs with the test
- * site key used as lib/config.ts's turnstileSiteKey fallback. Only used
- * locally before TURNSTILE_SECRET_KEY is provisioned (§10 item 5).
- */
-const TURNSTILE_TEST_SECRET = "1x0000000000000000000000000000000AA";
 const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 async function verifyTurnstile(token: string, secret: string, remoteIp: string | null) {
@@ -58,9 +52,16 @@ export async function POST(request: Request) {
     );
   }
 
-  const secret = env.TURNSTILE_SECRET_KEY || TURNSTILE_TEST_SECRET;
+  if (!env.TURNSTILE_SECRET_KEY) {
+    console.error("[turnstile] TURNSTILE_SECRET_KEY is not configured");
+    return NextResponse.json(
+      { success: false, error: "turnstile-not-configured" },
+      { status: 500 },
+    );
+  }
+
   const remoteIp = request.headers.get("cf-connecting-ip");
-  const verified = await verifyTurnstile(turnstileToken, secret, remoteIp);
+  const verified = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, remoteIp);
   if (!verified) {
     return NextResponse.json(
       { success: false, error: "turnstile-verification-failed" },

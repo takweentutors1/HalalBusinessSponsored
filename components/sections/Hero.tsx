@@ -10,45 +10,81 @@ export function Hero() {
         background:
           "linear-gradient(135deg, var(--color-primary-pale) 0%, var(--color-surface-base) 100%)",
         padding: "var(--space-16) var(--space-8)",
-        textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <h1
-          style={{
-            fontSize: "var(--font-size-5xl)",
-            marginBottom: "var(--space-6)",
-          }}
-        >
-          {hero.headline}
-        </h1>
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(360px, 100%), 1fr))",
+          gap: "var(--space-12)",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ minWidth: 0 }}>
+          <h1
+            style={{
+              fontSize: "var(--font-size-4xl)",
+              marginBottom: "var(--space-4)",
+            }}
+          >
+            {hero.headline}
+          </h1>
 
-        <ul
-          style={{
-            listStyle: "none",
-            padding: 0,
-            marginBottom: "var(--space-6)",
-            display: "flex",
-            flexDirection: "column",
-            gap: "var(--space-2)",
-          }}
-        >
-          {hero.bullets.map((bullet) => (
-            <li key={bullet} style={{ color: "var(--color-text-secondary)" }}>
-              {bullet}
-            </li>
-          ))}
-        </ul>
+          <p style={{ fontWeight: 600, fontSize: "var(--font-size-lg)", marginBottom: "var(--space-4)" }}>
+            {hero.costLine}
+          </p>
 
-        <p style={{ fontWeight: 600, marginBottom: "var(--space-6)" }}>
-          {hero.costLine}
-        </p>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              marginBottom: "var(--space-6)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-2)",
+            }}
+          >
+            {hero.bullets.map((bullet) => (
+              <li key={bullet} style={{ color: "var(--color-text-secondary)" }}>
+                {bullet}
+              </li>
+            ))}
+          </ul>
 
-        <Button href="/apply" variant="primary">
-          {hero.ctaLabel}
-        </Button>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "var(--space-4)",
+              marginBottom: "var(--space-6)",
+            }}
+          >
+            <Button href="/apply" variant="primary">
+              {hero.ctaLabel}
+            </Button>
+            <Button href={hero.secondaryCtaHref} variant="ghost">
+              {hero.secondaryCtaLabel}
+            </Button>
+          </div>
 
-        <div style={{ marginTop: "var(--space-6)" }}>
+          <p
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-2)",
+              color: "var(--color-text-secondary)",
+              fontSize: "var(--font-size-sm)",
+              marginBottom: "var(--space-4)",
+            }}
+          >
+            <span aria-hidden="true" style={{ color: "var(--color-primary-accessible)" }}>
+              ✓
+            </span>
+            {hero.trustLine}
+          </p>
+
           <Disclosure text={hero.disclosureLine} />
         </div>
 

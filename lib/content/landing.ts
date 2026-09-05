@@ -43,6 +43,15 @@ export const hero = {
   costLine,
   disclosureLine: disclosure.footer,
   ctaLabel: "Apply for a Sponsored Website",
+  secondaryCtaLabel: "See How It Works",
+  secondaryCtaHref: "#how-it-works",
+  /**
+   * Non-Negotiable Rule: never fabricate reviews/stats. No real ones exist
+   * yet, so this is an honest, non-numeric trust line — not a star rating —
+   * reusing the same claim already made on /apply, not a new one invented
+   * for the Hero.
+   */
+  trustLine: "Reviewed by a real person, not an algorithm.",
 } as const;
 
 export const whoItsFor: ListSection = {

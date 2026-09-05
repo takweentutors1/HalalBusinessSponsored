@@ -70,7 +70,7 @@ export function ListSection({
               listStyle: "none",
               padding: 0,
               display: "grid",
-              gridTemplateColumns: `repeat(auto-fit, minmax(${gridColumns}px, 1fr))`,
+              gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridColumns}px, 100%), 1fr))`,
               gap: "var(--space-4)",
             }}
           >

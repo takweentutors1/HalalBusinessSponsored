@@ -3,6 +3,7 @@ import { processSteps } from "@/lib/content/landing";
 export function ProcessSteps() {
   return (
     <section
+      id="how-it-works"
       style={{
         maxWidth: 900,
         margin: "0 auto",
@@ -32,7 +33,7 @@ export function ProcessSteps() {
                 width: "2rem",
                 height: "2rem",
                 borderRadius: "var(--radius-full)",
-                background: "var(--color-primary)",
+                background: "var(--color-primary-accessible)",
                 color: "white",
                 fontWeight: 700,
                 marginBottom: "var(--space-3)",

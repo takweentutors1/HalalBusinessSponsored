@@ -45,13 +45,16 @@ export const costLine =
   "The build is £0. Domain and hosting remain your own, separate cost.";
 
 /**
- * Real site key comes from Cloudflare Turnstile (§10 item — provision
- * alongside D1/KV) via NEXT_PUBLIC_TURNSTILE_SITE_KEY. Falls back to
- * Cloudflare's public "always passes" test key so the form works in local
- * dev before that's provisioned — never use this fallback in production.
+ * Real widget provisioned via `wrangler turnstile widget create`, scoped to
+ * halal-business-website.takweencentreuk.workers.dev. Site keys are public
+ * by design (Turnstile embeds them in every page's HTML), so committing the
+ * real value here is safe — the paired secret lives only as the
+ * TURNSTILE_SECRET_KEY Worker secret, never in source.
+ * NEXT_PUBLIC_TURNSTILE_SITE_KEY still overrides this for local dev against
+ * a different widget if needed.
  */
 export const turnstileSiteKey =
-  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA";
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "0x4AAAAAAEpDfRi2oBw7wWTd";
 
 /**
  * Current deployment's real URL — used for sitemap.xml, robots.txt, and

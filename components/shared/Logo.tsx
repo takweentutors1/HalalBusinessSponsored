@@ -13,7 +13,15 @@ export interface LogoProps {
  */
 export function Logo({ size = 32, animated = false, showWordmark = true }: LogoProps) {
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-3)" }}>
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "var(--space-3)",
+        minWidth: 0,
+        maxWidth: "100%",
+      }}
+    >
       <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" role="img">
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">

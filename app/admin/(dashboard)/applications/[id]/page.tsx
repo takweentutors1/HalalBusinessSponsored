@@ -51,7 +51,7 @@ export default async function ApplicationDetailPage({
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "var(--space-6)" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))", gap: "var(--space-6)" }}>
         <Card>
           <h4>Business</h4>
           <Field label="Business type" value={application.businessType} />
