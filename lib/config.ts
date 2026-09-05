@@ -7,12 +7,14 @@
 
 export const brand = {
   /**
-   * Sub-brand name/logo/domain not yet decided (brief's open dependency,
-   * referenced throughout as "[Halal Brand]"). Placeholder only — does not
-   * block building against a staging URL, but blocks Milestone 3 (launch).
+   * Finalized to match what was already hardcoded everywhere else (logo
+   * wordmark, page titles, PWA manifest, admin panel, emails) — this
+   * resolves the brief's former "[Halal Brand]" placeholder dependency
+   * without an actual rename, since nothing else was ever using anything
+   * different.
    */
-  name: "[Halal Brand]",
-  domain: "[halal-brand-domain].com",
+  name: "Halal Business Initiative",
+  domain: "takweenconnect.co.uk",
   parentCompany: "Takween Digital Services",
 } as const;
 
@@ -38,7 +40,7 @@ export const disclosure = {
   termsIntro: `This programme is operated by ${brand.parentCompany}.`,
   nearSubmit: `Applications are reviewed by the ${brand.parentCompany} team.`,
   /** Used in the FAQ's "Who actually builds my website?" answer. */
-  faqAnswer: `Your project is delivered by the ${brand.parentCompany} team through our ${brand.name} initiative.`,
+  faqAnswer: `Your project is delivered by the ${brand.parentCompany} team through our ${brand.name}.`,
 } as const;
 
 export const costLine =
@@ -60,8 +62,6 @@ export const turnstileSiteKey =
  * Custom domain (takweenconnect.co.uk), provisioned via the Workers
  * Custom Domains API — see wrangler.jsonc's routes. Used for
  * sitemap.xml, robots.txt, and OG metadata, which all need absolute
- * URLs. Note: brand.name/brand.domain above are still placeholders —
- * this is the technical hosting domain, not necessarily the finalized
- * `[Halal Brand]` sub-brand identity.
+ * URLs. Same domain as brand.domain above.
  */
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://takweenconnect.co.uk";
