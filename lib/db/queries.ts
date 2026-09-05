@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "./client";
 import { applications, type Application } from "./schema";
 
@@ -23,6 +23,27 @@ export { STATUS_VALUES };
 export async function listApplications(): Promise<Application[]> {
   const db = await getDb();
   return db.select().from(applications).orderBy(desc(applications.createdAt)).limit(200);
+}
+
+/**
+ * Powers the landing page's live "spots remaining this month" ring —
+ * accepted/completed applications submitted in the current calendar month
+ * (UTC, matching createdAt's `datetime('now')` default). Uses submission
+ * month as a proxy for cohort month; fine given this program's fast
+ * review turnaround, not a strict cohort-tracking field.
+ */
+export async function getAcceptedCountThisMonth(): Promise<number> {
+  const db = await getDb();
+  const [row] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(applications)
+    .where(
+      and(
+        inArray(applications.status, ["accepted", "completed"]),
+        sql`strftime('%Y-%m', ${applications.createdAt}) = strftime('%Y-%m', 'now')`,
+      ),
+    );
+  return row?.count ?? 0;
 }
 
 export async function getApplicationById(id: string): Promise<Application | undefined> {

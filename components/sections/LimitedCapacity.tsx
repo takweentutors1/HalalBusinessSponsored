@@ -1,6 +1,17 @@
 import { limitedCapacity } from "@/lib/content/landing";
+import { getAcceptedCountThisMonth } from "@/lib/db/queries";
+import { CapacityRing } from "./CapacityRing";
 
-export function LimitedCapacity() {
+/**
+ * The ring shows real spots-remaining data from D1 (see
+ * getAcceptedCountThisMonth), not a fixed figure — this is why the
+ * homepage route is marked force-dynamic (see app/(marketing)/page.tsx),
+ * so it's read fresh on every request rather than frozen at build time.
+ */
+export async function LimitedCapacity() {
+  const acceptedThisMonth = await getAcceptedCountThisMonth();
+  const remaining = Math.max(0, limitedCapacity.count - acceptedThisMonth);
+
   return (
     <section
       style={{
@@ -9,16 +20,17 @@ export function LimitedCapacity() {
         background: "var(--color-primary-pale)",
       }}
     >
-      <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-4)" }}>
+      <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-6)" }}>
         {limitedCapacity.title}
       </h2>
+      <CapacityRing total={limitedCapacity.count} remaining={remaining} />
       <p
         style={{
-          fontSize: "var(--font-size-3xl)",
+          fontSize: "var(--font-size-xl)",
           fontFamily: "var(--font-display)",
           color: "var(--color-primary-dark)",
           fontWeight: 700,
-          marginBottom: "var(--space-2)",
+          margin: "var(--space-6) 0 var(--space-2)",
         }}
       >
         {limitedCapacity.statement}

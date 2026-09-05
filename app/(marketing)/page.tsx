@@ -23,6 +23,13 @@ import {
   whoQualifies,
 } from "@/lib/content/landing";
 
+// LimitedCapacity reads a real, live count from D1 (spots remaining this
+// month) — force-dynamic so that's re-read on every request instead of
+// being frozen at build time, which is what would silently happen
+// otherwise since D1 access isn't part of Next's fetch()-based static
+// analysis.
+export const dynamic = "force-dynamic";
+
 export default function LandingPage() {
   return (
     <>
