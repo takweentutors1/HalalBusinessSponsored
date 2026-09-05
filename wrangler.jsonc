@@ -4,10 +4,25 @@
 	"name": "halal-business-website",
 	"compatibility_date": "2026-09-04",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+	// Adding "routes" below makes Wrangler disable the workers.dev
+	// subdomain by default — kept on explicitly since it's still in use
+	// (e.g. admin login) and nothing asked for it to go away.
+	"workers_dev": true,
+
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
+
+	// Custom domain — provisioned via the Workers Custom Domains API
+	// (takweenconnect.co.uk zone), not wrangler deploy. Listed here so
+	// future deploys don't drift from what's actually live, and so this
+	// is documented in source control.
+	"routes": [
+		{ "pattern": "takweenconnect.co.uk", "custom_domain": true },
+		{ "pattern": "www.takweenconnect.co.uk", "custom_domain": true }
+	],
 	"services": [
 		{
 			// Self-reference service binding, the service name must match the worker name

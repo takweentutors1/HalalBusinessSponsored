@@ -57,10 +57,11 @@ export const turnstileSiteKey =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "0x4AAAAAAEpDfRi2oBw7wWTd";
 
 /**
- * Current deployment's real URL — used for sitemap.xml, robots.txt, and
- * OG metadata, which all need absolute URLs. Swap to the real custom
- * domain once `[Halal Brand]`'s domain is finalized (blocks Milestone 3
- * only, per §1 — brand.domain above stays a placeholder until then).
+ * Custom domain (takweenconnect.co.uk), provisioned via the Workers
+ * Custom Domains API — see wrangler.jsonc's routes. Used for
+ * sitemap.xml, robots.txt, and OG metadata, which all need absolute
+ * URLs. Note: brand.name/brand.domain above are still placeholders —
+ * this is the technical hosting domain, not necessarily the finalized
+ * `[Halal Brand]` sub-brand identity.
  */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://halal-business-website.takweencentreuk.workers.dev";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://takweenconnect.co.uk";
