@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AdminEmptyState } from "@/components/admin/AdminEmptyState";
+import { StatCard } from "@/components/admin/StatCard";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { listApplications } from "@/lib/db/queries";
 
@@ -12,13 +14,13 @@ export default async function AdminApplicationsPage() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: "var(--space-2)" }}>Applications</h1>
-      <p style={{ color: "var(--color-text-secondary)", marginBottom: "var(--space-6)" }}>
-        {applications.length} total
-      </p>
+      <h1 style={{ marginBottom: "var(--space-6)" }}>Applications</h1>
+      <div style={{ marginBottom: "var(--space-8)" }}>
+        <StatCard label="Total applications" value={applications.length} />
+      </div>
 
       {applications.length === 0 ? (
-        <p style={{ color: "var(--color-text-secondary)" }}>No applications yet.</p>
+        <AdminEmptyState />
       ) : (
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -33,8 +35,15 @@ export default async function AdminApplicationsPage() {
               </tr>
             </thead>
             <tbody>
-              {applications.map((application) => (
-                <tr key={application.id} style={{ borderBottom: "1px solid var(--color-border-light)" }}>
+              {applications.map((application, index) => (
+                <tr
+                  key={application.id}
+                  className="ui-admin-row-enter"
+                  style={{
+                    borderBottom: "1px solid var(--color-border-light)",
+                    animationDelay: `${Math.min(index * 40, 400)}ms`,
+                  }}
+                >
                   <td style={{ padding: "var(--space-3)" }}>
                     <Link
                       href={`/admin/applications/${application.id}`}

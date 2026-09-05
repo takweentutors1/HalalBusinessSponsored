@@ -235,3 +235,67 @@
     transition: none;
   }
 }
+
+/* Admin applications list (app/admin/(dashboard)/applications/page.tsx,
+   components/admin/AdminEmptyState.tsx, components/admin/StatCard.tsx) */
+@keyframes ui-admin-empty-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.ui-admin-empty-float {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ui-admin-empty-float 3.2s ease-in-out infinite;
+}
+
+@keyframes ui-admin-empty-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.ui-admin-empty-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ui-admin-empty-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ui-admin-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ui-admin-stat-card {
+  animation: ui-admin-fade-up 400ms ease-out;
+}
+
+.ui-admin-row-enter {
+  animation: ui-admin-fade-up 300ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-admin-empty-float,
+  .ui-admin-empty-pulse,
+  .ui-admin-stat-card,
+  .ui-admin-row-enter {
+    animation: none;
+  }
+}
