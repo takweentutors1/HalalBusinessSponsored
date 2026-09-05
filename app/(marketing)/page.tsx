@@ -1,4 +1,5 @@
 import {
+  CategorizedSection,
   FAQ,
   FinalCta,
   Hero,
@@ -6,6 +7,8 @@ import {
   ListSection,
   PortfolioAndTestimonials,
   ProcessSteps,
+  QualificationFit,
+  StatsBar,
   WhySponsored,
 } from "@/components/sections";
 import {
@@ -24,16 +27,16 @@ export default function LandingPage() {
   return (
     <>
       <Hero />
-      <ListSection {...whoItsFor} />
-      <ListSection {...currentDigitalProblem} />
-      <ListSection {...whatTheWebsiteSolves} />
+      <StatsBar />
+      <ListSection {...whoItsFor} variant="grid" tone="muted" />
+      <ListSection {...currentDigitalProblem} variant="grid" />
+      <ListSection {...whatTheWebsiteSolves} variant="grid" tone="tint" />
       <WhySponsored />
-      <ListSection {...whatsIncluded} />
+      <CategorizedSection {...whatsIncluded} />
       <ListSection {...whatsOutsideScope} />
-      <ListSection {...domainHostingCosts} />
+      <ListSection {...domainHostingCosts} tone="muted" />
       <ListSection {...whatHappensAfterLaunch} />
-      <ListSection {...whoQualifies} />
-      <ListSection {...whoIsNotAFit} />
+      <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
       <LimitedCapacity />
       <ProcessSteps />
       <PortfolioAndTestimonials />

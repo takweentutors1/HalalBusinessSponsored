@@ -15,6 +15,23 @@ export interface ListSection {
   note?: string;
 }
 
+export interface CategorizedSection {
+  id: string;
+  number: number;
+  title: string;
+  categories: { title: string; items: string[] }[];
+  note?: string;
+}
+
+/** Three glanceable facts shown right below the Hero — all restating
+ * values that already appear elsewhere (whatsIncluded, costLine), never a
+ * separate source of truth. */
+export const statsBar = [
+  { value: "£0", label: "Development Cost" },
+  { value: "4–5", label: "Pages Included" },
+  { value: "2", label: "Revision Rounds" },
+] as const;
+
 export const hero = {
   number: 1,
   headline: "Turn your Instagram presence into a professional business presence",
@@ -89,24 +106,37 @@ export const whyItsSponsored = {
     "Honest completion feedback is expected from every accepted business. A positive review is never required.",
 } as const;
 
-export const whatsIncluded: ListSection = {
+export const whatsIncluded: CategorizedSection = {
   id: "whats-included",
   number: 6,
   title: "What's Included",
-  items: [
-    "Up to 4–5 pages",
-    "Responsive design across mobile, tablet and desktop",
-    "Business info, services and menu where relevant",
-    "Contact form and/or WhatsApp call-to-action",
-    "Google Maps and social links",
-    "Portfolio or gallery where appropriate",
-    "Existing testimonials, where available",
-    "Relevant halal or business credentials",
-    "Basic on-page SEO",
-    "Basic performance optimisation",
-    "Up to 2 revision rounds",
+  categories: [
+    {
+      title: "Design & Build",
+      items: [
+        "Up to 4–5 pages",
+        "Responsive design across mobile, tablet and desktop",
+        "Basic on-page SEO",
+        "Basic performance optimisation",
+      ],
+    },
+    {
+      title: "Features",
+      items: [
+        "Business info, services and menu where relevant",
+        "Contact form and/or WhatsApp call-to-action",
+        "Google Maps and social links",
+        "Portfolio or gallery where appropriate",
+        "Existing testimonials, where available",
+        "Relevant halal or business credentials",
+      ],
+    },
+    {
+      title: "Revisions",
+      items: ["Up to 2 revision rounds"],
+    },
   ],
-  note: `Development cost: £0.`,
+  note: "Development cost: £0.",
 };
 
 export const whatsOutsideScope: ListSection = {

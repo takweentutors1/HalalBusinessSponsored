@@ -1,6 +1,9 @@
 export { Hero } from "./Hero";
 export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";
+export { StatsBar } from "./StatsBar";
+export { CategorizedSection } from "./CategorizedSection";
+export { QualificationFit } from "./QualificationFit";
 export { LimitedCapacity } from "./LimitedCapacity";
 export { ProcessSteps } from "./ProcessSteps";
 export { PortfolioAndTestimonials } from "./PortfolioAndTestimonials";
