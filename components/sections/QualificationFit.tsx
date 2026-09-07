@@ -26,14 +26,14 @@ export function QualificationFit({
         >
           <div
             style={{
-              border: "1px solid var(--color-border-light)",
               borderRadius: "var(--radius-lg)",
-              padding: "var(--space-6)",
+              padding: "var(--space-8) var(--space-6)",
+              background: "var(--color-primary-pale)",
             }}
           >
             <h2
               style={{
-                fontSize: "var(--font-size-xl)",
+                fontSize: "var(--font-size-2xl)",
                 color: "var(--color-primary-dark)",
                 marginBottom: "var(--space-2)",
               }}
@@ -71,14 +71,14 @@ export function QualificationFit({
 
           <div
             style={{
-              border: "1px solid var(--color-border-light)",
               borderRadius: "var(--radius-lg)",
-              padding: "var(--space-6)",
+              padding: "var(--space-8) var(--space-6)",
+              background: "var(--color-surface-elevated)",
             }}
           >
             <h2
               style={{
-                fontSize: "var(--font-size-xl)",
+                fontSize: "var(--font-size-2xl)",
                 color: "var(--color-text-primary)",
                 marginBottom: "var(--space-2)",
               }}

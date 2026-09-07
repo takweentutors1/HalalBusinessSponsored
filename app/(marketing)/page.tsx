@@ -59,6 +59,7 @@ export default function LandingPage() {
         {...whoItsFor}
         variant="grid"
         tone="muted"
+        cardStyle="flush"
         illustration={<AudienceIllustration />}
         itemIcons={[
           <UtensilsIcon key="restaurants" />,
@@ -73,10 +74,11 @@ export default function LandingPage() {
       <ListSection
         {...currentDigitalProblem}
         variant="grid"
+        cardStyle="accent"
         illustration={<ProblemIllustration />}
         itemIcons={[<PlatformIconPair key="instagram-whatsapp" />]}
       />
-      <ListSection {...whatTheWebsiteSolves} variant="grid" tone="tint" />
+      <ListSection {...whatTheWebsiteSolves} variant="stack" tone="tint" />
       <WhySponsored />
       <CategorizedSection
         {...whatsIncluded}
@@ -91,10 +93,15 @@ export default function LandingPage() {
           ],
         }}
       />
-      <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" />
+      <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" cardStyle="dashed" />
       <MidCta {...qualifyCta} tone="tint" />
-      <ListSection {...domainHostingCosts} variant="grid" tone="muted" />
-      <ListSection {...whatHappensAfterLaunch} variant="grid" />
+      <ListSection {...domainHostingCosts} variant="stack" tone="muted" />
+      <ListSection
+        {...whatHappensAfterLaunch}
+        variant="grid"
+        cardStyle="tinted"
+        tintColor="var(--color-surface-base)"
+      />
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
       <MidCta {...applyCtaMidPage} tone="plain" />
       <LimitedCapacity />

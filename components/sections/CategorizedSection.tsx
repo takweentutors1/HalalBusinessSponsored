@@ -18,6 +18,13 @@ interface CategorizedSectionProps extends CategorizedSectionContent {
    * specific rows without forcing icons onto every category.
    */
   categoryItemIcons?: Record<string, (ReactNode | undefined)[]>;
+  /**
+   * "boxed" (default): solid border, white fill, colored top accent bar —
+   * for the scope that's included. "dashed" mixes a dashed border and a
+   * neutral fill instead, so the exclusion list reads visually distinct
+   * from (not just a copy of) the included-scope cards next to it.
+   */
+  cardStyle?: "boxed" | "dashed";
 }
 
 export function CategorizedSection({
@@ -27,10 +34,26 @@ export function CategorizedSection({
   polarity = "positive",
   tone = "muted",
   categoryItemIcons,
+  cardStyle = "boxed",
 }: CategorizedSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
     polarity === "negative" ? "var(--color-text-tertiary)" : "var(--color-primary-accessible)";
+  const cardContainerStyle =
+    cardStyle === "dashed"
+      ? {
+          border: "1px dashed var(--color-border-medium)",
+          borderRadius: "var(--radius-lg)",
+          padding: "var(--space-6)",
+          background: "var(--color-surface-elevated)",
+        }
+      : {
+          border: "1px solid var(--color-border-light)",
+          borderTop: "3px solid var(--color-primary)",
+          borderRadius: "var(--radius-lg)",
+          padding: "var(--space-6)",
+          background: "var(--color-surface-base)",
+        };
 
   return (
     <section style={{ background: tone === "muted" ? "var(--color-surface-base)" : undefined }}>
@@ -58,16 +81,14 @@ export function CategorizedSection({
           }}
         >
           {categories.map((category) => (
-            <div
-              key={category.title}
-              style={{
-                border: "1px solid var(--color-border-light)",
-                borderRadius: "var(--radius-lg)",
-                padding: "var(--space-6)",
-                background: "var(--color-surface-base)",
-              }}
-            >
-              <h3 style={{ fontFamily: "var(--font-display)", marginBottom: "var(--space-4)" }}>
+            <div key={category.title} style={cardContainerStyle}>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--font-size-lg)",
+                  marginBottom: "var(--space-4)",
+                }}
+              >
                 {category.title}
               </h3>
               <ul style={{ listStyle: "none", padding: 0 }}>

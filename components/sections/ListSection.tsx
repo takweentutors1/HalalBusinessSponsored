@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { RichText } from "@/components/shared/RichText";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
@@ -31,6 +31,19 @@ interface ListSectionProps extends ListSectionContent {
    * every item in the list to carry a distinct icon.
    */
   itemIcons?: (ReactNode | undefined)[];
+  /**
+   * Grid-item container treatment. Varying this across sections is
+   * deliberate — repeating the same bordered white box down the whole
+   * page reads as template filler rather than distinct content.
+   * "boxed" (default): solid border + white fill — genuine grouping.
+   * "flush": bottom hairline only, no fill — for loose, scannable tags.
+   * "accent": left color bar, no border/fill — for narrative/pain-point rows.
+   * "tinted": solid color fill, no border — for a single cohesive block.
+   * Ignored for the "stack" variant, which is already borderless.
+   */
+  cardStyle?: "boxed" | "flush" | "accent" | "tinted";
+  /** Fill color for cardStyle "tinted". Defaults to the section's tone tint. */
+  tintColor?: string;
 }
 
 export function ListSection({
@@ -43,11 +56,37 @@ export function ListSection({
   polarity = "positive",
   illustration,
   itemIcons,
+  cardStyle = "boxed",
+  tintColor,
 }: ListSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
     polarity === "negative" ? "var(--color-text-tertiary)" : "var(--color-primary-accessible)";
   const gridColumns = variant === "grid" && polarity === "negative" ? 280 : 240;
+  const accentColor = polarity === "negative" ? "var(--color-text-tertiary)" : "var(--color-primary)";
+  const resolvedTint = tintColor ?? "var(--color-primary-pale)";
+
+  const cardItemStyle: Record<NonNullable<ListSectionProps["cardStyle"]>, CSSProperties> = {
+    boxed: {
+      border: "1px solid var(--color-border-light)",
+      borderRadius: "var(--radius-md)",
+      padding: "var(--space-4)",
+      background: "var(--color-surface-base)",
+    },
+    flush: {
+      borderBottom: "1px solid var(--color-border-light)",
+      padding: "var(--space-3) var(--space-1)",
+    },
+    accent: {
+      borderLeft: `3px solid ${accentColor}`,
+      padding: "var(--space-2) var(--space-4)",
+    },
+    tinted: {
+      borderRadius: "var(--radius-md)",
+      padding: "var(--space-4)",
+      background: resolvedTint,
+    },
+  };
 
   return (
     <section style={{ background: TONE_BACKGROUND[tone] }}>
@@ -94,12 +133,9 @@ export function ListSection({
               <li
                 key={item}
                 style={{
-                  border: "1px solid var(--color-border-light)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "var(--space-4)",
-                  background: "var(--color-surface-base)",
+                  ...cardItemStyle[cardStyle],
                   display: "flex",
-                  gap: "var(--space-2)",
+                  gap: "var(--space-3)",
                   alignItems: "center",
                 }}
               >
