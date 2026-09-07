@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui";
 import { Disclosure } from "@/components/shared/Disclosure";
 import { hero } from "@/lib/content/landing";
-import { HeroVideo } from "./HeroVideo";
+import { HeroMockup } from "./HeroMockup";
 
 export function Hero() {
   return (
@@ -88,7 +88,19 @@ export function Hero() {
           <Disclosure text={hero.disclosureLine} />
         </div>
 
-        <HeroVideo />
+        <div style={{ minWidth: 0 }}>
+          <HeroMockup />
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--color-text-tertiary)",
+              fontSize: "var(--font-size-xs)",
+              marginTop: "var(--space-3)",
+            }}
+          >
+            {hero.mockupCaption}
+          </p>
+        </div>
       </div>
     </section>
   );

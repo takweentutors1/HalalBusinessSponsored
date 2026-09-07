@@ -46,6 +46,13 @@ export const hero = {
   secondaryCtaLabel: "See How It Works",
   secondaryCtaHref: "#how-it-works",
   /**
+   * Non-Negotiable Rule: never fabricate reviews/stats — the same reason
+   * this mockup is illustrative rather than a real client screenshot (no
+   * completed sponsored site exists yet). This caption keeps that honest
+   * rather than letting the mockup pass as a real delivered site.
+   */
+  mockupCaption: "Illustrative preview — not an actual client site.",
+  /**
    * Non-Negotiable Rule: never fabricate reviews/stats. No real ones exist
    * yet, so this is an honest, non-numeric trust line — not a star rating —
    * reusing the same claim already made on /apply, not a new one invented
@@ -104,7 +111,7 @@ export const whyItsSponsored = {
   businessReceives: [
     "A free, professional starter website",
     "A stronger online presence to convert enquiries into customers",
-    "A completed, portfolio-quality project they own",
+    "A completed, portfolio-quality project you own",
   ],
   initiativeReceives: [
     "A genuine portfolio project to showcase",
@@ -186,6 +193,15 @@ export const whatsOutsideScope: CategorizedSection = {
   note: "That isn't part of the free starter scope, but we're happy to scope and quote it separately — you'll always see the price before any paid work begins.",
 };
 
+/** Mid-page CTA after What's Included / Outside Scope — lets a reader who
+ * already has scope questions self-route to the qualification criteria
+ * instead of scrolling on regardless. */
+export const qualifyCta = {
+  label: "Check If Your Business Qualifies",
+  supportingText: "Not sure if your business is eligible? See the criteria below.",
+  href: "#who-qualifies",
+} as const;
+
 export const domainHostingCosts: ListSection = {
   id: "domain-hosting-costs",
   number: 8,
@@ -239,6 +255,15 @@ export const whoIsNotAFit: ListSection = {
     "Already has a strong site with no real need for a rebuild",
   ],
 };
+
+/** Mid-page CTA after Who Qualifies — a reader who just self-confirmed fit
+ * against the criteria is at peak intent, so offer Apply immediately
+ * rather than only at the very bottom of the page. */
+export const applyCtaMidPage = {
+  label: "Apply for a Sponsored Website",
+  supportingText: "Meet the criteria? Applications only take a few minutes.",
+  href: "/apply",
+} as const;
 
 export const limitedCapacity = {
   id: "limited-capacity",

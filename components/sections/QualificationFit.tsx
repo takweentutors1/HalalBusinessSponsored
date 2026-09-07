@@ -8,7 +8,7 @@ export function QualificationFit({
   notFit: ListSectionContent;
 }) {
   return (
-    <section style={{ background: "var(--color-surface-base)" }}>
+    <section id={qualifies.id} style={{ background: "var(--color-surface-base)" }}>
       <div
         style={{
           maxWidth: 960,

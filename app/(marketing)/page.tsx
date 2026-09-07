@@ -5,6 +5,7 @@ import {
   Hero,
   LimitedCapacity,
   ListSection,
+  MidCta,
   PortfolioAndTestimonials,
   ProcessSteps,
   QualificationFit,
@@ -12,8 +13,10 @@ import {
   WhySponsored,
 } from "@/components/sections";
 import {
+  applyCtaMidPage,
   currentDigitalProblem,
   domainHostingCosts,
+  qualifyCta,
   whatHappensAfterLaunch,
   whatTheWebsiteSolves,
   whatsIncluded,
@@ -41,9 +44,11 @@ export default function LandingPage() {
       <WhySponsored />
       <CategorizedSection {...whatsIncluded} />
       <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" />
+      <MidCta {...qualifyCta} tone="tint" />
       <ListSection {...domainHostingCosts} variant="grid" tone="muted" />
       <ListSection {...whatHappensAfterLaunch} variant="grid" />
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
+      <MidCta {...applyCtaMidPage} tone="plain" />
       <LimitedCapacity />
       <ProcessSteps />
       <PortfolioAndTestimonials />

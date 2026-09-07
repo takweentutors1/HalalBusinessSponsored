@@ -1,6 +1,7 @@
 export { Hero } from "./Hero";
 export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";
+export { MidCta } from "./MidCta";
 export { StatsBar } from "./StatsBar";
 export { CategorizedSection } from "./CategorizedSection";
 export { QualificationFit } from "./QualificationFit";
