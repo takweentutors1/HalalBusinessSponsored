@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui";
+import { RichText } from "@/components/shared/RichText";
 import { finalCta } from "@/lib/content/landing";
 
 /**
@@ -31,7 +32,9 @@ export function FinalCta() {
           }}
         >
           {finalCta.bullets.map((bullet) => (
-            <li key={bullet}>{bullet}</li>
+            <li key={bullet}>
+              <RichText text={bullet} />
+            </li>
           ))}
         </ul>
         <Button

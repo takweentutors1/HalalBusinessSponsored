@@ -43,8 +43,10 @@ export const disclosure = {
   faqAnswer: `Your project is delivered by the ${brand.parentCompany} team through our ${brand.name}.`,
 } as const;
 
+/** `**bold**` markers are parsed by components/shared/RichText.tsx — every
+ * render site (Hero, FAQ) must render this through RichText, not raw. */
 export const costLine =
-  "The build is £0. Domain and hosting remain your own, separate cost.";
+  "The build is **£0**. Domain and hosting remain your own, separate cost.";
 
 /**
  * Real widget provisioned via `wrangler turnstile widget create`, scoped to

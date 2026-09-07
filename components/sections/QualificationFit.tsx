@@ -1,3 +1,4 @@
+import { RichText } from "@/components/shared/RichText";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
 export function QualificationFit({
@@ -47,7 +48,7 @@ export function QualificationFit({
                   marginBottom: "var(--space-4)",
                 }}
               >
-                {qualifies.intro}
+                <RichText text={qualifies.intro} />
               </p>
             )}
             <ul style={{ listStyle: "none", padding: 0 }}>
@@ -62,7 +63,7 @@ export function QualificationFit({
                   >
                     ✓
                   </span>
-                  {item}
+                  <RichText text={item} />
                 </li>
               ))}
             </ul>

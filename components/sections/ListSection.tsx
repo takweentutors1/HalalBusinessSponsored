@@ -1,3 +1,4 @@
+import { RichText } from "@/components/shared/RichText";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
 export type SectionTone = "plain" | "muted" | "tint";
@@ -60,7 +61,7 @@ export function ListSection({
               textAlign: variant === "grid" ? "center" : "left",
             }}
           >
-            {intro}
+            <RichText text={intro} />
           </p>
         )}
 
@@ -89,7 +90,9 @@ export function ListSection({
                 <span aria-hidden="true" style={{ color: markerColor, fontWeight: 700 }}>
                   {marker}
                 </span>
-                <span>{item}</span>
+                <span>
+                  <RichText text={item} />
+                </span>
               </li>
             ))}
           </ul>
@@ -115,7 +118,7 @@ export function ListSection({
                 >
                   {marker}
                 </span>
-                {item}
+                <RichText text={item} />
               </li>
             ))}
           </ul>

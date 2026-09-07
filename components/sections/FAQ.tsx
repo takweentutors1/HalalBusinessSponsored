@@ -1,3 +1,4 @@
+import { RichText } from "@/components/shared/RichText";
 import { faq } from "@/lib/content/landing";
 
 export function FAQ() {
@@ -26,7 +27,7 @@ export function FAQ() {
               {item.question}
             </summary>
             <p style={{ color: "var(--color-text-secondary)", marginTop: "var(--space-3)" }}>
-              {item.answer}
+              <RichText text={item.answer} />
             </p>
           </details>
         ))}

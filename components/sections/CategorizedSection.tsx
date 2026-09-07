@@ -1,3 +1,4 @@
+import { RichText } from "@/components/shared/RichText";
 import type { CategorizedSection as CategorizedSectionContent } from "@/lib/content/landing";
 
 interface CategorizedSectionProps extends CategorizedSectionContent {
@@ -81,7 +82,7 @@ export function CategorizedSection({
                     >
                       {marker}
                     </span>
-                    {item}
+                    <RichText text={item} />
                   </li>
                 ))}
               </ul>
@@ -97,7 +98,7 @@ export function CategorizedSection({
               color: "var(--color-text-primary)",
             }}
           >
-            {note}
+            <RichText text={note} />
           </p>
         )}
       </div>

@@ -1,3 +1,4 @@
+import { RichText } from "@/components/shared/RichText";
 import { whyItsSponsored } from "@/lib/content/landing";
 
 function Column({
@@ -23,7 +24,7 @@ function Column({
               borderTop: index === 0 ? undefined : "1px solid var(--color-border-light)",
             }}
           >
-            {item}
+            <RichText text={item} />
           </li>
         ))}
       </ul>
@@ -46,7 +47,7 @@ export function WhySponsored() {
           {whyItsSponsored.title}
         </h2>
         <p style={{ color: "var(--color-text-secondary)", marginBottom: "var(--space-8)" }}>
-          {whyItsSponsored.intro}
+          <RichText text={whyItsSponsored.intro} />
         </p>
 
         <div
@@ -79,7 +80,9 @@ export function WhySponsored() {
             textAlign: "left",
           }}
         >
-          <p style={{ fontWeight: 600 }}>{whyItsSponsored.feedbackNote}</p>
+          <p style={{ fontWeight: 600 }}>
+            <RichText text={whyItsSponsored.feedbackNote} />
+          </p>
         </div>
       </div>
     </section>

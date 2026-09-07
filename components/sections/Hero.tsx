@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui";
 import { Disclosure } from "@/components/shared/Disclosure";
+import { RichText } from "@/components/shared/RichText";
 import { hero } from "@/lib/content/landing";
 import { HeroMockup } from "./HeroMockup";
 
@@ -33,7 +34,7 @@ export function Hero() {
           </h1>
 
           <p style={{ fontWeight: 600, fontSize: "var(--font-size-lg)", marginBottom: "var(--space-4)" }}>
-            {hero.costLine}
+            <RichText text={hero.costLine} />
           </p>
 
           <ul
@@ -48,7 +49,7 @@ export function Hero() {
           >
             {hero.bullets.map((bullet) => (
               <li key={bullet} style={{ color: "var(--color-text-secondary)" }}>
-                {bullet}
+                <RichText text={bullet} />
               </li>
             ))}
           </ul>

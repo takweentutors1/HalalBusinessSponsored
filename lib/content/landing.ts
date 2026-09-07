@@ -36,9 +36,9 @@ export const hero = {
   number: 1,
   headline: "Turn your Instagram presence into a professional business presence",
   bullets: [
-    `Limited places each month — ${capacityStatement()}`,
-    "A defined starter website: a clear, agreed scope, not open-ended.",
-    "No obligation to buy anything else, ever.",
+    `**Limited spots** — ${capacityStatement()}`,
+    "**A defined scope** — clear and agreed, never open-ended.",
+    "**No obligation** to buy anything, ever.",
   ],
   costLine,
   disclosureLine: disclosure.footer,
@@ -106,20 +106,18 @@ export const whyItsSponsored = {
   id: "why-its-sponsored",
   number: 5,
   title: "Why It's Sponsored",
-  intro:
-    "No catch, stated openly: this is a genuine exchange, not a free trial with strings attached.",
+  intro: "**No catch.** A genuine exchange — not a free trial with strings attached.",
   businessReceives: [
-    "A free, professional starter website",
-    "A stronger online presence to convert enquiries into customers",
-    "A completed, portfolio-quality project you own",
+    "**A free**, professional starter website",
+    "A stronger online presence that **converts enquiries into customers**",
+    "A completed, portfolio-quality project **you own**",
   ],
   initiativeReceives: [
     "A genuine portfolio project to showcase",
     "Honest feedback on the experience",
     "Permission to share the story as a case study, only with consent",
   ],
-  feedbackNote:
-    "Honest completion feedback is expected from every accepted business. A positive review is never required.",
+  feedbackNote: "**Honest feedback is expected.** A positive review never is.",
 } as const;
 
 export const whatsIncluded: CategorizedSection = {
@@ -152,7 +150,7 @@ export const whatsIncluded: CategorizedSection = {
       items: ["Up to 2 revision rounds"],
     },
   ],
-  note: "Development cost: £0.",
+  note: "Development cost: **£0**.",
 };
 
 export const whatsOutsideScope: CategorizedSection = {
@@ -190,7 +188,7 @@ export const whatsOutsideScope: CategorizedSection = {
       ],
     },
   ],
-  note: "That isn't part of the free starter scope, but we're happy to scope and quote it separately — you'll always see the price before any paid work begins.",
+  note: "Not part of the free scope — but we'll **scope and quote it separately**, price shown upfront.",
 };
 
 /** Mid-page CTA after What's Included / Outside Scope — lets a reader who
@@ -207,9 +205,9 @@ export const domainHostingCosts: ListSection = {
   number: 8,
   title: "Domain, Hosting & Third-Party Costs",
   items: [
-    "Your business remains responsible for its own domain and hosting.",
-    "Any paid plugin, licence or third-party service is a separate cost.",
-    "The team can guide you toward a suitable option if asked.",
+    "**You** keep ownership of your domain and hosting.",
+    "Paid plugins, licences or third-party services are a **separate cost**.",
+    "We'll guide you to a suitable option, if asked.",
   ],
 };
 
@@ -218,9 +216,9 @@ export const whatHappensAfterLaunch: ListSection = {
   number: 9,
   title: "What Happens After Launch",
   items: [
-    "A one-time project covering the agreed scope: design, development, revisions and launch.",
-    "A short, defined close-out window covers issues within the delivered scope (see Programme Terms).",
-    "Anything outside that scope gets a fresh, transparent quotation — never assumed or added silently.",
+    "**One-time project** — design, build, revisions and launch, within the agreed scope.",
+    "A short **close-out window** covers issues in the delivered scope (see Programme Terms).",
+    "Anything outside scope gets a **fresh, transparent quote** — never assumed or added silently.",
   ],
 };
 
@@ -228,10 +226,10 @@ export const whoQualifies: ListSection = {
   id: "who-qualifies",
   number: 10,
   title: "Who Qualifies",
-  intro: "This is the public-facing summary — full scoring stays internal to our review process.",
+  intro: "Public summary only — full scoring stays internal to our review process.",
   items: [
     "Already operating with real customers",
-    "Muslim-owned, or clearly within the halal/Muslim market",
+    "**Muslim-owned**, or clearly within the halal/Muslim market",
     "No website, or a visibly weak or outdated one",
     "Clear products or services",
     "Can provide content promptly",
@@ -362,7 +360,7 @@ export const faq = {
     {
       question: "Is ongoing maintenance included?",
       answer:
-        "No. This is a one-time build, not a maintenance plan. A short post-launch window covers issues within the agreed scope; anything beyond that gets a fresh quotation.",
+        "No — this is a **one-time build**, not a maintenance plan. A short post-launch window covers issues in scope; anything beyond that gets a fresh quote.",
     },
     {
       question: "Can I get more done later?",
@@ -376,7 +374,7 @@ export const faq = {
     },
     {
       question: "Does applying guarantee a website?",
-      answer: `No. We review every application, but places are limited — ${capacityStatement()} — and not every applicant can be accepted. Everyone who applies hears back either way.`,
+      answer: `No — places are limited (${capacityStatement()}), so not every applicant is accepted. **Everyone who applies hears back**, either way.`,
     },
     {
       question: "Who actually builds my website?",
@@ -390,9 +388,9 @@ export const finalCta = {
   number: 16,
   title: "Ready to Apply?",
   bullets: [
-    "For selected Muslim-owned businesses",
-    "A defined starter site at no development cost",
-    `Limited monthly places — ${capacityStatement()}`,
+    "For selected **Muslim-owned** businesses",
+    "A defined starter site at **no cost**",
+    `**Limited spots** — ${capacityStatement()}`,
     "Honest feedback expected",
     "No promise of ongoing free maintenance",
   ],
