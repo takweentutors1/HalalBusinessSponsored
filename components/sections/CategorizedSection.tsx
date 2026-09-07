@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { RichText } from "@/components/shared/RichText";
 import type { CategorizedSection as CategorizedSectionContent } from "@/lib/content/landing";
 
@@ -10,6 +11,13 @@ interface CategorizedSectionProps extends CategorizedSectionContent {
    * = transparent section (shows the page's gray), white cards for contrast —
    * used to keep the alternating section-background rhythm going. */
   tone?: "muted" | "plain";
+  /**
+   * Per-item icons keyed by category title, same length/order as that
+   * category's `items`. Entries left undefined fall back to the default
+   * checkmark/dash marker — lets one category (e.g. "Features") anchor
+   * specific rows without forcing icons onto every category.
+   */
+  categoryItemIcons?: Record<string, (ReactNode | undefined)[]>;
 }
 
 export function CategorizedSection({
@@ -18,6 +26,7 @@ export function CategorizedSection({
   note,
   polarity = "positive",
   tone = "muted",
+  categoryItemIcons,
 }: CategorizedSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
@@ -62,7 +71,7 @@ export function CategorizedSection({
                 {category.title}
               </h3>
               <ul style={{ listStyle: "none", padding: 0 }}>
-                {category.items.map((item) => (
+                {category.items.map((item, index) => (
                   <li
                     key={item}
                     style={{
@@ -76,11 +85,12 @@ export function CategorizedSection({
                       style={{
                         position: "absolute",
                         left: 0,
+                        top: "var(--space-2)",
                         color: markerColor,
                         fontWeight: 700,
                       }}
                     >
-                      {marker}
+                      {categoryItemIcons?.[category.title]?.[index] ?? marker}
                     </span>
                     <RichText text={item} />
                   </li>

@@ -14,6 +14,22 @@ import {
 } from "@/components/sections";
 import { AudienceIllustration, ProblemIllustration } from "@/components/illustrations";
 import {
+  BadgeCheckIcon,
+  BookIcon,
+  BriefcaseIcon,
+  ClipboardIcon,
+  GalleryIcon,
+  HangerIcon,
+  MapPinIcon,
+  MeatIcon,
+  PlatformIconPair,
+  RingsIcon,
+  ScissorsIcon,
+  StarIcon,
+  UtensilsIcon,
+  WhatsAppIcon,
+} from "@/components/icons";
+import {
   applyCtaMidPage,
   currentDigitalProblem,
   domainHostingCosts,
@@ -39,11 +55,42 @@ export default function LandingPage() {
     <>
       <Hero />
       <StatsBar />
-      <ListSection {...whoItsFor} variant="grid" tone="muted" illustration={<AudienceIllustration />} />
-      <ListSection {...currentDigitalProblem} variant="grid" illustration={<ProblemIllustration />} />
+      <ListSection
+        {...whoItsFor}
+        variant="grid"
+        tone="muted"
+        illustration={<AudienceIllustration />}
+        itemIcons={[
+          <UtensilsIcon key="restaurants" />,
+          <MeatIcon key="butchers" />,
+          <ScissorsIcon key="salons" />,
+          <BookIcon key="education" />,
+          <RingsIcon key="wedding" />,
+          <HangerIcon key="fashion" />,
+          <BriefcaseIcon key="professional" />,
+        ]}
+      />
+      <ListSection
+        {...currentDigitalProblem}
+        variant="grid"
+        illustration={<ProblemIllustration />}
+        itemIcons={[<PlatformIconPair key="instagram-whatsapp" />]}
+      />
       <ListSection {...whatTheWebsiteSolves} variant="grid" tone="tint" />
       <WhySponsored />
-      <CategorizedSection {...whatsIncluded} />
+      <CategorizedSection
+        {...whatsIncluded}
+        categoryItemIcons={{
+          Features: [
+            <ClipboardIcon key="business-info" />,
+            <WhatsAppIcon key="whatsapp-cta" />,
+            <MapPinIcon key="maps" />,
+            <GalleryIcon key="gallery" />,
+            <StarIcon key="testimonials" />,
+            <BadgeCheckIcon key="credentials" />,
+          ],
+        }}
+      />
       <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" />
       <MidCta {...qualifyCta} tone="tint" />
       <ListSection {...domainHostingCosts} variant="grid" tone="muted" />

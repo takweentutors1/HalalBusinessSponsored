@@ -23,6 +23,14 @@ interface ListSectionProps extends ListSectionContent {
   /** Optional decorative graphic shown above the title, centered — used
    * sparingly (Problem, Who It's For) to break up long text-only scroll. */
   illustration?: ReactNode;
+  /**
+   * Per-item icons, same length/order as `items`. Where an entry is
+   * provided it replaces the checkmark/dash marker for that row; entries
+   * left undefined fall back to the default marker — lets a section
+   * anchor specific rows (a category, a named platform) without forcing
+   * every item in the list to carry a distinct icon.
+   */
+  itemIcons?: (ReactNode | undefined)[];
 }
 
 export function ListSection({
@@ -34,6 +42,7 @@ export function ListSection({
   tone = "plain",
   polarity = "positive",
   illustration,
+  itemIcons,
 }: ListSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
@@ -81,7 +90,7 @@ export function ListSection({
               gap: "var(--space-4)",
             }}
           >
-            {items.map((item) => (
+            {items.map((item, index) => (
               <li
                 key={item}
                 style={{
@@ -91,11 +100,18 @@ export function ListSection({
                   background: "var(--color-surface-base)",
                   display: "flex",
                   gap: "var(--space-2)",
+                  alignItems: "center",
                 }}
               >
-                <span aria-hidden="true" style={{ color: markerColor, fontWeight: 700 }}>
-                  {marker}
-                </span>
+                {itemIcons?.[index] ? (
+                  <span aria-hidden="true" style={{ color: markerColor, flexShrink: 0 }}>
+                    {itemIcons[index]}
+                  </span>
+                ) : (
+                  <span aria-hidden="true" style={{ color: markerColor, fontWeight: 700 }}>
+                    {marker}
+                  </span>
+                )}
                 <span>
                   <RichText text={item} />
                 </span>
@@ -104,7 +120,7 @@ export function ListSection({
           </ul>
         ) : (
           <ul style={{ listStyle: "none", padding: 0 }}>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <li
                 key={item}
                 style={{
@@ -118,11 +134,12 @@ export function ListSection({
                   style={{
                     position: "absolute",
                     left: 0,
+                    top: "var(--space-2)",
                     color: markerColor,
                     fontWeight: 700,
                   }}
                 >
-                  {marker}
+                  {itemIcons?.[index] ?? marker}
                 </span>
                 <RichText text={item} />
               </li>
