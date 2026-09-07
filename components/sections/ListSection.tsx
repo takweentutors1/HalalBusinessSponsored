@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { RichText } from "@/components/shared/RichText";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
@@ -19,6 +20,9 @@ interface ListSectionProps extends ListSectionContent {
    * "this is included".
    */
   polarity?: "positive" | "negative";
+  /** Optional decorative graphic shown above the title, centered — used
+   * sparingly (Problem, Who It's For) to break up long text-only scroll. */
+  illustration?: ReactNode;
 }
 
 export function ListSection({
@@ -29,6 +33,7 @@ export function ListSection({
   variant = "stack",
   tone = "plain",
   polarity = "positive",
+  illustration,
 }: ListSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
@@ -44,6 +49,7 @@ export function ListSection({
           padding: "var(--space-12) var(--space-8)",
         }}
       >
+        {illustration && <div style={{ marginBottom: "var(--space-6)" }}>{illustration}</div>}
         <h2
           style={{
             color: "var(--color-primary-dark)",

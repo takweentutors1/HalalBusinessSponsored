@@ -12,6 +12,7 @@ import {
   StatsBar,
   WhySponsored,
 } from "@/components/sections";
+import { AudienceIllustration, ProblemIllustration } from "@/components/illustrations";
 import {
   applyCtaMidPage,
   currentDigitalProblem,
@@ -38,8 +39,8 @@ export default function LandingPage() {
     <>
       <Hero />
       <StatsBar />
-      <ListSection {...whoItsFor} variant="grid" tone="muted" />
-      <ListSection {...currentDigitalProblem} variant="grid" />
+      <ListSection {...whoItsFor} variant="grid" tone="muted" illustration={<AudienceIllustration />} />
+      <ListSection {...currentDigitalProblem} variant="grid" illustration={<ProblemIllustration />} />
       <ListSection {...whatTheWebsiteSolves} variant="grid" tone="tint" />
       <WhySponsored />
       <CategorizedSection {...whatsIncluded} />

@@ -1,4 +1,5 @@
 import { RichText } from "@/components/shared/RichText";
+import { TrustIllustration } from "@/components/illustrations";
 import { whyItsSponsored } from "@/lib/content/landing";
 
 function Column({
@@ -43,6 +44,9 @@ export function WhySponsored() {
           textAlign: "center",
         }}
       >
+        <div style={{ marginBottom: "var(--space-4)" }}>
+          <TrustIllustration />
+        </div>
         <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-4)" }}>
           {whyItsSponsored.title}
         </h2>
