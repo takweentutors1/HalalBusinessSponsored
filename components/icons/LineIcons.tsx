@@ -130,6 +130,18 @@ export function StarIcon({ size = 20 }: IconProps) {
   );
 }
 
+export function MonitorIcon({ size = 20 }: IconProps) {
+  return (
+    <svg aria-hidden="true" width={size} height={size} {...base}>
+      <rect x="2.5" y="4" width="19" height="13" rx="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="21" />
+      <line x1="6" y1="8.5" x2="14" y2="8.5" />
+      <line x1="6" y1="12" x2="11" y2="12" />
+    </svg>
+  );
+}
+
 export function BadgeCheckIcon({ size = 20 }: IconProps) {
   return (
     <svg aria-hidden="true" width={size} height={size} {...base}>

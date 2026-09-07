@@ -14,4 +14,5 @@ export {
   GalleryIcon,
   StarIcon,
   BadgeCheckIcon,
+  MonitorIcon,
 } from "./LineIcons";
