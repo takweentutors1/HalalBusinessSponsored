@@ -1,5 +1,4 @@
 import {
-  CategorizedSection,
   FAQ,
   FinalCta,
   Hero,
@@ -9,6 +8,7 @@ import {
   PortfolioAndTestimonials,
   ProcessSteps,
   QualificationFit,
+  ScopeComparison,
   StatsBar,
   WhySponsored,
 } from "@/components/sections";
@@ -80,9 +80,10 @@ export default function LandingPage() {
       />
       <ListSection {...whatTheWebsiteSolves} variant="stack" tone="tint" />
       <WhySponsored />
-      <CategorizedSection
-        {...whatsIncluded}
-        categoryItemIcons={{
+      <ScopeComparison
+        included={whatsIncluded}
+        addOns={whatsOutsideScope}
+        includedItemIcons={{
           Features: [
             <ClipboardIcon key="business-info" />,
             <WhatsAppIcon key="whatsapp-cta" />,
@@ -93,7 +94,6 @@ export default function LandingPage() {
           ],
         }}
       />
-      <CategorizedSection {...whatsOutsideScope} polarity="negative" tone="plain" cardStyle="dashed" />
       <MidCta {...qualifyCta} tone="tint" />
       <ListSection {...domainHostingCosts} variant="stack" tone="muted" />
       <ListSection

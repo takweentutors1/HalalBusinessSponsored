@@ -3,7 +3,7 @@ export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";
 export { MidCta } from "./MidCta";
 export { StatsBar } from "./StatsBar";
-export { CategorizedSection } from "./CategorizedSection";
+export { ScopeComparison } from "./ScopeComparison";
 export { QualificationFit } from "./QualificationFit";
 export { LimitedCapacity } from "./LimitedCapacity";
 export { ProcessSteps } from "./ProcessSteps";
