@@ -126,7 +126,7 @@ export function ListSection({
               padding: 0,
               display: "grid",
               gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridColumns}px, 100%), 1fr))`,
-              gap: "var(--space-4)",
+              gap: cardStyle === "flush" ? "var(--space-2) var(--space-8)" : "var(--space-4)",
             }}
           >
             {items.map((item, index) => (

@@ -1,72 +1,73 @@
 /**
- * Decorative illustration for "Who It's For" — three evenly-spaced
- * storefront icons (food, salon/services, education) sharing one style,
- * standing in for the range of business types the programme accepts.
- * aria-hidden since the grid of business types below already carries
- * the meaning.
+ * Decorative illustration for "Who It's For" — a single storefront mark
+ * standing in for "a local business," generic enough to cover the full
+ * range of business types listed below rather than picking favourites
+ * among them. Replaced an earlier three-icon composite (food/salon/
+ * education) that read as crowded at this size — one bold mark, matching
+ * TrustIllustration's line-art scale, reads cleaner. aria-hidden since
+ * the grid of business types below already carries the meaning.
  */
-export function AudienceIllustration() {
+export function AudienceIllustration({ size = 88 }: { size?: number }) {
+  const height = Math.round(size * (84 / 96));
+
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 220 100"
-      width={200}
-      height={91}
+      viewBox="0 0 96 84"
+      width={size}
+      height={height}
       style={{ display: "block", margin: "0 auto" }}
     >
-      {/* food / restaurant: awning storefront */}
-      <g transform="translate(10 10)">
-        <rect
-          x="4"
-          y="26"
-          width="52"
-          height="34"
-          rx="4"
-          fill="var(--color-surface-base)"
-          stroke="var(--color-primary-accessible)"
-          strokeWidth="2.5"
-        />
-        <path
-          d="M0 26 L30 4 L60 26 Z"
-          fill="var(--color-primary-pale)"
-          stroke="var(--color-primary-accessible)"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-        <rect x="24" y="42" width="12" height="18" fill="var(--color-primary-light)" />
-      </g>
+      {/* awning */}
+      <path
+        d="M4 30 L14 6 a6 6 0 0 1 5.6-3.8h56.8A6 6 0 0 1 82 6 L92 30Z"
+        fill="var(--color-primary-pale)"
+        stroke="var(--color-primary-accessible)"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 30h88M22 30V6M40 30V6M56 30V6M74 30V6"
+        stroke="var(--color-primary-accessible)"
+        strokeWidth="2.5"
+      />
 
-      {/* salon / services: scissors */}
-      <g transform="translate(84 10)">
-        <circle
-          cx="30"
-          cy="30"
-          r="30"
-          fill="var(--color-primary-pale)"
-          stroke="var(--color-primary-accessible)"
-          strokeWidth="2.5"
-        />
-        <g transform="translate(16 16)" stroke="var(--color-primary-accessible)" strokeWidth="2.5" fill="none">
-          <circle cx="4" cy="4" r="3.5" />
-          <circle cx="4" cy="24" r="3.5" />
-          <line x1="7" y1="6.5" x2="27" y2="21.5" strokeLinecap="round" />
-          <line x1="7" y1="21.5" x2="27" y2="6.5" strokeLinecap="round" />
-        </g>
-      </g>
+      {/* storefront body */}
+      <rect
+        x="10"
+        y="30"
+        width="76"
+        height="46"
+        fill="var(--color-surface-base)"
+        stroke="var(--color-primary-accessible)"
+        strokeWidth="3"
+      />
 
-      {/* education: open book */}
-      <g transform="translate(158 14)">
-        <path
-          d="M28 6 C22 2 8 2 2 6 V44 C8 40 22 40 28 44 C34 40 48 40 54 44 V6 C48 2 34 2 28 6 Z"
-          fill="var(--color-surface-base)"
-          stroke="var(--color-primary-accessible)"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-        <line x1="28" y1="6" x2="28" y2="44" stroke="var(--color-primary-accessible)" strokeWidth="2.5" />
-        <line x1="8" y1="14" x2="20" y2="12" stroke="var(--color-primary-light)" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="8" y1="22" x2="20" y2="20" stroke="var(--color-primary-light)" strokeWidth="2.5" strokeLinecap="round" />
-      </g>
+      {/* window */}
+      <rect
+        x="18"
+        y="38"
+        width="24"
+        height="20"
+        rx="2"
+        fill="var(--color-primary-pale)"
+        stroke="var(--color-primary-accessible)"
+        strokeWidth="2.5"
+      />
+      <path d="M30 38v20" stroke="var(--color-primary-accessible)" strokeWidth="2" />
+
+      {/* door */}
+      <rect
+        x="54"
+        y="46"
+        width="22"
+        height="30"
+        rx="1.5"
+        fill="var(--color-primary-light)"
+        stroke="var(--color-primary-accessible)"
+        strokeWidth="2.5"
+      />
+      <circle cx="71" cy="61" r="1.8" fill="var(--color-primary-accessible)" />
     </svg>
   );
 }
