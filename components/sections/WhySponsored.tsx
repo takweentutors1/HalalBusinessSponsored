@@ -92,7 +92,7 @@ export function WhySponsored() {
     >
       <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
-        <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-4)" }}>
+        <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-6)" }}>
           {whyItsSponsored.title}
         </h2>
         <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-10)" }}>
