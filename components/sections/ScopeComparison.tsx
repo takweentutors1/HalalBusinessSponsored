@@ -10,11 +10,29 @@ interface ScopeComparisonProps {
   includedItemIcons?: Record<string, (ReactNode | undefined)[]>;
 }
 
+function CheckGlyph() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={12} height={12} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 12.5l5 5L20 6" />
+    </svg>
+  );
+}
+
+function PlusGlyph() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={12} height={12} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
 function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
   return (
     <span
       style={{
-        display: "inline-block",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "var(--space-1)",
         padding: "var(--space-1) var(--space-3)",
         borderRadius: "var(--radius-full)",
         fontSize: "var(--font-size-xs)",
@@ -23,9 +41,11 @@ function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
         letterSpacing: "0.06em",
         background: tone === "free" ? "var(--color-primary-accessible)" : "var(--color-warning)",
         color: tone === "free" ? "white" : "var(--color-neutral-900)",
+        boxShadow: "var(--shadow-md)",
         marginBottom: "var(--space-3)",
       }}
     >
+      {tone === "free" ? <CheckGlyph /> : <PlusGlyph />}
       {label}
     </span>
   );
