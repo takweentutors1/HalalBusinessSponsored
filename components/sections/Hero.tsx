@@ -26,7 +26,7 @@ export function Hero() {
         <div style={{ minWidth: 0 }}>
           <h1
             style={{
-              fontSize: "var(--font-size-4xl)",
+              fontSize: "clamp(1.75rem, 1.3rem + 2vw, var(--font-size-4xl))",
               marginBottom: "var(--space-4)",
             }}
           >
