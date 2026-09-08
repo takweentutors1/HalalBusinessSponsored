@@ -36,7 +36,7 @@ export const hero = {
   number: 1,
   headline: "Turn your Instagram presence into a professional business presence",
   bullets: [
-    `**Limited spots** — ${capacityStatement()}`,
+    `**Limited spots** — up to ${capacity.count} ${capacity.unit} a ${capacity.period}.`,
     "**A defined scope** — clear and agreed, never open-ended.",
     "**No obligation** to buy anything, ever.",
   ],
@@ -50,12 +50,15 @@ export const hero = {
   secondaryCtaLabel: "See How It Works",
   secondaryCtaHref: "#how-it-works",
   /**
-   * Non-Negotiable Rule: never fabricate reviews/stats — the same reason
-   * this mockup is illustrative rather than a real client screenshot (no
-   * completed sponsored site exists yet). This caption keeps that honest
-   * rather than letting the mockup pass as a real delivered site.
+   * takweentutors.com is a real, live site built by the same team
+   * (Takween Digital Services) — not a fabricated client example, and
+   * distinct from a sponsored-client case study (portfolioAndTestimonials
+   * stays empty until one of those exists, per the Non-Negotiable Rule
+   * against fabricating reviews/stats). This caption keeps that distinction
+   * honest rather than letting the mockup pass as an example of a
+   * *sponsored* build.
    */
-  mockupCaption: "Illustrative preview — not an actual client site.",
+  mockupCaption: "A real site by our team — takweentutors.com.",
   /**
    * Non-Negotiable Rule: never fabricate reviews/stats. No real ones exist
    * yet, so this is an honest, non-numeric trust line — not a star rating —

@@ -1,15 +1,22 @@
 /**
  * Static laptop + mobile device mockup replacing the old autoplaying video.
  * Built entirely from CSS (no image/video request) so it doesn't compete
- * with the hero's LCP, and deliberately generic/illustrative — not a real
- * client screenshot, since no completed sponsored site exists yet (see
- * portfolioAndTestimonials in lib/content/landing.ts). The caption in
- * Hero.tsx makes that explicit rather than letting it read as a real
- * client's site.
+ * with the hero's LCP.
+ *
+ * Content is a faithful miniature of takweentutors.com — a real, live site
+ * built by the same team (Takween Digital Services), not a fabricated
+ * client example. Brand name, tagline, nav labels, and the brand green
+ * (#10b981, which happens to equal this project's own --color-primary)
+ * were pulled from the site's live CSS/JS bundles. This is deliberately
+ * distinct from portfolioAndTestimonials in lib/content/landing.ts, which
+ * stays empty until real *sponsored-client* case studies exist — this
+ * mockup is proof of the team's own build quality, not a sponsored output.
+ * aria-hidden throughout: decorative at this scale, and the caption in
+ * Hero.tsx already states what it is for screen reader users.
  */
 export function HeroMockup() {
   return (
-    <div style={{ position: "relative", maxWidth: 480, margin: "0 auto" }}>
+    <div aria-hidden="true" style={{ position: "relative", maxWidth: 480, margin: "0 auto" }}>
       {/* Laptop */}
       <div
         style={{
@@ -50,24 +57,27 @@ export function HeroMockup() {
             />
             <span
               style={{
-                width: "22%",
-                height: 8,
-                borderRadius: "var(--radius-full)",
-                background: "var(--color-neutral-300)",
+                fontSize: 9,
+                fontWeight: 700,
+                color: "var(--color-neutral-800)",
+                whiteSpace: "nowrap",
               }}
-            />
-            <span style={{ marginLeft: "auto", display: "flex", gap: "var(--space-2)" }}>
-              {[1, 2, 3].map((i) => (
-                <span
-                  key={i}
-                  style={{
-                    width: 24,
-                    height: 6,
-                    borderRadius: "var(--radius-full)",
-                    background: "var(--color-neutral-200)",
-                  }}
-                />
-              ))}
+            >
+              Takween Tutors
+            </span>
+            <span
+              style={{
+                marginLeft: "auto",
+                display: "flex",
+                gap: "var(--space-3)",
+                fontSize: 7,
+                fontWeight: 600,
+                color: "var(--color-neutral-500)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span>How It Works</span>
+              <span>Become a Tutor</span>
             </span>
           </div>
 
@@ -82,29 +92,31 @@ export function HeroMockup() {
           >
             <span
               style={{
-                width: "72%",
-                height: 12,
-                borderRadius: "var(--radius-full)",
-                background: "var(--color-neutral-700)",
+                fontSize: 9.5,
+                fontWeight: 600,
+                lineHeight: 1.4,
+                color: "var(--color-neutral-700)",
+                width: "78%",
               }}
-            />
+            >
+              A different kind of tuition agency, built on precision, care, and results.
+            </span>
             <span
               style={{
-                width: "48%",
-                height: 12,
-                borderRadius: "var(--radius-full)",
-                background: "var(--color-neutral-700)",
-                marginBottom: "var(--space-2)",
-              }}
-            />
-            <span
-              style={{
-                width: 84,
-                height: 22,
+                display: "inline-flex",
+                alignItems: "center",
+                width: "fit-content",
+                padding: "5px 10px",
                 borderRadius: "var(--radius-full)",
                 background: "var(--color-primary)",
+                color: "white",
+                fontSize: 7,
+                fontWeight: 700,
+                marginTop: "var(--space-1)",
               }}
-            />
+            >
+              Book a Free Trial
+            </span>
           </div>
 
           {/* content cards */}
@@ -117,16 +129,25 @@ export function HeroMockup() {
               marginTop: "auto",
             }}
           >
-            {[1, 2, 3].map((i) => (
+            {["GCSE Biology", "Free Trials", "Resources"].map((label) => (
               <span
-                key={i}
+                key={label}
                 style={{
                   aspectRatio: "4 / 3",
                   borderRadius: "var(--radius-md)",
                   background: "var(--color-primary-pale)",
                   border: "1px solid var(--color-border-light)",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: "var(--space-1)",
+                  fontSize: 6,
+                  fontWeight: 600,
+                  color: "var(--color-primary-accessible-dark)",
+                  lineHeight: 1.2,
                 }}
-              />
+              >
+                {label}
+              </span>
             ))}
           </div>
         </div>
@@ -170,38 +191,49 @@ export function HeroMockup() {
         >
           <span
             style={{
-              width: "40%",
-              height: 5,
-              borderRadius: "var(--radius-full)",
-              background: "var(--color-neutral-300)",
+              display: "flex",
+              alignItems: "center",
+              gap: 3,
             }}
-          />
+          >
+            <span
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: "var(--radius-full)",
+                background: "var(--color-primary)",
+                flexShrink: 0,
+              }}
+            />
+            <span style={{ fontSize: 5, fontWeight: 700, color: "var(--color-neutral-800)" }}>
+              Takween Tutors
+            </span>
+          </span>
           <span
             style={{
-              width: "85%",
-              height: 7,
-              borderRadius: "var(--radius-full)",
-              background: "var(--color-neutral-700)",
+              fontSize: 5.5,
+              fontWeight: 600,
+              lineHeight: 1.3,
+              color: "var(--color-neutral-700)",
               marginTop: "var(--space-2)",
             }}
-          />
+          >
+            A different kind of tuition agency, built on results.
+          </span>
           <span
             style={{
-              width: "60%",
-              height: 7,
-              borderRadius: "var(--radius-full)",
-              background: "var(--color-neutral-700)",
-            }}
-          />
-          <span
-            style={{
-              width: "50%",
-              height: 14,
+              width: "fit-content",
+              padding: "3px 7px",
               borderRadius: "var(--radius-full)",
               background: "var(--color-primary)",
+              color: "white",
+              fontSize: 4.5,
+              fontWeight: 700,
               marginTop: "var(--space-1)",
             }}
-          />
+          >
+            Free Trial
+          </span>
           <span
             style={{
               flex: 1,
