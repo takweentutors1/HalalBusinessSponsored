@@ -150,3 +150,30 @@ export function BadgeCheckIcon({ size = 20 }: IconProps) {
     </svg>
   );
 }
+
+export function TagIcon({ size = 20 }: IconProps) {
+  return (
+    <svg aria-hidden="true" width={size} height={size} {...base}>
+      <path d="M12.6 3H5.8A2.8 2.8 0 0 0 3 5.8v6.8c0 .5.2 1 .6 1.4l9 9a2 2 0 0 0 2.8 0l7.4-7.4a2 2 0 0 0 0-2.8l-9-9a2 2 0 0 0-1.2-.8Z" />
+      <circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function PagesIcon({ size = 20 }: IconProps) {
+  return (
+    <svg aria-hidden="true" width={size} height={size} {...base}>
+      <rect x="5.5" y="2.5" width="13" height="19" rx="1.8" />
+      <path d="M9 8h6M9 12h6M9 16h3.5" />
+    </svg>
+  );
+}
+
+export function RefreshIcon({ size = 20 }: IconProps) {
+  return (
+    <svg aria-hidden="true" width={size} height={size} {...base}>
+      <path d="M20.5 11.5a8.5 8.5 0 1 0-2.4 6.9" />
+      <path d="M20.5 4.5v6.5H14" />
+    </svg>
+  );
+}

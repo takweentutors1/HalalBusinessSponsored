@@ -15,4 +15,7 @@ export {
   StarIcon,
   BadgeCheckIcon,
   MonitorIcon,
+  TagIcon,
+  PagesIcon,
+  RefreshIcon,
 } from "./LineIcons";
