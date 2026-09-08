@@ -22,7 +22,7 @@ function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
         textTransform: "uppercase",
         letterSpacing: "0.06em",
         background: tone === "free" ? "var(--color-primary-accessible)" : "var(--color-warning)",
-        color: "white",
+        color: tone === "free" ? "white" : "var(--color-neutral-900)",
         marginBottom: "var(--space-3)",
       }}
     >

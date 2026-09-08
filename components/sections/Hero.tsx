@@ -62,7 +62,7 @@ export function Hero() {
               marginBottom: "var(--space-6)",
             }}
           >
-            <Button href="/apply" variant="primary">
+            <Button href={hero.ctaHref} variant="primary">
               {hero.ctaLabel}
             </Button>
             <Button href={hero.secondaryCtaHref} variant="ghost">

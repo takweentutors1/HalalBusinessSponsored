@@ -43,6 +43,10 @@ export const hero = {
   costLine,
   disclosureLine: disclosure.footer,
   ctaLabel: "Apply for a Sponsored Website",
+  // Points at whyItsSponsored.id below — scrolls to the trust/scope
+  // proof in-page rather than jumping straight to /apply, so visitors who
+  // click through from the hero see why the offer is legitimate first.
+  ctaHref: "#why-its-sponsored",
   secondaryCtaLabel: "See How It Works",
   secondaryCtaHref: "#how-it-works",
   /**

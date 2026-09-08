@@ -83,6 +83,7 @@ function ExchangePanel({
 export function WhySponsored() {
   return (
     <section
+      id={whyItsSponsored.id}
       style={{
         background:
           "linear-gradient(135deg, var(--color-primary-accessible) 0%, var(--color-primary-accessible-dark) 100%)",
@@ -91,7 +92,7 @@ export function WhySponsored() {
     >
       <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
-        <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-3)" }}>
+        <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-4)" }}>
           {whyItsSponsored.title}
         </h2>
         <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-10)" }}>
