@@ -10,7 +10,7 @@ export function Hero() {
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "auto",
         backgroundColor: "#f8fcf8",
         backgroundImage: [
           "radial-gradient(circle at 18% 35%, rgba(180, 238, 205, 0.45) 0%, transparent 45%)",
