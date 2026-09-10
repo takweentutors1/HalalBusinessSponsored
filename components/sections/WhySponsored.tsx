@@ -85,12 +85,27 @@ export function WhySponsored() {
     <section
       id={whyItsSponsored.id}
       style={{
+        position: "relative",
+        overflow: "hidden",
         background:
           "linear-gradient(135deg, var(--color-primary-accessible) 0%, var(--color-primary-accessible-dark) 100%)",
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-      <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-trust.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.8,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
         <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-6)" }}>
           {whyItsSponsored.title}

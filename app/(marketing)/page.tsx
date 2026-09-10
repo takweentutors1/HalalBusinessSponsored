@@ -61,6 +61,7 @@ export default function LandingPage() {
         tone="muted"
         cardStyle="flush"
         illustration={<AudienceIllustration />}
+        bgSvg="/images/bg-business.svg"
         itemIcons={[
           <UtensilsIcon key="restaurants" />,
           <MeatIcon key="butchers" />,
@@ -76,9 +77,10 @@ export default function LandingPage() {
         variant="grid"
         cardStyle="accent"
         illustration={<ProblemIllustration />}
+        bgSvg="/images/bg-problem.svg"
         itemIcons={[<PlatformIconPair key="instagram-whatsapp" />]}
       />
-      <ListSection {...whatTheWebsiteSolves} variant="stack" tone="tint" />
+      <ListSection {...whatTheWebsiteSolves} variant="stack" tone="tint" bgSvg="/images/bg-solution.svg" />
       <WhySponsored />
       <ScopeComparison
         included={whatsIncluded}
@@ -95,12 +97,13 @@ export default function LandingPage() {
         }}
       />
       <MidCta {...qualifyCta} tone="tint" />
-      <ListSection {...domainHostingCosts} variant="stack" tone="muted" />
+      <ListSection {...domainHostingCosts} variant="stack" tone="muted" bgSvg="/images/bg-tech.svg" />
       <ListSection
         {...whatHappensAfterLaunch}
         variant="grid"
         cardStyle="tinted"
         tintColor="var(--color-surface-base)"
+        bgSvg="/images/bg-launch.svg"
       />
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
       <MidCta {...applyCtaMidPage} tone="plain" />

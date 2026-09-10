@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <!-- Abstract exchange arrows (trust/balance) -->
+  <g opacity="0.12" stroke="white" stroke-width="1" fill="none" stroke-linecap="round">
+    <path d="M200,70 C300,50 500,50 600,70"/>
+    <path d="M590,65 l10,5 l-10,5"/>
+    <path d="M600,130 C500,150 300,150 200,130"/>
+    <path d="M210,125 l-10,5 l10,5"/>
+  </g>
+  
+  <!-- Scattered small diamonds -->
+  <g opacity="0.08" fill="white">
+    <rect x="148" y="58" width="6" height="6" rx="1" transform="rotate(45 151 61)"/>
+    <rect x="348" y="48" width="5" height="5" rx="1" transform="rotate(45 351 50.5)"/>
+    <rect x="548" y="58" width="6" height="6" rx="1" transform="rotate(45 551 61)"/>
+    <rect x="448" y="148" width="5" height="5" rx="1" transform="rotate(45 451 150.5)"/>
+    <rect x="248" y="138" width="5" height="5" rx="1" transform="rotate(45 251 140.5)"/>
+  </g>
+  
+  <!-- Subtle circular glow -->
+  <ellipse cx="400" cy="100" rx="200" ry="80" fill="white" opacity="0.04" filter="url(#blur4)"/>
+</svg>

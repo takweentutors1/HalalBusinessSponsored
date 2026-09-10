@@ -12,6 +12,8 @@ export function FinalCta() {
   return (
     <section
       style={{
+        position: "relative",
+        overflow: "hidden",
         textAlign: "center",
         padding: "var(--space-16) var(--space-8)",
         background:
@@ -19,7 +21,20 @@ export function FinalCta() {
         color: "white",
       }}
     >
-      <div style={{ maxWidth: 640, margin: "0 auto" }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-finalcta.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.8,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 640, margin: "0 auto" }}>
         <h2 style={{ marginBottom: "var(--space-6)", color: "white" }}>{finalCta.title}</h2>
         <ul
           style={{

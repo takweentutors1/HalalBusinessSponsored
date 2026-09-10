@@ -85,8 +85,21 @@ function AddOnMarker() {
  */
 export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
   return (
-    <section style={{ background: "var(--color-surface-base)" }}>
-      <div style={{ maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
+    <section style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-compare.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.9,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
         <h2
           style={{
             color: "var(--color-primary-dark)",

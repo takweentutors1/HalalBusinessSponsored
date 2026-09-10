@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur12" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Speech bubble shapes -->
+  <g opacity="0.06">
+    <rect x="100" y="50" width="100" height="60" rx="10" stroke="#a8e6cf" stroke-width="0.8" fill="none"/>
+    <polygon points="130,110 140,110 125,125" fill="none" stroke="#a8e6cf" stroke-width="0.8"/>
+  </g>
+  <g opacity="0.05">
+    <rect x="300" y="40" width="120" height="70" rx="10" stroke="#d7f5e4" stroke-width="0.8" fill="none"/>
+    <polygon points="340,110 355,110 330,128" fill="none" stroke="#d7f5e4" stroke-width="0.8"/>
+  </g>
+  <g opacity="0.06">
+    <rect x="550" y="55" width="110" height="55" rx="10" stroke="#a8e6cf" stroke-width="0.8" fill="none"/>
+    <polygon points="590,110 600,110 585,122" fill="none" stroke="#a8e6cf" stroke-width="0.8"/>
+  </g>
+  
+  <!-- Quotation marks -->
+  <g opacity="0.05" fill="#a8e6cf">
+    <text x="120" y="80" font-family="Georgia, serif" font-size="24">&ldquo;</text>
+    <text x="320" y="72" font-family="Georgia, serif" font-size="28">&ldquo;</text>
+    <text x="570" y="80" font-family="Georgia, serif" font-size="24">&ldquo;</text>
+  </g>
+  
+  <!-- Dots -->
+  <circle cx="250" cy="140" r="1.5" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="450" cy="150" r="2" fill="#a8e6cf" opacity="0.12"/>
+  <circle cx="700" cy="60" r="1.8" fill="#d7f5e4" opacity="0.15"/>
+  
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="100" rx="200" ry="60" fill="#d7f5e4" opacity="0.04" filter="url(#blur12)"/>
+</svg>

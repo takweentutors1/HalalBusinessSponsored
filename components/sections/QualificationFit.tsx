@@ -9,9 +9,24 @@ export function QualificationFit({
   notFit: ListSectionContent;
 }) {
   return (
-    <section id={qualifies.id} style={{ background: "var(--color-surface-base)" }}>
+    <section id={qualifies.id} style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-qualify.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.9,
+          zIndex: 1,
+        }}
+      />
       <div
         style={{
+          position: "relative",
+          zIndex: 10,
           maxWidth: 960,
           margin: "0 auto",
           padding: "var(--space-12) var(--space-8)",

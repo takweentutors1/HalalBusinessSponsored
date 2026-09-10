@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <!-- Scattered small X marks (chaos/confusion) -->
+  <g opacity="0.15" stroke="#dc2626" stroke-width="1" stroke-linecap="round">
+    <line x1="100" y1="50" x2="110" y2="60"/><line x1="110" y1="50" x2="100" y2="60"/>
+    <line x1="200" y1="80" x2="210" y2="90"/><line x1="210" y1="80" x2="200" y2="90"/>
+    <line x1="350" y1="40" x2="360" y2="50"/><line x1="360" y1="40" x2="350" y2="50"/>
+    <line x1="500" y1="70" x2="510" y2="80"/><line x1="510" y1="70" x2="500" y2="80"/>
+    <line x1="650" y1="55" x2="660" y2="65"/><line x1="660" y1="55" x2="650" y2="65"/>
+    <line x1="750" y1="90" x2="760" y2="100"/><line x1="760" y1="90" x2="750" y2="100"/>
+    <line x1="150" y1="130" x2="160" y2="140"/><line x1="160" y1="130" x2="150" y2="140"/>
+    <line x1="420" y1="120" x2="430" y2="130"/><line x1="430" y1="120" x2="420" y2="130"/>
+    <line x1="580" y1="140" x2="590" y2="150"/><line x1="590" y1="140" x2="580" y2="150"/>
+  </g>
+  
+  <!-- Dotted arrows pointing down (losing customers) -->
+  <g opacity="0.12" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="3 4">
+    <line x1="180" y1="40" x2="180" y2="90"/>
+    <polyline points="175,85 180,95 185,85" fill="none"/>
+  </g>
+  <g opacity="0.1" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="3 4">
+    <line x1="480" y1="35" x2="480" y2="85"/>
+    <polyline points="475,80 480,90 485,80" fill="none"/>
+  </g>
+  <g opacity="0.1" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="3 4">
+    <line x1="700" y1="45" x2="700" y2="95"/>
+    <polyline points="695,90 700,100 705,90" fill="none"/>
+  </g>
+  
+  <!-- Soft red/amber glow (warning) -->
+  <ellipse cx="400" cy="100" rx="150" ry="80" fill="#fef2f2" opacity="0.3" filter="url(#blur2)"/>
+</svg>

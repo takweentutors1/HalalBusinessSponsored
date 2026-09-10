@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Organized grid of small circles (order/clarity) -->
+  <g opacity="0.12" fill="#10b981">
+    <circle cx="100" cy="60" r="3"/><circle cx="140" cy="60" r="3"/><circle cx="180" cy="60" r="3"/>
+    <circle cx="100" cy="90" r="3"/><circle cx="140" cy="90" r="3"/><circle cx="180" cy="90" r="3"/>
+    <circle cx="100" cy="120" r="3"/><circle cx="140" cy="120" r="3"/><circle cx="180" cy="120" r="3"/>
+  </g>
+  
+  <!-- Clean checkmark paths -->
+  <g opacity="0.08" stroke="#086942" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M350,55 l8,8 l16,-16"/>
+    <path d="M500,75 l8,8 l16,-16"/>
+    <path d="M650,65 l8,8 l16,-16"/>
+  </g>
+  
+  <!-- Connected dots (structured network) -->
+  <g opacity="0.1" stroke="#a8e6cf" stroke-width="0.6">
+    <circle cx="300" cy="80" r="4" fill="#d7f5e4" fill-opacity="0.3"/>
+    <circle cx="350" cy="60" r="4" fill="#d7f5e4" fill-opacity="0.3"/>
+    <circle cx="400" cy="80" r="4" fill="#d7f5e4" fill-opacity="0.3"/>
+    <circle cx="350" cy="100" r="4" fill="#d7f5e4" fill-opacity="0.3"/>
+    <line x1="300" y1="80" x2="350" y2="60"/>
+    <line x1="350" y1="60" x2="400" y2="80"/>
+    <line x1="400" y1="80" x2="350" y2="100"/>
+    <line x1="350" y1="100" x2="300" y2="80"/>
+  </g>
+  
+  <!-- Soft green glow -->
+  <ellipse cx="400" cy="100" rx="180" ry="70" fill="#d7f5e4" opacity="0.1" filter="url(#blur3)"/>
+  <ellipse cx="600" cy="80" rx="100" ry="50" fill="#a8e6cf" opacity="0.06" filter="url(#blur3)"/>
+</svg>

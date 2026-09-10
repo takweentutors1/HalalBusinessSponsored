@@ -44,6 +44,8 @@ interface ListSectionProps extends ListSectionContent {
   cardStyle?: "boxed" | "flush" | "accent" | "tinted";
   /** Fill color for cardStyle "tinted". Defaults to the section's tone tint. */
   tintColor?: string;
+  /** Optional SVG background image path for the section. */
+  bgSvg?: string;
 }
 
 export function ListSection({
@@ -58,6 +60,7 @@ export function ListSection({
   itemIcons,
   cardStyle = "boxed",
   tintColor,
+  bgSvg,
 }: ListSectionProps) {
   const marker = polarity === "negative" ? "–" : "✓";
   const markerColor =
@@ -89,9 +92,26 @@ export function ListSection({
   };
 
   return (
-    <section style={{ background: TONE_BACKGROUND[tone] }}>
+    <section style={{ position: "relative", overflow: "hidden", background: TONE_BACKGROUND[tone] }}>
+      {bgSvg && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${bgSvg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.9,
+            zIndex: 1,
+          }}
+        />
+      )}
       <div
         style={{
+          position: "relative",
+          zIndex: bgSvg ? 10 : undefined,
           maxWidth: variant === "grid" ? 960 : 720,
           margin: "0 auto",
           padding: "var(--space-12) var(--space-8)",

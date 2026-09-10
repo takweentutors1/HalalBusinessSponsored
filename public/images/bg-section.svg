@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur15" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Subtle horizontal lines (section divider feel) -->
+  <g opacity="0.06" stroke="#a8e6cf" stroke-width="0.5">
+    <line x1="100" y1="50" x2="700" y2="50"/>
+    <line x1="100" y1="100" x2="700" y2="100"/>
+    <line x1="100" y1="150" x2="700" y2="150"/>
+  </g>
+  
+  <!-- Small scattered shapes -->
+  <circle cx="150" cy="80" r="2" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="300" cy="120" r="1.5" fill="#a8e6cf" opacity="0.12"/>
+  <circle cx="450" cy="70" r="2" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="600" cy="130" r="1.8" fill="#a8e6cf" opacity="0.12"/>
+  
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="100" rx="200" ry="60" fill="#d7f5e4" opacity="0.04" filter="url(#blur15)"/>
+</svg>

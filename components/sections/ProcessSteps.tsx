@@ -5,11 +5,25 @@ export function ProcessSteps() {
     <section
       id="how-it-works"
       style={{
-        maxWidth: 900,
-        margin: "0 auto",
+        position: "relative",
+        overflow: "hidden",
         padding: "var(--space-12) var(--space-8)",
       }}
     >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-process.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.9,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 900, margin: "0 auto" }}>
       <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-8)" }}>
         {processSteps.title}
       </h2>
@@ -48,6 +62,7 @@ export function ProcessSteps() {
           </li>
         ))}
       </ol>
+      </div>
     </section>
   );
 }

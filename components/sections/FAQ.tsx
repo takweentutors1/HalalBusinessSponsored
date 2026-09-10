@@ -5,11 +5,25 @@ export function FAQ() {
   return (
     <section
       style={{
-        maxWidth: 720,
-        margin: "0 auto",
+        position: "relative",
+        overflow: "hidden",
         padding: "var(--space-12) var(--space-8)",
       }}
     >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-faq.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.9,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 720, margin: "0 auto" }}>
       <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-6)" }}>
         {faq.title}
       </h2>
@@ -31,6 +45,7 @@ export function FAQ() {
             </p>
           </details>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" fill="none">
+  <defs>
+    <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Subtle arrow pointing right -->
+  <path d="M300,60 L500,60" stroke="#a8e6cf" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+  <polyline points="490,52 505,60 490,68" fill="none" stroke="#a8e6cf" stroke-width="1" opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Small dots along the arrow -->
+  <circle cx="340" cy="60" r="2" fill="#d7f5e4" opacity="0.2"/>
+  <circle cx="380" cy="60" r="1.5" fill="#a8e6cf" opacity="0.2"/>
+  <circle cx="420" cy="60" r="2" fill="#d7f5e4" opacity="0.2"/>
+  <circle cx="460" cy="60" r="1.5" fill="#a8e6cf" opacity="0.2"/>
+  
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="60" rx="120" ry="40" fill="#d7f5e4" opacity="0.06" filter="url(#blur6)"/>
+</svg>

@@ -8,11 +8,25 @@ export function StatsBar() {
   return (
     <section
       style={{
+        position: "relative",
+        overflow: "hidden",
         padding: "var(--space-4) var(--space-8) var(--space-12)",
-        maxWidth: 900,
-        margin: "0 auto",
       }}
     >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/images/bg-dots.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.8,
+          zIndex: 1,
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 900, margin: "0 auto" }}>
       <div
         style={{
           display: "grid",
@@ -64,6 +78,7 @@ export function StatsBar() {
             <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-sm)" }}>{stat.label}</p>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

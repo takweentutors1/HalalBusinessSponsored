@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <!-- Abstract building/shop shapes (blurred) -->
+  <rect x="80" y="60" width="35" height="50" rx="3" stroke="#a8e6cf" stroke-width="1" fill="none" opacity="0.35" filter="url(#blur1)"/>
+  <rect x="140" y="45" width="40" height="65" rx="3" stroke="#d7f5e4" stroke-width="1" fill="none" opacity="0.3" filter="url(#blur1)"/>
+  <rect x="210" y="70" width="30" height="40" rx="3" stroke="#a8e6cf" stroke-width="1" fill="none" opacity="0.25" filter="url(#blur1)"/>
+  
+  <!-- Abstract people silhouettes -->
+  <circle cx="400" cy="55" r="8" stroke="#d7f5e4" stroke-width="0.8" fill="none" opacity="0.2"/>
+  <line x1="400" y1="63" x2="400" y2="85" stroke="#d7f5e4" stroke-width="0.8" opacity="0.2"/>
+  
+  <circle cx="520" cy="50" r="7" stroke="#a8e6cf" stroke-width="0.8" fill="none" opacity="0.25"/>
+  <line x1="520" y1="57" x2="520" y2="78" stroke="#a8e6cf" stroke-width="0.8" opacity="0.25"/>
+  
+  <!-- Storefront awning shapes -->
+  <path d="M620,95 L660,95 L655,85 L625,85 Z" stroke="#a8e6cf" stroke-width="0.8" fill="none" opacity="0.2"/>
+  <rect x="625" y="95" width="30" height="25" rx="2" stroke="#a8e6cf" stroke-width="0.8" fill="none" opacity="0.2"/>
+  
+  <!-- Scattered dots -->
+  <circle cx="300" cy="130" r="1.5" fill="#d7f5e4" opacity="0.3"/>
+  <circle cx="450" cy="140" r="2" fill="#a8e6cf" opacity="0.25"/>
+  <circle cx="700" cy="60" r="1.8" fill="#d7f5e4" opacity="0.3"/>
+  
+  <!-- Soft ambient glow -->
+  <ellipse cx="350" cy="100" rx="120" ry="60" fill="#d7f5e4" opacity="0.08" filter="url(#blur1)"/>
+  <ellipse cx="650" cy="80" rx="100" ry="50" fill="#a8e6cf" opacity="0.06" filter="url(#blur1)"/>
+</svg>

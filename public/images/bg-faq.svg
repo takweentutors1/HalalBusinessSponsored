@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur13" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Question mark shapes -->
+  <g opacity="0.06" stroke="#a8e6cf" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M150,55 C150,40 170,35 175,48 C180,60 165,65 165,80"/>
+    <circle cx="165" cy="95" r="2" fill="#a8e6cf"/>
+  </g>
+  <g opacity="0.05" stroke="#d7f5e4" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M350,50 C350,35 370,30 375,43 C380,55 365,60 365,75"/>
+    <circle cx="365" cy="90" r="2" fill="#d7f5e4"/>
+  </g>
+  <g opacity="0.06" stroke="#a8e6cf" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M550,55 C550,40 570,35 575,48 C580,60 565,65 565,80"/>
+    <circle cx="565" cy="95" r="2" fill="#a8e6cf"/>
+  </g>
+  <g opacity="0.04" stroke="#d7f5e4" stroke-width="1" fill="none" stroke-linecap="round">
+    <path d="M700,60 C700,48 715,44 718,54 C722,64 710,68 710,80"/>
+    <circle cx="710" cy="92" r="1.5" fill="#d7f5e4"/>
+  </g>
+  
+  <!-- Dots -->
+  <circle cx="200" cy="130" r="1.5" fill="#a8e6cf" opacity="0.12"/>
+  <circle cx="450" cy="140" r="2" fill="#d7f5e4" opacity="0.1"/>
+  <circle cx="650" cy="130" r="1.8" fill="#a8e6cf" opacity="0.12"/>
+  
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="100" rx="180" ry="60" fill="#d7f5e4" opacity="0.04" filter="url(#blur13)"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <filter id="blur9" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- Large faded checkmarks -->
+  <g opacity="0.06" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M150,60 l12,12 l24,-24"/>
+    <path d="M350,50 l12,12 l24,-24"/>
+    <path d="M550,65 l12,12 l24,-24"/>
+  </g>
+  
+  <!-- Large faded X marks -->
+  <g opacity="0.05" stroke="#9ca3af" stroke-width="2" fill="none" stroke-linecap="round">
+    <line x1="248" y1="58" x2="268" y2="78"/><line x1="268" y1="58" x2="248" y2="78"/>
+    <line x1="448" y1="48" x2="468" y2="68"/><line x1="468" y1="48" x2="448" y2="68"/>
+    <line x1="648" y1="63" x2="668" y2="83"/><line x1="668" y1="63" x2="648" y2="83"/>
+  </g>
+  
+  <!-- Divider dots -->
+  <circle cx="100" cy="100" r="2" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="200" cy="100" r="1.5" fill="#a8e6cf" opacity="0.15"/>
+  <circle cx="300" cy="100" r="2" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="400" cy="100" r="2.5" fill="#a8e6cf" opacity="0.12"/>
+  <circle cx="500" cy="100" r="2" fill="#d7f5e4" opacity="0.15"/>
+  <circle cx="600" cy="100" r="1.5" fill="#a8e6cf" opacity="0.15"/>
+  <circle cx="700" cy="100" r="2" fill="#d7f5e4" opacity="0.15"/>
+  
+  <!-- Soft glow -->
+  <ellipse cx="250" cy="100" rx="100" ry="50" fill="#d7f5e4" opacity="0.05" filter="url(#blur9)"/>
+  <ellipse cx="600" cy="100" rx="100" ry="50" fill="#f3f4f6" opacity="0.08" filter="url(#blur9)"/>
+</svg>
