@@ -8,13 +8,40 @@ export function Hero() {
   return (
     <section
       style={{
-        background:
-          "linear-gradient(135deg, var(--color-primary-pale) 0%, var(--color-surface-base) 100%)",
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "#f8fcf8",
+        backgroundImage: [
+          "radial-gradient(circle at 18% 35%, rgba(180, 238, 205, 0.45) 0%, transparent 45%)",
+          "radial-gradient(circle at 80% 50%, rgba(205, 243, 222, 0.40) 0%, transparent 50%)",
+          "radial-gradient(circle at 50% 100%, rgba(230, 248, 238, 0.6) 0%, transparent 60%)",
+        ].join(", "),
+        overflow: "hidden",
         padding: "var(--space-16) var(--space-8)",
       }}
     >
+      {/* SVG pathway/network background layer */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: "url(/images/hero-map-bg.svg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.85,
+          zIndex: 1,
+        }}
+      />
+
       <div
         style={{
+          position: "relative",
+          zIndex: 10,
           maxWidth: 1100,
           margin: "0 auto",
           display: "grid",

@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <!-- Glow filters -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="iconBlur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <!-- Gradient for pathway -->
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a8e6cf" stop-opacity="0.1"/>
+      <stop offset="40%" stop-color="#10b981" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#086942" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#a8e6cf" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Radial glow for nodes -->
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a8e6cf" stroke-width="0.3" stroke-opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <!-- Subtle grid background -->
+  <rect width="1200" height="800" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- === LEFT SIDE: Progress icons (blurred, abstract) === -->
+  
+  <!-- Book icon (learning) -->
+  <g transform="translate(140, 200)" filter="url(#iconBlur)" opacity="0.3">
+    <rect x="-20" y="-25" width="40" height="50" rx="4" stroke="#086942" stroke-width="1.5" fill="none"/>
+    <line x1="-12" y1="-15" x2="12" y2="-15" stroke="#086942" stroke-width="1" stroke-opacity="0.6"/>
+    <line x1="-12" y1="-7" x2="8" y2="-7" stroke="#086942" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="-12" y1="1" x2="12" y2="1" stroke="#086942" stroke-width="1" stroke-opacity="0.6"/>
+    <line x1="-12" y1="9" x2="6" y2="9" stroke="#086942" stroke-width="1" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Compass icon (direction) -->
+  <g transform="translate(100, 380)" filter="url(#iconBlur)" opacity="0.25">
+    <circle cx="0" cy="0" r="22" stroke="#086942" stroke-width="1.5" fill="none"/>
+    <polygon points="0,-15 4,0 0,15 -4,0" fill="#086942" fill-opacity="0.3"/>
+    <circle cx="0" cy="0" r="3" fill="#086942" fill-opacity="0.5"/>
+  </g>
+
+  <!-- Calendar icon (scheduling) -->
+  <g transform="translate(180, 540)" filter="url(#iconBlur)" opacity="0.25">
+    <rect x="-20" y="-18" width="40" height="38" rx="4" stroke="#086942" stroke-width="1.5" fill="none"/>
+    <line x1="-20" y1="-6" x2="20" y2="-6" stroke="#086942" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="-12" y1="-25" x2="-12" y2="-14" stroke="#086942" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="12" y1="-25" x2="12" y2="-14" stroke="#086942" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="-12" y="0" width="8" height="6" rx="1" fill="#086942" fill-opacity="0.3"/>
+    <rect x="4" y="0" width="8" height="6" rx="1" fill="#086942" fill-opacity="0.2"/>
+    <rect x="-12" y="10" width="8" height="6" rx="1" fill="#086942" fill-opacity="0.2"/>
+  </g>
+
+  <!-- Blurred glow behind left icons -->
+  <ellipse cx="140" cy="370" rx="100" ry="180" fill="#d7f5e4" opacity="0.25" filter="url(#softGlow)"/>
+
+
+  <!-- === CENTRAL: Curving pathway with dashed markers === -->
+  
+  <!-- Main pathway curve -->
+  <path
+    d="M -50,450 C 200,420 350,300 500,340 S 750,500 900,380 S 1100,250 1250,300"
+    stroke="url(#pathGrad)"
+    stroke-width="2.5"
+    fill="none"
+    stroke-linecap="round"
+  />
+
+  <!-- Dashed path overlay -->
+  <path
+    d="M -50,450 C 200,420 350,300 500,340 S 750,500 900,380 S 1100,250 1250,300"
+    stroke="#a8e6cf"
+    stroke-width="1"
+    fill="none"
+    stroke-dasharray="8 12"
+    stroke-linecap="round"
+    opacity="0.6"
+  />
+
+  <!-- Pathway milestone dots -->
+  <circle cx="200" cy="400" r="4" fill="#10b981" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="500" cy="340" r="5" fill="#086942" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="900" cy="380" r="4" fill="#10b981" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- Small milestone labels (abstract dashes) -->
+  <line x1="188" y1="412" x2="212" y2="412" stroke="#086942" stroke-width="1" opacity="0.4"/>
+  <line x1="488" y1="352" x2="512" y2="352" stroke="#086942" stroke-width="1" opacity="0.4"/>
+  <line x1="888" y1="392" x2="912" y2="392" stroke="#086942" stroke-width="1" opacity="0.4"/>
+
+
+  <!-- === RIGHT SIDE: Network node structure === -->
+  
+  <!-- Network glow backdrop -->
+  <ellipse cx="1000" cy="300" rx="160" ry="140" fill="#e3f8ee" opacity="0.3" filter="url(#softGlow)"/>
+
+  <!-- Connection lines -->
+  <line x1="920" y1="240" x2="1000" y2="200" stroke="#a8e6cf" stroke-width="1" opacity="0.5"/>
+  <line x1="1000" y1="200" x2="1080" y2="250" stroke="#a8e6cf" stroke-width="1" opacity="0.5"/>
+  <line x1="1080" y1="250" x2="1060" y2="340" stroke="#a8e6cf" stroke-width="1" opacity="0.5"/>
+  <line x1="1060" y1="340" x2="960" y2="360" stroke="#a8e6cf" stroke-width="1" opacity="0.5"/>
+  <line x1="960" y1="360" x2="920" y2="240" stroke="#a8e6cf" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Cross connections -->
+  <line x1="1000" y1="200" x2="1060" y2="340" stroke="#a8e6cf" stroke-width="0.5" opacity="0.3"/>
+  <line x1="920" y1="240" x2="1080" y2="250" stroke="#a8e6cf" stroke-width="0.5" opacity="0.3"/>
+  <line x1="920" y1="240" x2="960" y2="360" stroke="#a8e6cf" stroke-width="0.5" opacity="0.3"/>
+  <line x1="1000" y1="200" x2="960" y2="360" stroke="#a8e6cf" stroke-width="0.5" opacity="0.25"/>
+  <line x1="1080" y1="250" x2="960" y2="360" stroke="#a8e6cf" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Network nodes -->
+  <circle cx="1000" cy="200" r="8" fill="#086942" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="1000" cy="200" r="3" fill="#ffffff" opacity="0.9"/>
+  
+  <circle cx="1080" cy="250" r="6" fill="#10b981" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="1080" cy="250" r="2.5" fill="#ffffff" opacity="0.8"/>
+  
+  <circle cx="920" cy="240" r="6" fill="#10b981" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="920" cy="240" r="2.5" fill="#ffffff" opacity="0.8"/>
+  
+  <circle cx="1060" cy="340" r="7" fill="#086942" opacity="0.65" filter="url(#glow)"/>
+  <circle cx="1060" cy="340" r="3" fill="#ffffff" opacity="0.85"/>
+  
+  <circle cx="960" cy="360" r="5" fill="#10b981" opacity="0.55" filter="url(#glow)"/>
+  <circle cx="960" cy="360" r="2" fill="#ffffff" opacity="0.75"/>
+
+  <!-- Secondary smaller nodes (satellites) -->
+  <circle cx="1040" cy="170" r="3" fill="#a8e6cf" opacity="0.5"/>
+  <circle cx="1120" cy="300" r="2.5" fill="#a8e6cf" opacity="0.4"/>
+  <circle cx="880" cy="300" r="2.5" fill="#a8e6cf" opacity="0.4"/>
+  <line x1="1040" y1="170" x2="1000" y2="200" stroke="#a8e6cf" stroke-width="0.5" opacity="0.35"/>
+  <line x1="1120" y1="300" x2="1080" y2="250" stroke="#a8e6cf" stroke-width="0.5" opacity="0.35"/>
+  <line x1="880" y1="300" x2="920" y2="240" stroke="#a8e6cf" stroke-width="0.5" opacity="0.35"/>
+
+
+  <!-- === Decorative floating dots === -->
+  <circle cx="350" cy="150" r="2" fill="#a8e6cf" opacity="0.3"/>
+  <circle cx="650" cy="120" r="1.5" fill="#d7f5e4" opacity="0.4"/>
+  <circle cx="800" cy="600" r="2" fill="#a8e6cf" opacity="0.25"/>
+  <circle cx="450" cy="650" r="1.5" fill="#d7f5e4" opacity="0.3"/>
+  <circle cx="700" cy="200" r="1" fill="#10b981" opacity="0.2"/>
+</svg>
