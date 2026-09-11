@@ -1,18 +1,21 @@
 import {
+  AfterLaunchCards,
   FAQ,
   FinalCta,
   Hero,
+  InfoCallout,
   LimitedCapacity,
   ListSection,
   MidCta,
   PortfolioAndTestimonials,
   ProcessSteps,
+  ProblemSolution,
   QualificationFit,
   ScopeComparison,
   StatsBar,
   WhySponsored,
 } from "@/components/sections";
-import { AudienceIllustration, ProblemIllustration } from "@/components/illustrations";
+import { AudienceIllustration } from "@/components/illustrations";
 import {
   BadgeCheckIcon,
   BookIcon,
@@ -31,11 +34,9 @@ import {
 } from "@/components/icons";
 import {
   applyCtaMidPage,
-  currentDigitalProblem,
   domainHostingCosts,
   qualifyCta,
   whatHappensAfterLaunch,
-  whatTheWebsiteSolves,
   whatsIncluded,
   whatsOutsideScope,
   whoIsNotAFit,
@@ -55,13 +56,14 @@ export default function LandingPage() {
     <>
       <Hero />
       <StatsBar />
+
+      {/* Who It's For — grid of icon cards with shadows */}
       <ListSection
         {...whoItsFor}
         variant="grid"
         tone="muted"
-        cardStyle="flush"
+        cardStyle="boxed"
         illustration={<AudienceIllustration />}
-        bgSvg="/images/bg-business.svg"
         itemIcons={[
           <UtensilsIcon key="restaurants" />,
           <MeatIcon key="butchers" />,
@@ -72,16 +74,12 @@ export default function LandingPage() {
           <BriefcaseIcon key="professional" />,
         ]}
       />
-      <ListSection
-        {...currentDigitalProblem}
-        variant="grid"
-        cardStyle="accent"
-        illustration={<ProblemIllustration />}
-        bgSvg="/images/bg-problem.svg"
-        itemIcons={[<PlatformIconPair key="instagram-whatsapp" />]}
-      />
-      <ListSection {...whatTheWebsiteSolves} variant="stack" tone="tint" bgSvg="/images/bg-solution.svg" />
+
+      {/* Problem → Solution side-by-side comparison table */}
+      <ProblemSolution />
+
       <WhySponsored />
+
       <ScopeComparison
         included={whatsIncluded}
         addOns={whatsOutsideScope}
@@ -96,17 +94,17 @@ export default function LandingPage() {
           ],
         }}
       />
+
       <MidCta {...qualifyCta} tone="tint" />
-      <ListSection {...domainHostingCosts} variant="stack" tone="muted" bgSvg="/images/bg-tech.svg" />
-      <ListSection
-        {...whatHappensAfterLaunch}
-        variant="grid"
-        cardStyle="tinted"
-        tintColor="var(--color-surface-base)"
-        bgSvg="/images/bg-launch.svg"
-      />
+
+      <InfoCallout />
+
+      <AfterLaunchCards />
+
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
-      <MidCta {...applyCtaMidPage} tone="plain" />
+
+      <MidCta {...applyCtaMidPage} tone="tint" />
+
       <LimitedCapacity />
       <ProcessSteps />
       <PortfolioAndTestimonials />

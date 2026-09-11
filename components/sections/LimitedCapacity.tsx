@@ -19,40 +19,94 @@ export async function LimitedCapacity() {
         overflow: "hidden",
         textAlign: "center",
         padding: "var(--space-12) var(--space-8)",
-        background: "var(--color-primary-pale)",
+        background: "#fafaf7",
       }}
     >
       <div
-        aria-hidden="true"
         style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url(/images/bg-urgency.svg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.9,
-          zIndex: 1,
-        }}
-      />
-      <div style={{ position: "relative", zIndex: 10 }}>
-      <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-6)" }}>
-        {limitedCapacity.title}
-      </h2>
-      <CapacityRing total={limitedCapacity.count} remaining={remaining} />
-      <p
-        style={{
-          fontSize: "var(--font-size-xl)",
-          fontFamily: "var(--font-display)",
-          color: "var(--color-primary-dark)",
-          fontWeight: 700,
-          margin: "var(--space-6) 0 var(--space-2)",
+          position: "relative",
+          zIndex: 10,
+          maxWidth: 640,
+          margin: "0 auto",
+          background: "var(--color-surface-base)",
+          border: "1px solid var(--color-border-light)",
+          borderRadius: "var(--radius-xl)",
+          boxShadow: "var(--shadow-lg)",
+          padding: "var(--space-8) var(--space-6)",
         }}
       >
-        {limitedCapacity.statement}
-      </p>
-      <p style={{ color: "var(--color-text-secondary)" }}>{limitedCapacity.note}</p>
+        {/* Live Cohort Status Pill */}
+        <div style={{ marginBottom: "var(--space-5)" }}>
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "var(--space-2)",
+              padding: "var(--space-1) var(--space-4)",
+              borderRadius: "var(--radius-full)",
+              background: "rgba(26, 71, 49, 0.08)",
+              border: "1px solid rgba(26, 71, 49, 0.2)",
+              color: "var(--color-primary-accessible)",
+              fontSize: "var(--font-size-xs)",
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+            }}
+          >
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "var(--radius-full)",
+                background: "#16a34a",
+                boxShadow: "0 0 0 2px rgba(22, 163, 74, 0.2)",
+              }}
+            />
+            Cohort Status: Applications Open
+          </span>
+        </div>
+
+        <h2
+          style={{
+            fontSize: "var(--font-size-2xl)",
+            color: "var(--color-primary-dark)",
+            marginBottom: "var(--space-6)",
+          }}
+        >
+          {limitedCapacity.title}
+        </h2>
+
+        {/* Capacity Ring */}
+        <div style={{ margin: "var(--space-2) auto" }}>
+          <CapacityRing total={limitedCapacity.count} remaining={remaining} />
+        </div>
+
+        {/* Statement & Subtext */}
+        <p
+          style={{
+            fontSize: "var(--font-size-xl)",
+            fontFamily: "var(--font-serif)",
+            color: "var(--color-primary-dark)",
+            fontWeight: 700,
+            margin: "var(--space-6) 0 var(--space-2)",
+            lineHeight: 1.35,
+          }}
+        >
+          {limitedCapacity.statement}
+        </p>
+        <p
+          style={{
+            color: "var(--color-text-secondary)",
+            fontSize: "var(--font-size-sm)",
+            lineHeight: 1.6,
+            maxWidth: 460,
+            margin: "0 auto",
+          }}
+        >
+          {limitedCapacity.note}
+        </p>
       </div>
     </section>
   );
 }
+

@@ -72,9 +72,11 @@ export function ListSection({
   const cardItemStyle: Record<NonNullable<ListSectionProps["cardStyle"]>, CSSProperties> = {
     boxed: {
       border: "1px solid var(--color-border-light)",
-      borderRadius: "var(--radius-md)",
-      padding: "var(--space-4)",
+      borderRadius: "var(--radius-lg)",
+      padding: "var(--space-5) var(--space-4)",
       background: "var(--color-surface-base)",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
+      transition: "box-shadow 200ms ease, transform 200ms ease",
     },
     flush: {
       borderBottom: "1px solid var(--color-border-light)",

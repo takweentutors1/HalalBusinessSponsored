@@ -27,6 +27,7 @@ function PlusGlyph() {
 }
 
 function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
+  const isFree = tone === "free";
   return (
     <span
       style={{
@@ -39,13 +40,14 @@ function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
         fontWeight: 700,
         textTransform: "uppercase",
         letterSpacing: "0.06em",
-        background: tone === "free" ? "var(--color-primary-accessible)" : "var(--color-warning)",
-        color: tone === "free" ? "white" : "var(--color-neutral-900)",
-        boxShadow: "var(--shadow-md)",
+        background: isFree ? "rgba(255, 255, 255, 0.15)" : "var(--color-warning)",
+        color: isFree ? "#ffffff" : "var(--color-neutral-900)",
+        border: isFree ? "1px solid rgba(255, 255, 255, 0.35)" : "none",
+        boxShadow: isFree ? "none" : "var(--shadow-md)",
         marginBottom: "var(--space-3)",
       }}
     >
-      {tone === "free" ? <CheckGlyph /> : <PlusGlyph />}
+      {isFree ? <CheckGlyph /> : null}
       {label}
     </span>
   );
@@ -59,20 +61,12 @@ function AddOnMarker() {
         position: "absolute",
         left: 0,
         top: "var(--space-1)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: 18,
-        height: 18,
-        borderRadius: "var(--radius-full)",
-        border: "1.5px solid var(--color-warning)",
-        color: "var(--color-warning)",
-        fontSize: "var(--font-size-xs)",
+        color: "var(--color-neutral-400)",
         fontWeight: 700,
-        lineHeight: 1,
+        lineHeight: 1.2,
       }}
     >
-      +
+      —
     </span>
   );
 }
@@ -80,30 +74,17 @@ function AddOnMarker() {
 /**
  * Replaces two stacked "spec sheet" CategorizedSection blocks (What's
  * Included, What's Outside Scope) with one bordered two-column comparison:
- * a green "Free" panel next to an amber "Paid Add-On" panel, so a reader
+ * a dark green "Free" panel next to a warm off-white "Paid Add-On" panel, so a reader
  * sees the value split at a glance instead of two separate lists of facts.
  */
 export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
   return (
     <section style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url(/images/bg-compare.svg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.9,
-          zIndex: 1,
-        }}
-      />
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
         <h2
           style={{
             color: "var(--color-primary-dark)",
-            marginBottom: "var(--space-8)",
+            marginBottom: "var(--space-10)",
             textAlign: "center",
           }}
         >
@@ -112,36 +93,54 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
         <div
           style={{
             border: "1px solid var(--color-border-light)",
-            borderRadius: "var(--radius-lg)",
+            borderRadius: "var(--radius-xl)",
             overflow: "hidden",
+            boxShadow: "var(--shadow-lg)",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
           }}
         >
-          {/* Included, free */}
-          <div style={{ padding: "var(--space-8) var(--space-6)", background: "var(--color-primary-pale)" }}>
+          {/* Included, free (Dark Forest Green) */}
+          <div style={{ padding: "var(--space-8) var(--space-6)", background: "#1a4731", color: "#ffffff" }}>
             <Badge label="Free" tone="free" />
-            <h3 style={{ fontSize: "var(--font-size-xl)", marginBottom: "var(--space-6)" }}>
+            <h3 style={{ fontSize: "var(--font-size-xl)", color: "#ffffff", marginBottom: "var(--space-6)" }}>
               {included.title}
             </h3>
             {included.categories.map((category) => (
               <div key={category.title} style={{ marginBottom: "var(--space-5)" }}>
-                <h4
+                <div
                   style={{
-                    fontSize: "var(--font-size-sm)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.04em",
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "var(--space-2)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-3)",
+                    margin: "var(--space-5) 0 var(--space-3)",
                   }}
                 >
-                  {category.title}
-                </h4>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255, 255, 255, 0.15)" }} />
+                  <span
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {category.title}
+                  </span>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255, 255, 255, 0.15)" }} />
+                </div>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {category.items.map((item, index) => (
                     <li
                       key={item}
-                      style={{ padding: "var(--space-1) 0", paddingLeft: "var(--space-6)", position: "relative" }}
+                      style={{
+                        padding: "var(--space-1) 0",
+                        paddingLeft: "var(--space-6)",
+                        position: "relative",
+                        color: "rgba(255, 255, 255, 0.95)",
+                      }}
                     >
                       <span
                         aria-hidden="true"
@@ -149,7 +148,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                           position: "absolute",
                           left: 0,
                           top: "var(--space-1)",
-                          color: "var(--color-primary-accessible)",
+                          color: "rgba(255, 255, 255, 0.85)",
                           fontWeight: 700,
                         }}
                       >
@@ -162,31 +161,43 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
               </div>
             ))}
             {included.note && (
-              <p style={{ fontWeight: 600, marginTop: "var(--space-4)" }}>
+              <p style={{ fontWeight: 600, marginTop: "var(--space-4)", color: "rgba(255, 255, 255, 0.9)" }}>
                 <RichText text={included.note} />
               </p>
             )}
           </div>
 
-          {/* Paid add-ons */}
-          <div style={{ padding: "var(--space-8) var(--space-6)", background: "var(--color-surface-elevated)" }}>
+          {/* Paid add-ons (Warm Off-White) */}
+          <div style={{ padding: "var(--space-8) var(--space-6)", background: "#fafaf7", color: "var(--color-text-primary)" }}>
             <Badge label="Paid Add-On" tone="addon" />
-            <h3 style={{ fontSize: "var(--font-size-xl)", marginBottom: "var(--space-6)" }}>
+            <h3 style={{ fontSize: "var(--font-size-xl)", color: "var(--color-primary-dark)", marginBottom: "var(--space-6)" }}>
               {addOns.title}
             </h3>
             {addOns.categories.map((category) => (
               <div key={category.title} style={{ marginBottom: "var(--space-5)" }}>
-                <h4
+                <div
                   style={{
-                    fontSize: "var(--font-size-sm)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.04em",
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "var(--space-2)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-3)",
+                    margin: "var(--space-5) 0 var(--space-3)",
                   }}
                 >
-                  {category.title}
-                </h4>
+                  <div style={{ flex: 1, height: 1, background: "var(--color-border-light)" }} />
+                  <span
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      color: "var(--color-text-tertiary)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {category.title}
+                  </span>
+                  <div style={{ flex: 1, height: 1, background: "var(--color-border-light)" }} />
+                </div>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {category.items.map((item) => (
                     <li

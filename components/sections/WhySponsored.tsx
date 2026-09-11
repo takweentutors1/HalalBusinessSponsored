@@ -92,19 +92,7 @@ export function WhySponsored() {
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url(/images/bg-trust.svg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.8,
-          zIndex: 1,
-        }}
-      />
+
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
         <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-6)" }}>

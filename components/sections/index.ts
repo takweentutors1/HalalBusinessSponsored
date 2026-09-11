@@ -1,4 +1,5 @@
 export { Hero } from "./Hero";
+export { ProblemSolution } from "./ProblemSolution";
 export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";
 export { MidCta } from "./MidCta";
@@ -11,3 +12,5 @@ export { PortfolioAndTestimonials } from "./PortfolioAndTestimonials";
 export { FAQ } from "./FAQ";
 export { FinalCta } from "./FinalCta";
 export { TermsList } from "./TermsList";
+export { InfoCallout } from "./InfoCallout";
+export { AfterLaunchCards } from "./AfterLaunchCards";

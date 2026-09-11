@@ -412,3 +412,14 @@
     animation: none;
   }
 }
+
+/* FAQ Accordion */
+.ui-faq-summary {
+  list-style: none;
+}
+.ui-faq-summary::-webkit-details-marker {
+  display: none;
+}
+.ui-faq-details[open] .ui-faq-chevron {
+  transform: rotate(180deg);
+}

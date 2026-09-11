@@ -43,7 +43,11 @@ export function Logo({ size = 32, animated = false, showWordmark = true }: LogoP
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 700,
+            fontSize: "var(--font-size-lg)",
             color: "var(--color-primary-accessible)",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           Halal Business Initiative

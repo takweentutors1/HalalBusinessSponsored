@@ -21,22 +21,7 @@ export function Hero() {
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-      {/* SVG pathway/network background layer */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: "url(/images/hero-map-bg.svg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.85,
-          zIndex: 1,
-        }}
-      />
+      {/* No decorative SVG shapes — clean background only */}
 
       <div
         style={{
