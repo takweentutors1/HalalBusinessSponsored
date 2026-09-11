@@ -53,6 +53,43 @@ function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
   );
 }
 
+function ScopeCheckBadge() {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        left: 0,
+        top: "2px",
+        width: 20,
+        height: 20,
+        borderRadius: "var(--radius-full)",
+        background: "rgba(255, 255, 255, 0.14)",
+        border: "1px solid rgba(255, 255, 255, 0.28)",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <svg
+        aria-hidden="true"
+        width={11}
+        height={11}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth={3}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </span>
+  );
+}
+
 function AddOnMarker() {
   return (
     <span
@@ -60,13 +97,30 @@ function AddOnMarker() {
       style={{
         position: "absolute",
         left: 0,
-        top: "var(--space-1)",
-        color: "var(--color-neutral-400)",
-        fontWeight: 700,
-        lineHeight: 1.2,
+        top: "2px",
+        width: 20,
+        height: 20,
+        borderRadius: "var(--radius-full)",
+        background: "rgba(0, 0, 0, 0.04)",
+        border: "1px solid var(--color-border-light)",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
       }}
     >
-      —
+      <svg
+        aria-hidden="true"
+        width={10}
+        height={10}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="var(--color-text-tertiary)"
+        strokeWidth={2.8}
+        strokeLinecap="round"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </svg>
     </span>
   );
 }
@@ -136,24 +190,15 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                     <li
                       key={item}
                       style={{
-                        padding: "var(--space-1) 0",
-                        paddingLeft: "var(--space-6)",
+                        padding: "var(--space-2) 0",
+                        paddingLeft: "var(--space-7)",
                         position: "relative",
                         color: "rgba(255, 255, 255, 0.95)",
+                        fontSize: "var(--font-size-sm)",
+                        lineHeight: 1.55,
                       }}
                     >
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          position: "absolute",
-                          left: 0,
-                          top: "var(--space-1)",
-                          color: "rgba(255, 255, 255, 0.85)",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {includedItemIcons?.[category.title]?.[index] ?? "✓"}
-                      </span>
+                      <ScopeCheckBadge />
                       <RichText text={item} />
                     </li>
                   ))}
@@ -202,7 +247,13 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                   {category.items.map((item) => (
                     <li
                       key={item}
-                      style={{ padding: "var(--space-1) 0", paddingLeft: "var(--space-6)", position: "relative" }}
+                      style={{
+                        padding: "var(--space-2) 0",
+                        paddingLeft: "var(--space-7)",
+                        position: "relative",
+                        fontSize: "var(--font-size-sm)",
+                        lineHeight: 1.55,
+                      }}
                     >
                       <AddOnMarker />
                       <RichText text={item} />

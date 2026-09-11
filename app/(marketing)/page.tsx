@@ -17,20 +17,14 @@ import {
 } from "@/components/sections";
 import { AudienceIllustration } from "@/components/illustrations";
 import {
-  BadgeCheckIcon,
   BookIcon,
   BriefcaseIcon,
-  ClipboardIcon,
-  GalleryIcon,
   HangerIcon,
-  MapPinIcon,
   MeatIcon,
   PlatformIconPair,
   RingsIcon,
   ScissorsIcon,
-  StarIcon,
   UtensilsIcon,
-  WhatsAppIcon,
 } from "@/components/icons";
 import {
   applyCtaMidPage,
@@ -83,16 +77,6 @@ export default function LandingPage() {
       <ScopeComparison
         included={whatsIncluded}
         addOns={whatsOutsideScope}
-        includedItemIcons={{
-          Features: [
-            <ClipboardIcon key="business-info" />,
-            <WhatsAppIcon key="whatsapp-cta" />,
-            <MapPinIcon key="maps" />,
-            <GalleryIcon key="gallery" />,
-            <StarIcon key="testimonials" />,
-            <BadgeCheckIcon key="credentials" />,
-          ],
-        }}
       />
 
       <MidCta {...qualifyCta} tone="tint" />
