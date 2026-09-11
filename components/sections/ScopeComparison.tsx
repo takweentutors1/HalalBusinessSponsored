@@ -58,9 +58,6 @@ function ScopeCheckBadge() {
     <span
       aria-hidden="true"
       style={{
-        position: "absolute",
-        left: 0,
-        top: "2px",
         width: 20,
         height: 20,
         borderRadius: "var(--radius-full)",
@@ -70,6 +67,7 @@ function ScopeCheckBadge() {
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
+        marginTop: 2,
         boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
       }}
     >
@@ -95,9 +93,6 @@ function AddOnMarker() {
     <span
       aria-hidden="true"
       style={{
-        position: "absolute",
-        left: 0,
-        top: "2px",
         width: 20,
         height: 20,
         borderRadius: "var(--radius-full)",
@@ -107,6 +102,7 @@ function AddOnMarker() {
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
+        marginTop: 2,
       }}
     >
       <svg
@@ -191,15 +187,18 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                       key={item}
                       style={{
                         padding: "var(--space-2) 0",
-                        paddingLeft: "var(--space-7)",
-                        position: "relative",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "var(--space-3)",
                         color: "rgba(255, 255, 255, 0.95)",
                         fontSize: "var(--font-size-sm)",
                         lineHeight: 1.55,
                       }}
                     >
                       <ScopeCheckBadge />
-                      <RichText text={item} />
+                      <span>
+                        <RichText text={item} />
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -249,14 +248,17 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                       key={item}
                       style={{
                         padding: "var(--space-2) 0",
-                        paddingLeft: "var(--space-7)",
-                        position: "relative",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "var(--space-3)",
                         fontSize: "var(--font-size-sm)",
                         lineHeight: 1.55,
                       }}
                     >
                       <AddOnMarker />
-                      <RichText text={item} />
+                      <span>
+                        <RichText text={item} />
+                      </span>
                     </li>
                   ))}
                 </ul>
