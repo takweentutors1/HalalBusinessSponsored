@@ -57,6 +57,8 @@ export function StepReview({
             I agree to the{" "}
             <a
               href="/programme-terms"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ color: "var(--color-primary-accessible)", textDecoration: "underline" }}
             >
               Programme Terms
