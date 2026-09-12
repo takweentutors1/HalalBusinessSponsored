@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Button, Card, FormField, Input } from "@/components/ui";
 import { Logo } from "@/components/shared/Logo";
+import { brand } from "@/lib/config";
 import { login } from "./actions";
 
 export const metadata: Metadata = {
@@ -43,7 +44,7 @@ export default async function AdminLoginPage({
             Admin Login
           </h1>
           <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-sm)" }}>
-            Halal Business Initiative — internal review access
+            {brand.name} — internal review access
           </p>
         </div>
 

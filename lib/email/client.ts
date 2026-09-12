@@ -34,6 +34,8 @@
  * time, swap to a small serverless relay (any platform with normal Node
  * SMTP support) that still sends through the same Hostinger mailbox.
  */
+import { brand } from "@/lib/config";
+
 export interface SendEmailOptions {
   to: { name?: string; email: string };
   subject: string;
@@ -75,7 +77,7 @@ export async function sendEmail(
         authType: "plain",
       },
       {
-        from: { name: "Halal Business Initiative", email: HOSTINGER_SMTP_USER },
+        from: { name: brand.name, email: HOSTINGER_SMTP_USER },
         to: options.to,
         subject: options.subject,
         html: options.html,

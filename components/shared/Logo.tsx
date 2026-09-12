@@ -1,3 +1,5 @@
+import { brand } from "@/lib/config";
+
 export interface LogoProps {
   size?: number;
   animated?: boolean;
@@ -64,7 +66,7 @@ export function Logo({
             textOverflow: "ellipsis",
           }}
         >
-          Halal Business Initiative
+          {brand.name}
         </span>
       )}
     </span>

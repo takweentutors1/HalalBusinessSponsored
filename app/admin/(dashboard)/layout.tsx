@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui";
 import { Logo } from "@/components/shared/Logo";
+import { brand } from "@/lib/config";
 import { logout } from "../login/actions";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-          <Link href="/admin/applications" aria-label="Halal Business Initiative — Admin, home">
+          <Link href="/admin/applications" aria-label={`${brand.name} — Admin, home`}>
             <Logo size={28} />
           </Link>
           <Badge variant="primary">Admin</Badge>

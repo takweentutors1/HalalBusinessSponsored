@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui";
+import { brand } from "@/lib/config";
 
 export function SiteHeader() {
   return (
@@ -21,7 +22,7 @@ export function SiteHeader() {
     >
       <Link
         href="/"
-        aria-label="Halal Business Initiative — home"
+        aria-label={`${brand.name} — home`}
         className="ui-site-logo-link"
         style={{ minWidth: 0, maxWidth: "100%" }}
       >

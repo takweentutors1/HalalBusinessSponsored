@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Disclosure } from "@/components/shared/Disclosure";
 import { TermsList } from "@/components/sections";
-import { disclosure } from "@/lib/config";
+import { brand, disclosure } from "@/lib/config";
 import { termsItems } from "@/lib/content/terms";
 
 export const metadata: Metadata = {
   title: "Programme Terms",
-  description:
-    "The detailed rules behind the Halal Business Initiative's free website programme.",
+  description: `The detailed rules behind ${brand.name}'s free website programme.`,
 };
 
 export default function ProgrammeTermsPage() {

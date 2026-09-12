@@ -13,7 +13,7 @@ export const brand = {
    * without an actual rename, since nothing else was ever using anything
    * different.
    */
-  name: "Halal Business Initiative",
+  name: "Takween Connect",
   domain: "takweenconnect.co.uk",
   parentCompany: "Takween Digital Services",
 } as const;

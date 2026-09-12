@@ -37,6 +37,7 @@ export function Hero() {
           </span>
         </div>
         <h1
+          className="ui-hero-heading"
           style={{
             marginBottom: "var(--space-4)",
           }}

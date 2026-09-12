@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/shared/Footer";
-import { siteUrl } from "@/lib/config";
+import { brand, siteUrl } from "@/lib/config";
 import "./globals.css";
 
-const title = "Halal Business Initiative";
+const title = brand.name;
 const description =
   "A free programme offering professional websites to selected Muslim-owned businesses.";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s | Halal Business Initiative",
+    template: `%s | ${brand.name}`,
   },
   description,
   openGraph: {

@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { brand } from "@/lib/config";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Halal Business Initiative",
-    short_name: "Halal Business",
+    name: brand.name,
+    short_name: brand.name,
     description:
       "A free programme offering professional websites to selected Muslim-owned businesses.",
     start_url: "/",
