@@ -84,7 +84,7 @@ function AddOnMarker() {
 
 /**
  * Replaces two stacked "spec sheet" blocks with side-by-side comparison cards:
- * Left: pale green Sponsored card
+ * Left: pale green Free Website card
  * Right: clean white Optional Paid Add-ons card
  */
 export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
@@ -105,7 +105,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             alignItems: "stretch",
           }}
         >
-          {/* Included, sponsored (Pale Mint Green Card) */}
+          {/* Included, free (Pale Mint Green Card) */}
           <div
             style={{
               padding: "var(--space-8) var(--space-6)",
@@ -117,7 +117,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             }}
           >
             <div>
-              <Badge label="Sponsored" tone="free" />
+              <Badge label="Free Website Package" tone="free" />
             </div>
             <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-6)" }}>
               {included.title}
@@ -147,7 +147,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         alignItems: "flex-start",
                         gap: "var(--space-3)",
                         color: "var(--color-text-primary)",
-                        fontSize: "var(--font-size-sm)",
+                        fontSize: "var(--font-size-base)",
                         lineHeight: 1.55,
                       }}
                     >
@@ -167,7 +167,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                 background: "white",
                 border: "1px dashed #cbd5e1",
                 borderRadius: "var(--radius-md)",
-                fontSize: "var(--font-size-sm)",
+                fontSize: "var(--font-size-base)",
                 fontWeight: 700,
                 color: "#0f172a",
               }}
@@ -219,7 +219,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         alignItems: "flex-start",
                         gap: "var(--space-3)",
                         color: "var(--color-text-primary)",
-                        fontSize: "var(--font-size-sm)",
+                        fontSize: "var(--font-size-base)",
                         lineHeight: 1.55,
                       }}
                     >
@@ -239,7 +239,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                 background: "#fafaf9",
                 border: "1px dashed #cbd5e1",
                 borderRadius: "var(--radius-md)",
-                fontSize: "var(--font-size-sm)",
+                fontSize: "var(--font-size-base)",
                 color: "var(--color-text-secondary)",
               }}
             >
@@ -257,7 +257,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             borderLeft: "4px solid var(--color-primary-accessible)",
             borderRadius: "var(--radius-lg)",
             padding: "var(--space-4) var(--space-6)",
-            fontSize: "var(--font-size-sm)",
+            fontSize: "var(--font-size-base)",
             lineHeight: 1.6,
             color: "var(--color-text-secondary)",
           }}
@@ -268,7 +268,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
         {/* Centered CTA */}
         <div style={{ marginTop: "var(--space-8)", textAlign: "center" }}>
           <Button href="/apply" variant="primary">
-            Apply for a Sponsored Website
+            Apply for a Free Website
           </Button>
         </div>
       </div>

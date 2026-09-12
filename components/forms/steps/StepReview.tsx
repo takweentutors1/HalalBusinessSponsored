@@ -34,7 +34,7 @@ export function StepReview({
           borderRadius: "var(--radius-md)",
           padding: "var(--space-4)",
           marginBottom: "var(--space-6)",
-          fontSize: "var(--font-size-sm)",
+          fontSize: "var(--font-size-base)",
         }}
       >
         <p style={{ marginBottom: "var(--space-1)" }}>

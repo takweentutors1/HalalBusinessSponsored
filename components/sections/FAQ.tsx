@@ -102,7 +102,7 @@ export function FAQ() {
                   color: "var(--color-text-secondary)",
                   marginTop: "var(--space-3)",
                   paddingLeft: "var(--space-6)",
-                  fontSize: "var(--font-size-sm)",
+                  fontSize: "var(--font-size-base)",
                   lineHeight: 1.65,
                 }}
               >

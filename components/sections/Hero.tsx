@@ -2,7 +2,6 @@ import { Button } from "@/components/ui";
 import { Disclosure } from "@/components/shared/Disclosure";
 import { RichText } from "@/components/shared/RichText";
 import { hero } from "@/lib/content/landing";
-import { HeroMockup } from "./HeroMockup";
 
 export function Hero() {
   return (
@@ -27,117 +26,112 @@ export function Hero() {
         style={{
           position: "relative",
           zIndex: 10,
-          maxWidth: 1100,
+          maxWidth: 760,
           margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(360px, 100%), 1fr))",
-          gap: "var(--space-12)",
-          alignItems: "center",
+          textAlign: "center",
         }}
       >
-        <div style={{ minWidth: 0 }}>
-          <div style={{ marginBottom: "var(--space-2)" }}>
-            <span className="ui-section-eyebrow">
-              SPONSORED WEBSITES FOR UK MUSLIM-OWNED BUSINESSES
-            </span>
-          </div>
-          <h1
-            style={{
-              marginBottom: "var(--space-4)",
-            }}
-          >
-            {hero.headline}
-          </h1>
+        <div style={{ marginBottom: "var(--space-2)" }}>
+          <span className="ui-section-eyebrow">
+            FREE WEBSITES FOR UK MUSLIM-OWNED BUSINESSES
+          </span>
+        </div>
+        <h1
+          style={{
+            marginBottom: "var(--space-4)",
+          }}
+        >
+          {hero.headline}
+        </h1>
 
-          <p style={{ fontWeight: 600, fontSize: "var(--font-size-lg)", marginBottom: "var(--space-4)" }}>
-            <RichText text={hero.costLine} />
-          </p>
+        <p style={{ fontWeight: 600, fontSize: "var(--font-size-lg)", marginBottom: "var(--space-4)" }}>
+          <RichText text={hero.costLine} />
+        </p>
 
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              marginBottom: "var(--space-6)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-3)",
-            }}
-          >
-            {hero.bullets.map((bullet) => (
-              <li
-                key={bullet}
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            marginBottom: "var(--space-6)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-3)",
+          }}
+        >
+          {hero.bullets.map((bullet) => (
+            <li
+              key={bullet}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "var(--space-3)",
+                color: "var(--color-text-secondary)",
+                fontSize: "var(--font-size-base)",
+                lineHeight: 1.55,
+                textAlign: "left",
+                maxWidth: 480,
+              }}
+            >
+              <span
+                aria-hidden="true"
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "var(--space-3)",
-                  color: "var(--color-text-secondary)",
-                  fontSize: "var(--font-size-base)",
-                  lineHeight: 1.55,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 20,
+                  height: 20,
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(26, 71, 49, 0.12)",
+                  color: "var(--color-primary-accessible)",
+                  flexShrink: 0,
+                  marginTop: 3,
                 }}
               >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 20,
-                    height: 20,
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(26, 71, 49, 0.12)",
-                    color: "var(--color-primary-accessible)",
-                    flexShrink: 0,
-                    marginTop: 3,
-                  }}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <span style={{ flex: 1 }}>
-                  <RichText text={bullet} />
-                </span>
-              </li>
-            ))}
-          </ul>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <span style={{ flex: 1 }}>
+                <RichText text={bullet} />
+              </span>
+            </li>
+          ))}
+        </ul>
 
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              fontSize: "var(--font-size-sm)",
-              marginBottom: "var(--space-6)",
-            }}
-          >
-            {hero.disclosureLine}
-          </p>
+        <p
+          style={{
+            color: "var(--color-text-secondary)",
+            fontSize: "var(--font-size-base)",
+            marginBottom: "var(--space-6)",
+          }}
+        >
+          {hero.disclosureLine}
+        </p>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "var(--space-4)",
-            }}
-          >
-            <Button href={hero.ctaHref} variant="primary">
-              {hero.ctaLabel}
-            </Button>
-            <Button href={hero.secondaryCtaHref} variant="ghost">
-              {hero.secondaryCtaLabel}
-            </Button>
-          </div>
-        </div>
-
-        <div style={{ minWidth: 0 }}>
-          <HeroMockup />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "var(--space-4)",
+          }}
+        >
+          <Button href={hero.ctaHref} variant="primary">
+            {hero.ctaLabel}
+          </Button>
+          <Button href={hero.secondaryCtaHref} variant="ghost">
+            {hero.secondaryCtaLabel}
+          </Button>
         </div>
       </div>
     </section>

@@ -75,7 +75,7 @@ function StepCard({
       <p
         style={{
           color: "var(--color-text-secondary)",
-          fontSize: "var(--font-size-sm)",
+          fontSize: "var(--font-size-base)",
           lineHeight: 1.6,
           margin: 0,
         }}
@@ -129,7 +129,7 @@ export function ProcessSteps() {
         {/* Centered CTA */}
         <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
           <Button href="/apply" variant="primary">
-            Apply for a Sponsored Website
+            Apply for a Free Website
           </Button>
         </div>
       </div>

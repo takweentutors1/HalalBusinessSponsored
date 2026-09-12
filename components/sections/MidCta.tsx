@@ -42,7 +42,7 @@ export function MidCta({ label, href, supportingText, subtext, tone = "plain" }:
         {subtext && (
           <p
             style={{
-              fontSize: "var(--font-size-sm)",
+              fontSize: "var(--font-size-base)",
               color: "var(--color-text-tertiary)",
               marginBottom: "var(--space-4)",
             }}

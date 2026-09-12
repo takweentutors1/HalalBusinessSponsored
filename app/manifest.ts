@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Halal Business Initiative",
     short_name: "Halal Business",
     description:
-      "A sponsored programme offering free, professional websites to selected Muslim-owned businesses.",
+      "A free programme offering professional websites to selected Muslim-owned businesses.",
     start_url: "/",
     display: "standalone",
     background_color: "#f9fafb",

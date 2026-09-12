@@ -63,7 +63,7 @@ export function StatsBar() {
             >
               {stat.value}
             </p>
-            <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-sm)" }}>{stat.label}</p>
+            <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-base)" }}>{stat.label}</p>
           </div>
         ))}
       </div>

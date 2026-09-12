@@ -41,7 +41,7 @@ export const hero = {
     "Weak or outdated website? **We’ll rebuild the essentials clearly.**",
   ],
   disclosureLine: "Defined starter scope. No obligation to buy extra services.",
-  ctaLabel: "Apply for a Sponsored Website",
+  ctaLabel: "Apply for a Free Website",
   ctaHref: "/apply",
   secondaryCtaLabel: "See If You Qualify",
   secondaryCtaHref: "#who-qualifies",
@@ -148,7 +148,7 @@ export const whatsIncluded: CategorizedSection = {
 export const whatsOutsideScope: CategorizedSection = {
   id: "whats-outside-scope",
   number: 7,
-  title: "What's outside the sponsored scope",
+  title: "What's outside the free scope",
   categories: [
     {
       title: "Commerce & Bookings",
@@ -204,7 +204,7 @@ export const domainHostingCosts: ListSection = {
 export const whatHappensAfterLaunch: ListSection = {
   id: "what-happens-after-launch",
   number: 9,
-  title: "What happens after your sponsored project is complete?",
+  title: "What happens after your free project is complete?",
   items: [
     "**One-time project** — design, build, revisions and launch, within the agreed scope.",
     "A short **close-out window** covers issues in the delivered scope (see Programme Terms).",
@@ -243,7 +243,7 @@ export const whoIsNotAFit: ListSection = {
  * against the criteria is at peak intent, so offer Apply immediately
  * rather than only at the very bottom of the page. */
 export const applyCtaMidPage = {
-  label: "Apply for a Sponsored Website",
+  label: "Apply for a Free Website",
   supportingText: "Meet the criteria? Applications only take a few minutes.",
   href: "/apply",
 } as const;
@@ -352,7 +352,7 @@ export const faq = {
         "Honest completion feedback is expected from every accepted business — that's part of the exchange. A positive review is never required.",
     },
     {
-      question: "Does applying guarantee a sponsored website?",
+      question: "Does applying guarantee a free website?",
       answer: `No — places are limited (${capacityStatement()}), so not every applicant is accepted. **Everyone who applies hears back**, either way.`,
     },
     {
@@ -373,5 +373,5 @@ export const finalCta = {
     "Honest feedback expected",
     "No promise of ongoing free maintenance",
   ],
-  ctaLabel: "Apply for a Sponsored Website",
+  ctaLabel: "Apply for a Free Website",
 } as const;

@@ -75,7 +75,7 @@ export async function LimitedCapacity() {
             marginBottom: "var(--space-6)",
           }}
         >
-          We currently sponsor up to 5 businesses per month.
+          We currently offer up to 5 free websites per month.
         </h2>
 
         {/* Capacity Ring */}
@@ -99,7 +99,7 @@ export async function LimitedCapacity() {
         <p
           style={{
             color: "var(--color-text-secondary)",
-            fontSize: "var(--font-size-sm)",
+            fontSize: "var(--font-size-base)",
             lineHeight: 1.6,
             maxWidth: 460,
             margin: "0 auto",

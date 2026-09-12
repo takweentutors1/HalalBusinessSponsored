@@ -126,7 +126,7 @@ export function QualificationFit({
                     display: "flex",
                     alignItems: "flex-start",
                     gap: "var(--space-3)",
-                    fontSize: "var(--font-size-sm)",
+                    fontSize: "var(--font-size-base)",
                     lineHeight: 1.55,
                     color: "var(--color-text-primary)",
                   }}
@@ -187,7 +187,7 @@ export function QualificationFit({
                     display: "flex",
                     alignItems: "flex-start",
                     gap: "var(--space-3)",
-                    fontSize: "var(--font-size-sm)",
+                    fontSize: "var(--font-size-base)",
                     lineHeight: 1.55,
                     color: "var(--color-text-secondary)",
                   }}
@@ -218,7 +218,7 @@ export function QualificationFit({
         {/* Centered CTA */}
         <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
           <Button href="/apply" variant="primary">
-            Apply for a Sponsored Website
+            Apply for a Free Website
           </Button>
         </div>
       </div>

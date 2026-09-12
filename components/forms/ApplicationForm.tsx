@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Button, Card } from "@/components/ui";
 import { disclosure, turnstileSiteKey } from "@/lib/config";
 import {
@@ -56,6 +56,8 @@ export function ApplicationForm() {
   const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const stepHeadingRef = useRef<HTMLDivElement>(null);
+
+  const handleTurnstileExpire = useCallback(() => setTurnstileToken(null), []);
 
   useEffect(() => {
     stepHeadingRef.current?.focus();
@@ -220,7 +222,7 @@ export function ApplicationForm() {
               onCheckboxChange={handleCheckbox}
               turnstileSiteKey={turnstileSiteKey}
               onVerify={setTurnstileToken}
-              onExpire={() => setTurnstileToken(null)}
+              onExpire={handleTurnstileExpire}
               disclosureText={disclosure.nearSubmit}
               status={status}
               submitError={submitError}

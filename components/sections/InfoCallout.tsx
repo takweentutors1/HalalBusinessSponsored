@@ -52,7 +52,7 @@ export function InfoCallout({ icon, children }: InfoCalloutProps) {
         {icon ?? <GlobeIcon />}
         <div
           style={{
-            fontSize: "var(--font-size-sm)",
+            fontSize: "var(--font-size-base)",
             lineHeight: 1.6,
             color: "var(--color-text-secondary)",
           }}

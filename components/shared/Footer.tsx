@@ -93,21 +93,6 @@ export function Footer() {
             >
               Privacy Policy
             </Link>
-            <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
-            <Link
-              href="/admin/login"
-              style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                fontSize: "var(--font-size-xs)",
-                fontWeight: 500,
-                padding: "2px 8px",
-                borderRadius: "var(--radius-sm)",
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.18)",
-              }}
-            >
-              Admin Login
-            </Link>
           </div>
 
           {/* 3. Right: Trademark & Initiative Notice */}

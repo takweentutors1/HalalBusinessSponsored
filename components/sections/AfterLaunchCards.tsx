@@ -126,7 +126,7 @@ const CARDS: AfterLaunchCardItem[] = [
   {
     icon: (size) => <CheckSquareIcon size={size} />,
     title: "One-time project",
-    body: "The sponsored package covers the agreed scope, build, revisions and launch.",
+    body: "The free package covers the agreed scope, build, revisions and launch.",
   },
   {
     icon: (size) => <EyeIcon size={size} />,
@@ -192,7 +192,7 @@ function CardItem({ card }: { card: AfterLaunchCardItem }) {
 
       <p
         style={{
-          fontSize: "var(--font-size-sm)",
+          fontSize: "var(--font-size-base)",
           lineHeight: 1.6,
           color: "var(--color-text-secondary)",
           margin: 0,

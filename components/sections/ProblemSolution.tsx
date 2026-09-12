@@ -31,7 +31,7 @@ export function ProblemSolution() {
             marginBottom: "var(--space-10)",
           }}
         >
-          Before vs after your sponsored starter website
+          Before vs after your free starter website
         </h2>
 
         <div
@@ -100,7 +100,7 @@ export function ProblemSolution() {
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-3)",
-                    fontSize: "var(--font-size-sm)",
+                    fontSize: "var(--font-size-base)",
                     color: "var(--color-text-secondary)",
                     lineHeight: 1.5,
                   }}
@@ -176,7 +176,7 @@ export function ProblemSolution() {
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-3)",
-                    fontSize: "var(--font-size-sm)",
+                    fontSize: "var(--font-size-base)",
                     color: "var(--color-neutral-800)",
                     lineHeight: 1.5,
                   }}
@@ -201,7 +201,7 @@ export function ProblemSolution() {
 
         <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
           <Button href="/apply" variant="primary">
-            Apply for a Sponsored Website
+            Apply for a Free Website
           </Button>
         </div>
       </div>

@@ -198,7 +198,7 @@ export function ProblemSection() {
               <p
                 style={{
                   color: "var(--color-text-primary)",
-                  fontSize: "var(--font-size-sm)",
+                  fontSize: "var(--font-size-base)",
                   lineHeight: 1.55,
                   margin: 0,
                   fontWeight: 500,

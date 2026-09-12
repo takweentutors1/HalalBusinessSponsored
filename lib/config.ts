@@ -26,7 +26,7 @@ export const capacity = {
 } as const;
 
 export function capacityStatement(): string {
-  return `We sponsor up to ${capacity.count} ${capacity.unit} each ${capacity.period}.`;
+  return `We offer free websites to up to ${capacity.count} ${capacity.unit} each ${capacity.period}.`;
 }
 
 /**

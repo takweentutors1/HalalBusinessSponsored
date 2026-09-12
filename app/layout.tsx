@@ -5,7 +5,7 @@ import "./globals.css";
 
 const title = "Halal Business Initiative";
 const description =
-  "A sponsored programme offering free, professional websites to selected Muslim-owned businesses.";
+  "A free programme offering professional websites to selected Muslim-owned businesses.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

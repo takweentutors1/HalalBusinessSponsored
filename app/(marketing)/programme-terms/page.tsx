@@ -8,7 +8,7 @@ import { termsItems } from "@/lib/content/terms";
 export const metadata: Metadata = {
   title: "Programme Terms",
   description:
-    "The detailed rules behind the Halal Business Initiative's sponsored website programme.",
+    "The detailed rules behind the Halal Business Initiative's free website programme.",
 };
 
 export default function ProgrammeTermsPage() {
@@ -45,7 +45,7 @@ export default function ProgrammeTermsPage() {
           textDecoration: "underline",
         }}
       >
-        Apply for a Sponsored Website →
+        Apply for a Free Website →
       </Link>
     </main>
   );
