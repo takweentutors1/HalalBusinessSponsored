@@ -84,10 +84,10 @@ p {
   }
 }
 
-/* Even with the nav link hidden, the wordmark (brand.name) plus the
-   Apply Now button don't both fit at small phone widths — tighten the
-   header chrome so the full name shows on one line instead of being
-   ellipsis-truncated. */
+/* Tighten header chrome on small phone widths so the logo and Apply Now
+   button both fit comfortably. The wordmark itself keeps the same
+   font-size as everywhere else (including the footer) — "Takween
+   Connect" is short enough not to need its own shrink. */
 @media (max-width: 480px) {
   .ui-site-header {
     padding: var(--space-3) var(--space-4);
@@ -98,12 +98,8 @@ p {
     height: 24px;
   }
 
-  .ui-site-logo-link .ui-logo-wordmark {
-    font-size: 0.85rem !important;
-  }
-
   .ui-header-cta {
-    padding: var(--space-1) var(--space-3) !important;
+    padding: calc(var(--space-1) * 1.15) calc(var(--space-3) * 1.15) !important;
     font-size: var(--font-size-xs) !important;
   }
 }

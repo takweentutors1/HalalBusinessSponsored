@@ -45,7 +45,10 @@ export function SiteHeader() {
           href="/apply"
           variant="primary"
           className="ui-header-cta"
-          style={{ padding: "var(--space-2) var(--space-5)", fontSize: "var(--font-size-sm)" }}
+          style={{
+            padding: "calc(var(--space-2) * 1.15) calc(var(--space-5) * 1.15)",
+            fontSize: "var(--font-size-sm)",
+          }}
         >
           Apply Now
         </Button>
