@@ -133,3 +133,45 @@ p {
   display: inline-block;
 }
 
+/* Footer top row: stacked + centered on mobile, splits into
+   logo-left / menu-right on desktop, with a divider below separating
+   it from the centered trademark/copyright block underneath. */
+.ui-footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.ui-footer-brand {
+  align-items: center;
+  text-align: center;
+}
+
+.ui-footer-nav {
+  justify-content: center;
+}
+
+.ui-footer-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 641px) {
+  .ui-footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .ui-footer-brand {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ui-footer-nav {
+    justify-content: flex-end;
+  }
+}
+

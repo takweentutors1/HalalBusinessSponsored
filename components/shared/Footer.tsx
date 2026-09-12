@@ -7,9 +7,10 @@ import { Logo } from "./Logo";
  * Site-wide footer with a refined, professional design:
  * - Subtle divider separating the section from above
  * - Primary Green theme background (#1a4731)
- * - Left: Logo mark + company name + descriptive subtitle
- * - Center / Navigation: Menu links (Programme Terms · Privacy Policy)
- * - Right / Copyright: A Takween Digital Services initiative · © 2026 Takween Digital Services
+ * - Mobile: everything stacked and centered.
+ * - Desktop (≥641px, .ui-footer-* classes in globals.css): top row splits
+ *   into logo+description (left) and the nav menu (right), a horizontal
+ *   rule follows, then the trademark/copyright notice is centered below it.
  */
 export function Footer() {
   return (
@@ -28,17 +29,11 @@ export function Footer() {
           margin: "0 auto",
         }}
       >
-        {/* Main Footer Row */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
-            gap: "var(--space-8)",
-            alignItems: "center",
-          }}
-        >
-          {/* 1. Left: Logo, Company Name, Description */}
+        {/* Top: Logo/description + Nav menu */}
+        <div className="ui-footer-top">
+          {/* Logo, Company Name, Description */}
           <div
+            className="ui-footer-brand"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -61,12 +56,12 @@ export function Footer() {
             </p>
           </div>
 
-          {/* 2. Middle: Navigation Menu Links */}
-          <div
+          {/* Navigation Menu Links */}
+          <nav
+            className="ui-footer-nav"
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
               flexWrap: "wrap",
               gap: "var(--space-3)",
               fontSize: "var(--font-size-sm)",
@@ -93,37 +88,40 @@ export function Footer() {
             >
               Privacy Policy
             </Link>
-          </div>
+          </nav>
+        </div>
 
-          {/* 3. Right: Trademark & Initiative Notice */}
-          <div
+        <div className="ui-footer-divider" />
+
+        {/* Bottom: Trademark & Copyright, always centered */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-1)",
+            textAlign: "center",
+          }}
+        >
+          <p
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-1)",
-              textAlign: "right",
+              fontSize: "var(--font-size-sm)",
+              fontWeight: 600,
+              color: "#ffffff",
+              margin: 0,
             }}
           >
-            <p
-              style={{
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 600,
-                color: "#ffffff",
-                margin: 0,
-              }}
-            >
-              A Takween Digital Services initiative
-            </p>
-            <p
-              style={{
-                fontSize: "var(--font-size-xs)",
-                color: "rgba(255, 255, 255, 0.65)",
-                margin: 0,
-              }}
-            >
-              © 2026 {brand.parentCompany}. All rights reserved.
-            </p>
-          </div>
+            A Takween Digital Services initiative
+          </p>
+          <p
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: "rgba(255, 255, 255, 0.65)",
+              margin: 0,
+            }}
+          >
+            © 2026 {brand.parentCompany}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

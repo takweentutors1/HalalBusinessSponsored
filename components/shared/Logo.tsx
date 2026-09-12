@@ -57,9 +57,10 @@ export function Logo({
         <span
           className="ui-logo-wordmark"
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-body)",
             fontWeight: 700,
             fontSize: "var(--font-size-lg)",
+            letterSpacing: "-0.01em",
             color: wordmarkColor ?? "var(--color-primary-accessible)",
             whiteSpace: "nowrap",
             overflow: "hidden",

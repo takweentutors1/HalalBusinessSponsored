@@ -24,7 +24,7 @@ export function SiteHeader() {
         href="/"
         aria-label={`${brand.name} — home`}
         className="ui-site-logo-link"
-        style={{ minWidth: 0, maxWidth: "100%" }}
+        style={{ display: "inline-flex", alignItems: "center", minWidth: 0, maxWidth: "100%" }}
       >
         <Logo size={32} animated showWordmark />
       </Link>
