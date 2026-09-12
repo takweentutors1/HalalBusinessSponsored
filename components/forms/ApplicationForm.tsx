@@ -189,8 +189,10 @@ export function ApplicationForm() {
       <StepIndicator steps={APPLICATION_STEPS} currentStep={step} />
 
       <form onSubmit={handleSubmit} noValidate>
-        {/* Honeypot — visually hidden, kept out of tab order and off screen readers */}
-        <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
+        {/* Honeypot — display:none (not off-screen positioning) so browser
+            autofill can't target it; naive bots that fill fields straight
+            from the raw HTML/DOM still catch it regardless of CSS. */}
+        <div style={{ display: "none" }} aria-hidden="true">
           <label htmlFor={HONEYPOT_FIELD_NAME}>Leave this field blank</label>
           <input
             type="text"

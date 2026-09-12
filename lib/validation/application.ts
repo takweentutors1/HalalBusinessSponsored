@@ -151,5 +151,12 @@ export function validateStep(stepIndex: number, payload: Record<string, unknown>
  * A non-empty value means a bot filled it in; the server route rejects
  * silently (still returns 200) rather than surfacing a validation error
  * that would tip off the bot. See §5 of the implementation plan.
+ *
+ * Deliberately NOT named after any recognizable autofill category
+ * (email/name/phone/address/company/url) — a prior name of
+ * "contact_backup_email" sitting next to a real "contact_email" field
+ * got silently filled by Chrome's saved-profile autofill despite
+ * `autoComplete="off"`, which triggered this honeypot check and dropped
+ * real applicants' submissions with zero error shown.
  */
-export const HONEYPOT_FIELD_NAME = "contact_backup_email";
+export const HONEYPOT_FIELD_NAME = "do_not_fill_this_field";
