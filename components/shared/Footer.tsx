@@ -22,7 +22,7 @@ export function Footer() {
         color: "rgba(255, 255, 255, 0.8)",
         borderTop: "1px solid rgba(255, 255, 255, 0.22)",
         boxShadow: "0 -1px 0 rgba(0, 0, 0, 0.08)",
-        padding: "var(--space-12) var(--space-8) 0",
+        padding: "var(--space-12) var(--space-8) var(--space-3)",
       }}
     >
       <div
