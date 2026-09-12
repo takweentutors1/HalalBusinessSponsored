@@ -99,7 +99,7 @@ p {
   }
 
   .ui-header-cta {
-    padding: calc(var(--space-1) * 1.15) calc(var(--space-3) * 1.15) !important;
+    padding: calc(var(--space-1) * 1.25) calc(var(--space-3) * 1.25) !important;
     font-size: var(--font-size-xs) !important;
   }
 }
@@ -161,13 +161,17 @@ p {
     justify-content: space-between;
   }
 
+  /* Visually swapped via `order` (not DOM order) so mobile stacking —
+     brand block first, nav second — is unaffected. */
   .ui-footer-brand {
-    align-items: flex-start;
-    text-align: left;
+    order: 2;
+    align-items: flex-end;
+    text-align: right;
   }
 
   .ui-footer-nav {
-    justify-content: flex-end;
+    order: 1;
+    justify-content: flex-start;
   }
 }
 

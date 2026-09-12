@@ -7,10 +7,13 @@ import { Logo } from "./Logo";
  * Site-wide footer with a refined, professional design:
  * - Subtle divider separating the section from above
  * - Primary Green theme background (#1a4731)
- * - Mobile: everything stacked and centered.
+ * - Mobile: everything stacked and centered, in source order (nav menu,
+ *   then the tagline + logo + description block).
  * - Desktop (≥641px, .ui-footer-* classes in globals.css): top row splits
- *   into logo+description (left) and the nav menu (right), a horizontal
- *   rule follows, then the trademark/copyright notice is centered below it.
+ *   into the nav menu (left) and the tagline + logo + description (right,
+ *   swapped via CSS `order` rather than DOM order so mobile stacking is
+ *   unaffected), a horizontal rule follows, then the copyright notice is
+ *   centered below it.
  */
 export function Footer() {
   return (
@@ -29,9 +32,9 @@ export function Footer() {
           margin: "0 auto",
         }}
       >
-        {/* Top: Logo/description + Nav menu */}
+        {/* Top: Nav menu + Tagline/logo/description */}
         <div className="ui-footer-top">
-          {/* Logo, Company Name, Description */}
+          {/* Tagline, Logo, Description */}
           <div
             className="ui-footer-brand"
             style={{
@@ -40,7 +43,11 @@ export function Footer() {
               gap: "var(--space-2)",
             }}
           >
-            <div style={{ display: "inline-flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "var(--space-2)" }}>
+              <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: "#ffffff" }}>
+                A Takween Digital Services initiative
+              </span>
+              <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
               <Logo size={28} showWordmark={true} wordmarkColor="#ffffff" />
             </div>
             <p
@@ -71,7 +78,7 @@ export function Footer() {
               href="/programme-terms"
               style={{
                 color: "#ffffff",
-                fontWeight: 500,
+                fontWeight: 400,
                 transition: "opacity 150ms ease",
               }}
             >
@@ -82,7 +89,7 @@ export function Footer() {
               href="/programme-terms#privacy"
               style={{
                 color: "#ffffff",
-                fontWeight: 500,
+                fontWeight: 400,
                 transition: "opacity 150ms ease",
               }}
             >
@@ -93,26 +100,8 @@ export function Footer() {
 
         <div className="ui-footer-divider" />
 
-        {/* Bottom: Trademark & Copyright, always centered */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "var(--space-1)",
-            textAlign: "center",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "var(--font-size-sm)",
-              fontWeight: 600,
-              color: "#ffffff",
-              margin: 0,
-            }}
-          >
-            A Takween Digital Services initiative
-          </p>
+        {/* Bottom: Copyright, always centered */}
+        <div style={{ textAlign: "center" }}>
           <p
             style={{
               fontSize: "var(--font-size-xs)",

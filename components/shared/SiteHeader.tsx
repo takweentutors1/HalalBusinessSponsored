@@ -46,7 +46,7 @@ export function SiteHeader() {
           variant="primary"
           className="ui-header-cta"
           style={{
-            padding: "calc(var(--space-2) * 1.15) calc(var(--space-5) * 1.15)",
+            padding: "calc(var(--space-2) * 1.25) calc(var(--space-5) * 1.25)",
             fontSize: "var(--font-size-sm)",
           }}
         >
