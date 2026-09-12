@@ -46,16 +46,6 @@ export const hero = {
   secondaryCtaLabel: "See If You Qualify",
   secondaryCtaHref: "#who-qualifies",
   /**
-   * takweentutors.com is a real, live site built by the same team
-   * (Takween Digital Services) — not a fabricated client example, and
-   * distinct from a sponsored-client case study (portfolioAndTestimonials
-   * stays empty until one of those exists, per the Non-Negotiable Rule
-   * against fabricating reviews/stats). This caption keeps that distinction
-   * honest rather than letting the mockup pass as an example of a
-   * *sponsored* build.
-   */
-  mockupCaption: "Developer: replace with a real Takween portfolio project",
-  /**
    * Non-Negotiable Rule: never fabricate reviews/stats. No real ones exist
    * yet, so this is an honest, non-numeric trust line — not a star rating —
    * reusing the same claim already made on /apply, not a new one invented

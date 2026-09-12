@@ -28,6 +28,7 @@ export function SiteHeader() {
       <nav style={{ display: "flex", alignItems: "center", gap: "var(--space-6)", flexShrink: 0 }}>
         <Link
           href="#how-it-works"
+          className="ui-header-nav-link"
           style={{
             color: "var(--color-text-secondary)",
             fontSize: "var(--font-size-sm)",

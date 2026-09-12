@@ -138,16 +138,6 @@ export function Hero() {
 
         <div style={{ minWidth: 0 }}>
           <HeroMockup />
-          <p
-            style={{
-              textAlign: "center",
-              color: "var(--color-text-tertiary)",
-              fontSize: "var(--font-size-xs)",
-              marginTop: "var(--space-3)",
-            }}
-          >
-            {hero.mockupCaption}
-          </p>
         </div>
       </div>
     </section>

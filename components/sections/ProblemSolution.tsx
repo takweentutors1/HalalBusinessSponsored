@@ -41,16 +41,16 @@ export function ProblemSolution() {
             overflow: "hidden",
             boxShadow: "var(--shadow-md)",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             background: "var(--color-surface-base)",
           }}
         >
           {/* Before column */}
           <div
+            className="ui-compare-col-before"
             style={{
               padding: "var(--space-8) var(--space-6)",
               background: "#fffaf9",
-              borderRight: "1px solid var(--color-border-light)",
               textAlign: "left",
             }}
           >

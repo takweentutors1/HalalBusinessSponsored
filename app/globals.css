@@ -64,6 +64,30 @@ p {
   line-height: 1.6;
 }
 
+/* Hide secondary header nav link on narrow screens so the logo has room */
+.ui-header-nav-link {
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .ui-header-nav-link {
+    display: none;
+  }
+}
+
+/* Before/After comparison: divider switches from a vertical rule (side by
+   side) to a horizontal rule once the columns stack on narrow screens. */
+.ui-compare-col-before {
+  border-right: 1px solid var(--color-border-light);
+}
+
+@media (max-width: 640px) {
+  .ui-compare-col-before {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+}
+
 /* Eyebrow / Overline utility class */
 .ui-section-eyebrow {
   font-family: var(--font-body);
