@@ -7,13 +7,12 @@ import { Logo } from "./Logo";
  * Site-wide footer with a refined, professional design:
  * - Subtle divider separating the section from above
  * - Primary Green theme background (#1a4731)
- * - Mobile: everything stacked and centered, in source order (nav menu,
- *   then the tagline + logo + description block).
+ * - Mobile: everything stacked and centered, in source order (logo +
+ *   description, then tagline + menu).
  * - Desktop (≥641px, .ui-footer-* classes in globals.css): top row splits
- *   into the nav menu (left) and the tagline + logo + description (right,
- *   swapped via CSS `order` rather than DOM order so mobile stacking is
- *   unaffected), a horizontal rule follows, then the copyright notice is
- *   centered below it.
+ *   into logo + description on the left, and the tagline stacked above
+ *   the menu on the right, a horizontal rule follows, then the
+ *   copyright notice is centered below it.
  */
 export function Footer() {
   return (
@@ -32,9 +31,9 @@ export function Footer() {
           margin: "0 auto",
         }}
       >
-        {/* Top: Nav menu + Tagline/logo/description */}
+        {/* Top: Logo/description + Tagline/menu */}
         <div className="ui-footer-top">
-          {/* Tagline, Logo, Description */}
+          {/* Left (desktop): Logo, Company Name, Description */}
           <div
             className="ui-footer-brand"
             style={{
@@ -43,11 +42,7 @@ export function Footer() {
               gap: "var(--space-2)",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "var(--space-2)" }}>
-              <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: "#ffffff" }}>
-                A Takween Digital Services initiative
-              </span>
-              <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center" }}>
               <Logo size={28} showWordmark={true} wordmarkColor="#ffffff" />
             </div>
             <p
@@ -63,39 +58,50 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Navigation Menu Links */}
-          <nav
-            className="ui-footer-nav"
+          {/* Right (desktop): Tagline, then Menu below it */}
+          <div
+            className="ui-footer-tagline-nav"
             style={{
               display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "var(--space-3)",
-              fontSize: "var(--font-size-sm)",
+              flexDirection: "column",
+              gap: "var(--space-2)",
             }}
           >
-            <Link
-              href="/programme-terms"
+            <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: "#ffffff" }}>
+              A Takween Digital Services initiative
+            </span>
+            <nav
               style={{
-                color: "#ffffff",
-                fontWeight: 400,
-                transition: "opacity 150ms ease",
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "var(--space-3)",
+                fontSize: "var(--font-size-sm)",
               }}
             >
-              Programme Terms
-            </Link>
-            <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
-            <Link
-              href="/programme-terms#privacy"
-              style={{
-                color: "#ffffff",
-                fontWeight: 400,
-                transition: "opacity 150ms ease",
-              }}
-            >
-              Privacy Policy
-            </Link>
-          </nav>
+              <Link
+                href="/programme-terms"
+                style={{
+                  color: "#ffffff",
+                  fontWeight: 400,
+                  transition: "opacity 150ms ease",
+                }}
+              >
+                Programme Terms
+              </Link>
+              <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
+              <Link
+                href="/programme-terms#privacy"
+                style={{
+                  color: "#ffffff",
+                  fontWeight: 400,
+                  transition: "opacity 150ms ease",
+                }}
+              >
+                Privacy Policy
+              </Link>
+            </nav>
+          </div>
         </div>
 
         <div className="ui-footer-divider" />

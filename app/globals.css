@@ -99,8 +99,8 @@ p {
   }
 
   .ui-header-cta {
-    padding: calc(var(--space-1) * 1.25) calc(var(--space-3) * 1.25) !important;
-    font-size: var(--font-size-xs) !important;
+    padding: calc(var(--space-1) * 1.25 * 1.25) calc(var(--space-3) * 1.25 * 1.25) !important;
+    font-size: calc(var(--font-size-xs) * 1.25) !important;
   }
 }
 
@@ -129,9 +129,10 @@ p {
   display: inline-block;
 }
 
-/* Footer top row: stacked + centered on mobile, splits into
-   logo-left / menu-right on desktop, with a divider below separating
-   it from the centered trademark/copyright block underneath. */
+/* Footer top row: everything stacked + centered on mobile. On desktop
+   it splits into two blocks — logo+description on the left,
+   tagline+menu (stacked) on the right — with a divider below
+   separating it from the centered copyright line underneath. */
 .ui-footer-top {
   display: flex;
   flex-direction: column;
@@ -140,13 +141,10 @@ p {
   margin-bottom: var(--space-6);
 }
 
-.ui-footer-brand {
+.ui-footer-brand,
+.ui-footer-tagline-nav {
   align-items: center;
   text-align: center;
-}
-
-.ui-footer-nav {
-  justify-content: center;
 }
 
 .ui-footer-divider {
@@ -161,17 +159,14 @@ p {
     justify-content: space-between;
   }
 
-  /* Visually swapped via `order` (not DOM order) so mobile stacking —
-     brand block first, nav second — is unaffected. */
   .ui-footer-brand {
-    order: 2;
-    align-items: flex-end;
-    text-align: right;
+    align-items: flex-start;
+    text-align: left;
   }
 
-  .ui-footer-nav {
-    order: 1;
-    justify-content: flex-start;
+  .ui-footer-tagline-nav {
+    align-items: flex-end;
+    text-align: right;
   }
 }
 

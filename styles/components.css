@@ -22,6 +22,15 @@
   transition: all 300ms ease-in-out;
 }
 
+/* Bigger touch target on mobile: another 25% on top of the padding/text
+   size above (1.25 * 1.25 combined). */
+@media (max-width: 640px) {
+  .ui-btn {
+    padding: calc(var(--space-3) * 1.25 * 1.25) calc(var(--space-6) * 1.25 * 1.25);
+    font-size: calc(var(--font-size-base) * 1.25);
+  }
+}
+
 .ui-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
