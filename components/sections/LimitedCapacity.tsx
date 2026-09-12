@@ -96,17 +96,6 @@ export async function LimitedCapacity() {
         >
           {remaining} of {limitedCapacity.count} places currently available
         </p>
-        <p
-          style={{
-            color: "var(--color-text-secondary)",
-            fontSize: "var(--font-size-base)",
-            lineHeight: 1.6,
-            maxWidth: 460,
-            margin: "0 auto",
-          }}
-        >
-          Capacity should always reflect the real number available.
-        </p>
       </div>
     </section>
   );

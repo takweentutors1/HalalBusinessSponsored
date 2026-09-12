@@ -28,7 +28,14 @@ export function Logo({
         maxWidth: "100%",
       }}
     >
-      <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" role="img">
+      <svg
+        className="ui-logo-icon"
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+        role="img"
+      >
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="var(--color-primary-accessible)" />
@@ -46,6 +53,7 @@ export function Logo({
       </svg>
       {showWordmark && (
         <span
+          className="ui-logo-wordmark"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 700,

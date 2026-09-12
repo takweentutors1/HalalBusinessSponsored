@@ -5,6 +5,7 @@ import { Button } from "@/components/ui";
 export function SiteHeader() {
   return (
     <header
+      className="ui-site-header"
       style={{
         padding: "var(--space-4) var(--space-8)",
         display: "flex",
@@ -21,6 +22,7 @@ export function SiteHeader() {
       <Link
         href="/"
         aria-label="Halal Business Initiative — home"
+        className="ui-site-logo-link"
         style={{ minWidth: 0, maxWidth: "100%" }}
       >
         <Logo size={32} animated showWordmark />
@@ -38,7 +40,12 @@ export function SiteHeader() {
         >
           How It Works
         </Link>
-        <Button href="/apply" variant="primary" style={{ padding: "var(--space-2) var(--space-5)", fontSize: "var(--font-size-sm)" }}>
+        <Button
+          href="/apply"
+          variant="primary"
+          className="ui-header-cta"
+          style={{ padding: "var(--space-2) var(--space-5)", fontSize: "var(--font-size-sm)" }}
+        >
           Apply Now
         </Button>
       </nav>

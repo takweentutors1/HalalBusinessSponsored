@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { disclosure } from "@/lib/config";
+import { brand, disclosure } from "@/lib/config";
 import { Disclosure } from "./Disclosure";
 import { Logo } from "./Logo";
 
@@ -8,8 +8,8 @@ import { Logo } from "./Logo";
  * - Subtle divider separating the section from above
  * - Primary Green theme background (#1a4731)
  * - Left: Logo mark + company name + descriptive subtitle
- * - Center / Navigation: Menu links (Programme Terms · Privacy Policy · Admin Login)
- * - Right / Copyright: A Takween Digital Services initiative · 2026 Registered Trademark
+ * - Center / Navigation: Menu links (Programme Terms · Privacy Policy)
+ * - Right / Copyright: A Takween Digital Services initiative · © 2026 Takween Digital Services
  */
 export function Footer() {
   return (
@@ -121,7 +121,7 @@ export function Footer() {
                 margin: 0,
               }}
             >
-              © 2026 Registered Trademark. All rights reserved.
+              © 2026 {brand.parentCompany}. All rights reserved.
             </p>
           </div>
         </div>
