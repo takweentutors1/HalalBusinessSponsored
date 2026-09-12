@@ -2,6 +2,7 @@ export interface LogoProps {
   size?: number;
   animated?: boolean;
   showWordmark?: boolean;
+  wordmarkColor?: string;
 }
 
 /**
@@ -11,7 +12,12 @@ export interface LogoProps {
  * here (not <img>) so the optional rotation animation can target it
  * directly and so it inherits no extra network request.
  */
-export function Logo({ size = 32, animated = false, showWordmark = true }: LogoProps) {
+export function Logo({
+  size = 32,
+  animated = false,
+  showWordmark = true,
+  wordmarkColor,
+}: LogoProps) {
   return (
     <span
       style={{
@@ -44,7 +50,7 @@ export function Logo({ size = 32, animated = false, showWordmark = true }: LogoP
             fontFamily: "var(--font-display)",
             fontWeight: 700,
             fontSize: "var(--font-size-lg)",
-            color: "var(--color-primary-accessible)",
+            color: wordmarkColor ?? "var(--color-primary-accessible)",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",

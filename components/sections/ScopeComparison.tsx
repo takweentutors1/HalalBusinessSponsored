@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Button } from "@/components/ui";
 import { RichText } from "@/components/shared/RichText";
 import type { CategorizedSection as CategorizedSectionContent } from "@/lib/content/landing";
 
@@ -33,21 +34,15 @@ function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
       style={{
         display: "inline-flex",
         alignItems: "center",
-        gap: "var(--space-1)",
-        padding: "var(--space-1) var(--space-3)",
+        padding: "4px 12px",
         borderRadius: "var(--radius-full)",
         fontSize: "var(--font-size-xs)",
         fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: "0.06em",
-        background: isFree ? "rgba(255, 255, 255, 0.15)" : "var(--color-warning)",
-        color: isFree ? "#ffffff" : "var(--color-neutral-900)",
-        border: isFree ? "1px solid rgba(255, 255, 255, 0.35)" : "none",
-        boxShadow: isFree ? "none" : "var(--shadow-md)",
-        marginBottom: "var(--space-3)",
+        background: isFree ? "#dcfce7" : "#fef3c7",
+        color: isFree ? "#166534" : "#92400e",
+        marginBottom: "var(--space-4)",
       }}
     >
-      {isFree ? <CheckGlyph /> : null}
       {label}
     </span>
   );
@@ -58,32 +53,14 @@ function ScopeCheckBadge() {
     <span
       aria-hidden="true"
       style={{
-        width: 20,
-        height: 20,
-        borderRadius: "var(--radius-full)",
-        background: "rgba(255, 255, 255, 0.14)",
-        border: "1px solid rgba(255, 255, 255, 0.28)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
+        color: "var(--color-primary-accessible)",
+        fontWeight: 700,
+        fontSize: 14,
         flexShrink: 0,
-        marginTop: 2,
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
+        marginTop: 1,
       }}
     >
-      <svg
-        aria-hidden="true"
-        width={11}
-        height={11}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#ffffff"
-        strokeWidth={3}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
+      ✓
     </span>
   );
 }
@@ -93,96 +70,75 @@ function AddOnMarker() {
     <span
       aria-hidden="true"
       style={{
-        width: 20,
-        height: 20,
-        borderRadius: "var(--radius-full)",
-        background: "rgba(0, 0, 0, 0.04)",
-        border: "1px solid var(--color-border-light)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
+        color: "#d97706",
+        fontWeight: 700,
+        fontSize: 14,
         flexShrink: 0,
-        marginTop: 2,
+        marginTop: 1,
       }}
     >
-      <svg
-        aria-hidden="true"
-        width={10}
-        height={10}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-text-tertiary)"
-        strokeWidth={2.8}
-        strokeLinecap="round"
-      >
-        <line x1="5" y1="12" x2="19" y2="12" />
-      </svg>
+      +
     </span>
   );
 }
 
 /**
- * Replaces two stacked "spec sheet" CategorizedSection blocks (What's
- * Included, What's Outside Scope) with one bordered two-column comparison:
- * a dark green "Free" panel next to a warm off-white "Paid Add-On" panel, so a reader
- * sees the value split at a glance instead of two separate lists of facts.
+ * Replaces two stacked "spec sheet" blocks with side-by-side comparison cards:
+ * Left: pale green Sponsored card
+ * Right: clean white Optional Paid Add-ons card
  */
 export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
   return (
     <section style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
-        <h2
-          style={{
-            color: "var(--color-primary-dark)",
-            marginBottom: "var(--space-10)",
-            textAlign: "center",
-          }}
-        >
-          What&rsquo;s In Scope
-        </h2>
+        <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <span className="ui-section-eyebrow">WHAT YOU GET</span>
+          <h2>
+            Clear free scope. Clear paid extras.
+          </h2>
+        </div>
         <div
           style={{
-            border: "1px solid var(--color-border-light)",
-            borderRadius: "var(--radius-xl)",
-            overflow: "hidden",
-            boxShadow: "var(--shadow-lg)",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+            gap: "var(--space-6)",
+            alignItems: "stretch",
           }}
         >
-          {/* Included, free (Dark Forest Green) */}
-          <div style={{ padding: "var(--space-8) var(--space-6)", background: "#1a4731", color: "#ffffff" }}>
-            <Badge label="Free" tone="free" />
-            <h3 style={{ fontSize: "var(--font-size-xl)", color: "#ffffff", marginBottom: "var(--space-6)" }}>
+          {/* Included, sponsored (Pale Mint Green Card) */}
+          <div
+            style={{
+              padding: "var(--space-8) var(--space-6)",
+              background: "#f0faf5",
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid var(--color-border-light)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div>
+              <Badge label="Sponsored" tone="free" />
+            </div>
+            <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-6)" }}>
               {included.title}
             </h3>
             {included.categories.map((category) => (
               <div key={category.title} style={{ marginBottom: "var(--space-5)" }}>
-                <div
+                <span
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    margin: "var(--space-5) 0 var(--space-3)",
+                    fontSize: "var(--font-size-xs)",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "var(--color-text-tertiary)",
+                    display: "block",
+                    marginBottom: "var(--space-2)",
                   }}
                 >
-                  <div style={{ flex: 1, height: 1, background: "rgba(255, 255, 255, 0.15)" }} />
-                  <span
-                    style={{
-                      fontSize: "var(--font-size-xs)",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      color: "rgba(255, 255, 255, 0.6)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {category.title}
-                  </span>
-                  <div style={{ flex: 1, height: 1, background: "rgba(255, 255, 255, 0.15)" }} />
-                </div>
-                <ul style={{ listStyle: "none", padding: 0 }}>
-                  {category.items.map((item, index) => (
+                  {category.title}
+                </span>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {category.items.map((item) => (
                     <li
                       key={item}
                       style={{
@@ -190,7 +146,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         display: "flex",
                         alignItems: "flex-start",
                         gap: "var(--space-3)",
-                        color: "rgba(255, 255, 255, 0.95)",
+                        color: "var(--color-text-primary)",
                         fontSize: "var(--font-size-sm)",
                         lineHeight: 1.55,
                       }}
@@ -204,45 +160,56 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                 </ul>
               </div>
             ))}
-            {included.note && (
-              <p style={{ fontWeight: 600, marginTop: "var(--space-4)", color: "rgba(255, 255, 255, 0.9)" }}>
-                <RichText text={included.note} />
-              </p>
-            )}
+            <div
+              style={{
+                marginTop: "auto",
+                padding: "var(--space-3) var(--space-4)",
+                background: "white",
+                border: "1px dashed #cbd5e1",
+                borderRadius: "var(--radius-md)",
+                fontSize: "var(--font-size-sm)",
+                fontWeight: 700,
+                color: "#0f172a",
+              }}
+            >
+              Development cost: £0
+            </div>
           </div>
 
-          {/* Paid add-ons (Warm Off-White) */}
-          <div style={{ padding: "var(--space-8) var(--space-6)", background: "#fafaf7", color: "var(--color-text-primary)" }}>
-            <Badge label="Paid Add-On" tone="addon" />
-            <h3 style={{ fontSize: "var(--font-size-xl)", color: "var(--color-primary-dark)", marginBottom: "var(--space-6)" }}>
+          {/* Paid add-ons (Clean White Card) */}
+          <div
+            style={{
+              padding: "var(--space-8) var(--space-6)",
+              background: "#ffffff",
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid var(--color-border-light)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div>
+              <Badge label="Optional Paid Add-ons" tone="addon" />
+            </div>
+            <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-6)" }}>
               {addOns.title}
             </h3>
             {addOns.categories.map((category) => (
               <div key={category.title} style={{ marginBottom: "var(--space-5)" }}>
-                <div
+                <span
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    margin: "var(--space-5) 0 var(--space-3)",
+                    fontSize: "var(--font-size-xs)",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "var(--color-text-tertiary)",
+                    display: "block",
+                    marginBottom: "var(--space-2)",
                   }}
                 >
-                  <div style={{ flex: 1, height: 1, background: "var(--color-border-light)" }} />
-                  <span
-                    style={{
-                      fontSize: "var(--font-size-xs)",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      color: "var(--color-text-tertiary)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {category.title}
-                  </span>
-                  <div style={{ flex: 1, height: 1, background: "var(--color-border-light)" }} />
-                </div>
-                <ul style={{ listStyle: "none", padding: 0 }}>
+                  {category.title}
+                </span>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   {category.items.map((item) => (
                     <li
                       key={item}
@@ -251,6 +218,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         display: "flex",
                         alignItems: "flex-start",
                         gap: "var(--space-3)",
+                        color: "var(--color-text-primary)",
                         fontSize: "var(--font-size-sm)",
                         lineHeight: 1.55,
                       }}
@@ -264,12 +232,44 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                 </ul>
               </div>
             ))}
-            {addOns.note && (
-              <p style={{ color: "var(--color-text-secondary)", marginTop: "var(--space-4)" }}>
-                <RichText text={addOns.note} />
-              </p>
-            )}
+            <div
+              style={{
+                marginTop: "auto",
+                padding: "var(--space-3) var(--space-4)",
+                background: "#fafaf9",
+                border: "1px dashed #cbd5e1",
+                borderRadius: "var(--radius-md)",
+                fontSize: "var(--font-size-sm)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              You always see the price before any paid work begins.
+            </div>
           </div>
+        </div>
+
+        {/* Full-width Domain & Hosting callout strip */}
+        <div
+          style={{
+            marginTop: "var(--space-8)",
+            background: "var(--color-neutral-50)",
+            border: "1px solid var(--color-border-light)",
+            borderLeft: "4px solid var(--color-primary-accessible)",
+            borderRadius: "var(--radius-lg)",
+            padding: "var(--space-4) var(--space-6)",
+            fontSize: "var(--font-size-sm)",
+            lineHeight: 1.6,
+            color: "var(--color-text-secondary)",
+          }}
+        >
+          <strong style={{ color: "var(--color-text-primary)" }}>Domain &amp; hosting:</strong> you remain responsible for your domain, hosting and any paid third-party tools. We can guide you toward a suitable option if needed.
+        </div>
+
+        {/* Centered CTA */}
+        <div style={{ marginTop: "var(--space-8)", textAlign: "center" }}>
+          <Button href="/apply" variant="primary">
+            Apply for a Sponsored Website
+          </Button>
         </div>
       </div>
     </section>

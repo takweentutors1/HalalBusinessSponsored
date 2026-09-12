@@ -37,79 +37,79 @@ export function FAQ() {
       <div style={{ position: "relative", zIndex: 10, maxWidth: 740, margin: "0 auto" }}>
         {/* Centered Heading */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <span className="ui-section-eyebrow">FAQ</span>
           <h2
             style={{
-              color: "var(--color-primary-dark)",
               marginBottom: "var(--space-2)",
             }}
           >
             {faq.title}
           </h2>
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              fontSize: "var(--font-size-base)",
-              maxWidth: 520,
-              margin: "0 auto",
-            }}
-          >
-            Everything you need to know about the sponsorship, scope, and process.
-          </p>
         </div>
 
-        {/* Single Unified Accordion Card */}
+        {/* Individual Accordion Cards */}
         <div
           style={{
-            background: "var(--color-surface-base)",
-            border: "1px solid var(--color-border-light)",
-            borderRadius: "var(--radius-xl)",
-            boxShadow: "var(--shadow-md)",
-            padding: "var(--space-2) var(--space-6)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-3)",
           }}
         >
-          {faq.items.map((item, index) => {
-            const isLast = index === faq.items.length - 1;
-            return (
-              <details
-                key={item.question}
-                className="ui-faq-details"
+          {faq.items.map((item) => (
+            <details
+              key={item.question}
+              className="ui-faq-details"
+              style={{
+                background: "var(--color-surface-base)",
+                border: "1px solid var(--color-border-light)",
+                borderRadius: "var(--radius-lg)",
+                padding: "var(--space-4) var(--space-5)",
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04)",
+              }}
+            >
+              <summary
+                className="ui-faq-summary"
                 style={{
-                  borderBottom: isLast ? "none" : "1px solid var(--color-border-light)",
-                  padding: "var(--space-4) 0",
+                  fontWeight: 700,
+                  fontSize: "1rem",
+                  color: "#0f172a",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--space-3)",
+                  userSelect: "none",
+                  lineHeight: 1.4,
+                  listStyle: "none",
                 }}
               >
-                <summary
-                  className="ui-faq-summary"
+                <span
+                  aria-hidden="true"
                   style={{
-                    fontWeight: 600,
-                    fontSize: "1.05rem",
-                    color: "var(--color-primary-dark)",
-                    cursor: "pointer",
-                    display: "flex",
+                    fontSize: "0.75rem",
+                    color: "#0f172a",
+                    display: "inline-flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: "var(--space-4)",
-                    userSelect: "none",
-                    lineHeight: 1.4,
+                    transition: "transform 200ms ease",
                   }}
+                  className="ui-faq-chevron"
                 >
-                  <span>{item.question}</span>
-                  <ChevronDownIcon />
-                </summary>
-                <div
-                  style={{
-                    color: "var(--color-text-secondary)",
-                    marginTop: "var(--space-3)",
-                    paddingRight: "var(--space-6)",
-                    fontSize: "var(--font-size-sm)",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  <RichText text={item.answer} />
-                </div>
-              </details>
-            );
-          })}
+                  ▶
+                </span>
+                <span>{item.question}</span>
+              </summary>
+              <div
+                style={{
+                  color: "var(--color-text-secondary)",
+                  marginTop: "var(--space-3)",
+                  paddingLeft: "var(--space-6)",
+                  fontSize: "var(--font-size-sm)",
+                  lineHeight: 1.65,
+                }}
+              >
+                <RichText text={item.answer} />
+              </div>
+            </details>
+          ))}
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 export { Hero } from "./Hero";
+export { ProblemSection } from "./ProblemSection";
 export { ProblemSolution } from "./ProblemSolution";
 export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";

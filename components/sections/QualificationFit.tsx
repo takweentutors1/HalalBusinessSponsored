@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui";
 import { RichText } from "@/components/shared/RichText";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
@@ -19,19 +20,20 @@ function CheckIcon() {
   );
 }
 
-function DashIcon() {
+function CrossIcon() {
   return (
     <svg
       aria-hidden="true"
-      width={10}
-      height={10}
+      width={11}
+      height={11}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="var(--color-text-tertiary)"
+      stroke="#dc2626"
       strokeWidth={3}
       strokeLinecap="round"
     >
-      <line x1="5" y1="12" x2="19" y2="12" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   );
 }
@@ -63,13 +65,13 @@ export function QualificationFit({
       >
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <span className="ui-section-eyebrow">WHO IT&apos;S FOR</span>
           <h2
             style={{
-              color: "var(--color-primary-dark)",
               marginBottom: "var(--space-2)",
             }}
           >
-            Eligibility &amp; Mutual Fit
+            {qualifies.title}
           </h2>
           <p
             style={{
@@ -79,7 +81,7 @@ export function QualificationFit({
               margin: "0 auto",
             }}
           >
-            We carefully select businesses where our sponsorship creates the greatest tangible impact.
+            We prioritise established businesses where a starter website can make a clear difference.
           </p>
         </div>
 
@@ -109,26 +111,14 @@ export function QualificationFit({
               style={{
                 fontSize: "var(--font-size-xl)",
                 fontFamily: "var(--font-serif)",
-                color: "var(--color-primary-dark)",
-                marginBottom: "var(--space-2)",
+                color: "#0f172a",
+                marginBottom: "var(--space-4)",
               }}
             >
-              {qualifies.title}
+              Good fit
             </h3>
-            {qualifies.intro && (
-              <p
-                style={{
-                  color: "var(--color-text-secondary)",
-                  fontSize: "var(--font-size-sm)",
-                  marginBottom: "var(--space-4)",
-                  lineHeight: 1.5,
-                }}
-              >
-                <RichText text={qualifies.intro} />
-              </p>
-            )}
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {qualifies.items.map((item) => (
+              {qualifies.items.slice(0, 5).map((item) => (
                 <li
                   key={item}
                   style={{
@@ -172,7 +162,7 @@ export function QualificationFit({
               padding: "var(--space-8) var(--space-6)",
               background: "var(--color-surface-base)",
               border: "1px solid var(--color-border-light)",
-              borderTop: "4px solid var(--color-border-medium)",
+              borderTop: "4px solid #ef4444",
               boxShadow: "var(--shadow-md)",
               display: "flex",
               flexDirection: "column",
@@ -182,24 +172,14 @@ export function QualificationFit({
               style={{
                 fontSize: "var(--font-size-xl)",
                 fontFamily: "var(--font-serif)",
-                color: "var(--color-text-primary)",
-                marginBottom: "var(--space-2)",
-              }}
-            >
-              {notFit.title}
-            </h3>
-            <p
-              style={{
-                color: "var(--color-text-tertiary)",
-                fontSize: "var(--font-size-sm)",
+                color: "#0f172a",
                 marginBottom: "var(--space-4)",
-                lineHeight: 1.5,
               }}
             >
-              To respect your time, the programme is usually not suitable if any of these apply:
-            </p>
+              Usually not a fit
+            </h3>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {notFit.items.map((item) => (
+              {notFit.items.slice(0, 6).map((item) => (
                 <li
                   key={item}
                   style={{
@@ -218,7 +198,7 @@ export function QualificationFit({
                       width: 20,
                       height: 20,
                       borderRadius: "var(--radius-full)",
-                      background: "var(--color-neutral-100)",
+                      background: "#fee2e2",
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -226,13 +206,20 @@ export function QualificationFit({
                       marginTop: 2,
                     }}
                   >
-                    <DashIcon />
+                    <CrossIcon />
                   </span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Centered CTA */}
+        <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
+          <Button href="/apply" variant="primary">
+            Apply for a Sponsored Website
+          </Button>
         </div>
       </div>
     </section>

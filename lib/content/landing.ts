@@ -34,21 +34,17 @@ export const statsBar = [
 
 export const hero = {
   number: 1,
-  headline: "Turn your Instagram presence into a professional business presence",
+  headline: "Your business is established. Your website should show it.",
+  costLine: "A professional starter website for selected Muslim-owned businesses — at **£0 development cost**.",
   bullets: [
-    `**Limited spots** — up to ${capacity.count} ${capacity.unit} a ${capacity.period}.`,
-    "**A defined scope** — clear and agreed, never open-ended.",
-    "**No obligation** to buy anything, ever.",
+    "No proper website? **We’ll build a professional online home.**",
+    "Weak or outdated website? **We’ll rebuild the essentials clearly.**",
   ],
-  costLine,
-  disclosureLine: disclosure.footer,
+  disclosureLine: "Defined starter scope. No obligation to buy extra services.",
   ctaLabel: "Apply for a Sponsored Website",
-  // Points at whyItsSponsored.id below — scrolls to the trust/scope
-  // proof in-page rather than jumping straight to /apply, so visitors who
-  // click through from the hero see why the offer is legitimate first.
-  ctaHref: "#why-its-sponsored",
-  secondaryCtaLabel: "See How It Works",
-  secondaryCtaHref: "#how-it-works",
+  ctaHref: "/apply",
+  secondaryCtaLabel: "See If You Qualify",
+  secondaryCtaHref: "#who-qualifies",
   /**
    * takweentutors.com is a real, live site built by the same team
    * (Takween Digital Services) — not a fabricated client example, and
@@ -58,7 +54,7 @@ export const hero = {
    * honest rather than letting the mockup pass as an example of a
    * *sponsored* build.
    */
-  mockupCaption: "A real site by our team — takweentutors.com.",
+  mockupCaption: "Developer: replace with a real Takween portfolio project",
   /**
    * Non-Negotiable Rule: never fabricate reviews/stats. No real ones exist
    * yet, so this is an honest, non-numeric trust line — not a star rating —
@@ -112,7 +108,7 @@ export const whatTheWebsiteSolves: ListSection = {
 export const whyItsSponsored = {
   id: "why-its-sponsored",
   number: 5,
-  title: "Why It's Sponsored",
+  title: "There is a clear reason it costs you £0 to build.",
   intro: "**No catch.** A genuine exchange — not a free trial with strings attached.",
   businessReceives: [
     "**A free**, professional starter website",
@@ -130,26 +126,25 @@ export const whyItsSponsored = {
 export const whatsIncluded: CategorizedSection = {
   id: "whats-included",
   number: 6,
-  title: "What's Included",
+  title: "What's included",
   categories: [
     {
       title: "Design & Build",
       items: [
         "Up to 4–5 pages",
-        "Responsive design across mobile, tablet and desktop",
+        "Responsive design",
         "Basic on-page SEO",
         "Basic performance optimisation",
       ],
     },
     {
-      title: "Features",
+      title: "Core Features",
       items: [
-        "Business info, services and menu where relevant",
-        "Contact form and/or WhatsApp call-to-action",
+        "Business info and services",
+        "Contact form / WhatsApp CTA",
         "Google Maps and social links",
-        "Portfolio or gallery where appropriate",
-        "Existing testimonials, where available",
-        "Relevant halal or business credentials",
+        "Portfolio/gallery where relevant",
+        "Existing testimonials and credentials",
       ],
     },
     {
@@ -163,12 +158,12 @@ export const whatsIncluded: CategorizedSection = {
 export const whatsOutsideScope: CategorizedSection = {
   id: "whats-outside-scope",
   number: 7,
-  title: "What's Outside Scope",
+  title: "What's outside the sponsored scope",
   categories: [
     {
       title: "Commerce & Bookings",
       items: [
-        "Ecommerce or large catalogues",
+        "Ecommerce / larger catalogues",
         "Online ordering",
         "Advanced booking",
         "Payment integrations",
@@ -177,10 +172,9 @@ export const whatsOutsideScope: CategorizedSection = {
     {
       title: "Platforms & Software",
       items: [
-        "LMS or student portals",
+        "LMS / student portals",
         "Membership systems",
-        "CRM",
-        "Automation or AI integrations",
+        "CRM / automation / AI",
         "Custom dashboards or software",
       ],
     },
@@ -189,13 +183,12 @@ export const whatsOutsideScope: CategorizedSection = {
       items: [
         "Advanced SEO campaigns",
         "Ongoing marketing",
-        "Unlimited revisions",
         "Ongoing maintenance",
-        "Future pages or functionality after completion",
+        "Future pages or functionality",
       ],
     },
   ],
-  note: "Not part of the free scope — but we'll **scope and quote it separately**, price shown upfront.",
+  note: "You always see the price before any paid work begins.",
 };
 
 /** Mid-page CTA after What's Included / Outside Scope — lets a reader who
@@ -221,7 +214,7 @@ export const domainHostingCosts: ListSection = {
 export const whatHappensAfterLaunch: ListSection = {
   id: "what-happens-after-launch",
   number: 9,
-  title: "What Happens After Launch",
+  title: "What happens after your sponsored project is complete?",
   items: [
     "**One-time project** — design, build, revisions and launch, within the agreed scope.",
     "A short **close-out window** covers issues in the delivered scope (see Programme Terms).",
@@ -232,32 +225,27 @@ export const whatHappensAfterLaunch: ListSection = {
 export const whoQualifies: ListSection = {
   id: "who-qualifies",
   number: 10,
-  title: "Who Qualifies",
-  intro: "Public summary only — full scoring stays internal to our review process.",
+  title: "Is your business a good fit?",
+  intro: "We prioritise established businesses where a starter website can make a clear difference.",
   items: [
     "Already operating with real customers",
-    "**Muslim-owned**, or clearly within the halal/Muslim market",
-    "No website, or a visibly weak or outdated one",
-    "Clear products or services",
-    "Can provide content promptly",
-    "A website would materially help the business",
-    "Good portfolio potential",
-    "Responsive owner",
-    "Willing to give honest feedback",
+    "Muslim-owned or clearly serving the halal/Muslim market",
+    "No proper website or a weak/outdated one",
+    "Clear products/services and content ready",
+    "Willing to provide honest feedback",
   ],
 };
 
 export const whoIsNotAFit: ListSection = {
   id: "who-is-not-a-fit",
   number: 11,
-  title: "Who Is Usually Not a Fit",
+  title: "Usually not a fit",
   items: [
-    "Not yet launched, or no real customers",
-    "Expects a large custom platform for free",
-    "Main need is ecommerce, an LMS, or custom software",
-    "Expects unlimited revisions or ongoing free support",
-    "Can't provide content or cooperate during the project",
-    "Already has a strong site with no real need for a rebuild",
+    "Not launched yet / no real customers",
+    "Main need is a large ecommerce, LMS or custom software build",
+    "Expecting unlimited revisions or ongoing free support",
+    "Unable to provide basic content",
+    "Already has a strong website with no meaningful need",
   ],
 };
 
@@ -287,32 +275,31 @@ export interface ProcessStep {
 export const processSteps = {
   id: "how-the-process-works",
   number: 13,
-  title: "How the Process Works",
+  title: "A simple process from application to launch",
   steps: [
     {
       step: "Apply",
-      description: "Submit your application with your business details and goals.",
+      description: "Tell us about your business and current online presence.",
     },
     {
       step: "Review",
-      description: "Our team reviews every application against this cohort's criteria.",
+      description: "We check programme fit and available capacity.",
     },
     {
       step: "Discovery",
-      description: "Accepted businesses have a short call to confirm scope and content.",
+      description: "We confirm goals, pages, branding and content.",
     },
     {
       step: "Build",
-      description: "We design and build your starter site within the agreed scope.",
+      description: "We design and develop the agreed starter website.",
     },
     {
       step: "Review & Launch",
-      description: "You review the build, we make up to 2 rounds of revisions, then launch.",
+      description: "Included revisions are completed and the site goes live.",
     },
     {
-      step: "Feedback & Close-Out",
-      description:
-        "You share honest feedback and we close out the project within the defined window.",
+      step: "Feedback",
+      description: "You provide honest completion feedback and the project closes.",
     },
   ] satisfies ProcessStep[],
 } as const;
@@ -348,21 +335,21 @@ export interface FaqItem {
 export const faq = {
   id: "faq",
   number: 15,
-  title: "Frequently Asked Questions",
+  title: "Your questions answered",
   items: [
     {
-      question: "Is it really free?",
+      question: "Is the website really free?",
       answer: `${costLine} Nothing about the build itself is charged.`,
     },
     {
-      question: "What about domain and hosting?",
+      question: "Do I pay for domain and hosting?",
       answer:
         "You choose and pay for your own domain and hosting. We can guide you toward a suitable option if asked.",
     },
     {
-      question: "Can I buy anything after the site launches?",
+      question: "Do I have to buy anything afterwards?",
       answer:
-        "Yes — once your starter site is live, any further work can be scoped and quoted separately. Nothing is ever assumed or added without your agreement.",
+        "No obligation to buy anything. Once your starter site is live, any further work can be scoped and quoted separately. Nothing is ever assumed or added without your agreement.",
     },
     {
       question: "Is ongoing maintenance included?",
@@ -370,21 +357,16 @@ export const faq = {
         "No — this is a **one-time build**, not a maintenance plan. A short post-launch window covers issues in scope; anything beyond that gets a fresh quote.",
     },
     {
-      question: "Can I get more done later?",
-      answer:
-        "The starter site covers a defined scope of up to 4–5 pages. If you need more later, that's future paid work — quoted transparently before anything begins.",
-    },
-    {
-      question: "Do I have to give feedback?",
+      question: "Do I have to provide feedback?",
       answer:
         "Honest completion feedback is expected from every accepted business — that's part of the exchange. A positive review is never required.",
     },
     {
-      question: "Does applying guarantee a website?",
+      question: "Does applying guarantee a sponsored website?",
       answer: `No — places are limited (${capacityStatement()}), so not every applicant is accepted. **Everyone who applies hears back**, either way.`,
     },
     {
-      question: "Who actually builds my website?",
+      question: "Who actually builds the website?",
       answer: disclosure.faqAnswer,
     },
   ] satisfies FaqItem[],
@@ -393,7 +375,7 @@ export const faq = {
 export const finalCta = {
   id: "final-cta",
   number: 16,
-  title: "Ready to Apply?",
+  title: "Give your business a stronger professional home online.",
   bullets: [
     "For selected **Muslim-owned** businesses",
     "A defined starter site at **no cost**",

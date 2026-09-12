@@ -3,38 +3,19 @@ import {
   FAQ,
   FinalCta,
   Hero,
-  InfoCallout,
   LimitedCapacity,
-  ListSection,
-  MidCta,
   PortfolioAndTestimonials,
+  ProblemSection,
   ProcessSteps,
   ProblemSolution,
   QualificationFit,
   ScopeComparison,
-  StatsBar,
   WhySponsored,
 } from "@/components/sections";
-import { AudienceIllustration } from "@/components/illustrations";
 import {
-  BookIcon,
-  BriefcaseIcon,
-  HangerIcon,
-  MeatIcon,
-  PlatformIconPair,
-  RingsIcon,
-  ScissorsIcon,
-  UtensilsIcon,
-} from "@/components/icons";
-import {
-  applyCtaMidPage,
-  domainHostingCosts,
-  qualifyCta,
-  whatHappensAfterLaunch,
   whatsIncluded,
   whatsOutsideScope,
   whoIsNotAFit,
-  whoItsFor,
   whoQualifies,
 } from "@/lib/content/landing";
 
@@ -48,51 +29,42 @@ export const dynamic = "force-dynamic";
 export default function LandingPage() {
   return (
     <>
+      {/* 1. Hero Section */}
       <Hero />
-      <StatsBar />
 
-      {/* Who It's For — grid of icon cards with shadows */}
-      <ListSection
-        {...whoItsFor}
-        variant="grid"
-        tone="muted"
-        cardStyle="boxed"
-        illustration={<AudienceIllustration />}
-        itemIcons={[
-          <UtensilsIcon key="restaurants" />,
-          <MeatIcon key="butchers" />,
-          <ScissorsIcon key="salons" />,
-          <BookIcon key="education" />,
-          <RingsIcon key="wedding" />,
-          <HangerIcon key="fashion" />,
-          <BriefcaseIcon key="professional" />,
-        ]}
-      />
+      {/* 2. Explain Problem */}
+      <ProblemSection />
 
-      {/* Problem → Solution side-by-side comparison table */}
+      {/* 3. Problem and Its Solution */}
       <ProblemSolution />
 
+      {/* 4. Why It's Sponsored */}
       <WhySponsored />
 
+      {/* 5. What You Get (Scope Comparison) */}
       <ScopeComparison
         included={whatsIncluded}
         addOns={whatsOutsideScope}
       />
 
-      <MidCta {...qualifyCta} tone="tint" />
-
-      <InfoCallout />
-
+      {/* 6. After Launch */}
       <AfterLaunchCards />
 
+      {/* 7. Who It's For (Qualification Fit) */}
       <QualificationFit qualifies={whoQualifies} notFit={whoIsNotAFit} />
 
-      <MidCta {...applyCtaMidPage} tone="tint" />
-
+      {/* Limited Capacity */}
       <LimitedCapacity />
+
+      {/* 8. How It Works */}
       <ProcessSteps />
+
       <PortfolioAndTestimonials />
+
+      {/* 9. FAQ */}
       <FAQ />
+
+      {/* 10. Ready to Apply */}
       <FinalCta />
     </>
   );

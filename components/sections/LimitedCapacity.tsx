@@ -36,7 +36,7 @@ export async function LimitedCapacity() {
         }}
       >
         {/* Live Cohort Status Pill */}
-        <div style={{ marginBottom: "var(--space-5)" }}>
+        <div style={{ marginBottom: "var(--space-3)" }}>
           <span
             style={{
               display: "inline-flex",
@@ -66,14 +66,16 @@ export async function LimitedCapacity() {
           </span>
         </div>
 
+        <div>
+          <span className="ui-section-eyebrow">LIMITED MONTHLY CAPACITY</span>
+        </div>
+
         <h2
           style={{
-            fontSize: "var(--font-size-2xl)",
-            color: "var(--color-primary-dark)",
             marginBottom: "var(--space-6)",
           }}
         >
-          {limitedCapacity.title}
+          We currently sponsor up to 5 businesses per month.
         </h2>
 
         {/* Capacity Ring */}
@@ -86,13 +88,13 @@ export async function LimitedCapacity() {
           style={{
             fontSize: "var(--font-size-xl)",
             fontFamily: "var(--font-serif)",
-            color: "var(--color-primary-dark)",
+            color: "#0f172a",
             fontWeight: 700,
             margin: "var(--space-6) 0 var(--space-2)",
             lineHeight: 1.35,
           }}
         >
-          {limitedCapacity.statement}
+          {remaining} of {limitedCapacity.count} places currently available
         </p>
         <p
           style={{
@@ -103,7 +105,7 @@ export async function LimitedCapacity() {
             margin: "0 auto",
           }}
         >
-          {limitedCapacity.note}
+          Capacity should always reflect the real number available.
         </p>
       </div>
     </section>

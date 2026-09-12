@@ -23,6 +23,7 @@ interface ListSectionProps extends ListSectionContent {
   /** Optional decorative graphic shown above the title, centered — used
    * sparingly (Problem, Who It's For) to break up long text-only scroll. */
   illustration?: ReactNode;
+  eyebrow?: string;
   /**
    * Per-item icons, same length/order as `items`. Where an entry is
    * provided it replaces the checkmark/dash marker for that row; entries
@@ -57,6 +58,7 @@ export function ListSection({
   tone = "plain",
   polarity = "positive",
   illustration,
+  eyebrow,
   itemIcons,
   cardStyle = "boxed",
   tintColor,
@@ -120,9 +122,13 @@ export function ListSection({
         }}
       >
         {illustration && <div style={{ marginBottom: "var(--space-6)" }}>{illustration}</div>}
+        {eyebrow && (
+          <div style={{ textAlign: variant === "grid" ? "center" : "left" }}>
+            <span className="ui-section-eyebrow">{eyebrow}</span>
+          </div>
+        )}
         <h2
           style={{
-            color: "var(--color-primary-dark)",
             marginBottom: "var(--space-4)",
             textAlign: variant === "grid" ? "center" : "left",
           }}

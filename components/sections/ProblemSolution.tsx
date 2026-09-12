@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui";
 import { currentDigitalProblem, whatTheWebsiteSolves } from "@/lib/content/landing";
 
 /**
@@ -23,165 +24,185 @@ export function ProblemSolution() {
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+        <span className="ui-section-eyebrow">FROM PROBLEM TO SOLUTION</span>
         <h2
           style={{
-            textAlign: "center",
-            color: "var(--color-primary-dark)",
             marginBottom: "var(--space-10)",
           }}
         >
-          From Problem to Solution
+          Before vs after your sponsored starter website
         </h2>
 
         <div
           style={{
-            border: "1px solid var(--color-border-medium)",
-            borderRadius: "var(--radius-lg)",
+            border: "1px solid var(--color-border-light)",
+            borderRadius: "var(--radius-xl)",
             overflow: "hidden",
             boxShadow: "var(--shadow-md)",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            background: "var(--color-surface-base)",
           }}
         >
-          {/* Column headers */}
+          {/* Before column */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              padding: "var(--space-8) var(--space-6)",
+              background: "#fffaf9",
+              borderRight: "1px solid var(--color-border-light)",
+              textAlign: "left",
             }}
           >
             <div
               style={{
-                background: "var(--color-neutral-900)",
-                padding: "var(--space-4) var(--space-6)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "var(--space-6)",
               }}
             >
-              <p
+              <h3
                 style={{
-                  color: "white",
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 700,
-                  fontSize: "var(--font-size-base)",
-                  letterSpacing: "0.02em",
+                  fontSize: "var(--font-size-xl)",
+                  fontFamily: "var(--font-serif)",
+                  color: "#0f172a",
+                  margin: 0,
                 }}
               >
-                The Problem Today
-              </p>
-            </div>
-            <div
-              style={{
-                background: "var(--color-primary-accessible)",
-                padding: "var(--space-4) var(--space-6)",
-              }}
-            >
-              <p
+                Before
+              </h3>
+              <span
                 style={{
-                  color: "white",
-                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 700,
-                  fontSize: "var(--font-size-base)",
-                  letterSpacing: "0.02em",
+                  color: "#b91c1c",
+                  background: "#fee2e2",
+                  padding: "3px 10px",
+                  borderRadius: "var(--radius-full)",
                 }}
               >
-                The Website Solution
-              </p>
+                Scattered
+              </span>
             </div>
+
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                "Instagram/WhatsApp acting as the main online presence",
+                "Services and contact details hard to find",
+                "Weak or outdated website",
+                "No clear place to show reviews or work",
+              ].map((text) => (
+                <li
+                  key={text}
+                  style={{
+                    padding: "var(--space-3) 0",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-3)",
+                    fontSize: "var(--font-size-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      color: "#dc2626",
+                      fontWeight: 700,
+                      fontSize: 13,
+                      flexShrink: 0,
+                    }}
+                  >
+                    ✕
+                  </span>
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Row pairs */}
-          {Array.from({ length: maxRows }, (_, i) => {
-            const problem = currentDigitalProblem.items[i];
-            const solution = whatTheWebsiteSolves.items[i];
-            const isEven = i % 2 === 0;
-            const rowBg = isEven ? "var(--color-surface-base)" : "var(--color-neutral-50)";
-
-            return (
-              <div
-                key={i}
+          {/* After column */}
+          <div
+            style={{
+              padding: "var(--space-8) var(--space-6)",
+              background: "var(--color-surface-base)",
+              textAlign: "left",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "var(--space-6)",
+              }}
+            >
+              <h3
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  borderTop: "1px solid var(--color-border-light)",
+                  fontSize: "var(--font-size-xl)",
+                  fontFamily: "var(--font-serif)",
+                  color: "#0f172a",
+                  margin: 0,
                 }}
               >
-                {/* Problem cell */}
-                <div
-                  style={{
-                    padding: "var(--space-4) var(--space-6)",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "var(--space-3)",
-                    background: rowBg,
-                    borderRight: "1px solid var(--color-border-light)",
-                  }}
-                >
-                  {problem ? (
-                    <>
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          flexShrink: 0,
-                          marginTop: 2,
-                          width: 20,
-                          height: 20,
-                          borderRadius: "var(--radius-full)",
-                          background: "#fee2e2",
-                          color: "#dc2626",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 11,
-                          fontWeight: 700,
-                        }}
-                      >
-                        ✕
-                      </span>
-                      <span style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
-                        {problem}
-                      </span>
-                    </>
-                  ) : null}
-                </div>
+                After
+              </h3>
+              <span
+                style={{
+                  fontSize: "var(--font-size-xs)",
+                  fontWeight: 700,
+                  color: "#166534",
+                  background: "#dcfce7",
+                  padding: "3px 10px",
+                  borderRadius: "var(--radius-full)",
+                }}
+              >
+                Professional
+              </span>
+            </div>
 
-                {/* Solution cell */}
-                <div
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                "One professional home online",
+                "Clear services, contact and enquiry path",
+                "Stronger credibility and first impression",
+                "Portfolio, reviews and business information in one place",
+              ].map((text) => (
+                <li
+                  key={text}
                   style={{
-                    padding: "var(--space-4) var(--space-6)",
+                    padding: "var(--space-3) 0",
                     display: "flex",
-                    alignItems: "flex-start",
+                    alignItems: "center",
                     gap: "var(--space-3)",
-                    background: isEven ? "var(--color-primary-pale)" : "#e6f9f1",
+                    fontSize: "var(--font-size-sm)",
+                    color: "var(--color-neutral-800)",
+                    lineHeight: 1.5,
                   }}
                 >
-                  {solution ? (
-                    <>
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          flexShrink: 0,
-                          marginTop: 2,
-                          width: 20,
-                          height: 20,
-                          borderRadius: "var(--radius-full)",
-                          background: "#dcfce7",
-                          color: "var(--color-primary-accessible)",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 11,
-                          fontWeight: 700,
-                        }}
-                      >
-                        ✓
-                      </span>
-                      <span style={{ color: "var(--color-neutral-800)", fontWeight: 600, lineHeight: 1.5 }}>
-                        {solution}
-                      </span>
-                    </>
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      color: "var(--color-primary-accessible)",
+                      fontWeight: 700,
+                      fontSize: 13,
+                      flexShrink: 0,
+                    }}
+                  >
+                    ✓
+                  </span>
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
+          <Button href="/apply" variant="primary">
+            Apply for a Sponsored Website
+          </Button>
         </div>
       </div>
     </section>

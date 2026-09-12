@@ -36,7 +36,7 @@ export function PortfolioAndTestimonials() {
         }}
       />
       <div style={{ position: "relative", zIndex: 10, maxWidth: 900, margin: "0 auto" }}>
-      <h2 style={{ color: "var(--color-primary-dark)", marginBottom: "var(--space-8)" }}>
+      <h2 style={{ marginBottom: "var(--space-8)" }}>
         {title}
       </h2>
       <div

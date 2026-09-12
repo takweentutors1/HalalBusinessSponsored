@@ -36,9 +36,13 @@ export function Hero() {
         }}
       >
         <div style={{ minWidth: 0 }}>
+          <div style={{ marginBottom: "var(--space-2)" }}>
+            <span className="ui-section-eyebrow">
+              SPONSORED WEBSITES FOR UK MUSLIM-OWNED BUSINESSES
+            </span>
+          </div>
           <h1
             style={{
-              fontSize: "clamp(1.75rem, 1.3rem + 2vw, var(--font-size-4xl))",
               marginBottom: "var(--space-4)",
             }}
           >
@@ -56,22 +60,71 @@ export function Hero() {
               marginBottom: "var(--space-6)",
               display: "flex",
               flexDirection: "column",
-              gap: "var(--space-2)",
+              gap: "var(--space-3)",
             }}
           >
             {hero.bullets.map((bullet) => (
-              <li key={bullet} style={{ color: "var(--color-text-secondary)" }}>
-                <RichText text={bullet} />
+              <li
+                key={bullet}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "var(--space-3)",
+                  color: "var(--color-text-secondary)",
+                  fontSize: "var(--font-size-base)",
+                  lineHeight: 1.55,
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 20,
+                    height: 20,
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(26, 71, 49, 0.12)",
+                    color: "var(--color-primary-accessible)",
+                    flexShrink: 0,
+                    marginTop: 3,
+                  }}
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span style={{ flex: 1 }}>
+                  <RichText text={bullet} />
+                </span>
               </li>
             ))}
           </ul>
+
+          <p
+            style={{
+              color: "var(--color-text-secondary)",
+              fontSize: "var(--font-size-sm)",
+              marginBottom: "var(--space-6)",
+            }}
+          >
+            {hero.disclosureLine}
+          </p>
 
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
               gap: "var(--space-4)",
-              marginBottom: "var(--space-6)",
             }}
           >
             <Button href={hero.ctaHref} variant="primary">
@@ -81,24 +134,6 @@ export function Hero() {
               {hero.secondaryCtaLabel}
             </Button>
           </div>
-
-          <p
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-2)",
-              color: "var(--color-text-secondary)",
-              fontSize: "var(--font-size-sm)",
-              marginBottom: "var(--space-4)",
-            }}
-          >
-            <span aria-hidden="true" style={{ color: "var(--color-primary-accessible)" }}>
-              ✓
-            </span>
-            {hero.trustLine}
-          </p>
-
-          <Disclosure text={hero.disclosureLine} />
         </div>
 
         <div style={{ minWidth: 0 }}>

@@ -67,21 +67,76 @@ function MessageSquareIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+function CheckSquareIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--color-primary-accessible)"
+      strokeWidth={2.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function EyeIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--color-primary-accessible)"
+      strokeWidth={2.2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="3" />
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
+    </svg>
+  );
+}
+
+function PlusSquareIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--color-primary-accessible)"
+      strokeWidth={2.5}
+      strokeLinecap="round"
+    >
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  );
+}
+
 const CARDS: AfterLaunchCardItem[] = [
   {
-    icon: (size) => <RefreshCwIcon size={size} />,
-    title: "One-Time Project",
-    body: "Complete design, build, revisions and launch strictly within the agreed scope.",
+    icon: (size) => <CheckSquareIcon size={size} />,
+    title: "One-time project",
+    body: "The sponsored package covers the agreed scope, build, revisions and launch.",
   },
   {
-    icon: (size) => <ClockIcon size={size} />,
-    title: "Close-Out Window",
-    body: "A dedicated post-launch window covers any issues or fixes in the delivered scope.",
+    icon: (size) => <EyeIcon size={size} />,
+    title: "Short close-out",
+    body: "Issues directly related to the delivered scope can be reviewed during the close-out period.",
   },
   {
-    icon: (size) => <MessageSquareIcon size={size} />,
-    title: "Fresh Quote for Extras",
-    body: "Anything outside original scope gets a clear, transparent quote — never added silently.",
+    icon: (size) => <PlusSquareIcon size={size} />,
+    title: "Future work",
+    body: "Maintenance, new pages and new functionality are separate and can be quoted if required.",
   },
 ];
 
@@ -158,12 +213,11 @@ export function AfterLaunchCards() {
         padding: "var(--space-12) var(--space-8)",
       }}
     >
-      <div style={{ maxWidth: 960, margin: "0 auto" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
+        <span className="ui-section-eyebrow">AFTER LAUNCH</span>
         <h2
           style={{
-            color: "var(--color-primary-dark)",
             marginBottom: "var(--space-8)",
-            textAlign: "center",
           }}
         >
           {whatHappensAfterLaunch.title}

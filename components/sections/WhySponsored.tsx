@@ -95,7 +95,15 @@ export function WhySponsored() {
 
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
-        <h2 style={{ color: "white", marginTop: "var(--space-4)", marginBottom: "var(--space-6)" }}>
+        <div style={{ marginTop: "var(--space-4)" }}>
+          <span
+            className="ui-section-eyebrow"
+            style={{ color: "rgba(255, 255, 255, 0.9)", marginBottom: "var(--space-2)" }}
+          >
+            WHY IT&apos;S SPONSORED
+          </span>
+        </div>
+        <h2 style={{ color: "white", marginBottom: "var(--space-6)" }}>
           {whyItsSponsored.title}
         </h2>
         <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-10)" }}>

@@ -4,52 +4,143 @@ import { Disclosure } from "./Disclosure";
 import { Logo } from "./Logo";
 
 /**
- * Site-wide footer — dark navy style matching the HTML reference design.
- * The logo shows the icon only; the initiative name appears below it.
- * Admin login is discoverable but visually subtle.
+ * Site-wide footer with a refined, professional design:
+ * - Subtle divider separating the section from above
+ * - Primary Green theme background (#1a4731)
+ * - Left: Logo mark + company name + descriptive subtitle
+ * - Center / Navigation: Menu links (Programme Terms · Privacy Policy · Admin Login)
+ * - Right / Copyright: A Takween Digital Services initiative · 2026 Registered Trademark
  */
 export function Footer() {
   return (
     <footer
       style={{
-        background: "#0f172a",
-        color: "#94a3b8",
-        padding: "var(--space-12) var(--space-8) var(--space-8)",
-        textAlign: "center",
+        background: "#1a4731",
+        color: "rgba(255, 255, 255, 0.8)",
+        borderTop: "1px solid rgba(255, 255, 255, 0.22)",
+        boxShadow: "0 -1px 0 rgba(0, 0, 0, 0.08)",
+        padding: "var(--space-12) var(--space-8)",
       }}
     >
-      {/* Logo mark */}
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "var(--space-4)" }}>
-        <Logo size={32} showWordmark={false} />
-      </div>
-
-      {/* Initiative label */}
-      <p
+      <div
         style={{
-          color: "#cbd5e1",
-          fontFamily: "var(--font-display)",
-          fontWeight: 600,
-          fontSize: "var(--font-size-sm)",
-          marginBottom: "var(--space-4)",
+          maxWidth: 1160,
+          margin: "0 auto",
         }}
       >
-        A Takween Digital Services initiative
-      </p>
-
-      {/* Disclosure */}
-      <div style={{ maxWidth: 560, margin: "0 auto", fontSize: "var(--font-size-xs)", lineHeight: 1.6, color: "#64748b" }}>
-        <Disclosure text={disclosure.footer} />
-      </div>
-
-      {/* Admin link */}
-      <p style={{ marginTop: "var(--space-4)" }}>
-        <Link
-          href="/admin/login"
-          style={{ color: "#475569", fontSize: "var(--font-size-xs)" }}
+        {/* Main Footer Row */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
+            gap: "var(--space-8)",
+            alignItems: "center",
+          }}
         >
-          Admin Login
-        </Link>
-      </p>
+          {/* 1. Left: Logo, Company Name, Description */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-2)",
+            }}
+          >
+            <div style={{ display: "inline-flex", alignItems: "center" }}>
+              <Logo size={28} showWordmark={true} wordmarkColor="#ffffff" />
+            </div>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: "rgba(255, 255, 255, 0.75)",
+                lineHeight: 1.5,
+                margin: 0,
+                maxWidth: 340,
+              }}
+            >
+              Empowering UK Muslim-owned businesses with professional, high-converting starter websites.
+            </p>
+          </div>
+
+          {/* 2. Middle: Navigation Menu Links */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "var(--space-3)",
+              fontSize: "var(--font-size-sm)",
+            }}
+          >
+            <Link
+              href="/programme-terms"
+              style={{
+                color: "#ffffff",
+                fontWeight: 500,
+                transition: "opacity 150ms ease",
+              }}
+            >
+              Programme Terms
+            </Link>
+            <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
+            <Link
+              href="/programme-terms#privacy"
+              style={{
+                color: "#ffffff",
+                fontWeight: 500,
+                transition: "opacity 150ms ease",
+              }}
+            >
+              Privacy Policy
+            </Link>
+            <span style={{ color: "rgba(255, 255, 255, 0.4)" }}>·</span>
+            <Link
+              href="/admin/login"
+              style={{
+                color: "rgba(255, 255, 255, 0.8)",
+                fontSize: "var(--font-size-xs)",
+                fontWeight: 500,
+                padding: "2px 8px",
+                borderRadius: "var(--radius-sm)",
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.18)",
+              }}
+            >
+              Admin Login
+            </Link>
+          </div>
+
+          {/* 3. Right: Trademark & Initiative Notice */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-1)",
+              textAlign: "right",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "var(--font-size-sm)",
+                fontWeight: 600,
+                color: "#ffffff",
+                margin: 0,
+              }}
+            >
+              A Takween Digital Services initiative
+            </p>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: "rgba(255, 255, 255, 0.65)",
+                margin: 0,
+              }}
+            >
+              © 2026 Registered Trademark. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

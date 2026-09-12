@@ -1,16 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui";
 import { processSteps } from "@/lib/content/landing";
-
-const STEP_TIMINGS = [
-  "5 mins",
-  "48 hrs",
-  "20 mins",
-  "7–10 days",
-  "3–5 days",
-  "Final check",
-];
 
 function StepCard({
   item,
@@ -38,12 +30,11 @@ function StepCard({
         position: "relative",
       }}
     >
-      {/* Top row: glowing number badge + duration tag */}
+      {/* Top row: step number badge */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
           marginBottom: "var(--space-4)",
         }}
       >
@@ -66,20 +57,6 @@ function StepCard({
         >
           {index + 1}
         </span>
-
-        <span
-          style={{
-            fontSize: "var(--font-size-xs)",
-            fontWeight: 600,
-            color: "var(--color-primary-accessible)",
-            background: "var(--color-primary-pale)",
-            padding: "2px 8px",
-            borderRadius: "var(--radius-full)",
-            letterSpacing: "0.02em",
-          }}
-        >
-          {STEP_TIMINGS[index]}
-        </span>
       </div>
 
       <h3
@@ -88,7 +65,7 @@ function StepCard({
           marginBottom: "var(--space-2)",
           fontSize: "1.05rem",
           fontWeight: 700,
-          color: "var(--color-primary-dark)",
+          color: "#0f172a",
           lineHeight: 1.3,
         }}
       >
@@ -123,24 +100,14 @@ export function ProcessSteps() {
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto" }}>
         {/* Centered Header */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <span className="ui-section-eyebrow">HOW IT WORKS</span>
           <h2
             style={{
-              color: "var(--color-primary-dark)",
               marginBottom: "var(--space-2)",
             }}
           >
             {processSteps.title}
           </h2>
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              fontSize: "var(--font-size-base)",
-              maxWidth: 560,
-              margin: "0 auto",
-            }}
-          >
-            A transparent 6-step journey from application to live website launch.
-          </p>
         </div>
 
         {/* 6-step Grid (3 desktop, 2 tablet, 1 mobile) */}
@@ -158,6 +125,13 @@ export function ProcessSteps() {
             <StepCard key={item.step} item={item} index={index} />
           ))}
         </ol>
+
+        {/* Centered CTA */}
+        <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
+          <Button href="/apply" variant="primary">
+            Apply for a Sponsored Website
+          </Button>
+        </div>
       </div>
     </section>
   );
