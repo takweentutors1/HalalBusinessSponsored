@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { HeaderNav } from "./HeaderNav";
 import { Button } from "@/components/ui";
 import { brand } from "@/lib/config";
 
@@ -29,18 +30,16 @@ export function SiteHeader() {
         <Logo size={32} animated showWordmark />
       </Link>
       <nav style={{ display: "flex", alignItems: "center", gap: "var(--space-6)", flexShrink: 0 }}>
-        <Link
-          href="#how-it-works"
-          className="ui-header-nav-link"
-          style={{
-            color: "var(--color-text-secondary)",
-            fontSize: "var(--font-size-sm)",
-            fontWeight: 600,
-            whiteSpace: "nowrap",
-          }}
-        >
-          How It Works
-        </Link>
+        {/* Wrapped in a plain div (not passed straight to HeaderNav's own
+            className prop) because HeaderNav's root <ul> sets its own
+            inline display: flex — an inline style always wins over the
+            .ui-header-nav-link media query's `display: none`, which would
+            silently break the existing hide-below-640px behavior. The
+            wrapper div has no competing inline display, so the CSS class
+            controls it cleanly instead. */}
+        <div className="ui-header-nav-link">
+          <HeaderNav />
+        </div>
         <Button
           href="/apply"
           variant="primary"
