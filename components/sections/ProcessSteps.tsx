@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { Button } from "@/components/ui";
 import { processSteps } from "@/lib/content/landing";
+import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
 
 function StepCard({
   item,
@@ -173,6 +174,7 @@ export function ProcessSteps() {
         background: "var(--color-surface-base)",
       }}
     >
+      <AmbientParallaxBg src="/images/bg-process.svg" opacity={0.55} />
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto" }}>
         {/* Centered Header */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>

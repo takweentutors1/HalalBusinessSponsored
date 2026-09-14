@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
+import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
 
 interface SourceCard {
   icon: React.ReactNode;
@@ -137,7 +138,8 @@ export function ProblemSection() {
         padding: "var(--space-16) var(--space-8) var(--space-12)",
       }}
     >
-      <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+      <AmbientParallaxBg src="/images/bg-problem.svg" opacity={0.65} />
+      <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
         <span className="ui-section-eyebrow">THE CURRENT PROBLEM</span>
         <h2 style={{ marginBottom: "var(--space-4)", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
           Your customers already look for Muslim-owned businesses like yours online.

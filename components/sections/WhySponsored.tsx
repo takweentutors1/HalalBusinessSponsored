@@ -8,6 +8,7 @@ import { TrustIllustration } from "@/components/illustrations";
 import { GalleryIcon, MonitorIcon } from "@/components/icons";
 import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
 import { whyItsSponsored } from "@/lib/content/landing";
+import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
 
 /** Bidirectional swap glyph marking the exchange between the two panels. */
 function ExchangeGlyph() {
@@ -140,7 +141,7 @@ export function WhySponsored() {
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-
+      <AmbientParallaxBg src="/images/bg-trust.svg" opacity={0.35} />
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
         <TrustIllustration size={64} tone="dark" />
         <div style={{ marginTop: "var(--space-4)" }}>

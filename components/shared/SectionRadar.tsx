@@ -17,6 +17,7 @@ export interface SectionRadarItem {
  */
 export const DEFAULT_SECTION_RADAR_ITEMS: SectionRadarItem[] = [
   { id: "the-problem", label: "The Problem" },
+  { id: "solution", label: "The Solution" },
   { id: "scope", label: "What You Get" },
   { id: "who-qualifies", label: "Who Qualifies" },
   { id: "how-it-works", label: "How It Works" },

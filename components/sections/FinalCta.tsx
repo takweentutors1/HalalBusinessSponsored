@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { Button } from "@/components/ui";
 import { finalCta } from "@/lib/content/landing";
+import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
 
 const REASSURANCE_CHIPS = [
   "Selected businesses only",
@@ -111,6 +112,7 @@ export function FinalCta() {
         color: "white",
       }}
     >
+      <AmbientParallaxBg src="/images/bg-finalcta.svg" opacity={0.3} />
       <div
         className="final-cta-aurora"
         aria-hidden="true"
