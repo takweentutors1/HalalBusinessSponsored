@@ -181,6 +181,19 @@ p {
   }
 }
 
+/* ProcessSteps: fixed 2x2 grid on desktop (was auto-fit, which produced
+   3 cols x 2 rows on the section's max-width for 4 steps). 1 col on
+   mobile. */
+.process-step-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 640px) {
+  .process-step-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /*
  * Decorative "browser content" mockup blocks inside ProblemSolution's
  * Before/After cards — ported from docs/index.html's .site-preview.

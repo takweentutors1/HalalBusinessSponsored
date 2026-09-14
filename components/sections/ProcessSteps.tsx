@@ -210,7 +210,7 @@ export function ProcessSteps() {
             />
           </div>
 
-          {/* Step Grid (3 desktop, 2 tablet, 1 mobile) */}
+          {/* Step Grid (2 desktop, 2 tablet, 1 mobile) */}
           <ol
             className="process-step-grid"
             style={{
@@ -218,7 +218,6 @@ export function ProcessSteps() {
               padding: 0,
               margin: 0,
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(270px, 100%), 1fr))",
               gap: "var(--space-5)",
             }}
           >
