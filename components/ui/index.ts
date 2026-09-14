@@ -18,3 +18,6 @@ export type { BadgeProps, BadgeVariant } from "./Badge";
 
 export { FormField } from "./FormField";
 export type { FormFieldProps } from "./FormField";
+
+export { ScrollVideoCanvas } from "./ScrollVideoCanvas";
+export type { ScrollVideoCanvasProps } from "./ScrollVideoCanvas";
