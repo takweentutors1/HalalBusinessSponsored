@@ -385,3 +385,69 @@
   }
 }
 
+/* HeaderNav.tsx sliding active-pill background. Only the static box
+   (position/size/background/shadow) lives here — x, width, and
+   opacity stay GSAP-tweened inline since they change per active
+   section and are read from a live getBoundingClientRect(). */
+.header-nav-pill {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-base);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+}
+
+/* Scroll-scrubbed video-canvas sections (components/ui/ScrollVideoCanvas.tsx) */
+
+/* Reserves scroll distance for a pinned ScrollVideoCanvas before its
+   own ScrollTrigger-created pin spacer exists (SSR / pre-hydration),
+   so the page doesn't jump when GSAP inserts that spacer on mount.
+   Height is a custom property so each usage can match its own
+   `scrollLength` prop instead of a single fixed guess. */
+.vs-spacer {
+  height: var(--vs-spacer-height, 100vh);
+}
+
+.vs-cv-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  background: var(--color-neutral-100);
+}
+
+.vs-cv {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes vs-loading-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Shown over .vs-cv-wrap until the first real frame is drawn, so
+   there's a placeholder instead of a blank box while the video's
+   metadata/frame is still loading. */
+.vs-loading {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-neutral-100), var(--color-neutral-200), var(--color-neutral-100));
+  animation: vs-loading-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-loading {
+    animation: none;
+  }
+}
+
