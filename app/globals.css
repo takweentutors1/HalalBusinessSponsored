@@ -271,6 +271,15 @@ p {
   transform: none;
 }
 
+/* SectionRadar: fixed vertical dot rail on the right edge — hidden
+   below 960px, where a fixed side rail would collide with content
+   rather than float clear of it. */
+@media (max-width: 960px) {
+  .section-radar-nav {
+    display: none;
+  }
+}
+
 /* Eyebrow / Overline utility class */
 .ui-section-eyebrow {
   font-family: var(--font-body);
