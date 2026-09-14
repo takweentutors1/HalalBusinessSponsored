@@ -161,6 +161,26 @@ p {
   }
 }
 
+/* PackageBenefits: fixed 3x2 grid on desktop (was auto-fit, which sized
+   to however many 220px-min tiles fit the container — 4 cols x 2 rows
+   on the 1180px section max-width, not the intended 3x2). 2 cols on
+   tablet, 1 col on mobile. */
+.package-benefit-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 960px) {
+  .package-benefit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .package-benefit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /*
  * Decorative "browser content" mockup blocks inside ProblemSolution's
  * Before/After cards — ported from docs/index.html's .site-preview.

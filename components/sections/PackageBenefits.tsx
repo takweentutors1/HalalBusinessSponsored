@@ -84,7 +84,6 @@ export function PackageBenefits() {
       className="package-benefit-grid"
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
         gap: "var(--space-5)",
         marginBottom: "var(--space-10)",
       }}
