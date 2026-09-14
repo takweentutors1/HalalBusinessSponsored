@@ -101,6 +101,98 @@ p {
   }
 }
 
+/* MobileNav.tsx — hamburger toggle for the section links HeaderNav's
+   pill row hides below 640px. Opposite visibility of
+   .ui-header-nav-link above: hidden by default, shown only at the
+   same width HeaderNav disappears, so there's exactly one way to
+   reach these links at any given viewport width. */
+.ui-mobile-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .ui-mobile-nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+}
+
+.ui-mobile-nav-bar {
+  width: 22px;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-primary);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.ui-mobile-nav-bar[data-open="true"]:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.ui-mobile-nav-bar[data-open="true"]:nth-child(2) {
+  opacity: 0;
+}
+
+.ui-mobile-nav-bar[data-open="true"]:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Dropdown panel — positioned against .ui-site-header (the nearest
+   positioned ancestor, via its own position: sticky), not against
+   .ui-mobile-nav itself, so it spans the full header width regardless
+   of where in the header's flex layout the toggle button sits. */
+.ui-mobile-nav-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface-base);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-sm);
+  z-index: 99;
+}
+
+.ui-mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-mobile-nav-link {
+  display: block;
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-mobile-nav-bar {
+    transition: none;
+  }
+}
+
+/* SiteHeader.tsx's right-hand nav row: HeaderNav's pill (desktop) or
+   nothing (mobile, see .ui-header-nav-link), the Apply Now CTA, and
+   MobileNav's hamburger toggle (mobile only). A plain CSS class rather
+   than an inline gap so the ≤480px rule below can shrink it — three
+   flex children now compete for space against the logo instead of two. */
+.ui-header-actions {
+  gap: var(--space-6);
+}
+
 /* Tighten header chrome on small phone widths so the logo and Apply Now
    button both fit comfortably. The wordmark itself keeps the same
    font-size as everywhere else (including the footer) — "Takween
@@ -115,9 +207,31 @@ p {
     height: 24px;
   }
 
+  /* Icon-only logo below 480px: even after shrinking the icon and the
+     Apply Now button, the wordmark still doesn't have room next to
+     both the CTA and MobileNav's hamburger toggle without truncating
+     mid-word. The icon alone still reads as the brand mark. */
+  .ui-logo-wordmark {
+    display: none;
+  }
+
   .ui-header-cta {
     padding: calc(var(--space-1) * 1.25 * 1.25) calc(var(--space-3) * 1.25 * 1.25) !important;
     font-size: calc(var(--font-size-xs) * 1.25) !important;
+  }
+
+  .ui-header-actions {
+    gap: var(--space-3);
+  }
+
+  .ui-mobile-nav-toggle {
+    width: 32px;
+    height: 32px;
+    gap: 4px;
+  }
+
+  .ui-mobile-nav-bar {
+    width: 18px;
   }
 }
 

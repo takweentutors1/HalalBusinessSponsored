@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { HeaderNav } from "./HeaderNav";
+import { MobileNav } from "./MobileNav";
 import { Button } from "@/components/ui";
 import { brand } from "@/lib/config";
 
@@ -29,7 +30,10 @@ export function SiteHeader() {
       >
         <Logo size={32} animated showWordmark />
       </Link>
-      <nav style={{ display: "flex", alignItems: "center", gap: "var(--space-6)", flexShrink: 0 }}>
+      <nav
+        className="ui-header-actions"
+        style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
+      >
         {/* Wrapped in a plain div (not passed straight to HeaderNav's own
             className prop) because HeaderNav's root <ul> sets its own
             inline display: flex — an inline style always wins over the
@@ -51,6 +55,7 @@ export function SiteHeader() {
         >
           Apply Now
         </Button>
+        <MobileNav />
       </nav>
     </header>
   );
