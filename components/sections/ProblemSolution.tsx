@@ -152,12 +152,18 @@ export function ProblemSolution() {
           </div>
         </div>
 
-        {/* Outcome stats */}
+        {/* Outcome stats — grid columns are a dedicated CSS class
+            (.outcome-stat-grid in app/globals.css) rather than
+            auto-fit: three 200px-min cards on a narrow phone (~350-
+            400px content width) barely fit two per row, wrapping the
+            third onto its own half-empty row. Each card also gets its
+            own accent-badge checkmark, echoing the "After" list's
+            checkmark bullets above so the stats read as a continuation
+            of that list rather than a separate, plainer block. */}
         <div
-          className="problem-solution-stats"
+          className="problem-solution-stats outcome-stat-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))",
             gap: "var(--space-4)",
             marginTop: "var(--space-6)",
           }}
@@ -166,17 +172,37 @@ export function ProblemSolution() {
             <div
               key={stat.label}
               className="problem-solution-stat"
+              onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+              onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
               style={{
                 textAlign: "center",
-                padding: "var(--space-5)",
+                padding: "var(--space-6) var(--space-5)",
                 background: "var(--color-surface-base)",
                 border: "1px solid var(--color-border-light)",
+                borderTop: "4px solid var(--color-accent)",
                 borderRadius: "var(--radius-xl)",
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-tertiary)" }}>{stat.label}</span>
-              <strong style={{ display: "block", fontFamily: "var(--font-display)", fontSize: "1.35rem", color: "var(--color-primary-accessible)", marginTop: "var(--space-1)" }}>
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 40,
+                  height: 40,
+                  borderRadius: "var(--radius-full)",
+                  background: "var(--color-accent-pale)",
+                  marginBottom: "var(--space-3)",
+                }}
+              >
+                <svg aria-hidden="true" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12l4 4L19 6" />
+                </svg>
+              </span>
+              <span style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-tertiary)" }}>{stat.label}</span>
+              <strong style={{ display: "block", fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "var(--color-primary-accessible)", marginTop: "var(--space-1)" }}>
                 {stat.value}
               </strong>
             </div>

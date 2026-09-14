@@ -308,6 +308,21 @@ p {
   }
 }
 
+/* ProblemSolution outcome stats: fixed 3-col row on desktop/tablet
+   (was auto-fit minmax(200px), which produced an uneven 2-then-1 wrap
+   on phone widths ~350-400px since two 200px cards barely fit per
+   row). 1 col on mobile instead, matching package-benefit-grid /
+   process-step-grid's fixed-column approach above. */
+.outcome-stat-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 640px) {
+  .outcome-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /*
  * Decorative "browser content" mockup blocks inside ProblemSolution's
  * Before/After cards — ported from docs/index.html's .site-preview.
