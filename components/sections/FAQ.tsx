@@ -1,28 +1,5 @@
-import { RichText } from "@/components/shared/RichText";
 import { faq } from "@/lib/content/landing";
-
-function ChevronDownIcon() {
-  return (
-    <svg
-      className="ui-faq-chevron"
-      aria-hidden="true"
-      width={18}
-      height={18}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="var(--color-primary-accessible)"
-      strokeWidth={2.2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={{
-        flexShrink: 0,
-        transition: "transform 200ms ease",
-      }}
-    >
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
+import { FAQAnimated } from "./FAQAnimated";
 
 export function FAQ() {
   return (
@@ -56,63 +33,10 @@ export function FAQ() {
           }}
         >
           {faq.items.map((item) => (
-            <details
-              key={item.question}
-              className="ui-faq-details"
-              style={{
-                background: "var(--color-surface-base)",
-                border: "1px solid var(--color-border-light)",
-                borderRadius: "var(--radius-lg)",
-                padding: "var(--space-4) var(--space-5)",
-                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04)",
-              }}
-            >
-              <summary
-                className="ui-faq-summary"
-                style={{
-                  fontWeight: 700,
-                  fontSize: "1rem",
-                  color: "#0f172a",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "var(--space-3)",
-                  userSelect: "none",
-                  lineHeight: 1.4,
-                  listStyle: "none",
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    fontSize: "0.75rem",
-                    color: "#0f172a",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    transition: "transform 200ms ease",
-                  }}
-                  className="ui-faq-chevron"
-                >
-                  ▶
-                </span>
-                <span>{item.question}</span>
-              </summary>
-              <div
-                style={{
-                  color: "var(--color-text-secondary)",
-                  marginTop: "var(--space-3)",
-                  paddingLeft: "var(--space-6)",
-                  fontSize: "var(--font-size-base)",
-                  lineHeight: 1.65,
-                }}
-              >
-                <RichText text={item.answer} />
-              </div>
-            </details>
+            <FAQAnimated key={item.question} question={item.question} answer={item.answer} />
           ))}
         </div>
       </div>
     </section>
   );
 }
-

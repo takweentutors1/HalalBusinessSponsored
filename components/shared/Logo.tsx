@@ -10,9 +10,15 @@ export interface LogoProps {
 /**
  * Icon: an 8-pointed geometric star (a classic Islamic architectural/tile
  * motif — decorative geometry, not a religious symbol) in a circular
- * emerald badge. Same shape as public/icons/mark.svg, reproduced inline
- * here (not <img>) so the optional rotation animation can target it
- * directly and so it inherits no extra network request.
+ * badge. Same shape as public/icons/mark.svg, reproduced inline here (not
+ * <img>) so the optional rotation animation can target it directly and so
+ * it inherits no extra network request.
+ *
+ * The circle badge is non-text decoration, so it uses the brighter
+ * --color-accent scale from the docs/index.html redesign; the wordmark
+ * text next to it stays on --color-primary-accessible since that's the
+ * variant that actually passes WCAG AA at body text size (see
+ * styles/tokens.css).
  */
 export function Logo({
   size = 32,
@@ -40,8 +46,8 @@ export function Logo({
       >
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--color-primary-accessible)" />
-            <stop offset="100%" stopColor="var(--color-primary-accessible-dark)" />
+            <stop offset="0%" stopColor="var(--color-accent)" />
+            <stop offset="100%" stopColor="var(--color-accent-dark)" />
           </linearGradient>
         </defs>
         <circle cx="50" cy="50" r="49" fill="url(#logoGradient)" />

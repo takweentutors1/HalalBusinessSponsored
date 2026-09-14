@@ -1,12 +1,8 @@
 /**
- * Design tokens ported verbatim from docs/Halal Business Design System.html.
- *
- * NOTE: that file is a documentation/overview page — it references external
- * `styles.css` and `_ds_bundle.js` deliverables (claiming "129 CSS Tokens")
- * that were never actually placed in docs/. Only the ~40 tokens defined in
- * that file's :root block are captured here. If the full styles.css /
- * _ds_bundle.js are provided later, reconcile this file against them rather
- * than assuming this subset is complete.
+ * Design tokens ported verbatim from docs/Halal Business Design System.html,
+ * then updated per the docs/index.html redesign (2026 refresh — see the
+ * homepage rebuild plan): DM Sans replaces Georgia for display type, and a
+ * brighter accent-green scale sits alongside the original primary scale.
  */
 
 :root {
@@ -28,6 +24,19 @@
    */
   --color-primary-accessible: #047857;
   --color-primary-accessible-dark: #036450;
+
+  /*
+   * Accent scale from the docs/index.html redesign — brighter than
+   * --color-primary and used the same way: non-text decoration only
+   * (icon backgrounds, thin borders, dots, hover glows, badge fills).
+   * White text on --color-accent is ~1.9:1 and on --color-accent-dark is
+   * ~2.9:1 — both fail WCAG AA same as the original primary scale, so any
+   * text sitting on these colors must still use --color-primary-accessible
+   * (or white on --color-primary-accessible-dark) instead.
+   */
+  --color-accent: #22c55e;
+  --color-accent-dark: #16a34a;
+  --color-accent-pale: #ecfdf3;
 
   /* Semantic colors */
   --color-success: #10b981;
@@ -58,9 +67,15 @@
   --color-border-light: var(--color-neutral-200);
   --color-border-medium: var(--color-neutral-300);
 
-  /* Typography */
-  --font-display: "Georgia", "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /*
+   * Typography — both loaded via next/font/google in app/layout.tsx
+   * (Inter + DM Sans), which sets the --font-inter/--font-dm-sans CSS
+   * variables on <html>. DM Sans replaces Georgia as the display face per
+   * the docs/index.html redesign; the fallback stacks only matter before
+   * the webfont loads or if next/font's variable is ever missing.
+   */
+  --font-display: var(--font-dm-sans), "Segoe UI", Arial, sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "Courier New", monospace;
 
   --font-size-xs: 0.75rem;
@@ -90,10 +105,17 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  /* Softer, more diffuse shadow from the docs/index.html redesign — used on
+     the larger, more rounded cards (see --radius-2xl) rather than replacing
+     --shadow-lg everywhere. */
+  --shadow-xl: 0 12px 35px rgba(17, 24, 39, 0.08);
+  --shadow-xl-hover: 0 18px 45px rgba(17, 24, 39, 0.13);
 
   /* Radius */
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
+  /* Larger card radius from the docs/index.html redesign. */
+  --radius-2xl: 1.375rem;
   --radius-full: 9999px;
 }

@@ -4,7 +4,7 @@
  * Capacity figure and brand name are never inlined here — always pulled
  * from lib/config.ts.
  */
-import { capacity, capacityStatement, costLine, disclosure } from "@/lib/config";
+import { capacity, capacityStatement, disclosure } from "@/lib/config";
 
 export interface ListSection {
   id: string;
@@ -34,13 +34,22 @@ export const statsBar = [
 
 export const hero = {
   number: 1,
+  topline: "Free websites for UK Muslim-owned businesses at £0 development cost",
   headline: "Your business is established. Your website should show it.",
+  headlineHighlight: "Your website should show it.",
   costLine: "A professional starter website for selected Muslim-owned businesses — at **£0 development cost**.",
   bullets: [
-    "No proper website? **We’ll build a professional online home.**",
-    "Weak or outdated website? **We’ll rebuild the essentials clearly.**",
+    "No proper website? **We’ll build your professional online home.**",
+    "Outdated website? **We’ll rebuild the essentials clearly.**",
   ],
-  disclosureLine: "Defined starter scope. No obligation to buy extra services.",
+  /** From the docs/index.html redesign's hero-urgency strip — 3 short
+   * reassurance/urgency facts shown as a row under the hero bullets. */
+  urgencyItems: [
+    { label: "Apply in ~2 minutes", note: "Short application" },
+    { label: "Fast-track build", note: "Once content is ready" },
+    { label: "Limited monthly places", note: "Selected businesses only" },
+  ],
+  disclosureLine: "No obligation to buy extra services.",
   ctaLabel: "Apply for a Free Website",
   ctaHref: "/apply",
   secondaryCtaLabel: "See If You Qualify",
@@ -52,6 +61,13 @@ export const hero = {
    * for the Hero.
    */
   trustLine: "Reviewed by a real person, not an algorithm.",
+  /** Copy for the decorative "browser window" mockup graphic beside the
+   * hero copy — purely illustrative, matching docs/index.html's mock-hero. */
+  mockVisual: {
+    pill: "Local business",
+    heading: "A modern website that makes the business feel established.",
+    body: "Clear services, stronger trust, and one obvious enquiry path.",
+  },
 } as const;
 
 export const whoItsFor: ListSection = {
@@ -94,6 +110,35 @@ export const whatTheWebsiteSolves: ListSection = {
     "A proper place to showcase work and reviews",
   ],
 };
+
+/**
+ * From the docs/index.html redesign — not one of the brief's original 16
+ * numbered sections, so it deliberately has no `number` field (unlike
+ * ListSection/CategorizedSection above). The £2,000–£5,000 agency figure
+ * is gated by lib/config.ts's marketValueComparison.approved; see
+ * components/sections/ValueComparison.tsx for how the fallback copy
+ * below is used when that's false.
+ */
+export const valueComparison = {
+  id: "value-comparison",
+  eyebrow: "The real cost elsewhere",
+  title: "A professional website for a Muslim-owned business can cost thousands.",
+  intro:
+    "For selected businesses, Takween Connect covers the development cost of the agreed starter scope.",
+  agency: {
+    label: "Comparable agency build",
+    fallbackPrice: "Thousands",
+    description:
+      "Professional design, multiple pages, responsive development and optimisation.",
+  },
+  free: {
+    label: "Takween Connect development cost",
+    price: "£0",
+    description: "For the agreed free starter website scope.",
+  },
+  unapprovedNote:
+    "A specific market-rate comparison is shown here once confirmed as an accurate public figure.",
+} as const;
 
 export const whyItsSponsored = {
   id: "why-its-sponsored",
@@ -262,10 +307,16 @@ export interface ProcessStep {
   description: string;
 }
 
+/**
+ * Trimmed to the docs/index.html redesign's exact 4 steps (was 6, with
+ * separate Discovery and Feedback steps) — Discovery folds into Build,
+ * Feedback folds into Review & Launch's wrap-up. Confirmed as the wanted
+ * outcome when matching the redesign exactly.
+ */
 export const processSteps = {
   id: "how-the-process-works",
   number: 13,
-  title: "A simple process from application to launch",
+  title: "A simple 4-step process",
   steps: [
     {
       step: "Apply",
@@ -273,23 +324,15 @@ export const processSteps = {
     },
     {
       step: "Review",
-      description: "We check programme fit and available capacity.",
-    },
-    {
-      step: "Discovery",
-      description: "We confirm goals, pages, branding and content.",
+      description: "We check fit, scope and available capacity.",
     },
     {
       step: "Build",
-      description: "We design and develop the agreed starter website.",
+      description: "We confirm essentials, build the website and collect feedback.",
     },
     {
-      step: "Review & Launch",
-      description: "Included revisions are completed and the site goes live.",
-    },
-    {
-      step: "Feedback",
-      description: "You provide honest completion feedback and the project closes.",
+      step: "Launch",
+      description: "Final revisions are completed and the website goes live.",
     },
   ] satisfies ProcessStep[],
 } as const;
@@ -322,6 +365,13 @@ export interface FaqItem {
   answer: string;
 }
 
+/**
+ * Trimmed to the docs/index.html redesign's exact 5 questions (was 7 —
+ * dropped "is ongoing maintenance included?" and "do I have to provide
+ * feedback?"). Those two points are still made elsewhere on the page
+ * (AfterLaunchCards, WhySponsored's feedbackNote) — confirmed as the
+ * wanted outcome when matching the redesign exactly.
+ */
 export const faq = {
   id: "faq",
   number: 15,
@@ -329,34 +379,24 @@ export const faq = {
   items: [
     {
       question: "Is the website really free?",
-      answer: `${costLine} Nothing about the build itself is charged.`,
+      answer: "Yes. Design and development within the agreed starter scope is free.",
     },
     {
       question: "Do I pay for domain and hosting?",
       answer:
-        "You choose and pay for your own domain and hosting. We can guide you toward a suitable option if asked.",
+        "Yes. Domain, hosting and optional paid third-party tools remain your responsibility.",
     },
     {
       question: "Do I have to buy anything afterwards?",
+      answer: "No. Additional services are optional and only quoted if you request them.",
+    },
+    {
+      question: "Does applying guarantee acceptance?",
       answer:
-        "No obligation to buy anything. Once your starter site is live, any further work can be scoped and quoted separately. Nothing is ever assumed or added without your agreement.",
+        "No. Applications are reviewed against fit and available monthly capacity.",
     },
     {
-      question: "Is ongoing maintenance included?",
-      answer:
-        "No — this is a **one-time build**, not a maintenance plan. A short post-launch window covers issues in scope; anything beyond that gets a fresh quote.",
-    },
-    {
-      question: "Do I have to provide feedback?",
-      answer:
-        "Honest completion feedback is expected from every accepted business — that's part of the exchange. A positive review is never required.",
-    },
-    {
-      question: "Does applying guarantee a free website?",
-      answer: `No — places are limited (${capacityStatement()}), so not every applicant is accepted. **Everyone who applies hears back**, either way.`,
-    },
-    {
-      question: "Who actually builds the website?",
+      question: "Who builds the website?",
       answer: disclosure.faqAnswer,
     },
   ] satisfies FaqItem[],

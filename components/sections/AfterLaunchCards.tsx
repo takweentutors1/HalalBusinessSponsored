@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { whatHappensAfterLaunch } from "@/lib/content/landing";
 
 interface AfterLaunchCardItem {
@@ -140,21 +142,64 @@ const CARDS: AfterLaunchCardItem[] = [
   },
 ];
 
+/**
+ * Cursor-tracking 3D tilt via quickTo, replacing the previous React
+ * useState hover lift — this is the exact upgrade the original GSAP
+ * plan's mapping matrix specified for this component ("quickTo cursor
+ * tilt + 3-card staggered entrance") but was never built during the
+ * phased rollout.
+ */
 function CardItem({ card }: { card: AfterLaunchCardItem }) {
-  const [hovered, setHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const quickToRef = useRef<{
+    rotateX: gsap.QuickToFunc;
+    rotateY: gsap.QuickToFunc;
+    y: gsap.QuickToFunc;
+  } | null>(null);
+
+  useGSAP(
+    () => {
+      const el = cardRef.current;
+      if (!el || prefersReducedMotion()) return;
+      gsap.set(el, { transformPerspective: 800 });
+      quickToRef.current = {
+        rotateX: gsap.quickTo(el, "rotationX", { duration: 0.4, ease: "power3" }),
+        rotateY: gsap.quickTo(el, "rotationY", { duration: 0.4, ease: "power3" }),
+        y: gsap.quickTo(el, "y", { duration: 0.4, ease: "power3" }),
+      };
+    },
+    { scope: cardRef }
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion() || !quickToRef.current || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    quickToRef.current.rotateY(px * 12);
+    quickToRef.current.rotateX(-py * 12);
+    quickToRef.current.y(-4);
+  };
+
+  const handleMouseLeave = () => {
+    if (prefersReducedMotion() || !quickToRef.current) return;
+    quickToRef.current.rotateX(0);
+    quickToRef.current.rotateY(0);
+    quickToRef.current.y(0);
+  };
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      ref={cardRef}
+      className="after-launch-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       style={{
         background: "var(--color-surface-base)",
         border: "1px solid var(--color-border-light)",
-        borderRadius: "var(--radius-lg)",
+        borderRadius: "var(--radius-2xl)",
         padding: "var(--space-6) var(--space-5)",
-        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
-        transform: hovered ? "translateY(-2px)" : "none",
-        transition: "box-shadow 200ms ease, transform 200ms ease",
+        boxShadow: "var(--shadow-xl)",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
@@ -179,10 +224,10 @@ function CardItem({ card }: { card: AfterLaunchCardItem }) {
 
       <h3
         style={{
-          fontFamily: "var(--font-serif)",
+          fontFamily: "var(--font-display)",
           fontSize: "1.05rem",
           fontWeight: 700,
-          color: "var(--color-primary-dark)",
+          color: "var(--color-primary-accessible)",
           marginBottom: "var(--space-2)",
           lineHeight: 1.3,
         }}
@@ -205,8 +250,29 @@ function CardItem({ card }: { card: AfterLaunchCardItem }) {
 }
 
 export function AfterLaunchCards() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      gsap.from(".after-launch-card", {
+        opacity: 0,
+        y: 40,
+        rotationX: -35,
+        transformPerspective: 800,
+        stagger: 0.15,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".after-launch-grid", start: "top 80%" },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       style={{
         position: "relative",
         background: "var(--color-surface-elevated)",
@@ -224,6 +290,7 @@ export function AfterLaunchCards() {
         </h2>
 
         <div
+          className="after-launch-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",

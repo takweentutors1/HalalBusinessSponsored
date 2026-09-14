@@ -49,6 +49,21 @@ export const costLine =
   "The build is **£0**. Domain and hosting remain your own, separate cost.";
 
 /**
+ * The docs/index.html redesign adds an agency-price-vs-£0 comparison
+ * section. Its own source carries a caution: "Use the £2,000–£5,000
+ * comparison publicly only if Takween approves this as a genuine
+ * market-value range." `approved: true` — confirmed to match the
+ * redesign exactly, publishing the figure as shown in docs/index.html.
+ * See components/sections/ValueComparison.tsx.
+ */
+export const marketValueComparison = {
+  approved: true,
+  agencyLow: 2000,
+  agencyHigh: 5000,
+  currency: "£",
+} as const;
+
+/**
  * Real widget provisioned via `wrangler turnstile widget create`, scoped to
  * halal-business-website.takweencentreuk.workers.dev. Site keys are public
  * by design (Turnstile embeds them in every page's HTML), so committing the

@@ -1,7 +1,21 @@
 import type { Metadata, Viewport } from "next";
+import { DM_Sans, Inter } from "next/font/google";
 import { Footer } from "@/components/shared/Footer";
 import { brand, siteUrl } from "@/lib/config";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["500", "700", "800"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 const title = brand.name;
 const description =
@@ -28,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body>
         {children}
         <Footer />

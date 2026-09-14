@@ -1,6 +1,12 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui";
 import { RichText } from "@/components/shared/RichText";
+import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
+import { PackageBenefits } from "./PackageBenefits";
 import type { CategorizedSection as CategorizedSectionContent } from "@/lib/content/landing";
 
 interface ScopeComparisonProps {
@@ -86,10 +92,57 @@ function AddOnMarker() {
  * Replaces two stacked "spec sheet" blocks with side-by-side comparison cards:
  * Left: pale green Free Website card
  * Right: clean white Optional Paid Add-ons card
+ *
+ * Panel entrance (slide in from opposite sides) and the per-row cascading
+ * checklist reveal were in the original GSAP plan's §4.7 but never built
+ * during the phased rollout — added here as part of giving every card on
+ * the site consistent GSAP treatment.
  */
 export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      gsap.from(".package-benefit-tile", {
+        opacity: 0,
+        y: 30,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".package-benefit-grid", start: "top 80%" },
+      });
+
+      gsap.from(".scope-panel-free", {
+        opacity: 0,
+        x: -50,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".scope-panels", start: "top 75%" },
+      });
+      gsap.from(".scope-panel-addon", {
+        opacity: 0,
+        x: 50,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".scope-panels", start: "top 75%" },
+      });
+      gsap.from(".scope-list-item", {
+        opacity: 0,
+        y: 10,
+        stagger: 0.05,
+        duration: 0.4,
+        ease: "power2.out",
+        delay: 0.3,
+        scrollTrigger: { trigger: ".scope-panels", start: "top 75%" },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
+    <section ref={sectionRef} style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
           <span className="ui-section-eyebrow">WHAT YOU GET</span>
@@ -97,7 +150,11 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             Clear free scope. Clear paid extras.
           </h2>
         </div>
+
+        <PackageBenefits />
+
         <div
+          className="scope-panels"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
@@ -107,10 +164,13 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
         >
           {/* Included, free (Pale Mint Green Card) */}
           <div
+            className="scope-panel-free"
+            onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+            onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
               padding: "var(--space-8) var(--space-6)",
               background: "#f0faf5",
-              borderRadius: "var(--radius-xl)",
+              borderRadius: "var(--radius-2xl)",
               border: "1px solid var(--color-border-light)",
               display: "flex",
               flexDirection: "column",
@@ -141,6 +201,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                   {category.items.map((item) => (
                     <li
                       key={item}
+                      className="scope-list-item"
                       style={{
                         padding: "var(--space-2) 0",
                         display: "flex",
@@ -178,10 +239,13 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
 
           {/* Paid add-ons (Clean White Card) */}
           <div
+            className="scope-panel-addon"
+            onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+            onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
               padding: "var(--space-8) var(--space-6)",
               background: "#ffffff",
-              borderRadius: "var(--radius-xl)",
+              borderRadius: "var(--radius-2xl)",
               border: "1px solid var(--color-border-light)",
               boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
               display: "flex",
@@ -213,6 +277,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                   {category.items.map((item) => (
                     <li
                       key={item}
+                      className="scope-list-item"
                       style={{
                         padding: "var(--space-2) 0",
                         display: "flex",

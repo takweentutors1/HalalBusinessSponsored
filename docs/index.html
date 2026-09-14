@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Takween Connect — Free Websites for UK Muslim-Owned Businesses</title>
+<meta name="description" content="Free starter websites for selected UK Muslim-owned businesses."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2322c55e'/%3E%3Cpath d='M18 22h28M24 22l8 20 8-20' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>
+:root{
+  --green:#22c55e;
+  --green-dark:#16a34a;
+  --green-soft:#ecfdf3;
+  --red:#ef4444;
+  --red-soft:#fff1f2;
+  --ink:#111827;
+  --text:#374151;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --soft:#f8fafc;
+  --white:#ffffff;
+  --shadow:0 12px 35px rgba(17,24,39,.08);
+  --shadow-hover:0 18px 45px rgba(17,24,39,.13);
+  --radius:22px;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:#fff;
+  font-family:"Inter","Segoe UI",Arial,sans-serif;
+  line-height:1.55;
+}
+h1,h2,h3{
+  margin:0 0 14px;
+  font-family:"DM Sans","Inter","Segoe UI",sans-serif;
+  letter-spacing:-.035em;
+}
+h1{font-size:clamp(2.65rem,5.4vw,5.8rem);line-height:.98;font-weight:800}
+h2{font-size:clamp(2rem,3.7vw,3.9rem);line-height:1.05;font-weight:800}
+h3{font-size:1.25rem;line-height:1.18}
+p{margin:0 0 14px;color:var(--text)}
+a{text-decoration:none;color:inherit}
+.container{width:min(var(--max),calc(100% - 36px));margin:auto}
+.section{padding:90px 0}
+.section-sm{padding:52px 0}
+.center{text-align:center}
+.max-760{max-width:760px;margin-inline:auto}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:22px}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:var(--shadow);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-hover);
+  border-color:#d1d5db;
+}
+.icon{
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  flex:0 0 auto;
+}
+.icon.red-bg{background:var(--red-soft);color:var(--red)}
+.icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.inline{display:flex;gap:14px;align-items:flex-start}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{
+  min-height:50px;padding:0 22px;border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:800;border:1px solid transparent;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.btn.primary{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 10px 24px rgba(34,197,94,.25)
+}
+.btn.primary:hover{
+  background:var(--green-dark);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(34,197,94,.32)
+}
+.btn.secondary{
+  background:#fff;
+  border-color:#cbd5e1;
+  color:var(--ink)
+}
+.btn.secondary:hover{border-color:var(--green);transform:translateY(-2px)}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 11px;border:1px solid var(--line);
+  border-radius:999px;background:#fff;font-size:.86rem;font-weight:700;
+}
+
+/* nav */
+.navbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(229,231,235,.9);
+}
+.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.04rem}
+.logo-mark{
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;background:var(--green);color:#fff;
+}
+.logo-mark svg{width:21px;height:21px}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.nav-link{font-size:.93rem;font-weight:700;color:var(--text)}
+
+/* hero */
+.hero{
+  padding:76px 0 60px;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(34,197,94,.11), transparent 25%),
+    linear-gradient(180deg,#ffffff 0%,#fbfefc 100%);
+  overflow:hidden;
+}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
+.hero-copy{max-width:680px}
+.hero-topline{
+  display:inline-block;
+  margin-bottom:18px;
+  font-size:1rem;
+  font-weight:800;
+  color:var(--green);
+}
+.hero h1 .highlight{color:var(--green)}
+.hero-points{display:grid;gap:12px;margin-top:26px}
+.hero-point{
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:1.18rem;
+  font-weight:750;
+  color:#1f2937;
+}
+.hero-point svg{
+  width:22px;height:22px;
+  stroke:var(--green);
+  stroke-width:2.2;
+  fill:none;
+  flex:0 0 auto;
+  margin-top:3px
+}
+.hero-urgency{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.urgency-item{
+  border:1px solid var(--line);
+  border-radius:14px;padding:12px 14px;background:#fff;
+  min-width:150px;
+}
+.urgency-item b{display:block;color:var(--green);font-size:1rem}
+.urgency-item span{font-size:.82rem;color:var(--muted)}
+.hero-note{
+  font-size:.95rem;
+  color:#475569;
+  font-weight:700;
+  margin-top:14px;
+}
+
+/* hero visual */
+.browser{
+  border:1px solid #dfe5e2;border-radius:24px;background:#fff;
+  box-shadow:0 30px 70px rgba(17,24,39,.12);overflow:hidden;
+  transform:perspective(1000px) rotateY(-2deg);
+  transition:transform .35s ease;
+}
+.browser:hover{transform:perspective(1000px) rotateY(0deg) translateY(-4px)}
+.browser-top{
+  height:42px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:7px;padding:0 14px;background:#fafafa
+}
+.dot{width:8px;height:8px;border-radius:50%;background:#d1d5db}
+.browser-body{padding:20px}
+.mock-hero{
+  border-radius:18px;min-height:210px;
+  background:linear-gradient(135deg,#f9fafb,#eefbf3);
+  padding:24px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;
+}
+.mock-copy h4{font-size:1.55rem;margin:0 0 9px;letter-spacing:-.03em}
+.mock-copy p{font-size:.82rem;color:#6b7280}
+.mock-pill{
+  display:inline-block;background:var(--green);color:#fff;
+  border-radius:999px;padding:6px 10px;font-size:.72rem;font-weight:800
+}
+.mock-img{
+  border-radius:16px;
+  background:
+    linear-gradient(160deg,rgba(34,197,94,.18),rgba(34,197,94,.02)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='360' viewBox='0 0 500 360'%3E%3Crect width='500' height='360' fill='%23f8fafc'/%3E%3Ccircle cx='360' cy='115' r='72' fill='%23dcfce7'/%3E%3Crect x='85' y='90' width='230' height='160' rx='16' fill='%23ffffff' stroke='%23d1fae5' stroke-width='4'/%3E%3Crect x='115' y='120' width='120' height='16' rx='8' fill='%2322c55e'/%3E%3Crect x='115' y='150' width='160' height='10' rx='5' fill='%239ca3af'/%3E%3Crect x='115' y='175' width='140' height='10' rx='5' fill='%23d1d5db'/%3E%3Crect x='115' y='208' width='80' height='28' rx='8' fill='%2322c55e'/%3E%3C/svg%3E");
+  background-size:cover;background-position:center;
+}
+.mock-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.mock-card{min-height:104px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}
+.mock-card .line{height:7px;border-radius:99px;background:#d1d5db;margin-top:9px}
+.mock-card .line.green{background:#86efac;width:55%}
+
+/* problem */
+.problem-grid{grid-template-columns:repeat(3,1fr);margin-top:34px}
+.problem-card p{margin:0}
+
+/* before after */
+.ba-grid{grid-template-columns:1fr 1fr;margin-top:36px}
+.ba-card{position:relative;overflow:hidden}
+.ba-card.before{border-top:4px solid var(--red)}
+.ba-card.after{border-top:4px solid var(--green)}
+.ba-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ba-title span{
+  font-size:.95rem;
+  font-weight:900;
+  padding:8px 12px;border-radius:999px
+}
+.before .ba-title span{background:var(--red-soft);color:#b91c1c}
+.after .ba-title span{background:var(--green-soft);color:var(--green-dark)}
+.list{display:grid;gap:12px}
+.list-item{display:flex;gap:10px;align-items:flex-start}
+.list-item svg{width:20px;height:20px;flex:0 0 auto;margin-top:2px}
+.before .list-item svg{stroke:var(--red)}
+.after .list-item svg{stroke:var(--green-dark)}
+
+/* why free */
+.why-grid{grid-template-columns:1fr 1fr;margin-top:34px}
+.why-card{box-shadow:none;background:#fff}
+.why-card.green-top{border-top:4px solid var(--green)}
+.why-card.gray-top{border-top:4px solid #9ca3af}
+
+/* scope */
+.scope-grid{
+  grid-template-columns:1fr 1fr;
+  margin-top:34px;
+  align-items:stretch;
+}
+.scope-grid .card{
+  display:flex;
+  flex-direction:column;
+}
+.scope-free{border-top:4px solid var(--green)}
+.scope-paid{border-top:4px solid #f59e0b}
+.scope-label{
+  font-size:.82rem;font-weight:900;text-transform:uppercase;
+  letter-spacing:.07em;margin-bottom:10px
+}
+.scope-free .scope-label{color:var(--green)}
+.scope-paid .scope-label{color:#b45309}
+.scope-groups{display:grid;gap:18px;margin-top:20px}
+.scope-group h4{
+  margin:0 0 9px;font-size:.82rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em
+}
+.scope-group .list-item p{margin:0;font-size:.96rem}
+.scope-note{
+  margin-top:auto;
+  padding:14px 16px;border-radius:14px;
+  background:var(--soft);border:1px solid var(--line);
+  font-size:.92rem;color:var(--text)
+}
+
+/* fit */
+.fit-grid{grid-template-columns:1fr 1fr;margin-top:34px}
+.fit-good{border-top:4px solid var(--green)}
+.fit-bad{border-top:4px solid var(--red)}
+
+/* capacity */
+.capacity-card{
+  max-width:640px;
+  margin:auto;
+  padding:30px 34px 36px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.cohort-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 16px;
+  border:1px solid #b6d7c1;
+  border-radius:999px;
+  background:#f4fbf7;
+  color:#22c55e;
+  font-size:.88rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.cohort-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--green);
+  display:inline-block;
+}
+.capacity-label{
+  margin:18px 0 12px;
+  font-weight:800;
+  font-size:.88rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--green);
+}
+.capacity-headline{
+  font-size:clamp(2rem, 3vw, 3rem);
+  line-height:1.08;
+  max-width:540px;
+  margin:30px;
+}
+.capacity-ring{
+  width:94px;
+  height:94px;
+  margin:0 auto 28px;
+  border-radius:50%;
+  border:9px solid #22c55e;
+  display:grid;
+  place-items:center;
+  background:#fff;
+}
+.capacity-ring-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+.capacity-ring-inner strong{
+  font-size:2rem;
+  color:#22c55e;
+  font-weight:900;
+}
+.capacity-ring-inner span{
+  font-size:.95rem;
+  color:var(--muted);
+  margin-top:4px;
+}
+.capacity-availability{
+  font-size:1.1rem;
+  font-weight:800;
+  color:var(--ink);
+  margin:0;
+}
+
+/* process */
+.process-grid{grid-template-columns:repeat(4,1fr);margin-top:34px}
+.step{
+  position:relative;
+  padding-top:68px;
+}
+.step-num{
+  position:absolute;top:24px;left:28px;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--green);color:#fff;
+  display:grid;place-items:center;font-weight:900;
+}
+
+/* faq */
+.faq{max-width:900px;margin:auto}
+details{
+  border:1px solid var(--line);border-radius:14px;
+  padding:17px 19px;background:#fff;margin-bottom:10px
+}
+summary{cursor:pointer;font-weight:800}
+details p{margin:12px 0 0;color:var(--muted)}
+
+/* final */
+.final-wrap{
+  padding:52px;border:1px solid var(--line);border-radius:28px;
+  background:
+    radial-gradient(circle at 85% 20%,rgba(34,197,94,.15),transparent 24%),
+    #fff;
+  box-shadow:var(--shadow);
+}
+.final-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+/* footer */
+footer{padding:34px 0;border-top:1px solid var(--line);background:#fff}
+.footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+
+/* subtle reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .hero-grid,.scope-grid,.fit-grid,.why-grid,.ba-grid{grid-template-columns:1fr}
+  .problem-grid,.process-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{padding-top:52px}
+  .browser{transform:none}
+  .capacity{grid-template-columns:auto 1fr}
+  .capacity .btn{grid-column:1/-1}
+}
+@media(max-width:640px){
+  .capacity-card{padding:24px 18px 28px}
+  .capacity-headline{font-size:2rem}
+  .capacity-ring{width:84px;height:84px;border-width:8px}
+
+  h1{font-size:2.65rem}
+  h2{font-size:2.2rem}
+  .container{width:min(var(--max),calc(100% - 24px))}
+  .section{padding:68px 0}
+  .problem-grid,.process-grid{grid-template-columns:1fr}
+  .nav-link.how{display:none}
+  .nav .btn{padding:0 14px;min-height:44px}
+  .brand{font-size:.94rem}
+  .logo-mark{width:32px;height:32px}
+  .mock-hero{grid-template-columns:1fr}
+  .mock-img{min-height:150px}
+  .mock-cards{grid-template-columns:1fr}
+  .capacity{grid-template-columns:1fr;text-align:center}
+  .capacity-num{margin:auto}
+  .final-wrap{padding:34px 22px}
+  .hero-urgency{display:grid;grid-template-columns:1fr 1fr}
+  .urgency-item{min-width:0}
+}
+
+/* === Conversion-funnel additions below hero === */
+.problem-path{margin-top:36px}
+.problem-source-grid{grid-template-columns:repeat(3,1fr)}
+.source-card{text-align:center}
+.source-card .icon{margin:0 auto 14px}
+.source-card h3{margin-bottom:6px}
+.flow-arrow{display:grid;place-items:center;margin:22px 0;color:var(--green)}
+.flow-arrow svg{width:34px;height:34px;stroke:currentColor;fill:none;stroke-width:2}
+.search-box{
+  max-width:640px;margin:auto;padding:22px 24px;
+  border:1px solid var(--line);border-radius:18px;
+  background:#fff;box-shadow:var(--shadow);text-align:center
+}
+.search-chip{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid #d1d5db;border-radius:999px;
+  padding:10px 16px;background:#fff;color:#374151
+}
+.problem-result{
+  max-width:700px;margin:20px auto 0;padding:22px;
+  border-radius:18px;background:var(--red-soft);
+  border:1px solid #fecdd3;text-align:center
+}
+.problem-result strong{color:#b91c1c;font-size:1.08rem}
+.competitor-result{
+  max-width:700px;margin:12px auto 0;padding:22px;
+  border-radius:18px;background:var(--green-soft);
+  border:1px solid #bbf7d0;text-align:center
+}
+.competitor-result strong{color:var(--green-dark);font-size:1.08rem}
+
+.site-preview{
+  height:160px;border-radius:16px;border:1px solid var(--line);
+  margin:14px 0 20px;position:relative;overflow:hidden;background:#fff
+}
+.before .site-preview{background:#f8fafc}
+.before .site-preview:before{
+  content:"";position:absolute;left:12%;top:20%;width:76%;height:16px;
+  border-radius:5px;background:#d1d5db;
+  box-shadow:0 28px 0 #e5e7eb,0 56px 0 #e5e7eb,0 84px 0 #d1d5db
+}
+.after .site-preview{background:linear-gradient(135deg,#f0fdf4,#fff)}
+.after .site-preview:before{
+  content:"";position:absolute;left:10%;top:18%;width:45%;height:17px;
+  border-radius:6px;background:var(--green);
+  box-shadow:0 30px 0 #bbf7d0,0 60px 0 #dcfce7
+}
+.after .site-preview:after{
+  content:"";position:absolute;right:9%;top:18%;width:28%;height:62%;
+  border-radius:12px;background:#dcfce7;border:1px solid #bbf7d0
+}
+
+.outcome-grid{grid-template-columns:repeat(3,1fr);margin-top:22px}
+.outcome-card{text-align:center}
+.outcome-card strong{
+  display:block;font-size:1.45rem;color:var(--green);margin-top:5px
+}
+
+.value-wrap{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:24px;align-items:center;margin-top:34px
+}
+.value-card{padding:30px;text-align:center}
+.value-card.agency{border-top:4px solid #9ca3af}
+.value-card.free{border-top:4px solid var(--green)}
+.value-price{
+  font-size:clamp(2.4rem,4vw,4rem);
+  font-weight:900;letter-spacing:-.05em;margin:6px 0
+}
+.value-price.gray{color:#4b5563}
+.value-price.green{color:var(--green)}
+.vs{font-weight:900;color:#9ca3af;font-size:1.05rem}
+
+.benefit-grid{grid-template-columns:repeat(3,1fr);margin-top:30px}
+.benefit-card{text-align:center}
+.benefit-card .icon{margin:0 auto 14px}
+
+.market-note{
+  max-width:820px;margin:18px auto 0;
+  padding:13px 15px;border-radius:12px;
+  background:#fff7ed;border:1px solid #fed7aa;
+  color:#9a3412;font-size:.9rem
+}
+
+@media(max-width:960px){
+  .problem-source-grid,.outcome-grid,.benefit-grid{grid-template-columns:repeat(2,1fr)}
+  .value-wrap{grid-template-columns:1fr}
+  .vs{text-align:center}
+}
+@media(max-width:640px){
+  .problem-source-grid,.outcome-grid,.benefit-grid{grid-template-columns:1fr}
+}
+
+
+/* requested-only updates */
+.center > p.muted,
+.center.max-760 > p.muted{
+  font-size:1.06rem;
+  line-height:1.65;
+}
+
+.package-benefit-grid{
+  grid-template-columns:repeat(3,1fr);
+  margin-top:30px;
+}
+.package-benefit-card{
+  text-align:center;
+  min-height:230px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.package-benefit-card .icon{
+  margin:0 auto 14px;
+  width:50px;
+  height:50px;
+}
+.package-benefit-card h3{
+  margin-bottom:8px;
+}
+.package-benefit-card p{
+  margin-bottom:0;
+  max-width:290px;
+}
+@media(max-width:960px){
+  .package-benefit-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .package-benefit-grid{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav">
+    <a href="#" class="brand">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M8 7l4 10 4-10" stroke="currentColor" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Takween Connect</span>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-link how" href="#process">How It Works</a>
+      <a class="btn primary" href="#apply">Apply Now</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="hero-topline">Free websites for UK Muslim-owned businesses at £0 development cost</div>
+      <h1>Your business is established. <span class="highlight">Your website should show it.</span></h1>
+
+      <div class="hero-points">
+        <div class="hero-point">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <span>No proper website? <strong>We’ll build your professional online home.</strong></span>
+        </div>
+        <div class="hero-point">
+          <svg viewBox="0 0 24 24"><path d="M4 18l4-4 4 3 6-8"/><path d="M14 9h4v4"/></svg>
+          <span>Outdated website? <strong>We’ll rebuild the essentials clearly.</strong></span>
+        </div>
+      </div>
+
+      <div class="hero-urgency">
+        <div class="urgency-item"><b>Apply in ~2 minutes</b><span>Short application</span></div>
+        <div class="urgency-item"><b>Fast-track build</b><span>Once content is ready</span></div>
+        <div class="urgency-item"><b>Limited monthly places</b><span>Selected businesses only</span></div>
+      </div>
+
+      <div class="btns">
+        <a class="btn primary" href="#apply">Apply for a Free Website</a>
+        <a class="btn secondary" href="#fit">See If You Qualify</a>
+      </div>
+      <div class="hero-note">No obligation to buy extra services.</div>
+    </div>
+
+    <div class="browser" aria-label="Website project mockup">
+      <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="browser-body">
+        <div class="mock-hero">
+          <div class="mock-copy">
+            <span class="mock-pill">Local business</span>
+            <h4>A modern website that makes the business feel established.</h4>
+            <p>Clear services, stronger trust, and one obvious enquiry path.</p>
+          </div>
+          <div class="mock-img"></div>
+        </div>
+        <div class="mock-cards">
+          <div class="mock-card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 18V8l8-4 8 4v10"/><path d="M8 18v-5h8v5"/></svg></div><div class="line green"></div><div class="line"></div></div>
+          <div class="mock-card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M7 10h10M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12H3V6a2 2 0 0 1 2-2z"/></svg></div><div class="line green"></div><div class="line"></div></div>
+          <div class="mock-card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 12l4 4L20 4"/><path d="M4 20h16"/></svg></div><div class="line green"></div><div class="line"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section reveal">
+  <div class="container">
+    <div class="center max-760">
+      <h2>Your customers already look for <span class="green">Muslim-owned businesses</span> like yours online.</h2>
+      <p class="muted">The problem is what they see when they search for a Muslim-owned business like yours.</p>
+    </div>
+
+    <div class="problem-path">
+      <div class="grid problem-source-grid">
+        <div class="card source-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><circle cx="12" cy="9" r="3"/><path d="M8 17c1.5-2 6.5-2 8 0"/></svg>
+          </div>
+          <h3>Instagram</h3>
+          <p class="muted">Good for content, but not a complete business presence.</p>
+        </div>
+
+        <div class="card source-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 20l2-5a8 8 0 1 1 3 3z"/><path d="M9 8c1 3 3 5 6 6"/></svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <p class="muted">Great for messages, but weak for first-time trust.</p>
+        </div>
+
+        <div class="card source-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12h4l3-3v6l-3-3"/><path d="M15 8c3 1 5 3 5 6"/></svg>
+          </div>
+          <h3>Word of mouth</h3>
+          <p class="muted">Referrals help, but new customers still check you online.</p>
+        </div>
+      </div>
+
+      <div class="flow-arrow">
+        <svg viewBox="0 0 24 24"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
+      </div>
+
+      <div class="search-box">
+        <p style="font-weight:800;margin-bottom:12px">Then they search for a business like yours.</p>
+        <div class="search-chip">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke="#6b7280" fill="none"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
+          Muslim-owned business near me
+        </div>
+      </div>
+
+      <div class="problem-result">
+        <strong>If they cannot find a proper website, you can look harder to trust than you really are.</strong>
+      </div>
+
+      <div class="competitor-result">
+        <strong>So they may choose a competitor who looks clearer and more established online.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" style="background:var(--soft)">
+  <div class="container">
+    <div class="center max-760">
+      <h2>What changes when your Muslim-owned business gets a <span class="green">proper online home.</span></h2>
+    </div>
+
+    <div class="grid ba-grid">
+      <div class="card ba-card before">
+        <div class="ba-title"><h3>Before</h3><span>Scattered</span></div>
+        <div class="site-preview"></div>
+        <div class="list">
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Customers jump between social profiles and messages</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Services and trust signals are difficult to find</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Your online presence looks weaker than the business</p></div>
+        </div>
+      </div>
+
+      <div class="card ba-card after">
+        <div class="ba-title"><h3>After</h3><span>Professional</span></div>
+        <div class="site-preview"></div>
+        <div class="list">
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg><p>One clear home for services, reviews and enquiries</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg><p>Stronger credibility across mobile and desktop</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg><p>A stronger reason for customers to choose you</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid outcome-grid">
+      <div class="card outcome-card"><span>First impression</span><strong>Stronger</strong></div>
+      <div class="card outcome-card"><span>Customer journey</span><strong>Clearer</strong></div>
+      <div class="card outcome-card"><span>Online presence</span><strong>Professional</strong></div>
+    </div>
+
+    <div class="center"><a class="btn primary" href="#apply" style="margin-top:26px">Apply for a Free Website</a></div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="center max-760">
+      <h2>A professional website for a Muslim-owned business can cost <span class="green">thousands.</span></h2>
+      <p class="muted">For selected businesses, Takween Connect covers the development cost of the agreed starter scope.</p>
+    </div>
+
+    <div class="value-wrap">
+      <div class="card value-card agency">
+        <p class="muted" style="font-weight:800">Comparable agency build</p>
+        <div class="value-price gray">£2,000–£5,000</div>
+        <p>Professional design, multiple pages, responsive development and optimisation.</p>
+      </div>
+
+      <div class="vs">VS</div>
+
+      <div class="card value-card free">
+        <p class="muted" style="font-weight:800">Takween Connect development cost</p>
+        <div class="value-price green">£0</div>
+        <p>For the agreed free starter website scope.</p>
+      </div>
+    </div>
+
+    <div class="market-note">
+      Use the £2,000–£5,000 comparison publicly only if Takween approves this as a genuine market-value range.
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" style="background:var(--soft)">
+  <div class="container">
+    <div class="center max-760">
+      <h2>Built to feel <span class="green">fast, modern and professional.</span></h2>
+    </div>
+
+    <div class="grid benefit-grid">
+      <div class="card benefit-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg></div>
+        <h3>Fast</h3>
+        <p class="muted">Optimised for a smoother browsing experience.</p>
+      </div>
+
+      <div class="card benefit-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 5v4"/></svg></div>
+        <h3>Modern</h3>
+        <p class="muted">Clean layout, clear hierarchy and responsive presentation.</p>
+      </div>
+
+      <div class="card benefit-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Professional</h3>
+        <p class="muted">Designed to make an established business feel established online.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="center max-760">
+      <h2>A genuine exchange <span class="green">not a hidden upsell.</span></h2>
+      <p class="muted">We’re building real portfolio work in this niche while helping selected Muslim-owned businesses improve their online presence.</p>
+    </div>
+    <div class="grid why-grid">
+      <div class="card why-card green-top">
+        <div class="inline">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div>
+          <div><h3>You get</h3><p>A professionally built starter website at £0 development cost. Comparable agency builds can commonly sit around £2,000–£5,000.</p></div>
+        </div>
+      </div>
+      <div class="card why-card gray-top">
+        <div class="inline">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/></svg></div>
+          <div><h3>We get</h3><p>A real project, honest feedback, and portfolio value where permission is given.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" style="background:var(--soft)">
+  <div class="container">
+    <div class="center max-760">
+      <h2>A clear <span class="green">free website package</span> without the wall of text.</h2>
+      <p class="muted">A starter website of this type can often be priced around £2,000–£5,000 elsewhere. For selected Muslim-owned businesses, the agreed development scope is £0.</p>
+    </div>
+
+    <div class="grid package-benefit-grid">
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="7" y="2" width="10" height="20" rx="2"/>
+            <path d="M10 18h4"/>
+          </svg>
+        </div>
+        <h3>Mobile responsive</h3>
+        <p class="muted">Designed to work smoothly across mobile, tablet and desktop.</p>
+      </div>
+
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 5h16v14H4z"/>
+            <path d="M4 9h16"/>
+            <path d="M8 5v4"/>
+          </svg>
+        </div>
+        <h3>Professional design</h3>
+        <p class="muted">A clean, polished layout that helps your business look credible and established.</p>
+      </div>
+
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M13 2L5 14h6l-1 8 8-12h-6z"/>
+          </svg>
+        </div>
+        <h3>Performance basics</h3>
+        <p class="muted">Essential speed and performance optimisation for a smoother browsing experience.</p>
+      </div>
+
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 5h16v14H4z"/>
+            <path d="M8 9h8"/>
+            <path d="M8 13h5"/>
+          </svg>
+        </div>
+        <h3>4–5 core pages</h3>
+        <p class="muted">Enough space to present your business, services, trust signals and contact details clearly.</p>
+      </div>
+
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6"/>
+            <path d="M16 16l4 4"/>
+            <path d="M8.5 11h5"/>
+          </svg>
+        </div>
+        <h3>Basic SEO setup</h3>
+        <p class="muted">Essential on-page structure to help search engines understand your website.</p>
+      </div>
+
+      <div class="card package-benefit-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 12a8 8 0 0 1 14-5"/>
+            <path d="M18 3v4h-4"/>
+            <path d="M20 12a8 8 0 0 1-14 5"/>
+            <path d="M6 21v-4h4"/>
+          </svg>
+        </div>
+        <h3>Up to 2 revision rounds</h3>
+        <p class="muted">Two focused rounds to refine the agreed starter website before launch.</p>
+      </div>
+    </div>
+
+    <div class="grid scope-grid">
+      <div class="card scope-free">
+        <div class="scope-label">Free Website Package</div>
+        <h3>Included</h3>
+        <div class="scope-groups">
+          <div class="scope-group">
+            <h4>Website</h4>
+            <div class="list">
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Up to 4–5 pages</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Mobile-responsive design</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Services, contact and enquiry journey</p></div>
+            </div>
+          </div>
+          <div class="scope-group">
+            <h4>Essentials</h4>
+            <div class="list">
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Basic on-page SEO</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Basic performance optimisation</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>2 revision rounds</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-note"><strong class="green">£0 development cost.</strong> Domain and hosting remain the business’s responsibility.</div>
+      </div>
+
+      <div class="card scope-paid">
+        <div class="scope-label">Optional Paid Add-ons</div>
+        <h3>Only if you need more</h3>
+        <div class="scope-groups">
+          <div class="scope-group">
+            <h4>Advanced features</h4>
+            <div class="list">
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="#b45309" fill="none"><path d="M12 5v14M5 12h14"/></svg><p>Ecommerce, payments or advanced booking</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="#b45309" fill="none"><path d="M12 5v14M5 12h14"/></svg><p>LMS, memberships, CRM or automation</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="#b45309" fill="none"><path d="M12 5v14M5 12h14"/></svg><p>Custom dashboards or software</p></div>
+            </div>
+          </div>
+          <div class="scope-group">
+            <h4>Ongoing work</h4>
+            <div class="list">
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="#b45309" fill="none"><path d="M12 5v14M5 12h14"/></svg><p>Maintenance, future pages or advanced SEO</p></div>
+              <div class="list-item"><svg viewBox="0 0 24 24" stroke="#b45309" fill="none"><path d="M12 5v14M5 12h14"/></svg><p>Additional integrations or future functionality</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-note">Nothing extra is added unless you ask for it and approve the price first.</div>
+      </div>
+    </div>
+
+    <div class="center"><a class="btn primary" href="#apply" style="margin-top:26px">Apply for a Free Website</a></div>
+  </div>
+</section>
+
+<section class="section reveal" id="fit">
+  <div class="container">
+    <div class="center max-760">
+      <h2>Is your Muslim-owned business a <span class="green">good fit?</span></h2>
+    </div>
+    <div class="grid fit-grid">
+      <div class="card fit-good">
+        <div class="inline"><div class="icon"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></div><h3>Good fit</h3></div>
+        <div class="list" style="margin-top:18px">
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>UK Muslim-owned business already trading with real customers</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>No proper website or an outdated one</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--green-dark)" fill="none"><path d="M5 12l4 4L19 6"/></svg><p>Clear services and enough content to build from</p></div>
+        </div>
+      </div>
+
+      <div class="card fit-bad">
+        <div class="inline"><div class="icon red-bg"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div><h3>Usually not a fit</h3></div>
+        <div class="list" style="margin-top:18px">
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--red)" fill="none"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Not launched yet / no real customers</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--red)" fill="none"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Main need is a large ecommerce or custom software build</p></div>
+          <div class="list-item"><svg viewBox="0 0 24 24" stroke="var(--red)" fill="none"><path d="M6 6l12 12M18 6L6 18"/></svg><p>Expecting unlimited revisions or ongoing free support</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="center"><a class="btn primary" href="#apply" style="margin-top:26px">See If You Qualify</a></div>
+  </div>
+</section>
+
+<section class="section-sm reveal" style="background:var(--soft)">
+  <div class="container">
+    <div class="capacity-card">
+      <div class="cohort-badge"><span class="cohort-dot"></span> Cohort Status: Applications Open</div>
+      <h2 class="capacity-headline">We currently offer up to 5 free websites per month.</h2>
+      <div class="capacity-ring">
+        <div class="capacity-ring-inner">
+          <strong>5</strong>
+          <span>of 5 left</span>
+        </div>
+      </div>
+      <p class="capacity-availability">5 of 5 places currently available</p>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="process">
+  <div class="container">
+    <div class="center max-760">
+      <h2>A <span class="green">simple 4-step</span> process.</h2>
+      <p class="muted">Keep the experience short and easy to understand.</p>
+    </div>
+    <div class="grid process-grid">
+      <div class="card step"><div class="step-num">1</div><h3>Apply</h3><p>Tell us about your business and current online presence.</p></div>
+      <div class="card step"><div class="step-num">2</div><h3>Review</h3><p>We check fit, scope and available capacity.</p></div>
+      <div class="card step"><div class="step-num">3</div><h3>Build</h3><p>We confirm essentials, build the website and collect feedback.</p></div>
+      <div class="card step"><div class="step-num">4</div><h3>Launch</h3><p>Final revisions are completed and the website goes live.</p></div>
+    </div>
+    <div class="center"><a class="btn primary" href="#apply" style="margin-top:26px">Apply for a Free Website</a></div>
+  </div>
+</section>
+
+<section class="section reveal" style="background:var(--soft)">
+  <div class="container faq">
+    <div class="center"><h2>Your questions answered.</h2></div>
+    <div style="margin-top:30px">
+      <details><summary>Is the website really free?</summary><p>Yes. Design and development within the agreed starter scope is free.</p></details>
+      <details><summary>Do I pay for domain and hosting?</summary><p>Yes. Domain, hosting and optional paid third-party tools remain your responsibility.</p></details>
+      <details><summary>Do I have to buy anything afterwards?</summary><p>No. Additional services are optional and only quoted if you request them.</p></details>
+      <details><summary>Does applying guarantee acceptance?</summary><p>No. Applications are reviewed against fit and available monthly capacity.</p></details>
+      <details><summary>Who builds the website?</summary><p>The programme is operated and delivered by the Takween Digital Services team.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="apply">
+  <div class="container">
+    <div class="final-wrap center">
+      <h2>Give your business a website that <span class="green">looks as established as you are.</span></h2>
+      <p class="muted max-760">Selected UK Muslim-owned businesses. A starter website that can often cost £2,000–£5,000 elsewhere, with £0 development cost for the agreed free scope. No obligation to buy extra services.</p>
+      <div class="final-badges">
+        <span class="badge">✓ Selected businesses only</span>
+        <span class="badge">✓ No hidden obligation</span>
+        <span class="badge">✓ Limited monthly places</span>
+      </div>
+      <div class="btns" style="justify-content:center">
+        <a class="btn primary" href="#">Apply for a Free Website</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="brand">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M5 7h14M8 7l4 10 4-10" stroke="currentColor" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Takween Connect</span>
+    </div>
+    <div class="footer-links">
+      <span>A Takween Digital Services initiative</span>
+      <a href="#">Programme Terms</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible');}
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

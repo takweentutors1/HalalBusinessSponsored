@@ -1,6 +1,6 @@
 import { limitedCapacity } from "@/lib/content/landing";
 import { getAcceptedCountThisMonth } from "@/lib/db/queries";
-import { CapacityRing } from "./CapacityRing";
+import { CapacityRingAnimated } from "./CapacityRingAnimated";
 
 /**
  * The ring shows real spots-remaining data from D1 (see
@@ -30,8 +30,8 @@ export async function LimitedCapacity() {
           margin: "0 auto",
           background: "var(--color-surface-base)",
           border: "1px solid var(--color-border-light)",
-          borderRadius: "var(--radius-xl)",
-          boxShadow: "var(--shadow-lg)",
+          borderRadius: "var(--radius-2xl)",
+          boxShadow: "var(--shadow-xl)",
           padding: "var(--space-8) var(--space-6)",
         }}
       >
@@ -80,14 +80,14 @@ export async function LimitedCapacity() {
 
         {/* Capacity Ring */}
         <div style={{ margin: "var(--space-2) auto" }}>
-          <CapacityRing total={limitedCapacity.count} remaining={remaining} />
+          <CapacityRingAnimated total={limitedCapacity.count} remaining={remaining} />
         </div>
 
         {/* Statement & Subtext */}
         <p
           style={{
             fontSize: "var(--font-size-xl)",
-            fontFamily: "var(--font-serif)",
+            fontFamily: "var(--font-display)",
             color: "#0f172a",
             fontWeight: 700,
             margin: "var(--space-6) 0 var(--space-2)",

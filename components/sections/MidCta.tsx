@@ -28,7 +28,7 @@ export function MidCta({ label, href, supportingText, subtext, tone = "plain" }:
         {supportingText && (
           <p
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "1.125rem",
               fontWeight: 600,
               color: "var(--color-primary-dark)",

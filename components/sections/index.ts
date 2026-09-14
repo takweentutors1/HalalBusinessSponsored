@@ -1,11 +1,14 @@
 export { Hero } from "./Hero";
 export { ProblemSection } from "./ProblemSection";
 export { ProblemSolution } from "./ProblemSolution";
+export { ValueComparison } from "./ValueComparison";
+export { BuiltToFeel } from "./BuiltToFeel";
 export { WhySponsored } from "./WhySponsored";
 export { ListSection } from "./ListSection";
 export { MidCta } from "./MidCta";
 export { StatsBar } from "./StatsBar";
 export { ScopeComparison } from "./ScopeComparison";
+export { PackageBenefits } from "./PackageBenefits";
 export { QualificationFit } from "./QualificationFit";
 export { LimitedCapacity } from "./LimitedCapacity";
 export { ProcessSteps } from "./ProcessSteps";

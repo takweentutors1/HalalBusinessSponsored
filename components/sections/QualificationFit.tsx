@@ -1,5 +1,10 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui";
 import { RichText } from "@/components/shared/RichText";
+import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
 function CheckIcon() {
@@ -38,6 +43,14 @@ function CrossIcon() {
   );
 }
 
+/**
+ * "Good fit" cascades in from the left, "Usually not a fit" from the
+ * right — from the original GSAP plan's mapping-matrix row for this
+ * section, never built during the phased rollout. The red cross icons
+ * get one gentle pulse on the not-a-fit card's entrance (a single pulse,
+ * not a loop — a permanently-pulsing red X reads as an alert/error state
+ * you'd want to act on, which isn't the intent here).
+ */
 export function QualificationFit({
   qualifies,
   notFit,
@@ -45,8 +58,45 @@ export function QualificationFit({
   qualifies: ListSectionContent;
   notFit: ListSectionContent;
 }) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      gsap.from(".qualify-card-good", {
+        opacity: 0,
+        x: -50,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".qualify-cards", start: "top 75%" },
+      });
+      gsap.from(".qualify-card-bad", {
+        opacity: 0,
+        x: 50,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".qualify-cards", start: "top 75%" },
+      });
+      gsap.fromTo(
+        ".qualify-cross-icon",
+        { scale: 0.6 },
+        {
+          scale: 1,
+          stagger: 0.06,
+          duration: 0.4,
+          ease: "back.out(2.5)",
+          delay: 0.4,
+          scrollTrigger: { trigger: ".qualify-cards", start: "top 75%" },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id={qualifies.id}
       style={{
         position: "relative",
@@ -87,6 +137,7 @@ export function QualificationFit({
 
         {/* Dual Cards */}
         <div
+          className="qualify-cards"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
@@ -96,13 +147,16 @@ export function QualificationFit({
         >
           {/* Who Qualifies Card */}
           <div
+            className="qualify-card-good"
+            onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+            onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
-              borderRadius: "var(--radius-xl)",
+              borderRadius: "var(--radius-2xl)",
               padding: "var(--space-8) var(--space-6)",
               background: "var(--color-surface-base)",
               border: "1px solid var(--color-border-light)",
               borderTop: "4px solid #1a4731",
-              boxShadow: "var(--shadow-md)",
+              boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
             }}
@@ -110,7 +164,7 @@ export function QualificationFit({
             <h3
               style={{
                 fontSize: "var(--font-size-xl)",
-                fontFamily: "var(--font-serif)",
+                fontFamily: "var(--font-display)",
                 color: "#0f172a",
                 marginBottom: "var(--space-4)",
               }}
@@ -157,13 +211,16 @@ export function QualificationFit({
 
           {/* Who Is Usually Not a Fit Card */}
           <div
+            className="qualify-card-bad"
+            onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+            onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
-              borderRadius: "var(--radius-xl)",
+              borderRadius: "var(--radius-2xl)",
               padding: "var(--space-8) var(--space-6)",
               background: "var(--color-surface-base)",
               border: "1px solid var(--color-border-light)",
               borderTop: "4px solid #ef4444",
-              boxShadow: "var(--shadow-md)",
+              boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
             }}
@@ -171,7 +228,7 @@ export function QualificationFit({
             <h3
               style={{
                 fontSize: "var(--font-size-xl)",
-                fontFamily: "var(--font-serif)",
+                fontFamily: "var(--font-display)",
                 color: "#0f172a",
                 marginBottom: "var(--space-4)",
               }}
@@ -194,6 +251,7 @@ export function QualificationFit({
                 >
                   <span
                     aria-hidden="true"
+                    className="qualify-cross-icon"
                     style={{
                       width: 20,
                       height: 20,
@@ -225,4 +283,3 @@ export function QualificationFit({
     </section>
   );
 }
-

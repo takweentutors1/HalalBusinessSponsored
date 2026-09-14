@@ -1,13 +1,18 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { RichText } from "@/components/shared/RichText";
 import { TrustIllustration } from "@/components/illustrations";
 import { GalleryIcon, MonitorIcon } from "@/components/icons";
+import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
 import { whyItsSponsored } from "@/lib/content/landing";
 
 /** Bidirectional swap glyph marking the exchange between the two panels. */
 function ExchangeGlyph() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width={28} height={28}>
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={28} height={28} className="exchange-glyph">
       <path
         d="M4 8h13.5M14 4l3.5 4L14 12"
         fill="none"
@@ -32,13 +37,18 @@ function ExchangePanel({
   icon,
   heading,
   items,
+  className,
 }: {
   icon: ReactNode;
   heading: string;
   items: readonly string[];
+  className: string;
 }) {
   return (
     <div
+      className={className}
+      onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
+      onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
       style={{
         background: "rgba(255,255,255,0.08)",
         border: "1px solid rgba(255,255,255,0.25)",
@@ -79,10 +89,48 @@ function ExchangePanel({
  * this is the page's one explicit answer to "what's the catch?". White
  * text checked against both gradient stops in FinalCta.tsx's comment
  * applies identically here (same gradient, same stops).
+ *
+ * The glyph spin + panels-converging-from-center entrance was specified
+ * in the original GSAP plan's §4.6 but never actually built during the
+ * phased rollout — added here as part of giving every card on the site
+ * consistent GSAP treatment.
  */
 export function WhySponsored() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      gsap.from(".exchange-glyph-wrap", {
+        rotation: -180,
+        scale: 0.4,
+        opacity: 0,
+        duration: 1.1,
+        ease: "back.out(2)",
+        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
+      });
+      gsap.from(".why-panel-left", {
+        opacity: 0,
+        x: 60,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
+      });
+      gsap.from(".why-panel-right", {
+        opacity: 0,
+        x: -60,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id={whyItsSponsored.id}
       style={{
         position: "relative",
@@ -110,7 +158,7 @@ export function WhySponsored() {
           <RichText text={whyItsSponsored.intro} />
         </p>
 
-        <div style={{ position: "relative", marginBottom: "var(--space-8)" }}>
+        <div className="why-sponsored-wrap" style={{ position: "relative", marginBottom: "var(--space-8)" }}>
           <div
             style={{
               display: "grid",
@@ -118,11 +166,12 @@ export function WhySponsored() {
               gap: "var(--space-6)",
             }}
           >
-            <ExchangePanel icon={<MonitorIcon size={24} />} heading="You Receive" items={whyItsSponsored.businessReceives} />
-            <ExchangePanel icon={<GalleryIcon size={24} />} heading="We Receive" items={whyItsSponsored.initiativeReceives} />
+            <ExchangePanel className="why-panel-left" icon={<MonitorIcon size={24} />} heading="You Receive" items={whyItsSponsored.businessReceives} />
+            <ExchangePanel className="why-panel-right" icon={<GalleryIcon size={24} />} heading="We Receive" items={whyItsSponsored.initiativeReceives} />
           </div>
           <div
             aria-hidden="true"
+            className="exchange-glyph-wrap"
             style={{
               position: "absolute",
               left: "50%",
