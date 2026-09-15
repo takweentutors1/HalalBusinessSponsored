@@ -247,11 +247,23 @@ export function ApplicationForm() {
             <span />
           )}
           {step < LAST_STEP ? (
-            <Button type="button" variant="primary" onClick={handleNext}>
+            <Button
+              type="button"
+              variant="primary"
+              className="cta-btn-accent"
+              style={{ background: "var(--color-accent)" }}
+              onClick={handleNext}
+            >
               Next
             </Button>
           ) : (
-            <Button type="submit" variant="primary" disabled={status === "submitting"}>
+            <Button
+              type="submit"
+              variant="primary"
+              className="cta-btn-accent"
+              style={{ background: "var(--color-accent)" }}
+              disabled={status === "submitting"}
+            >
               {status === "submitting" ? "Submitting…" : "Submit Application"}
             </Button>
           )}

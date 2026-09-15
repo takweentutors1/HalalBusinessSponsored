@@ -1,7 +1,6 @@
 import { GSAPReveal } from "@/components/shared/GSAPReveal";
 import { Reveal } from "@/components/shared/Reveal";
 import {
-  AfterLaunchCards,
   BuiltToFeel,
   FAQ,
   FinalCta,
@@ -61,21 +60,15 @@ export default function LandingPage() {
         <BuiltToFeel />
       </div>
 
-      {/* 4. Why It's Sponsored — GSAP-driven internal reveal (glyph spin +
-          panels converging from center), same reasoning as above. Already
-          carries id="why-its-sponsored" internally — no wrapper id needed. */}
+      {/* 4. Why It's Sponsored — GSAP-driven internal reveal (panels sliding
+          in from left/right), same reasoning as above. Already carries
+          id="why-its-sponsored" internally — no wrapper id needed. */}
       <WhySponsored />
 
       {/* 5. What You Get (Scope Comparison) — GSAP-driven internal reveal,
           same reasoning as above. */}
       <div id="scope">
         <ScopeComparison included={whatsIncluded} addOns={whatsOutsideScope} />
-      </div>
-
-      {/* 6. After Launch — GSAP-driven internal reveal (quickTo tilt cards +
-          staggered entrance), same reasoning as above. */}
-      <div id="after-launch">
-        <AfterLaunchCards />
       </div>
 
       {/* 7. Who It's For (Qualification Fit) — GSAP-driven internal reveal

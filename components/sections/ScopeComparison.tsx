@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui";
@@ -12,93 +11,73 @@ import type { CategorizedSection as CategorizedSectionContent } from "@/lib/cont
 interface ScopeComparisonProps {
   included: CategorizedSectionContent;
   addOns: CategorizedSectionContent;
-  /** Per-item icons keyed by category title, applied within the "included"
-   * column only (e.g. WhatsApp/Maps icons on the Features category). */
-  includedItemIcons?: Record<string, (ReactNode | undefined)[]>;
 }
 
 function CheckGlyph() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width={12} height={12} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 12.5l5 5L20 6" />
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      width={20}
+      height={20}
+      fill="none"
+      stroke="var(--color-accent-dark)"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ flexShrink: 0, marginTop: 2 }}
+    >
+      <path d="M5 12l4 4L19 6" />
     </svg>
   );
 }
 
 function PlusGlyph() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width={12} height={12} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      width={20}
+      height={20}
+      fill="none"
+      stroke="#b45309"
+      strokeWidth={2}
+      strokeLinecap="round"
+      style={{ flexShrink: 0, marginTop: 2 }}
+    >
       <path d="M12 5v14M5 12h14" />
     </svg>
   );
 }
 
-function Badge({ label, tone }: { label: string; tone: "free" | "addon" }) {
-  const isFree = tone === "free";
+function ScopeLabel({ label, tone }: { label: string; tone: "free" | "addon" }) {
   return (
-    <span
+    <div
       style={{
-        display: "inline-flex",
-        alignItems: "center",
-        padding: "4px 12px",
-        borderRadius: "var(--radius-full)",
-        fontSize: "var(--font-size-xs)",
-        fontWeight: 700,
-        background: isFree ? "#dcfce7" : "#fef3c7",
-        color: isFree ? "#166534" : "#92400e",
-        marginBottom: "var(--space-4)",
+        fontSize: "0.82rem",
+        fontWeight: 900,
+        textTransform: "uppercase",
+        letterSpacing: "0.07em",
+        marginBottom: 10,
+        color: tone === "free" ? "var(--color-accent)" : "#b45309",
       }}
     >
       {label}
-    </span>
-  );
-}
-
-function ScopeCheckBadge() {
-  return (
-    <span
-      aria-hidden="true"
-      style={{
-        color: "var(--color-primary-accessible)",
-        fontWeight: 700,
-        fontSize: 14,
-        flexShrink: 0,
-        marginTop: 1,
-      }}
-    >
-      ✓
-    </span>
-  );
-}
-
-function AddOnMarker() {
-  return (
-    <span
-      aria-hidden="true"
-      style={{
-        color: "#d97706",
-        fontWeight: 700,
-        fontSize: 14,
-        flexShrink: 0,
-        marginTop: 1,
-      }}
-    >
-      +
-    </span>
+    </div>
   );
 }
 
 /**
  * Replaces two stacked "spec sheet" blocks with side-by-side comparison cards:
- * Left: pale green Free Website card
- * Right: clean white Optional Paid Add-ons card
+ * Left: white Free Website card with a bright-green top accent
+ * Right: white Optional Paid Add-ons card with an amber top accent
  *
  * Panel entrance (slide in from opposite sides) and the per-row cascading
  * checklist reveal were in the original GSAP plan's §4.7 but never built
  * during the phased rollout — added here as part of giving every card on
  * the site consistent GSAP treatment.
  */
-export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeComparisonProps) {
+export function ScopeComparison({ included, addOns }: ScopeComparisonProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -142,13 +121,17 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
   );
 
   return (
-    <section ref={sectionRef} style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-base)" }}>
+    <section ref={sectionRef} style={{ position: "relative", overflow: "hidden", background: "var(--color-surface-elevated)" }}>
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1040, margin: "0 auto", padding: "var(--space-12) var(--space-8)" }}>
-        <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
-          <span className="ui-section-eyebrow">WHAT YOU GET</span>
-          <h2>
-            Clear free scope. Clear paid extras.
+        <div style={{ textAlign: "center", marginBottom: "var(--space-10)", maxWidth: 760, marginLeft: "auto", marginRight: "auto" }}>
+          <h2 style={{ fontSize: "clamp(2rem, 3.7vw, 3.9rem)" }}>
+            A clear <span style={{ color: "var(--color-accent)" }}>free website package</span> for Halal Muslim
+            businesses
           </h2>
+          <p style={{ color: "var(--color-text-tertiary)", fontSize: "var(--font-size-base)", margin: 0 }}>
+            A starter website of this type can often be priced around £2,000–£5,000 elsewhere. For selected
+            Muslim-owned businesses, the agreed development scope is £0.
+          </p>
         </div>
 
         <PackageBenefits />
@@ -162,23 +145,23 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             alignItems: "stretch",
           }}
         >
-          {/* Included, free (Pale Mint Green Card) */}
+          {/* Included, free */}
           <div
             className="scope-panel-free"
             onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
             onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
               padding: "var(--space-8) var(--space-6)",
-              background: "#f0faf5",
+              background: "var(--color-surface-base)",
               borderRadius: "var(--radius-2xl)",
               border: "1px solid var(--color-border-light)",
+              borderTop: "4px solid var(--color-accent)",
+              boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <div>
-              <Badge label="Free Website Package" tone="free" />
-            </div>
+            <ScopeLabel label="Free Website Package" tone="free" />
             <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-6)" }}>
               {included.title}
             </h3>
@@ -212,7 +195,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         lineHeight: 1.55,
                       }}
                     >
-                      <ScopeCheckBadge />
+                      <CheckGlyph />
                       <span>
                         <RichText text={item} />
                       </span>
@@ -222,39 +205,38 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
               </div>
             ))}
             <div
+              className="scope-note-free"
               style={{
                 marginTop: "auto",
-                padding: "var(--space-3) var(--space-4)",
-                background: "white",
-                border: "1px dashed #cbd5e1",
-                borderRadius: "var(--radius-md)",
-                fontSize: "var(--font-size-base)",
-                fontWeight: 700,
-                color: "#0f172a",
+                padding: "14px 16px",
+                background: "var(--color-surface-elevated)",
+                border: "1px solid var(--color-border-light)",
+                borderRadius: 14,
+                fontSize: "0.92rem",
+                color: "var(--color-text-secondary)",
               }}
             >
-              Development cost: £0
+              <RichText text={included.note ?? ""} />
             </div>
           </div>
 
-          {/* Paid add-ons (Clean White Card) */}
+          {/* Paid add-ons */}
           <div
             className="scope-panel-addon"
             onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
             onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
             style={{
               padding: "var(--space-8) var(--space-6)",
-              background: "#ffffff",
+              background: "var(--color-surface-base)",
               borderRadius: "var(--radius-2xl)",
               border: "1px solid var(--color-border-light)",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+              borderTop: "4px solid #f59e0b",
+              boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <div>
-              <Badge label="Optional Paid Add-ons" tone="addon" />
-            </div>
+            <ScopeLabel label="Optional Paid Add-ons" tone="addon" />
             <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-6)" }}>
               {addOns.title}
             </h3>
@@ -288,7 +270,7 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
                         lineHeight: 1.55,
                       }}
                     >
-                      <AddOnMarker />
+                      <PlusGlyph />
                       <span>
                         <RichText text={item} />
                       </span>
@@ -300,39 +282,30 @@ export function ScopeComparison({ included, addOns, includedItemIcons }: ScopeCo
             <div
               style={{
                 marginTop: "auto",
-                padding: "var(--space-3) var(--space-4)",
-                background: "#fafaf9",
-                border: "1px dashed #cbd5e1",
-                borderRadius: "var(--radius-md)",
-                fontSize: "var(--font-size-base)",
+                padding: "14px 16px",
+                background: "var(--color-surface-elevated)",
+                border: "1px solid var(--color-border-light)",
+                borderRadius: 14,
+                fontSize: "0.92rem",
                 color: "var(--color-text-secondary)",
               }}
             >
-              You always see the price before any paid work begins.
+              {addOns.note}
             </div>
           </div>
         </div>
 
-        {/* Full-width Domain & Hosting callout strip */}
-        <div
-          style={{
-            marginTop: "var(--space-8)",
-            background: "var(--color-neutral-50)",
-            border: "1px solid var(--color-border-light)",
-            borderLeft: "4px solid var(--color-primary-accessible)",
-            borderRadius: "var(--radius-lg)",
-            padding: "var(--space-4) var(--space-6)",
-            fontSize: "var(--font-size-base)",
-            lineHeight: 1.6,
-            color: "var(--color-text-secondary)",
-          }}
-        >
-          <strong style={{ color: "var(--color-text-primary)" }}>Domain &amp; hosting:</strong> you remain responsible for your domain, hosting and any paid third-party tools. We can guide you toward a suitable option if needed.
-        </div>
-
         {/* Centered CTA */}
-        <div style={{ marginTop: "var(--space-8)", textAlign: "center" }}>
-          <Button href="/apply" variant="primary">
+        <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
+          <Button
+            href="/apply"
+            variant="primary"
+            className="cta-btn-accent"
+            style={{
+              background: "var(--color-accent)",
+              boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)",
+            }}
+          >
             Apply for a Free Website
           </Button>
         </div>

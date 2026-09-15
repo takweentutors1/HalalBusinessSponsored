@@ -22,7 +22,7 @@ export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
           style={{
             height: "100%",
             width: `${progressPercent}%`,
-            background: "var(--color-primary-accessible)",
+            background: "var(--color-accent)",
             borderRadius: "var(--radius-full)",
           }}
         />
@@ -56,7 +56,7 @@ export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
                   fontWeight: 700,
                   background:
                     isComplete || isCurrent
-                      ? "var(--color-primary-accessible)"
+                      ? "var(--color-accent)"
                       : "var(--color-neutral-200)",
                   color: isComplete || isCurrent ? "white" : "var(--color-text-tertiary)",
                 }}

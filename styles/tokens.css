@@ -7,36 +7,36 @@
 
 :root {
   /* Primary palette */
-  --color-primary: #10b981;
-  --color-primary-dark: #059669;
-  --color-primary-light: #a7f3d0;
-  --color-primary-pale: #ecfdf5;
+  --color-primary: #29c15b;
+  --color-primary-dark: #209748;
+  --color-primary-light: #c0edcf;
+  --color-primary-pale: #f3fcf6;
   /*
    * Neither --color-primary nor --color-primary-dark meets WCAG AA
    * (4.5:1) for body-sized text or white-on-color button labels —
-   * confirmed by axe-core: white on --color-primary is 2.54:1, white on
-   * --color-primary-dark is 3.77:1, --color-primary-dark on white/pale
+   * confirmed by axe-core: white on --color-primary is 2.37:1, white on
+   * --color-primary-dark is 3.76:1, --color-primary-dark on white/pale
    * backgrounds is ~3.6-3.8:1. They're fine for headings (large text only
    * needs 3:1) and for non-text decoration (checkmarks, borders,
    * backgrounds). These two extra shades exist specifically for text that
    * needs to pass AA at body size — not part of the original ported
    * palette, added to satisfy §9's accessibility requirement.
    */
-  --color-primary-accessible: #047857;
-  --color-primary-accessible-dark: #036450;
+  --color-primary-accessible: #197638;
+  --color-primary-accessible-dark: #145d2c;
 
   /*
-   * Accent scale from the docs/index.html redesign — brighter than
-   * --color-primary and used the same way: non-text decoration only
-   * (icon backgrounds, thin borders, dots, hover glows, badge fills).
-   * White text on --color-accent is ~1.9:1 and on --color-accent-dark is
-   * ~2.9:1 — both fail WCAG AA same as the original primary scale, so any
-   * text sitting on these colors must still use --color-primary-accessible
-   * (or white on --color-primary-accessible-dark) instead.
+   * Accent scale — same hue as --color-primary, used the same way:
+   * non-text decoration only (icon backgrounds, thin borders, dots,
+   * hover glows, badge fills). White text on --color-accent is ~2.37:1
+   * and on --color-accent-dark is ~3.76:1 — both fail WCAG AA same as the
+   * primary scale, so any text sitting on these colors must still use
+   * --color-primary-accessible (or white on --color-primary-accessible-dark)
+   * instead.
    */
-  --color-accent: #22c55e;
-  --color-accent-dark: #16a34a;
-  --color-accent-pale: #ecfdf3;
+  --color-accent: #29c15b;
+  --color-accent-dark: #209748;
+  --color-accent-pale: #f3fcf6;
 
   /* Semantic colors */
   --color-success: #10b981;

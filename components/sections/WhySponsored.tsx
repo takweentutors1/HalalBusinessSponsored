@@ -1,48 +1,38 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { RichText } from "@/components/shared/RichText";
-import { TrustIllustration } from "@/components/illustrations";
-import { GalleryIcon, MonitorIcon } from "@/components/icons";
 import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
 import { whyItsSponsored } from "@/lib/content/landing";
-import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
 
-/** Bidirectional swap glyph marking the exchange between the two panels. */
-function ExchangeGlyph() {
+function PlusIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width={28} height={28} className="exchange-glyph">
-      <path
-        d="M4 8h13.5M14 4l3.5 4L14 12"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M20 16H6.5M10 20l-3.5-4L10 12"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round">
+      <path d="M12 3v18M3 12h18" />
     </svg>
   );
 }
 
-function ExchangePanel({
+function TrendingUpIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 17l5-5 4 4 7-8" />
+      <path d="M15 8h5v5" />
+    </svg>
+  );
+}
+
+function WhyCard({
   icon,
   heading,
-  items,
+  body,
+  accentColor,
   className,
 }: {
-  icon: ReactNode;
+  icon: React.ReactNode;
   heading: string;
-  items: readonly string[];
+  body: string;
+  accentColor: string;
   className: string;
 }) {
   return (
@@ -51,50 +41,49 @@ function ExchangePanel({
       onMouseEnter={(e) => cardHoverLift(e.currentTarget, true)}
       onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
       style={{
-        background: "rgba(255,255,255,0.08)",
-        border: "1px solid rgba(255,255,255,0.25)",
-        borderRadius: "var(--radius-lg)",
-        padding: "var(--space-6)",
+        background: "var(--color-surface-base)",
+        border: "1px solid var(--color-border-light)",
+        borderTop: `4px solid ${accentColor}`,
+        borderRadius: "var(--radius-2xl)",
+        padding: "var(--space-8) var(--space-6)",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "var(--space-3)",
         textAlign: "left",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-4)" }}>
-        <span aria-hidden="true" style={{ color: "white" }}>
-          {icon}
-        </span>
-        <h3 style={{ fontFamily: "var(--font-display)", color: "white", fontSize: "var(--font-size-lg)" }}>
+      <span
+        aria-hidden="true"
+        style={{
+          width: 46,
+          height: 46,
+          borderRadius: 14,
+          background: "var(--color-accent-pale)",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        {icon}
+      </span>
+      <div>
+        <h3 style={{ fontSize: "var(--font-size-xl)", color: "#0f172a", marginBottom: "var(--space-2)" }}>
           {heading}
         </h3>
+        <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-base)", lineHeight: 1.55, margin: 0 }}>
+          {body}
+        </p>
       </div>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {items.map((item, index) => (
-          <li
-            key={item}
-            style={{
-              padding: "var(--space-3) 0",
-              borderTop: index === 0 ? undefined : "1px solid rgba(255,255,255,0.18)",
-              color: "rgba(255,255,255,0.95)",
-            }}
-          >
-            <RichText text={item} />
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
 /**
- * High-contrast trust banner — deliberately as visually loud as FinalCta
- * (same gradient) rather than blending in as another white section, since
- * this is the page's one explicit answer to "what's the catch?". White
- * text checked against both gradient stops in FinalCta.tsx's comment
- * applies identically here (same gradient, same stops).
- *
- * The glyph spin + panels-converging-from-center entrance was specified
- * in the original GSAP plan's §4.6 but never actually built during the
- * phased rollout — added here as part of giving every card on the site
- * consistent GSAP treatment.
+ * Two-card comparison — matches docs/index.html's `why-grid` section
+ * exactly. Replaces an earlier high-contrast dark-gradient banner
+ * version (shield illustration, exchange glyph, bulleted panels) that
+ * predated the docs/index.html redesign and had no equivalent there.
  */
 export function WhySponsored() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -103,27 +92,19 @@ export function WhySponsored() {
     () => {
       if (prefersReducedMotion()) return;
 
-      gsap.from(".exchange-glyph-wrap", {
-        rotation: -180,
-        scale: 0.4,
-        opacity: 0,
-        duration: 1.1,
-        ease: "back.out(2)",
-        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
-      });
       gsap.from(".why-panel-left", {
         opacity: 0,
-        x: 60,
+        x: -50,
         duration: 0.7,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
+        scrollTrigger: { trigger: ".why-sponsored-grid", start: "top 75%" },
       });
       gsap.from(".why-panel-right", {
         opacity: 0,
-        x: -60,
+        x: 50,
         duration: 0.7,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".why-sponsored-wrap", start: "top 75%" },
+        scrollTrigger: { trigger: ".why-sponsored-grid", start: "top 75%" },
       });
     },
     { scope: sectionRef }
@@ -136,73 +117,42 @@ export function WhySponsored() {
       style={{
         position: "relative",
         overflow: "hidden",
-        background:
-          "linear-gradient(135deg, var(--color-primary-accessible) 0%, var(--color-primary-accessible-dark) 100%)",
-        padding: "var(--space-16) var(--space-8)",
+        background: "var(--color-surface-base)",
+        padding: "var(--space-12) var(--space-8)",
       }}
     >
-      <AmbientParallaxBg src="/images/bg-trust.svg" opacity={0.35} />
-      <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto", textAlign: "center" }}>
-        <TrustIllustration size={64} tone="dark" />
-        <div style={{ marginTop: "var(--space-4)" }}>
-          <span
-            className="ui-section-eyebrow"
-            style={{ color: "rgba(255, 255, 255, 0.9)", marginBottom: "var(--space-2)" }}
-          >
-            WHY IT&apos;S SPONSORED
-          </span>
-        </div>
-        <h2 style={{ color: "white", marginBottom: "var(--space-6)" }}>
-          {whyItsSponsored.title}
-        </h2>
-        <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-10)" }}>
-          <RichText text={whyItsSponsored.intro} />
-        </p>
-
-        <div className="why-sponsored-wrap" style={{ position: "relative", marginBottom: "var(--space-8)" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
-              gap: "var(--space-6)",
-            }}
-          >
-            <ExchangePanel className="why-panel-left" icon={<MonitorIcon size={24} />} heading="You Receive" items={whyItsSponsored.businessReceives} />
-            <ExchangePanel className="why-panel-right" icon={<GalleryIcon size={24} />} heading="We Receive" items={whyItsSponsored.initiativeReceives} />
-          </div>
-          <div
-            aria-hidden="true"
-            className="exchange-glyph-wrap"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 48,
-              height: 48,
-              borderRadius: "var(--radius-full)",
-              background: "var(--color-primary-accessible-dark)",
-              border: "3px solid var(--color-primary-pale)",
-            }}
-          >
-            <ExchangeGlyph />
-          </div>
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: "var(--space-10)", maxWidth: 760, marginLeft: "auto", marginRight: "auto" }}>
+          <h2 style={{ fontSize: "clamp(2rem, 3.7vw, 3.9rem)" }}>
+            A genuine exchange <span style={{ color: "var(--color-accent)" }}>not a hidden upsell.</span>
+          </h2>
+          <p style={{ color: "var(--color-text-tertiary)", fontSize: "var(--font-size-base)", margin: 0 }}>
+            {whyItsSponsored.intro}
+          </p>
         </div>
 
         <div
+          className="why-sponsored-grid"
           style={{
-            background: "white",
-            borderRadius: "var(--radius-full)",
-            padding: "var(--space-3) var(--space-6)",
-            display: "inline-block",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
+            gap: "var(--space-6)",
           }}
         >
-          <p style={{ fontWeight: 600, color: "var(--color-primary-accessible-dark)" }}>
-            <RichText text={whyItsSponsored.feedbackNote} />
-          </p>
+          <WhyCard
+            className="why-panel-left"
+            icon={<PlusIcon />}
+            heading={whyItsSponsored.youGet.heading}
+            body={whyItsSponsored.youGet.body}
+            accentColor="var(--color-accent)"
+          />
+          <WhyCard
+            className="why-panel-right"
+            icon={<TrendingUpIcon />}
+            heading={whyItsSponsored.weGet.heading}
+            body={whyItsSponsored.weGet.body}
+            accentColor="#9ca3af"
+          />
         </div>
       </div>
     </section>

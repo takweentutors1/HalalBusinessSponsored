@@ -13,7 +13,7 @@ interface FeelCard {
 const CARDS: FeelCard[] = [
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 2L5 14h6l-1 8 8-12h-6z" />
       </svg>
     ),
@@ -22,7 +22,7 @@ const CARDS: FeelCard[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 5h16v14H4z" />
         <path d="M4 9h16M8 5v4" />
       </svg>
@@ -32,7 +32,7 @@ const CARDS: FeelCard[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z" />
         <path d="M9 12l2 2 4-4" />
       </svg>
@@ -80,12 +80,13 @@ export function BuiltToFeel() {
   return (
     <section ref={sectionRef} style={{ background: "var(--color-surface-elevated)", padding: "var(--space-16) var(--space-8)" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ marginBottom: "var(--space-10)" }}>Built to feel fast, modern and professional.</h2>
+        <h2 style={{ marginBottom: "var(--space-10)", fontSize: "clamp(2rem, 3.7vw, 3.9rem)" }}>
+          Built to feel <span style={{ color: "var(--color-accent)" }}>fast, modern and professional.</span>
+        </h2>
         <div
           className="built-cards-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
             gap: "var(--space-5)",
           }}
         >

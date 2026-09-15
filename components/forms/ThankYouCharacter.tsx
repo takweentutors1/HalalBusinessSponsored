@@ -17,8 +17,8 @@ export function ThankYouCharacter() {
     >
       <defs>
         <linearGradient id="thankYouGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--color-primary-accessible)" />
-          <stop offset="100%" stopColor="var(--color-primary-accessible-dark)" />
+          <stop offset="0%" stopColor="var(--color-accent)" />
+          <stop offset="100%" stopColor="var(--color-accent-dark)" />
         </linearGradient>
       </defs>
 

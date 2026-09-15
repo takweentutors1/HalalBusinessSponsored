@@ -8,16 +8,16 @@ export function FAQ() {
         position: "relative",
         overflow: "hidden",
         padding: "var(--space-12) var(--space-8)",
-        background: "var(--color-surface-base)",
+        background: "var(--color-surface-elevated)",
       }}
     >
       <div style={{ position: "relative", zIndex: 10, maxWidth: 740, margin: "0 auto" }}>
         {/* Centered Heading */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
-          <span className="ui-section-eyebrow">FAQ</span>
           <h2
             style={{
               marginBottom: "var(--space-2)",
+              fontSize: "clamp(2rem, 3.7vw, 3.9rem)",
             }}
           >
             {faq.title}

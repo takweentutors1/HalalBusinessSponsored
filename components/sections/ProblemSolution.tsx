@@ -15,10 +15,9 @@ const OUTCOME_STATS = [
 /**
  * Before/After comparison — browser-chrome-style preview blocks (pure CSS,
  * see .ui-site-preview in app/globals.css) plus a 3-stat outcome row,
- * matching the docs/index.html redesign. Renders the first 4 items from
- * currentDigitalProblem / whatTheWebsiteSolves (lib/content/landing.ts)
- * directly rather than a separate hardcoded copy, so this can't drift
- * from those lists the way the previous version had.
+ * matching the docs/index.html redesign. Renders currentDigitalProblem /
+ * whatTheWebsiteSolves (lib/content/landing.ts) directly rather than a
+ * separate hardcoded copy, so this can't drift from those lists.
  *
  * The "collision" entrance (Before slides from the left, After from the
  * right, meeting in the middle) was in the original GSAP plan's §4.3 but
@@ -26,8 +25,8 @@ const OUTCOME_STATS = [
  * giving every card on the site consistent GSAP treatment.
  */
 export function ProblemSolution() {
-  const beforeItems = currentDigitalProblem.items.slice(0, 4);
-  const afterItems = whatTheWebsiteSolves.items.slice(0, 4);
+  const beforeItems = currentDigitalProblem.items;
+  const afterItems = whatTheWebsiteSolves.items;
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -69,9 +68,17 @@ export function ProblemSolution() {
       }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <span className="ui-section-eyebrow">FROM PROBLEM TO SOLUTION</span>
-        <h2 style={{ marginBottom: "var(--space-10)" }}>
-          What changes when your Muslim-owned business gets a proper online home.
+        <h2
+          style={{
+            marginBottom: "var(--space-10)",
+            maxWidth: 760,
+            marginLeft: "auto",
+            marginRight: "auto",
+            fontSize: "clamp(2rem, 3.7vw, 3.9rem)",
+          }}
+        >
+          What changes when your Muslim business gets a{" "}
+          <span style={{ color: "var(--color-accent)" }}>proper online home.</span>
         </h2>
 
         <div
@@ -100,7 +107,7 @@ export function ProblemSolution() {
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-5)" }}>
               <h3 style={{ margin: 0 }}>Before</h3>
-              <span style={{ fontSize: "var(--font-size-xs)", fontWeight: 800, color: "#b91c1c", background: "#fee2e2", padding: "4px 12px", borderRadius: "var(--radius-full)" }}>
+              <span style={{ fontSize: "var(--font-size-xs)", fontWeight: 800, color: "#b91c1c", background: "#fff1f2", padding: "4px 12px", borderRadius: "var(--radius-full)" }}>
                 Scattered
               </span>
             </div>
@@ -108,7 +115,7 @@ export function ProblemSolution() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {beforeItems.map((text) => (
                 <li key={text} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", padding: "var(--space-2) 0" }}>
-                  <svg aria-hidden="true" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth={2.4} strokeLinecap="round" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <svg aria-hidden="true" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth={2.4} strokeLinecap="round" style={{ flexShrink: 0, marginTop: 2 }}>
                     <path d="M6 6l12 12M18 6L6 18" />
                   </svg>
                   <span style={{ color: "var(--color-text-secondary)" }}>{text}</span>
@@ -134,7 +141,7 @@ export function ProblemSolution() {
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-5)" }}>
               <h3 style={{ margin: 0 }}>After</h3>
-              <span style={{ fontSize: "var(--font-size-xs)", fontWeight: 800, color: "var(--color-primary-accessible)", background: "var(--color-accent-pale)", padding: "4px 12px", borderRadius: "var(--radius-full)" }}>
+              <span style={{ fontSize: "var(--font-size-xs)", fontWeight: 800, color: "var(--color-accent-dark)", background: "var(--color-accent-pale)", padding: "4px 12px", borderRadius: "var(--radius-full)" }}>
                 Professional
               </span>
             </div>
@@ -142,7 +149,7 @@ export function ProblemSolution() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {afterItems.map((text) => (
                 <li key={text} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", padding: "var(--space-2) 0" }}>
-                  <svg aria-hidden="true" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <svg aria-hidden="true" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                   <span style={{ color: "var(--color-text-primary)" }}>{text}</span>
@@ -156,10 +163,7 @@ export function ProblemSolution() {
             (.outcome-stat-grid in app/globals.css) rather than
             auto-fit: three 200px-min cards on a narrow phone (~350-
             400px content width) barely fit two per row, wrapping the
-            third onto its own half-empty row. Each card also gets its
-            own accent-badge checkmark, echoing the "After" list's
-            checkmark bullets above so the stats read as a continuation
-            of that list rather than a separate, plainer block. */}
+            third onto its own half-empty row. */}
         <div
           className="problem-solution-stats outcome-stat-grid"
           style={{
@@ -176,33 +180,15 @@ export function ProblemSolution() {
               onMouseLeave={(e) => cardHoverLift(e.currentTarget, false)}
               style={{
                 textAlign: "center",
-                padding: "var(--space-6) var(--space-5)",
+                padding: "28px",
                 background: "var(--color-surface-base)",
                 border: "1px solid var(--color-border-light)",
-                borderTop: "4px solid var(--color-accent)",
-                borderRadius: "var(--radius-xl)",
-                boxShadow: "var(--shadow-sm)",
+                borderRadius: "var(--radius-2xl)",
+                boxShadow: "var(--shadow-xl)",
               }}
             >
-              <span
-                aria-hidden="true"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 40,
-                  height: 40,
-                  borderRadius: "var(--radius-full)",
-                  background: "var(--color-accent-pale)",
-                  marginBottom: "var(--space-3)",
-                }}
-              >
-                <svg aria-hidden="true" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12l4 4L19 6" />
-                </svg>
-              </span>
               <span style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-tertiary)" }}>{stat.label}</span>
-              <strong style={{ display: "block", fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "var(--color-primary-accessible)", marginTop: "var(--space-1)" }}>
+              <strong style={{ display: "block", fontFamily: "var(--font-display)", fontSize: "1.45rem", color: "var(--color-accent)", marginTop: "var(--space-1)" }}>
                 {stat.value}
               </strong>
             </div>
@@ -210,7 +196,15 @@ export function ProblemSolution() {
         </div>
 
         <div style={{ marginTop: "var(--space-10)" }}>
-          <Button href="/apply" variant="primary">
+          <Button
+            href="/apply"
+            variant="primary"
+            className="cta-btn-accent"
+            style={{
+              background: "var(--color-accent)",
+              boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)",
+            }}
+          >
             Apply for a Free Website
           </Button>
         </div>

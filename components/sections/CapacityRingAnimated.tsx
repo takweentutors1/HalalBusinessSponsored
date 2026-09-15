@@ -81,8 +81,8 @@ export function CapacityRingAnimated({ total, remaining }: CapacityRingAnimatedP
     >
       <defs>
         <linearGradient id="capacityRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--color-primary-accessible)" />
-          <stop offset="100%" stopColor="var(--color-primary-accessible-dark)" />
+          <stop offset="0%" stopColor="var(--color-accent)" />
+          <stop offset="100%" stopColor="var(--color-accent-dark)" />
         </linearGradient>
       </defs>
 
@@ -108,13 +108,13 @@ export function CapacityRingAnimated({ total, remaining }: CapacityRingAnimatedP
         y="56"
         textAnchor="middle"
         fontFamily="var(--font-display)"
-        fontSize="28"
-        fontWeight={700}
-        fill="var(--color-primary-accessible)"
+        fontSize="30"
+        fontWeight={900}
+        fill="var(--color-accent)"
       >
         {remaining}
       </text>
-      <text x="60" y="75" textAnchor="middle" fontSize="12" fill="var(--color-text-tertiary)">
+      <text x="60" y="75" textAnchor="middle" fontSize="13" fill="var(--color-text-tertiary)">
         of {total} left
       </text>
     </svg>

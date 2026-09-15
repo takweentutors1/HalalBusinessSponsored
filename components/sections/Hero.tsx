@@ -6,11 +6,10 @@ import { Button } from "@/components/ui";
 import { RichText } from "@/components/shared/RichText";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { hero } from "@/lib/content/landing";
-import { HeroMapAnimation } from "./HeroMapAnimation";
 
 function ArrowIcon() {
   return (
-    <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-accent)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M5 12h14M13 6l6 6-6 6" />
     </svg>
   );
@@ -18,7 +17,7 @@ function ArrowIcon() {
 
 function TrendUpIcon() {
   return (
-    <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="var(--color-accent)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 18l4-4 4 3 6-8" />
       <path d="M14 9h4v4" />
     </svg>
@@ -44,8 +43,7 @@ const MOCK_CARD_ICONS = [
  * components stay server components only where fetching happens, not
  * everywhere by default.
  *
- * HeroMapAnimation renders the animated background art; the timeline
- * here staggers the copy in on top of it (badge → heading → bullets →
+ * The entrance timeline staggers the copy in (badge → heading → bullets →
  * urgency strip → CTAs), skipped entirely under prefers-reduced-motion.
  */
 export function Hero() {
@@ -132,18 +130,15 @@ export function Hero() {
       style={{
         position: "relative",
         width: "100%",
-        backgroundColor: "#f8fcf8",
+        backgroundColor: "#fff",
         backgroundImage: [
-          "radial-gradient(circle at 18% 35%, rgba(180, 238, 205, 0.45) 0%, transparent 45%)",
-          "radial-gradient(circle at 80% 50%, rgba(205, 243, 222, 0.40) 0%, transparent 50%)",
-          "radial-gradient(circle at 50% 100%, rgba(230, 248, 238, 0.6) 0%, transparent 60%)",
+          "radial-gradient(circle at 88% 14%, rgba(34, 197, 94, 0.11), transparent 25%)",
+          "linear-gradient(180deg, #ffffff 0%, #fbfefc 100%)",
         ].join(", "),
         overflow: "hidden",
         padding: "var(--space-16) var(--space-8)",
       }}
     >
-      <HeroMapAnimation />
-
       <div
         className="ui-hero-grid"
         style={{
@@ -157,12 +152,12 @@ export function Hero() {
         }}
       >
         {/* Copy column */}
-        <div>
+        <div style={{ maxWidth: 680 }}>
           <div
             className="hero-badge hero-anim-init"
             style={{
               fontWeight: 800,
-              color: "var(--color-primary-accessible)",
+              color: "var(--color-accent)",
               marginBottom: "var(--space-4)",
             }}
           >
@@ -175,9 +170,16 @@ export function Hero() {
               LCP under real mobile CPU/network throttling. Renders
               visible immediately; every other hero element still
               animates in around it. */}
-          <h1 className="ui-hero-heading" style={{ marginBottom: "var(--space-6)" }}>
+          <h1
+            className="ui-hero-heading"
+            style={{
+              marginBottom: "var(--space-6)",
+              fontSize: "clamp(2.65rem, 5.4vw, 5.8rem)",
+              lineHeight: 0.98,
+            }}
+          >
             {hero.headline.replace(hero.headlineHighlight, "")}
-            <span style={{ color: "var(--color-primary-accessible)" }}>{hero.headlineHighlight}</span>
+            <span style={{ color: "var(--color-accent)" }}>{hero.headlineHighlight}</span>
           </h1>
 
           <ul
@@ -234,7 +236,7 @@ export function Hero() {
                   flex: "1 1 150px",
                 }}
               >
-                <b style={{ display: "block", color: "var(--color-primary-accessible)", fontSize: "var(--font-size-base)" }}>
+                <b style={{ display: "block", color: "var(--color-accent)", fontSize: "var(--font-size-base)" }}>
                   {item.label}
                 </b>
                 <span style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-tertiary)" }}>{item.note}</span>
@@ -243,10 +245,15 @@ export function Hero() {
           </div>
 
           <div className="hero-cta-group hero-anim-init" style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-4)" }}>
-            <Button href={hero.ctaHref} variant="primary">
+            <Button
+              href={hero.ctaHref}
+              variant="primary"
+              className="cta-btn-accent"
+              style={{ background: "var(--color-accent)", boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)" }}
+            >
               {hero.ctaLabel}
             </Button>
-            <Button href={hero.secondaryCtaHref} variant="ghost">
+            <Button href={hero.secondaryCtaHref} variant="secondary">
               {hero.secondaryCtaLabel}
             </Button>
           </div>
@@ -291,7 +298,7 @@ export function Hero() {
               style={{
                 borderRadius: "var(--radius-xl)",
                 minHeight: 210,
-                background: "linear-gradient(135deg,#f9fafb,var(--color-accent-pale))",
+                background: "linear-gradient(135deg,#f9fafb,#eefbf3)",
                 padding: "var(--space-6)",
                 display: "grid",
                 gap: "var(--space-4)",
@@ -301,10 +308,7 @@ export function Hero() {
                 <span
                   style={{
                     display: "inline-block",
-                    // --color-accent is decorative-only elsewhere (fails AA
-                    // for white text, same as --color-primary); this pill
-                    // carries real text, so it needs the accessible variant.
-                    background: "var(--color-primary-accessible)",
+                    background: "var(--color-accent)",
                     color: "#fff",
                     borderRadius: "var(--radius-full)",
                     padding: "6px 10px",
@@ -315,7 +319,7 @@ export function Hero() {
                 >
                   {hero.mockVisual.pill}
                 </span>
-                <h4 style={{ fontSize: "1.35rem", marginBottom: "var(--space-2)", letterSpacing: "-0.02em" }}>
+                <h4 style={{ fontSize: "1.55rem", marginBottom: "var(--space-2)", letterSpacing: "-0.03em" }}>
                   {hero.mockVisual.heading}
                 </h4>
                 <p style={{ fontSize: "0.82rem", color: "var(--color-text-secondary)", margin: 0 }}>
@@ -326,7 +330,6 @@ export function Hero() {
                 aria-hidden="true"
                 style={{
                   borderRadius: "var(--radius-lg)",
-                  minHeight: 120,
                   background:
                     "linear-gradient(160deg, rgba(34,197,94,.18), rgba(34,197,94,.02)), var(--color-surface-elevated)",
                 }}
@@ -364,7 +367,7 @@ export function Hero() {
                       placeItems: "center",
                     }}
                   >
-                    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                       {path}
                     </svg>
                   </div>

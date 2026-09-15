@@ -14,11 +14,11 @@ export interface LogoProps {
  * <img>) so the optional rotation animation can target it directly and so
  * it inherits no extra network request.
  *
- * The circle badge is non-text decoration, so it uses the brighter
- * --color-accent scale from the docs/index.html redesign; the wordmark
- * text next to it stays on --color-primary-accessible since that's the
- * variant that actually passes WCAG AA at body text size (see
- * styles/tokens.css).
+ * Both the circle badge and the wordmark use the brighter --color-accent
+ * scale (#29c15b) per explicit brand-color direction — the wordmark no
+ * longer defaults to --color-primary-accessible, so callers needing
+ * AA-safe body text on this color should pass wordmarkColor explicitly
+ * (see styles/tokens.css for the underlying contrast numbers).
  */
 export function Logo({
   size = 32,
@@ -67,7 +67,7 @@ export function Logo({
             fontWeight: 700,
             fontSize: "var(--font-size-lg)",
             letterSpacing: "-0.01em",
-            color: wordmarkColor ?? "var(--color-primary-accessible)",
+            color: wordmarkColor ?? "var(--color-accent)",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",

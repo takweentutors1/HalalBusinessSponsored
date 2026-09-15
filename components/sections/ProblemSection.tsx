@@ -3,7 +3,32 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
-import { AmbientParallaxBg } from "@/components/shared/AmbientParallaxBg";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons";
+
+/** Self-authored "word of mouth" glyph — no single brand to borrow, so
+ * this follows the same solid-circle-badge language as InstagramIcon/
+ * WhatsAppIcon (a distinct blue, --color-info, to sit apart from
+ * Instagram's gradient and WhatsApp's green) rather than the generic
+ * outline icon docs/index.html used as a placeholder here. */
+function WordOfMouthIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width={size} height={size}>
+      <circle cx="12" cy="12" r="11" fill="var(--color-info)" />
+      <path
+        d="M6 9.5a3 3 0 0 1 3-3h1.5a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H9l-2.2 1.7c-.3.25-.8.03-.8-.36V13a3 3 0 0 1 0-3.5Z"
+        fill="white"
+      />
+      <path
+        d="M14 8.3c.3-.1.66-.16 1-.16h1a3 3 0 0 1 3 3v.7a3 3 0 0 1-2.2 2.9l.1 1.56c.02.35-.36.6-.66.4L14.8 15.5"
+        fill="none"
+        stroke="white"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 interface SourceCard {
   icon: React.ReactNode;
@@ -13,33 +38,17 @@ interface SourceCard {
 
 const SOURCE_CARDS: SourceCard[] = [
   {
-    icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-        <rect x="5" y="3" width="14" height="18" rx="3" />
-        <circle cx="12" cy="9" r="3" />
-        <path d="M8 17c1.5-2 6.5-2 8 0" />
-      </svg>
-    ),
+    icon: <InstagramIcon size={44} />,
     title: "Instagram",
     text: "Good for content, but not a complete business presence.",
   },
   {
-    icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 20l2-5a8 8 0 1 1 3 3z" />
-        <path d="M9 8c1 3 3 5 6 6" />
-      </svg>
-    ),
+    icon: <WhatsAppIcon size={44} />,
     title: "WhatsApp",
     text: "Great for messages, but weak for first-time trust.",
   },
   {
-    icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 12h4l3-3v6l-3-3" />
-        <path d="M15 8c3 1 5 3 5 6" />
-      </svg>
-    ),
+    icon: <WordOfMouthIcon size={44} />,
     title: "Word of mouth",
     text: "Referrals help, but new customers still check you online.",
   },
@@ -47,11 +56,17 @@ const SOURCE_CARDS: SourceCard[] = [
 
 function ArrowDownIcon() {
   return (
-    <svg aria-hidden="true" width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 4v14M6 12l6 6 6-6" />
     </svg>
   );
 }
+
+const SEARCH_QUERIES = [
+  "Halal restaurants near me",
+  "Hijab shops in Birmingham",
+  "Muslim barbers in Manchester",
+];
 
 function SearchIcon() {
   return (
@@ -97,22 +112,53 @@ export function ProblemSection() {
         ease: "sine.inOut",
       });
 
-      // Left-to-right highlight sweep across the search chip, timed to
-      // the section scrolling into view — a lighter-weight stand-in for
-      // a full typing simulation that doesn't risk mismatched timing
-      // against the real (translatable) query text.
-      gsap.fromTo(
-        ".problem-search-sweep",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          transformOrigin: "left center",
-          duration: 0.9,
-          ease: "power2.inOut",
-          delay: 0.3,
+      // Search chip cycles through a few example queries as a genuine
+      // typewriter — types each phrase out character by character, holds,
+      // backspaces it, then types the next. A blinking caret sells the
+      // "live search box" feel without the flat highlight-sweep this
+      // replaced. One looping timeline (no recursive self-scheduling) so
+      // useGSAP's context cleanly kills the whole cycle on unmount.
+      const queryEl = sectionRef.current?.querySelector<HTMLElement>(".problem-search-query");
+      if (queryEl) {
+        const cycleTl = gsap.timeline({
+          repeat: -1,
           scrollTrigger: { trigger: ".problem-search-box", start: "top 75%" },
-        }
-      );
+        });
+
+        SEARCH_QUERIES.forEach((query) => {
+          const typeProxy = { chars: 0 };
+          cycleTl
+            .to(typeProxy, {
+              chars: query.length,
+              duration: query.length * 0.045,
+              ease: "none",
+              onUpdate: () => {
+                queryEl.textContent = query.slice(0, Math.round(typeProxy.chars));
+              },
+            })
+            .to({}, { duration: 1.3 }) // hold the finished phrase on screen
+            .to(typeProxy, {
+              chars: 0,
+              duration: query.length * 0.022,
+              ease: "none",
+              onUpdate: () => {
+                queryEl.textContent = query.slice(0, Math.round(typeProxy.chars));
+              },
+            })
+            .to({}, { duration: 0.3 }); // brief pause on the empty box before the next phrase
+        });
+      }
+
+      // Caret blinks continuously alongside the typing, independent of
+      // which phrase is mid-type/delete — same idle-loop pattern as
+      // FinalCta's aurora.
+      gsap.to(".problem-search-caret", {
+        opacity: 0,
+        duration: 0.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "steps(1)",
+      });
 
       const calloutTl = gsap.timeline({
         scrollTrigger: { trigger: ".problem-callout-negative", start: "top 85%" },
@@ -138,11 +184,18 @@ export function ProblemSection() {
         padding: "var(--space-16) var(--space-8) var(--space-12)",
       }}
     >
-      <AmbientParallaxBg src="/images/bg-problem.svg" opacity={0.65} />
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <span className="ui-section-eyebrow">THE CURRENT PROBLEM</span>
-        <h2 style={{ marginBottom: "var(--space-4)", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
-          Your customers already look for Muslim-owned businesses like yours online.
+        <h2
+          style={{
+            marginBottom: "var(--space-4)",
+            maxWidth: 760,
+            marginLeft: "auto",
+            marginRight: "auto",
+            fontSize: "clamp(2rem, 3.7vw, 3.9rem)",
+          }}
+        >
+          Your customers already look for{" "}
+          <span style={{ color: "var(--color-accent)" }}>Muslim businesses</span> like yours online.
         </h2>
         <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--font-size-base)", maxWidth: 560, margin: "0 auto var(--space-10)", lineHeight: 1.6 }}>
           The problem is what they see when they search for a Muslim-owned business like yours.
@@ -173,17 +226,7 @@ export function ProblemSection() {
                 textAlign: "center",
               }}
             >
-              <div
-                style={{
-                  width: 46,
-                  height: 46,
-                  borderRadius: "var(--radius-lg)",
-                  background: "var(--color-accent-pale)",
-                  display: "grid",
-                  placeItems: "center",
-                  margin: "0 auto var(--space-4)",
-                }}
-              >
+              <div style={{ display: "grid", placeItems: "center", margin: "0 auto var(--space-4)" }}>
                 {card.icon}
               </div>
               <h3 style={{ marginBottom: "var(--space-1)" }}>{card.title}</h3>
@@ -224,40 +267,37 @@ export function ProblemSection() {
               background: "var(--color-surface-base)",
               color: "var(--color-text-secondary)",
               fontSize: "var(--font-size-sm)",
-              overflow: "hidden",
             }}
           >
+            <SearchIcon />
+            <span className="problem-search-query">{SEARCH_QUERIES[0]}</span>
             <span
-              className="problem-search-sweep"
+              className="problem-search-caret"
               aria-hidden="true"
               style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(90deg, transparent, var(--color-accent-pale) 45%, transparent 90%)",
-                transform: "scaleX(0)",
-                pointerEvents: "none",
+                width: 1,
+                height: "1em",
+                background: "var(--color-text-tertiary)",
+                marginLeft: 1,
               }}
             />
-            <SearchIcon />
-            Muslim-owned business near me
           </span>
         </div>
 
         {/* Result callouts */}
         <div
           className="problem-callout-negative"
-          style={{ maxWidth: 620, margin: "0 auto var(--space-4)", padding: "var(--space-5)", borderRadius: "var(--radius-lg)", background: "#fff1f2", border: "1px solid #fecdd3" }}
+          style={{ maxWidth: 700, margin: "0 auto var(--space-4)", padding: 22, borderRadius: "var(--radius-lg)", background: "#fff1f2", border: "1px solid #fecdd3" }}
         >
-          <p style={{ margin: 0, fontWeight: 700, color: "#b91c1c" }}>
-            If they can&apos;t find a proper website, you can look harder to trust than you really are.
+          <p style={{ margin: 0, fontWeight: 700, fontSize: "1.08rem", color: "#b91c1c" }}>
+            If they cannot find a proper website, you can look harder to trust than you really are.
           </p>
         </div>
         <div
           className="problem-callout-positive"
-          style={{ maxWidth: 620, margin: "0 auto", padding: "var(--space-5)", borderRadius: "var(--radius-lg)", background: "var(--color-accent-pale)", border: "1px solid var(--color-primary-light)" }}
+          style={{ maxWidth: 700, margin: "0 auto", padding: 22, borderRadius: "var(--radius-lg)", background: "var(--color-accent-pale)", border: "1px solid var(--color-primary-light)" }}
         >
-          <p style={{ margin: 0, fontWeight: 700, color: "var(--color-primary-accessible)" }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: "1.08rem", color: "var(--color-accent-dark)" }}>
             So they may choose a competitor who looks clearer and more established online.
           </p>
         </div>

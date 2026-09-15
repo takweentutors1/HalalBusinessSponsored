@@ -9,7 +9,7 @@ interface BenefitTile {
 const TILES: BenefitTile[] = [
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <rect x="7" y="2" width="10" height="20" rx="2" />
         <path d="M10 18h4" />
       </svg>
@@ -19,7 +19,7 @@ const TILES: BenefitTile[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 5h16v14H4z" />
         <path d="M4 9h16M8 5v4" />
       </svg>
@@ -29,7 +29,7 @@ const TILES: BenefitTile[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 2L5 14h6l-1 8 8-12h-6z" />
       </svg>
     ),
@@ -38,7 +38,7 @@ const TILES: BenefitTile[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 5h16v14H4z" />
         <path d="M8 9h8M8 13h5" />
       </svg>
@@ -48,7 +48,7 @@ const TILES: BenefitTile[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="6" />
         <path d="M16 16l4 4M8.5 11h5" />
       </svg>
@@ -58,7 +58,7 @@ const TILES: BenefitTile[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-accessible)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 12a8 8 0 0 1 14-5" />
         <path d="M18 3v4h-4" />
         <path d="M20 12a8 8 0 0 1-14 5" />

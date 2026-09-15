@@ -17,4 +17,3 @@ export { FAQ } from "./FAQ";
 export { FinalCta } from "./FinalCta";
 export { TermsList } from "./TermsList";
 export { InfoCallout } from "./InfoCallout";
-export { AfterLaunchCards } from "./AfterLaunchCards";

@@ -39,10 +39,12 @@ interface SectionRadarProps {
  * technique as HeaderNav.tsx) scales up and shows its label on hover;
  * every dot is a real <a href="#id"> for keyboard/click navigation.
  *
- * Standalone, not wired into any page yet — same "Create" scope as
- * HeaderNav.tsx (P2). Desktop-only by design (see the ≤960px media
- * query in app/globals.css): a fixed rail on the right edge would
- * collide with content on narrower viewports.
+ * Desktop and tablet only (see the ≥640px media queries in
+ * app/globals.css, which also size the dots/rail/labels up a step for
+ * each range): a fixed rail on the right edge would collide with
+ * content below that. Dot size, rail width, gap, and label sizing are
+ * all read from --radar-* custom properties set per breakpoint, with
+ * inline fallbacks matching the smallest (tablet) size.
  */
 export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }: SectionRadarProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -131,13 +133,13 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
       aria-label="Section navigation"
       style={{
         position: "fixed",
-        right: "var(--space-6)",
+        right: "var(--radar-offset, var(--space-6))",
         top: "50%",
         transform: "translateY(-50%)",
         zIndex: 50,
       }}
     >
-      <div className="section-radar" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-6)" }}>
+      <div className="section-radar" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--radar-gap, var(--space-6))" }}>
         {/* Track + fill rail, spanning from the center of the first dot
             to the center of the last — positioned via inset rather than
             a measured height, so it stays correct across re-renders. */}
@@ -145,10 +147,10 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
           aria-hidden="true"
           style={{
             position: "absolute",
-            top: 6,
-            bottom: 6,
+            top: "var(--radar-rail-inset, 6px)",
+            bottom: "var(--radar-rail-inset, 6px)",
             left: "50%",
-            width: 2,
+            width: "var(--radar-rail-width, 2px)",
             transform: "translateX(-50%)",
             background: "var(--color-border-light)",
             borderRadius: "var(--radius-full)",
@@ -183,9 +185,9 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
                   top: "50%",
                   transform: "translateY(-50%)",
                   whiteSpace: "nowrap",
-                  fontSize: "var(--font-size-xs)",
+                  fontSize: "var(--radar-label-font, var(--font-size-xs))",
                   fontWeight: 700,
-                  padding: "4px 10px",
+                  padding: "var(--radar-label-padding, 4px 10px)",
                   borderRadius: "var(--radius-full)",
                   background: "var(--color-surface-base)",
                   boxShadow: "var(--shadow-sm)",
@@ -212,11 +214,11 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
                   position: "relative",
                   zIndex: 1,
                   display: "block",
-                  width: 10,
-                  height: 10,
+                  width: "var(--radar-dot-size, 10px)",
+                  height: "var(--radar-dot-size, 10px)",
                   borderRadius: "var(--radius-full)",
                   background: isActive ? "var(--color-primary-accessible)" : "var(--color-surface-base)",
-                  border: `2px solid ${isActive ? "var(--color-primary-accessible)" : "var(--color-border-medium)"}`,
+                  border: `var(--radar-border-width, 2px) solid ${isActive ? "var(--color-primary-accessible)" : "var(--color-border-medium)"}`,
                   transition: "background 200ms ease, border-color 200ms ease",
                 }}
               />

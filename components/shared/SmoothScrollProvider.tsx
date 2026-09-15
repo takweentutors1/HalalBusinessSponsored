@@ -6,6 +6,20 @@ import "lenis/dist/lenis.css";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
 /**
+ * Module-level singleton, not React context — the only other consumer
+ * so far (BackToTop.tsx) needs a one-off imperative `scrollTo(0)` call
+ * from a click handler, not a re-rendering subscription, so context
+ * would be pure overhead. Null whenever Lenis isn't running (SSR,
+ * before mount, or prefersReducedMotion() bypassed it below) — callers
+ * must fall back to native scrolling in that case.
+ */
+let lenisInstance: Lenis | null = null;
+
+export function getLenis(): Lenis | null {
+  return lenisInstance;
+}
+
+/**
  * SmoothScrollProvider — connects Lenis smooth inertial scrolling with GSAP
  * ScrollTrigger's internal render ticker.
  *
@@ -27,6 +41,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       smoothWheel: true,
       touchMultiplier: 1.25,
     });
+    lenisInstance = lenis;
 
     // Notify ScrollTrigger on every scroll position change
     lenis.on("scroll", ScrollTrigger.update);
@@ -42,6 +57,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     return () => {
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
+      lenisInstance = null;
     };
   }, []);
 

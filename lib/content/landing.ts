@@ -34,7 +34,7 @@ export const statsBar = [
 
 export const hero = {
   number: 1,
-  topline: "Free websites for UK Muslim-owned businesses at £0 development cost",
+  topline: "Free websites for UK Halal Muslim businesses at £0 development cost",
   headline: "Your business is established. Your website should show it.",
   headlineHighlight: "Your website should show it.",
   costLine: "A professional starter website for selected Muslim-owned businesses — at **£0 development cost**.",
@@ -90,11 +90,9 @@ export const currentDigitalProblem: ListSection = {
   number: 3,
   title: "The Current Digital Problem",
   items: [
-    "Instagram and WhatsApp acting as the whole online presence",
-    "Customers digging through posts and DMs for basic information",
-    "Established offline but looking less professional online",
-    "Business information spread across too many platforms",
-    "Losing trust to competitors with a clearer web presence",
+    "Customers jump between social profiles and messages",
+    "Services and trust signals are difficult to find",
+    "Your online presence looks weaker than the business",
   ],
 };
 
@@ -103,11 +101,9 @@ export const whatTheWebsiteSolves: ListSection = {
   number: 4,
   title: "What the Website Solves",
   items: [
-    "One professional home online",
-    "Clearer services, contact and business details",
-    "Stronger credibility and first impression",
-    "Easier enquiries",
-    "A proper place to showcase work and reviews",
+    "One clear home for services, reviews and enquiries",
+    "Stronger credibility across mobile and desktop",
+    "A stronger reason for customers to choose you",
   ],
 };
 
@@ -121,8 +117,6 @@ export const whatTheWebsiteSolves: ListSection = {
  */
 export const valueComparison = {
   id: "value-comparison",
-  eyebrow: "The real cost elsewhere",
-  title: "A professional website for a Muslim-owned business can cost thousands.",
   intro:
     "For selected businesses, Takween Connect covers the development cost of the agreed starter scope.",
   agency: {
@@ -134,96 +128,62 @@ export const valueComparison = {
   free: {
     label: "Takween Connect development cost",
     price: "£0",
-    description: "For the agreed free starter website scope.",
+    description: "Professional design, multiple pages, responsive development and optimisation.",
   },
-  unapprovedNote:
-    "A specific market-rate comparison is shown here once confirmed as an accurate public figure.",
 } as const;
 
 export const whyItsSponsored = {
   id: "why-its-sponsored",
   number: 5,
-  title: "There is a clear reason it costs you £0 to build.",
-  intro: "**No catch.** A genuine exchange — not a free trial with strings attached.",
-  businessReceives: [
-    "**A free**, professional starter website",
-    "A stronger online presence that **converts enquiries into customers**",
-    "A completed, portfolio-quality project **you own**",
-  ],
-  initiativeReceives: [
-    "A genuine portfolio project to showcase",
-    "Honest feedback on the experience",
-    "Permission to share the story as a case study, only with consent",
-  ],
-  feedbackNote: "**Honest feedback is expected.** A positive review never is.",
+  title: "A genuine exchange not a hidden upsell.",
+  intro:
+    "We're building real portfolio work in this niche while helping selected Muslim-owned businesses improve their online presence.",
+  youGet: {
+    heading: "You get",
+    body: "A professionally built starter website at £0 development cost. While other agency builds can commonly sit around £2,000–£5,000.",
+  },
+  weGet: {
+    heading: "We get",
+    body: "A real project, honest feedback, and portfolio value where permission is given.",
+  },
 } as const;
 
 export const whatsIncluded: CategorizedSection = {
   id: "whats-included",
   number: 6,
-  title: "What's included",
+  title: "Included",
   categories: [
     {
-      title: "Design & Build",
-      items: [
-        "Up to 4–5 pages",
-        "Responsive design",
-        "Basic on-page SEO",
-        "Basic performance optimisation",
-      ],
+      title: "Website",
+      items: ["Up to 4–5 pages", "Mobile-responsive design", "Services, contact and enquiry journey"],
     },
     {
-      title: "Core Features",
-      items: [
-        "Business info and services",
-        "Contact form / WhatsApp CTA",
-        "Google Maps and social links",
-        "Portfolio/gallery where relevant",
-        "Existing testimonials and credentials",
-      ],
-    },
-    {
-      title: "Revisions",
-      items: ["Up to 2 revision rounds"],
+      title: "Essentials",
+      items: ["Basic on-page SEO", "Basic performance optimisation", "2 revision rounds"],
     },
   ],
-  note: "Development cost: **£0**.",
+  note: "**£0 development cost.** Domain and hosting remain the business's responsibility.",
 };
 
 export const whatsOutsideScope: CategorizedSection = {
   id: "whats-outside-scope",
   number: 7,
-  title: "What's outside the free scope",
+  title: "Only if you need more",
   categories: [
     {
-      title: "Commerce & Bookings",
+      title: "Advanced features",
       items: [
-        "Ecommerce / larger catalogues",
-        "Online ordering",
-        "Advanced booking",
-        "Payment integrations",
-      ],
-    },
-    {
-      title: "Platforms & Software",
-      items: [
-        "LMS / student portals",
-        "Membership systems",
-        "CRM / automation / AI",
+        "Ecommerce, payments or advanced booking",
+        "LMS, memberships, CRM or automation",
         "Custom dashboards or software",
       ],
     },
     {
-      title: "Ongoing Work",
-      items: [
-        "Advanced SEO campaigns",
-        "Ongoing marketing",
-        "Ongoing maintenance",
-        "Future pages or functionality",
-      ],
+      title: "Ongoing work",
+      items: ["Maintenance, future pages or advanced SEO", "Additional integrations or future functionality"],
     },
   ],
-  note: "You always see the price before any paid work begins.",
+  note: "Nothing extra is added unless you ask for it and approve the price first.",
 };
 
 /** Mid-page CTA after What's Included / Outside Scope — lets a reader who
@@ -246,28 +206,14 @@ export const domainHostingCosts: ListSection = {
   ],
 };
 
-export const whatHappensAfterLaunch: ListSection = {
-  id: "what-happens-after-launch",
-  number: 9,
-  title: "What happens after your free project is complete?",
-  items: [
-    "**One-time project** — design, build, revisions and launch, within the agreed scope.",
-    "A short **close-out window** covers issues in the delivered scope (see Programme Terms).",
-    "Anything outside scope gets a **fresh, transparent quote** — never assumed or added silently.",
-  ],
-};
-
 export const whoQualifies: ListSection = {
   id: "who-qualifies",
   number: 10,
-  title: "Is your business a good fit?",
-  intro: "We prioritise established businesses where a starter website can make a clear difference.",
+  title: "Is your Muslim-owned business a good fit?",
   items: [
-    "Already operating with real customers",
-    "Muslim-owned or clearly serving the halal/Muslim market",
-    "No proper website or a weak/outdated one",
-    "Clear products/services and content ready",
-    "Willing to provide honest feedback",
+    "UK Muslim-owned business already trading with real customers",
+    "No proper website or an outdated one",
+    "Clear services and enough content to build from",
   ],
 };
 
@@ -277,10 +223,8 @@ export const whoIsNotAFit: ListSection = {
   title: "Usually not a fit",
   items: [
     "Not launched yet / no real customers",
-    "Main need is a large ecommerce, LMS or custom software build",
+    "Main need is a large ecommerce or custom software build",
     "Expecting unlimited revisions or ongoing free support",
-    "Unable to provide basic content",
-    "Already has a strong website with no meaningful need",
   ],
 };
 
@@ -317,6 +261,7 @@ export const processSteps = {
   id: "how-the-process-works",
   number: 13,
   title: "A simple 4-step process",
+  subtitle: "Keep the experience short and easy to understand.",
   steps: [
     {
       step: "Apply",
@@ -366,16 +311,20 @@ export interface FaqItem {
 }
 
 /**
- * Trimmed to the docs/index.html redesign's exact 5 questions (was 7 —
- * dropped "is ongoing maintenance included?" and "do I have to provide
- * feedback?"). Those two points are still made elsewhere on the page
- * (AfterLaunchCards, WhySponsored's feedbackNote) — confirmed as the
- * wanted outcome when matching the redesign exactly.
+ * Restored to the original 7 questions from draft 2 (see
+ * docs/Brief_HalalBusinessSponsoredWebsite_Numan.docx §15), plus "who
+ * builds the website?" — the +1 answered via the disclosure line. A
+ * prior pass trimmed this to 5 to match docs/index.html's redesign
+ * exactly, dropping "is ongoing maintenance included?" and "do I have
+ * to give feedback?" on the reasoning that AfterLaunchCards and
+ * WhySponsored's feedbackNote already cover that ground — reinstated
+ * here since the FAQ section is where a reader actually expects to
+ * find those answers.
  */
 export const faq = {
   id: "faq",
   number: 15,
-  title: "Your questions answered",
+  title: "Your questions answered.",
   items: [
     {
       question: "Is the website really free?",
@@ -389,6 +338,16 @@ export const faq = {
     {
       question: "Do I have to buy anything afterwards?",
       answer: "No. Additional services are optional and only quoted if you request them.",
+    },
+    {
+      question: "Is ongoing maintenance included?",
+      answer:
+        "No. This is a one-time build. A short post-launch window covers issues within the agreed scope; anything beyond that is quoted separately.",
+    },
+    {
+      question: "Do I have to give feedback?",
+      answer:
+        "Yes. Honest completion feedback is expected from every accepted business. A positive review is never required.",
     },
     {
       question: "Does applying guarantee acceptance?",

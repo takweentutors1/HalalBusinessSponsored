@@ -44,9 +44,9 @@ export async function LimitedCapacity() {
               gap: "var(--space-2)",
               padding: "var(--space-1) var(--space-4)",
               borderRadius: "var(--radius-full)",
-              background: "rgba(26, 71, 49, 0.08)",
-              border: "1px solid rgba(26, 71, 49, 0.2)",
-              color: "var(--color-primary-accessible)",
+              background: "rgba(41, 193, 91, 0.08)",
+              border: "1px solid rgba(41, 193, 91, 0.3)",
+              color: "var(--color-accent)",
               fontSize: "var(--font-size-xs)",
               fontWeight: 700,
               letterSpacing: "0.04em",
@@ -58,21 +58,20 @@ export async function LimitedCapacity() {
                 width: 8,
                 height: 8,
                 borderRadius: "var(--radius-full)",
-                background: "#16a34a",
-                boxShadow: "0 0 0 2px rgba(22, 163, 74, 0.2)",
+                background: "var(--color-accent)",
+                boxShadow: "0 0 0 2px rgba(41, 193, 91, 0.2)",
               }}
             />
             Cohort Status: Applications Open
           </span>
         </div>
 
-        <div>
-          <span className="ui-section-eyebrow">LIMITED MONTHLY CAPACITY</span>
-        </div>
-
         <h2
           style={{
-            marginBottom: "var(--space-6)",
+            margin: "0 auto var(--space-6)",
+            maxWidth: 540,
+            fontSize: "clamp(2rem, 3vw, 3rem)",
+            lineHeight: 1.08,
           }}
         >
           We currently offer up to 5 free websites per month.
@@ -86,10 +85,10 @@ export async function LimitedCapacity() {
         {/* Statement & Subtext */}
         <p
           style={{
-            fontSize: "var(--font-size-xl)",
+            fontSize: "1.1rem",
             fontFamily: "var(--font-display)",
-            color: "#0f172a",
-            fontWeight: 700,
+            color: "var(--color-text-primary)",
+            fontWeight: 800,
             margin: "var(--space-6) 0 var(--space-2)",
             lineHeight: 1.35,
           }}

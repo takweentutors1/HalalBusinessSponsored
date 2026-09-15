@@ -263,6 +263,19 @@ p {
   }
 }
 
+/* Hero browser mockup's inner "mock-hero" panel: text + decorative image
+   side by side on desktop, stacked on narrow screens — matches
+   docs/index.html's .mock-hero. */
+.ui-mock-hero {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+@media (max-width: 960px) {
+  .ui-mock-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ValueComparison (agency vs £0): 3-column grid with a centered "VS" on
    desktop, stacked with "VS" between the two cards on narrow screens. */
 .ui-value-wrap {
@@ -295,17 +308,67 @@ p {
   }
 }
 
-/* ProcessSteps: fixed 2x2 grid on desktop (was auto-fit, which produced
-   3 cols x 2 rows on the section's max-width for 4 steps). 1 col on
-   mobile. */
+/* ProcessSteps: single row of 4 on desktop, matching docs/index.html's
+   process-grid exactly. 2 cols on tablet, 1 col on mobile. */
 .process-step-grid {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 960px) {
+  .process-step-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
   .process-step-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* BuiltToFeel: fixed 3-col grid on desktop, matching docs/index.html's
+   benefit-grid exactly. 2 cols on tablet, 1 col on mobile. */
+.built-cards-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 960px) {
+  .built-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .built-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bright-accent CTA buttons (ProcessSteps, QualificationFit): these
+   sections use var(--color-accent) instead of the site-wide dark
+   ui-btn-primary, matching docs/index.html's .btn.primary exactly.
+   Hover override needed since ui-btn-primary:hover otherwise jumps to
+   the much darker accessible-dark shade. */
+.cta-btn-accent:hover:not(:disabled) {
+  background: var(--color-accent-dark);
+}
+
+/* ScopeComparison's free-scope note bolds "£0 development cost." in
+   green, matching docs/index.html's <strong class="green"> exactly. */
+.scope-note-free strong {
+  color: var(--color-accent-dark);
+}
+
+/* Header "Apply Now" CTA: bright accent instead of the site-wide dark
+   ui-btn-primary — styled via SiteHeader.tsx's existing ui-header-cta
+   class rather than editing that file directly (standing constraint:
+   the header is treated as stable and not touched). */
+.ui-header-cta {
+  background: var(--color-accent);
+}
+
+.ui-header-cta:hover:not(:disabled) {
+  background: var(--color-accent-dark);
 }
 
 /* ProblemSolution outcome stats: fixed 3-col row on desktop/tablet
@@ -400,11 +463,48 @@ p {
   transform: none;
 }
 
-/* SectionRadar: fixed vertical dot rail on the right edge — hidden
-   below 960px, where a fixed side rail would collide with content
-   rather than float clear of it. */
-@media (max-width: 960px) {
+/* SectionRadar: fixed vertical dot rail on the right edge. Sized up for
+   desktop and tablet (was a single cramped 10px-dot size meant for
+   desktop only); still hidden below 640px, where a fixed side rail
+   collides with content rather than floating clear of it. */
+@media (min-width: 961px) {
   .section-radar-nav {
+    --radar-dot-size: 16px;
+    --radar-border-width: 3px;
+    --radar-rail-width: 3px;
+    --radar-rail-inset: 9px;
+    --radar-gap: var(--space-8);
+    --radar-offset: var(--space-8);
+    --radar-label-font: var(--font-size-sm);
+    --radar-label-padding: 6px 14px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 960px) {
+  .section-radar-nav {
+    --radar-dot-size: 14px;
+    --radar-border-width: 2px;
+    --radar-rail-width: 2px;
+    --radar-rail-inset: 8px;
+    --radar-gap: var(--space-6);
+    --radar-offset: var(--space-5);
+    --radar-label-font: var(--font-size-xs);
+    --radar-label-padding: 5px 12px;
+  }
+}
+
+@media (max-width: 639px) {
+  .section-radar-nav {
+    display: none;
+  }
+}
+
+/* MobileScrollProgress: the mobile-only counterpart to SectionRadar
+   above — a top-pinned fill bar instead of a side dot rail. Hidden at
+   the same 640px boundary where SectionRadar takes over, so exactly
+   one scroll-progress indicator is ever visible at a time. */
+@media (min-width: 640px) {
+  .mobile-scroll-progress {
     display: none;
   }
 }
@@ -416,7 +516,7 @@ p {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-primary-accessible); /* #1a4731 / #047857 */
+  color: var(--color-primary-accessible);
   margin-bottom: var(--space-2);
   display: inline-block;
 }

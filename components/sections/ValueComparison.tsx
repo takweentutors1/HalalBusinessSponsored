@@ -21,19 +21,11 @@ export function ValueComparison() {
     : agency.fallbackPrice;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const priceWrapRef = useRef<HTMLDivElement>(null);
-  const strikeRef = useRef<SVGLineElement>(null);
 
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
 
-      // Card-level entrance — previously missing entirely: the strike/
-      // glow effects below animate parts *within* the cards, but the
-      // cards themselves never had their own reveal once <Reveal> was
-      // removed from around this section in an earlier phase (it was
-      // removed because the strike/glow already looked like "enough"
-      // motion, but the cards popping in with zero fade was a real gap).
       gsap.from(".value-agency-card, .value-free-card", {
         opacity: 0,
         y: 30,
@@ -43,53 +35,43 @@ export function ValueComparison() {
         scrollTrigger: { trigger: ".ui-value-wrap", start: "top 75%" },
       });
 
-      // Strikethrough line is sized to the price element's own rendered
-      // box at animation time (not a hardcoded width) — the price text
-      // reflows across breakpoints (clamp() font-size) and between the
-      // "£2,000–£5,000" / "Thousands" labels, so a fixed-length line
-      // would drift out of alignment.
-      const priceEl = priceWrapRef.current;
-      const line = strikeRef.current;
-      if (priceEl && line) {
-        const { width, height } = priceEl.getBoundingClientRect();
-        line.setAttribute("x1", "0");
-        line.setAttribute("y1", String(height * 0.55));
-        line.setAttribute("x2", String(width));
-        line.setAttribute("y2", String(height * 0.45));
-        const length = line.getTotalLength();
-        gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
-        gsap.to(line, {
-          strokeDashoffset: 0,
-          duration: 0.6,
-          delay: 0.4,
-          ease: "power2.inOut",
-          scrollTrigger: { trigger: priceEl, start: "top 70%" },
-        });
-      }
-
-      // £0 card: scale pop + a separate blurred glow layer pulsing
-      // behind it — box-shadow itself isn't reliably tweenable by GSAP
-      // (its CSSPlugin doesn't smoothly interpolate multi-part shadow
-      // strings), so .value-free-glow is a dedicated element instead.
-      const glowTl = gsap.timeline({
-        delay: 0.4,
-        scrollTrigger: { trigger: ".value-free-card", start: "top 70%" },
+      // Prices pop in with a slight overshoot just after their cards land —
+      // the numbers are the whole point of this section, so they get their
+      // own beat instead of just fading in with everything else.
+      gsap.from(".value-price", {
+        scale: 0.7,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.6,
+        delay: 0.25,
+        ease: "back.out(1.7)",
+        scrollTrigger: { trigger: ".ui-value-wrap", start: "top 75%" },
       });
-      glowTl
-        .to(".value-free-card", { scale: 1.04, duration: 0.5, ease: "power2.out" })
-        .to(
-          ".value-free-glow",
-          { opacity: 0.55, duration: 0.5, ease: "power2.out" },
-          "<"
-        )
-        .to(".value-free-glow", {
-          opacity: 0.25,
-          scale: 1.08,
-          duration: 1.4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
+
+      // "VS" breathes gently forever once mounted — purely decorative, same
+      // reasoning as FinalCta's aurora loop (this section's own visibility
+      // is already gated by the outer page scroll).
+      gsap.to(".ui-value-vs", {
+        scale: 1.18,
+        duration: 1.4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      // £0 card: one-time glow pulse (not looping — a permanent pulse would
+      // read as an alert state, not an accent) to draw the eye to the
+      // "winning" card right after it lands. A dedicated layer rather than
+      // tweening box-shadow directly — GSAP's CSSPlugin doesn't reliably
+      // interpolate multi-part box-shadow strings (see AfterLaunchCards'
+      // now-removed equivalent for the same note).
+      gsap
+        .timeline({
+          delay: 0.9,
+          scrollTrigger: { trigger: ".value-free-card", start: "top 75%" },
+        })
+        .to(".value-free-glow", { opacity: 0.5, duration: 0.5, ease: "power2.out" })
+        .to(".value-free-glow", { opacity: 0, duration: 0.9, ease: "power2.in" });
     },
     { scope: sectionRef }
   );
@@ -106,8 +88,10 @@ export function ValueComparison() {
       }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <span className="ui-section-eyebrow">{valueComparison.eyebrow}</span>
-        <h2 style={{ marginBottom: "var(--space-4)" }}>{valueComparison.title}</h2>
+        <h2 style={{ marginBottom: "var(--space-4)", fontSize: "clamp(2rem, 3.7vw, 3.9rem)" }}>
+          A professional website for your Halal business can cost you{" "}
+          <span style={{ color: "var(--color-accent)" }}>thousands.</span>
+        </h2>
         <p
           style={{
             color: "var(--color-text-secondary)",
@@ -147,10 +131,8 @@ export function ValueComparison() {
               {agency.label}
             </p>
             <div
-              ref={priceWrapRef}
+              className="value-price"
               style={{
-                position: "relative",
-                display: "inline-block",
                 fontSize: "clamp(2rem, 4vw, 3rem)",
                 fontFamily: "var(--font-display)",
                 fontWeight: 800,
@@ -160,12 +142,6 @@ export function ValueComparison() {
               }}
             >
               {agencyPriceLabel}
-              <svg
-                aria-hidden="true"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}
-              >
-                <line ref={strikeRef} className="value-strike-line" stroke="#dc2626" strokeWidth={3} strokeLinecap="round" />
-              </svg>
             </div>
             <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>{agency.description}</p>
           </div>
@@ -195,7 +171,7 @@ export function ValueComparison() {
               position: "relative",
               padding: "var(--space-8) var(--space-6)",
               textAlign: "center",
-              background: "var(--color-accent-pale)",
+              background: "var(--color-surface-base)",
               border: "1px solid var(--color-border-light)",
               borderTop: "4px solid var(--color-accent)",
               borderRadius: "var(--radius-2xl)",
@@ -219,12 +195,13 @@ export function ValueComparison() {
               {free.label}
             </p>
             <div
+              className="value-price"
               style={{
                 fontSize: "clamp(2.4rem, 4vw, 4rem)",
                 fontFamily: "var(--font-display)",
                 fontWeight: 800,
                 letterSpacing: "-0.03em",
-                color: "var(--color-primary-accessible)",
+                color: "var(--color-accent)",
                 margin: "var(--space-2) 0",
               }}
             >
@@ -233,19 +210,6 @@ export function ValueComparison() {
             <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>{free.description}</p>
           </div>
         </div>
-
-        {!marketValueComparison.approved && (
-          <p
-            style={{
-              marginTop: "var(--space-6)",
-              fontSize: "var(--font-size-sm)",
-              color: "var(--color-text-tertiary)",
-              fontStyle: "italic",
-            }}
-          >
-            {valueComparison.unapprovedNote}
-          </p>
-        )}
       </div>
     </section>
   );

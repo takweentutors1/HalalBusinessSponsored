@@ -7,38 +7,40 @@ import { RichText } from "@/components/shared/RichText";
 import { cardHoverLift, gsap, prefersReducedMotion } from "@/lib/gsap";
 import type { ListSection as ListSectionContent } from "@/lib/content/landing";
 
-function CheckIcon() {
+function CheckIcon({ size = 20 }: { size?: number }) {
   return (
     <svg
       aria-hidden="true"
-      width={12}
-      height={12}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#1a4731"
-      strokeWidth={3}
+      stroke="var(--color-accent-dark)"
+      strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      style={{ flexShrink: 0, marginTop: 2 }}
     >
-      <polyline points="20 6 9 17 4 12" />
+      <path d="M5 12l4 4L19 6" />
     </svg>
   );
 }
 
-function CrossIcon() {
+function CrossIcon({ size = 20 }: { size?: number }) {
   return (
     <svg
       aria-hidden="true"
-      width={11}
-      height={11}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#dc2626"
-      strokeWidth={3}
+      stroke="#ef4444"
+      strokeWidth={2}
       strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ flexShrink: 0, marginTop: 2 }}
     >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
+      <path d="M6 6l12 12M18 6L6 18" />
     </svg>
   );
 }
@@ -115,24 +117,16 @@ export function QualificationFit({
       >
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
-          <span className="ui-section-eyebrow">WHO IT&apos;S FOR</span>
           <h2
             style={{
-              marginBottom: "var(--space-2)",
-            }}
-          >
-            {qualifies.title}
-          </h2>
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              fontSize: "var(--font-size-base)",
-              maxWidth: 580,
+              maxWidth: 760,
               margin: "0 auto",
+              fontSize: "clamp(2rem, 3.7vw, 3.9rem)",
             }}
           >
-            We prioritise established businesses where a starter website can make a clear difference.
-          </p>
+            Is your Muslim business a{" "}
+            <span style={{ color: "var(--color-accent)" }}>good fit?</span>
+          </h2>
         </div>
 
         {/* Dual Cards */}
@@ -155,24 +149,41 @@ export function QualificationFit({
               padding: "var(--space-8) var(--space-6)",
               background: "var(--color-surface-base)",
               border: "1px solid var(--color-border-light)",
-              borderTop: "4px solid #1a4731",
+              borderTop: "4px solid var(--color-accent)",
               boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <h3
-              style={{
-                fontSize: "var(--font-size-xl)",
-                fontFamily: "var(--font-display)",
-                color: "#0f172a",
-                marginBottom: "var(--space-4)",
-              }}
-            >
-              Good fit
-            </h3>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-4)" }}>
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 14,
+                  background: "var(--color-accent-pale)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <CheckIcon size={24} />
+              </span>
+              <h3
+                style={{
+                  fontSize: "var(--font-size-xl)",
+                  fontFamily: "var(--font-display)",
+                  color: "#0f172a",
+                  margin: 0,
+                }}
+              >
+                Good fit
+              </h3>
+            </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {qualifies.items.slice(0, 5).map((item) => (
+              {qualifies.items.map((item) => (
                 <li
                   key={item}
                   style={{
@@ -185,22 +196,7 @@ export function QualificationFit({
                     color: "var(--color-text-primary)",
                   }}
                 >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: "var(--radius-full)",
-                      background: "rgba(26, 71, 49, 0.1)",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      marginTop: 2,
-                    }}
-                  >
-                    <CheckIcon />
-                  </span>
+                  <CheckIcon />
                   <span>
                     <RichText text={item} />
                   </span>
@@ -225,18 +221,36 @@ export function QualificationFit({
               flexDirection: "column",
             }}
           >
-            <h3
-              style={{
-                fontSize: "var(--font-size-xl)",
-                fontFamily: "var(--font-display)",
-                color: "#0f172a",
-                marginBottom: "var(--space-4)",
-              }}
-            >
-              Usually not a fit
-            </h3>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-4)" }}>
+              <span
+                aria-hidden="true"
+                className="qualify-cross-icon"
+                style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 14,
+                  background: "#fff1f2",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <CrossIcon size={24} />
+              </span>
+              <h3
+                style={{
+                  fontSize: "var(--font-size-xl)",
+                  fontFamily: "var(--font-display)",
+                  color: "#0f172a",
+                  margin: 0,
+                }}
+              >
+                Usually not a fit
+              </h3>
+            </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {notFit.items.slice(0, 6).map((item) => (
+              {notFit.items.map((item) => (
                 <li
                   key={item}
                   style={{
@@ -249,23 +263,7 @@ export function QualificationFit({
                     color: "var(--color-text-secondary)",
                   }}
                 >
-                  <span
-                    aria-hidden="true"
-                    className="qualify-cross-icon"
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: "var(--radius-full)",
-                      background: "#fee2e2",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      marginTop: 2,
-                    }}
-                  >
-                    <CrossIcon />
-                  </span>
+                  <CrossIcon />
                   <span>{item}</span>
                 </li>
               ))}
@@ -275,8 +273,16 @@ export function QualificationFit({
 
         {/* Centered CTA */}
         <div style={{ marginTop: "var(--space-10)", textAlign: "center" }}>
-          <Button href="/apply" variant="primary">
-            Apply for a Free Website
+          <Button
+            href="/apply"
+            variant="primary"
+            className="cta-btn-accent"
+            style={{
+              background: "var(--color-accent)",
+              boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)",
+            }}
+          >
+            See If You Qualify
           </Button>
         </div>
       </div>

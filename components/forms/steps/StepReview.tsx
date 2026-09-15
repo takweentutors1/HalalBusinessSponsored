@@ -59,7 +59,7 @@ export function StepReview({
               href="/programme-terms"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "var(--color-primary-accessible)", textDecoration: "underline" }}
+              style={{ color: "var(--color-accent)", textDecoration: "underline" }}
             >
               Programme Terms
             </a>
