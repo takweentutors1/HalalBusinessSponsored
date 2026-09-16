@@ -24,12 +24,6 @@ function TrendUpIcon() {
   );
 }
 
-const MOCK_CARD_ICONS = [
-  <path key="a" d="M4 18V8l8-4 8 4v10M8 18v-5h8v5" />,
-  <path key="b" d="M7 10h10M7 14h6M5 4h14a2 2 0 0 1 2 2v12H3V6a2 2 0 0 1 2-2z" />,
-  <path key="c" d="M4 12l4 4L20 4M4 20h16" />,
-];
-
 /**
  * Two-column hero: copy on the left, a decorative "browser window" mockup
  * on the right — ported from the docs/index.html redesign (previously a
@@ -103,16 +97,16 @@ export function Hero() {
         // candidate than the h1 fix from Phase 7 solved — transforms
         // don't affect "when was this content painted", so this settles
         // into place with zero LCP exposure.
-        .fromTo(".hero-browser-mockup", { x: 40, scale: 0.96 }, { x: 0, scale: 1, duration: 1 }, 0)
+        .fromTo(".browser", { x: 40, scale: 0.96 }, { x: 0, scale: 1, duration: 1 }, 0)
         .from(
-          ".hero-mock-card",
+          ".mock-card",
           { opacity: 0, y: 16, stagger: 0.1, duration: 0.5, ease: "power2.out" },
           "-=0.3"
         );
 
       // Idle float once settled — small, continuous, not part of the
       // one-shot entrance timeline above.
-      gsap.to(".hero-browser-mockup", {
+      gsap.to(".browser", {
         y: 8,
         duration: 4,
         repeat: -1,
@@ -265,116 +259,62 @@ export function Hero() {
         {/* Browser mockup visual — purely decorative placeholder content
             (fake pill/heading/body text), not real information, so it's
             hidden from assistive tech rather than mislabeled as meaningful. */}
-        <div
-          aria-hidden="true"
-          className="hero-browser-mockup"
-          style={{
-            border: "1px solid #dfe5e2",
-            borderRadius: "var(--radius-2xl)",
-            background: "var(--color-surface-base)",
-            boxShadow: "0 30px 70px rgba(17,24,39,.12)",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              height: 42,
-              borderBottom: "1px solid var(--color-border-light)",
-              display: "flex",
-              alignItems: "center",
-              gap: 7,
-              padding: "0 14px",
-              background: "#fafafa",
-            }}
-          >
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#d1d5db" }} />
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#d1d5db" }} />
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#d1d5db" }} />
+        <div className="browser" aria-label="Website project mockup">
+          <div className="browser-top">
+            <span className="dot" />
+            <span className="dot" />
+            <span className="dot" />
           </div>
-
-          <div style={{ padding: "var(--space-5)" }}>
-            <div
-              className="ui-mock-hero"
-              style={{
-                borderRadius: "var(--radius-xl)",
-                minHeight: 210,
-                background: "linear-gradient(135deg,#f9fafb,#eefbf3)",
-                padding: "var(--space-6)",
-                display: "grid",
-                gap: "var(--space-4)",
-              }}
-            >
-              <div>
-                <span
-                  style={{
-                    display: "inline-block",
-                    background: "var(--color-accent)",
-                    color: "#fff",
-                    borderRadius: "var(--radius-full)",
-                    padding: "6px 10px",
-                    fontSize: "0.72rem",
-                    fontWeight: 800,
-                    marginBottom: "var(--space-3)",
-                  }}
-                >
-                  {hero.mockVisual.pill}
-                </span>
-                <h4 style={{ fontSize: "1.55rem", marginBottom: "var(--space-2)", letterSpacing: "-0.03em" }}>
-                  {hero.mockVisual.heading}
-                </h4>
-                <p style={{ fontSize: "0.82rem", color: "var(--color-text-secondary)", margin: 0 }}>
-                  {hero.mockVisual.body}
-                </p>
+          <div className="browser-body">
+            <div className="mock-hero">
+              <div className="mock-copy">
+                <span className="mock-pill">Local business</span>
+                <h4>A modern website that makes the business feel established.</h4>
+                <p>Clear services, stronger trust, and one obvious enquiry path.</p>
               </div>
-              <div
-                aria-hidden="true"
-                style={{
-                  borderRadius: "var(--radius-lg)",
-                  background:
-                    "linear-gradient(160deg, rgba(34,197,94,.18), rgba(34,197,94,.02)), var(--color-surface-elevated)",
-                }}
-              />
+              <div className="mock-img" aria-hidden="true">
+                <svg viewBox="0 0 240 180" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+                  <rect width="240" height="180" rx="16" fill="#e8faf0" />
+                  <circle cx="185" cy="55" r="46" fill="#c2f3d6" />
+                  <rect x="22" y="26" width="158" height="128" rx="14" fill="#ffffff" stroke="#bbf7d0" strokeWidth="2.5" />
+                  <rect x="38" y="44" width="88" height="12" rx="6" fill="#17c65c" />
+                  <rect x="38" y="68" width="112" height="7" rx="3.5" fill="#9ca3af" />
+                  <rect x="38" y="84" width="98" height="7" rx="3.5" fill="#d1d5db" />
+                  <rect x="38" y="108" width="58" height="22" rx="6" fill="#17c65c" />
+                </svg>
+              </div>
             </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "var(--space-3)",
-                marginTop: "var(--space-4)",
-              }}
-            >
-              {MOCK_CARD_ICONS.map((path, i) => (
-                <div
-                  key={i}
-                  aria-hidden="true"
-                  className="hero-mock-card"
-                  style={{
-                    minHeight: 100,
-                    border: "1px solid var(--color-border-light)",
-                    borderRadius: "var(--radius-lg)",
-                    background: "var(--color-surface-base)",
-                    padding: "var(--space-3)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "var(--radius-md)",
-                      background: "var(--color-accent-pale)",
-                      display: "grid",
-                      placeItems: "center",
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                      {path}
-                    </svg>
-                  </div>
-                  <div style={{ height: 7, borderRadius: 99, background: "var(--color-primary-light)", width: "55%", marginTop: "var(--space-3)" }} />
-                  <div style={{ height: 7, borderRadius: 99, background: "var(--color-border-medium)", width: "80%", marginTop: 6 }} />
+            <div className="mock-cards">
+              <div className="mock-card">
+                <div className="icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 18V8l8-4 8 4v10" />
+                    <path d="M8 18v-5h8v5" />
+                  </svg>
                 </div>
-              ))}
+                <div className="line green" />
+                <div className="line" />
+              </div>
+              <div className="mock-card">
+                <div className="icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M7 10h10M7 14h6" />
+                    <path d="M5 4h14a2 2 0 0 1 2 2v12H3V6a2 2 0 0 1 2-2z" />
+                  </svg>
+                </div>
+                <div className="line green" />
+                <div className="line" />
+              </div>
+              <div className="mock-card">
+                <div className="icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 12l4 4L20 4" />
+                    <path d="M4 20h16" />
+                  </svg>
+                </div>
+                <div className="line green" />
+                <div className="line" />
+              </div>
             </div>
           </div>
         </div>

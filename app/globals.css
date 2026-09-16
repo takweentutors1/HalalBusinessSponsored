@@ -114,25 +114,9 @@ p {
    .ui-header-nav-link above: hidden by default, shown only at the
    same width HeaderNav disappears, so there's exactly one way to
    reach these links at any given viewport width. */
-.ui-mobile-nav-toggle {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  .ui-mobile-nav-toggle {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
+.ui-mobile-nav-toggle,
+.ui-mobile-nav {
+  display: none !important;
 }
 
 .ui-mobile-nav-bar {
@@ -201,45 +185,64 @@ p {
   gap: var(--space-6);
 }
 
-/* Tighten header chrome on small phone widths so the logo and Apply Now
-   button both fit comfortably. The wordmark itself keeps the same
-   font-size as everywhere else (including the footer) — "Takween
-   Connect" is short enough not to need its own shrink. */
-@media (max-width: 480px) {
+/* Logo styling across desktop and mobile: wordmark is always visible next to the icon */
+.ui-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.ui-logo-wordmark {
+  display: inline-block !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Header and logo on mobile: wordmark stays clearly visible next to the logo in both
+   header and footer, and the Apply Now CTA is sized proportionally */
+@media (max-width: 640px) {
   .ui-site-header {
     padding: var(--space-3) var(--space-4);
   }
 
-  .ui-site-logo-link .ui-logo-icon {
-    width: 24px;
-    height: 24px;
+  .ui-site-logo-link {
+    gap: var(--space-2);
+    flex-shrink: 0;
   }
 
-  /* Icon-only logo below 480px: even after shrinking the icon and the
-     Apply Now button, the wordmark still doesn't have room next to
-     both the CTA and MobileNav's hamburger toggle without truncating
-     mid-word. The icon alone still reads as the brand mark. */
+  .ui-site-logo-link .ui-logo-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
   .ui-logo-wordmark {
-    display: none;
+    display: inline-block !important;
+    font-size: 1.02rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .ui-header-cta {
-    padding: calc(var(--space-1) * 1.25 * 1.25) calc(var(--space-3) * 1.25 * 1.25) !important;
-    font-size: calc(var(--font-size-xs) * 1.25) !important;
+    padding: 8px 16px !important;
+    font-size: 0.88rem !important;
+    white-space: nowrap !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .ui-header-actions {
     gap: var(--space-3);
-  }
-
-  .ui-mobile-nav-toggle {
-    width: 32px;
-    height: 32px;
-    gap: 4px;
-  }
-
-  .ui-mobile-nav-bar {
-    width: 18px;
+    flex-shrink: 0;
   }
 }
 
@@ -373,6 +376,9 @@ p {
    the header is treated as stable and not touched). */
 .ui-header-cta {
   background: var(--color-accent);
+  padding: calc(var(--space-2) * 1.25) calc(var(--space-5) * 1.25);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
 }
 
 .ui-header-cta:hover:not(:disabled) {
@@ -538,5 +544,144 @@ p {
   color: var(--color-primary-accessible);
   margin-bottom: var(--space-2);
   display: inline-block;
+}
+
+/* Hero Browser Mockup */
+.browser {
+  border: 1px solid #dfe5e2;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 30px 70px rgba(17, 24, 39, 0.12);
+  overflow: hidden;
+  transform: perspective(1000px) rotateY(-2deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.browser:hover {
+  transform: perspective(1000px) rotateY(0deg) translateY(-4px);
+  box-shadow: 0 35px 80px rgba(17, 24, 39, 0.16);
+}
+.browser-top {
+  height: 42px;
+  border-bottom: 1px solid var(--color-border-light, #e5e7eb);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  background: #fafafa;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+.browser-body {
+  padding: 20px;
+}
+.mock-hero {
+  border-radius: 18px;
+  min-height: 210px;
+  background: linear-gradient(135deg, #f9fafb, #eefbf3);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+}
+.mock-copy h4 {
+  font-size: 1.55rem;
+  margin: 0 0 9px;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--color-text-primary, #111827);
+  line-height: 1.2;
+}
+.mock-copy p {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.45;
+}
+.mock-pill {
+  display: inline-block;
+  background: var(--color-accent, #17c65c);
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.mock-img {
+  border-radius: 16px;
+  background: #e8faf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  min-height: 180px;
+}
+.mock-img svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.mock-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.mock-card {
+  min-height: 110px;
+  border: 1px solid var(--color-border-light, #e5e7eb);
+  border-radius: 16px;
+  background: #fff;
+  padding: 14px;
+}
+.mock-card .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #e8faf0;
+  color: var(--color-accent, #17c65c);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(23, 198, 92, 0.18);
+}
+.mock-card .icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mock-card .line {
+  height: 7px;
+  border-radius: 99px;
+  background: #d1d5db;
+  margin-top: 8px;
+}
+.mock-card .line.green {
+  background: #17c65c;
+  width: 60%;
+  margin-top: 12px;
+}
+
+@media (max-width: 960px) {
+  .browser {
+    transform: none;
+  }
+}
+@media (max-width: 640px) {
+  .mock-hero {
+    grid-template-columns: 1fr;
+  }
+  .mock-img {
+    min-height: 140px;
+  }
 }
 

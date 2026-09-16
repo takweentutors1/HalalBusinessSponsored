@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { HeaderNav } from "./HeaderNav";
-import { MobileNav } from "./MobileNav";
 import { Button } from "@/components/ui";
 import { brand } from "@/lib/config";
 
@@ -26,7 +25,7 @@ export function SiteHeader() {
         href="/"
         aria-label={`${brand.name} — home`}
         className="ui-site-logo-link"
-        style={{ display: "inline-flex", alignItems: "center", minWidth: 0, maxWidth: "100%" }}
+        style={{ display: "inline-flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}
       >
         <Logo size={32} animated showWordmark />
       </Link>
@@ -48,14 +47,9 @@ export function SiteHeader() {
           href="/apply"
           variant="primary"
           className="ui-header-cta"
-          style={{
-            padding: "calc(var(--space-2) * 1.25) calc(var(--space-5) * 1.25)",
-            fontSize: "var(--font-size-sm)",
-          }}
         >
           Apply Now
         </Button>
-        <MobileNav />
       </nav>
     </header>
   );

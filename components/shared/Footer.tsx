@@ -28,7 +28,14 @@ export function Footer() {
           flexWrap: "wrap",
         }}
       >
-        <Logo size={28} showWordmark />
+        <Link
+          href="/"
+          aria-label={`${brand.name} — home`}
+          className="ui-site-logo-link"
+          style={{ display: "inline-flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}
+        >
+          <Logo size={28} showWordmark />
+        </Link>
 
         <nav
           style={{

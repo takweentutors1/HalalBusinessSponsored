@@ -28,12 +28,14 @@ export function Logo({
 }: LogoProps) {
   return (
     <span
+      className="ui-logo"
       style={{
         display: "inline-flex",
         alignItems: "center",
         gap: "var(--space-3)",
         minWidth: 0,
         maxWidth: "100%",
+        flexShrink: 0,
       }}
     >
       <svg
@@ -43,6 +45,7 @@ export function Logo({
         viewBox="0 0 100 100"
         aria-hidden="true"
         role="img"
+        style={{ flexShrink: 0 }}
       >
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -69,8 +72,8 @@ export function Logo({
             letterSpacing: "-0.01em",
             color: wordmarkColor ?? "var(--color-accent)",
             whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
+            flexShrink: 0,
+            display: "inline-block",
           }}
         >
           {brand.name}
