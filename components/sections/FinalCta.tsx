@@ -16,13 +16,14 @@ export function FinalCta() {
         background: "#fff",
       }}
     >
-      <div style={{ width: "min(1180px, calc(100% - var(--space-8) * 2))", margin: "0 auto" }}>
+      <div className="final-cta-container" style={{ width: "min(1180px, calc(100% - var(--space-8) * 2))", margin: "0 auto" }}>
         <div
+          className="final-cta-card"
           style={{
             position: "relative",
             overflow: "hidden",
             textAlign: "center",
-            padding: 52,
+            padding: "52px 36px",
             border: "1px solid var(--color-border-light)",
             borderRadius: 28,
             background:
@@ -65,10 +66,12 @@ export function FinalCta() {
 
           {/* Reassurance Chips */}
           <div
+            className="final-cta-chips"
             style={{
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
+              alignItems: "center",
               gap: 10,
               marginBottom: "var(--space-6)",
             }}
@@ -76,6 +79,7 @@ export function FinalCta() {
             {REASSURANCE_CHIPS.map((chip) => (
               <span
                 key={chip}
+                className="final-cta-chip"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -86,34 +90,43 @@ export function FinalCta() {
                   background: "#fff",
                   border: "1px solid var(--color-border-light)",
                   borderRadius: "var(--radius-full)",
-                  padding: "8px 11px",
+                  padding: "8px 14px",
+                  whiteSpace: "nowrap",
+                  lineHeight: 1.2,
                 }}
               >
-                <span aria-hidden="true">✓</span>
-                {chip}
+                <span aria-hidden="true" style={{ color: "var(--color-accent)", fontWeight: 800 }}>✓</span>
+                <span>{chip}</span>
               </span>
             ))}
           </div>
 
           {/* Action Button */}
-          <Button
-            href="/apply"
-            variant="primary"
-            style={{
-              background: "var(--color-accent)",
-              color: "white",
-              fontWeight: 800,
-              fontSize: "1rem",
-              minHeight: 50,
-              padding: "0 22px",
-              borderRadius: 12,
-              boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)",
-              display: "inline-flex",
-              alignItems: "center",
-            }}
-          >
-            <span>{finalCta.ctaLabel}</span>
-          </Button>
+          <div className="final-cta-btn-wrap" style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+            <Button
+              href="/apply"
+              variant="primary"
+              className="final-cta-btn"
+              style={{
+                background: "var(--color-accent)",
+                color: "white",
+                fontWeight: 800,
+                fontSize: "1rem",
+                minHeight: 50,
+                padding: "0 28px",
+                borderRadius: 12,
+                boxShadow: "0 10px 24px rgba(41, 193, 91, 0.25)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                margin: "0 auto",
+              }}
+            >
+              <span>{finalCta.ctaLabel}</span>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
