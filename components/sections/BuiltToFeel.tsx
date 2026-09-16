@@ -13,7 +13,7 @@ interface FeelCard {
 const CARDS: FeelCard[] = [
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 2L5 14h6l-1 8 8-12h-6z" />
       </svg>
     ),
@@ -22,7 +22,7 @@ const CARDS: FeelCard[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 5h16v14H4z" />
         <path d="M4 9h16M8 5v4" />
       </svg>
@@ -32,7 +32,7 @@ const CARDS: FeelCard[] = [
   },
   {
     icon: (
-      <svg aria-hidden="true" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-dark)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z" />
         <path d="M9 12l2 2 4-4" />
       </svg>
@@ -108,8 +108,8 @@ export function BuiltToFeel() {
                 onMouseEnter={handleIconEnter}
                 onMouseLeave={handleIconLeave}
                 style={{
-                  width: 46,
-                  height: 46,
+                  width: 54,
+                  height: 54,
                   borderRadius: "var(--radius-lg)",
                   background: "var(--color-accent-pale)",
                   display: "grid",

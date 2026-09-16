@@ -66,7 +66,7 @@ function StepCard({
         style={{
           fontFamily: "var(--font-display)",
           marginBottom: "var(--space-2)",
-          fontSize: "1.05rem",
+          fontSize: "20px",
           fontWeight: 700,
           color: "#0f172a",
           lineHeight: 1.3,
@@ -123,7 +123,6 @@ export function ProcessSteps() {
       <div style={{ position: "relative", zIndex: 10, maxWidth: 960, margin: "0 auto" }}>
         {/* Centered Header */}
         <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
-          <span className="ui-section-eyebrow">HOW IT WORKS</span>
           <h2 style={{ marginBottom: "var(--space-2)", fontSize: "clamp(2rem, 3.7vw, 3.9rem)" }}>
             A <span style={{ color: "var(--color-accent)" }}>simple 4-step</span> process.
           </h2>

@@ -8,20 +8,27 @@ export interface SectionRadarItem {
   /** Must match a real section id on the page (see app/(marketing)/page.tsx). */
   id: string;
   label: string;
+  subtitle?: string;
+  number?: string;
 }
 
 /**
- * Same default subset as HeaderNav.tsx's DEFAULT_HEADER_NAV_ITEMS —
- * deliberately not all 12 section ids, which would make for a very
- * cramped dot column. Callers can override via the `items` prop.
+ * Comprehensive chapter list covering all key sections of the landing page.
+ * Styled with adaptive micro-dots and rich two-line glassmorphic heading badges.
  */
 export const DEFAULT_SECTION_RADAR_ITEMS: SectionRadarItem[] = [
-  { id: "the-problem", label: "The Problem" },
-  { id: "solution", label: "The Solution" },
-  { id: "scope", label: "What You Get" },
-  { id: "who-qualifies", label: "Who Qualifies" },
-  { id: "how-it-works", label: "How It Works" },
-  { id: "faq", label: "FAQ" },
+  { id: "hero", number: "01", label: "Overview", subtitle: "Free Website Initiative" },
+  { id: "the-problem", number: "02", label: "The Problem", subtitle: "Agency Traps & High Costs" },
+  { id: "solution", number: "03", label: "The Solution", subtitle: "Zero-Interest Digital Build" },
+  { id: "value-comparison", number: "04", label: "Market Value", subtitle: "£3,500 Agency Equivalent for £0" },
+  { id: "built-to-feel", number: "05", label: "Built to Feel", subtitle: "Custom Motion & High-Speed Craft" },
+  { id: "why-its-sponsored", number: "06", label: "Why Sponsored", subtitle: "Community Waqf Model" },
+  { id: "scope", number: "07", label: "What You Get", subtitle: "Full Scope Deliverables" },
+  { id: "who-qualifies", number: "08", label: "Who Qualifies", subtitle: "Eligibility & Selection Fit" },
+  { id: "capacity", number: "09", label: "Live Capacity", subtitle: "Real-Time Monthly Slots" },
+  { id: "how-it-works", number: "10", label: "How It Works", subtitle: "4-Step Process" },
+  { id: "faq", number: "11", label: "FAQ", subtitle: "Questions & Clear Answers" },
+  { id: "final-cta", number: "12", label: "Apply Now", subtitle: "Claim Your Sponsored Site" },
 ];
 
 interface SectionRadarProps {
@@ -30,21 +37,13 @@ interface SectionRadarProps {
 }
 
 /**
- * Vertical "chapter dots" floating on the right edge of the viewport,
- * with a progress rail behind them: a thin track fills from the first
- * tracked section's top to the last one's bottom, scrubbed 1:1 to
- * scroll position (not a discrete per-dot jump — the fill height is a
- * continuous function of scroll progress across the whole tracked
- * range). The active dot (closest section, same IntersectionObserver
- * technique as HeaderNav.tsx) scales up and shows its label on hover;
- * every dot is a real <a href="#id"> for keyboard/click navigation.
+ * Elite Pro Vertical Section Navigator ("Radar") floating on the right viewport edge.
  *
- * Desktop and tablet only (see the ≥640px media queries in
- * app/globals.css, which also size the dots/rail/labels up a step for
- * each range): a fixed rail on the right edge would collide with
- * content below that. Dot size, rail width, gap, and label sizing are
- * all read from --radar-* custom properties set per breakpoint, with
- * inline fallbacks matching the smallest (tablet) size.
+ * Features:
+ * 1. Adaptive dot column fitting all sections with dynamic clamp spacing.
+ * 2. Signature #17c65c vibrant emerald styling (rail glow, active dot halo, pulse beacon).
+ * 3. Rich two-line glassmorphic heading badges (Chapter #, Title, and Subtitle).
+ * 4. GSAP ScrollTrigger continuous fill rail + IntersectionObserver spy with edge clamping.
  */
 export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }: SectionRadarProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -52,15 +51,18 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
   const railFillRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
 
-  // Active-dot spy — identical band/logic to HeaderNav.tsx, kept in
-  // sync deliberately: both components answer "what section am I on"
-  // and should never disagree about it.
+  // Active section spy with boundary edge listeners for top (Hero) and bottom (Final CTA)
   useEffect(() => {
     const targets = items
       .map((item) => ({ item, el: document.getElementById(item.id) }))
-      .filter((t): t is { item: SectionRadarItem; el: HTMLElement } => t.el !== null);
+      .filter((t): t is { item: SectionRadarItem; el: HTMLElement } => t.el !== null && t.el.offsetHeight > 0);
 
     if (targets.length === 0) return;
+
+    // Default to first item if near top
+    if (window.scrollY < 120 && targets[0]) {
+      setActiveId(targets[0].item.id);
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -71,25 +73,32 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
           }
         }
       },
-      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      { rootMargin: "-15% 0px -60% 0px", threshold: 0 }
     );
 
     for (const { el } of targets) observer.observe(el);
-    return () => observer.disconnect();
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollY < 120 && targets[0]) {
+        setActiveId(targets[0].item.id);
+      } else if (scrollY + windowHeight >= docHeight - 80 && targets[targets.length - 1]) {
+        setActiveId(targets[targets.length - 1].item.id);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [items]);
 
-  // Progress rail — a continuous scrub, independent of which discrete
-  // dot is "active". Spans from the first tracked section's top to the
-  // last one's bottom, so the fill height is a genuine function of
-  // scroll position across that whole range, not a step function.
-  //
-  // Deliberately NOT gated behind prefersReducedMotion(): `scrub: true`
-  // (no lag/smoothing number) ties the fill directly 1:1 to scroll
-  // position rather than playing an independent eased animation, and
-  // this rail carries real functional information (scroll progress),
-  // not decoration — hiding it entirely for reduced-motion users would
-  // be a real information loss, not a courtesy. The separate active-dot
-  // "pop" below (a genuine eased, autoplaying animation) is still gated.
+  // Continuous GSAP scrubbed rail fill from first to last tracked section
   useGSAP(() => {
     const fill = railFillRef.current;
     if (!fill) return;
@@ -115,14 +124,13 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
     );
   }, [items]);
 
-  // Active dot pop — separate from the continuous rail scrub above,
-  // this is the discrete "you are here" feedback on the dot itself.
+  // Active dot spring feedback
   useGSAP(
     () => {
       if (prefersReducedMotion() || !activeId) return;
       const dot = dotRefs.current.get(activeId);
       if (!dot) return;
-      gsap.fromTo(dot, { scale: 1 }, { scale: 1.4, duration: 0.3, ease: "back.out(2)" });
+      gsap.fromTo(dot, { scale: 1 }, { scale: 1.35, duration: 0.35, ease: "back.out(2.2)" });
     },
     { dependencies: [activeId] }
   );
@@ -139,20 +147,27 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
         zIndex: 50,
       }}
     >
-      <div className="section-radar" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--radar-gap, var(--space-6))" }}>
-        {/* Track + fill rail, spanning from the center of the first dot
-            to the center of the last — positioned via inset rather than
-            a measured height, so it stays correct across re-renders. */}
+      <div
+        className="section-radar"
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "var(--radar-gap, clamp(10px, 1.8vh, 18px))",
+        }}
+      >
+        {/* Track + fill rail */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            top: "var(--radar-rail-inset, 6px)",
-            bottom: "var(--radar-rail-inset, 6px)",
+            top: "var(--radar-rail-inset, 8px)",
+            bottom: "var(--radar-rail-inset, 8px)",
             left: "50%",
             width: "var(--radar-rail-width, 2px)",
             transform: "translateX(-50%)",
-            background: "var(--color-border-light)",
+            background: "rgba(23, 198, 92, 0.18)",
             borderRadius: "var(--radius-full)",
           }}
         >
@@ -163,65 +178,166 @@ export function SectionRadar({ items = DEFAULT_SECTION_RADAR_ITEMS, className }:
               height: "100%",
               transformOrigin: "top",
               transform: "scaleY(0)",
-              background: "linear-gradient(180deg, var(--color-primary-accessible), var(--color-accent))",
+              background: "linear-gradient(180deg, #17c65c 0%, #10b981 100%)",
+              boxShadow: "0 0 10px rgba(23, 198, 92, 0.6)",
               borderRadius: "var(--radius-full)",
             }}
           />
         </div>
 
-        {items.map((item) => {
+        {items.map((item, index) => {
           const isActive = activeId === item.id;
           const isHovered = hoveredId === item.id;
+          const isVisible = isActive || isHovered;
+          const numText = item.number ?? String(index + 1).padStart(2, "0");
+
           return (
             <div key={item.id} style={{ position: "relative", display: "flex", alignItems: "center" }}>
-              {/* Label — shown on hover, or always for the active dot,
-                  sliding in from the right since the dots sit at the
-                  viewport's right edge. */}
-              <span
+              {/* Rich Glassmorphic Heading Badge (Slide in from right) */}
+              <div
                 aria-hidden="true"
                 style={{
                   position: "absolute",
-                  right: "calc(100% + var(--space-3))",
+                  right: "calc(100% + 14px)",
                   top: "50%",
-                  transform: "translateY(-50%)",
-                  whiteSpace: "nowrap",
-                  fontSize: "var(--radar-label-font, var(--font-size-xs))",
-                  fontWeight: 700,
-                  padding: "var(--radar-label-padding, 4px 10px)",
-                  borderRadius: "var(--radius-full)",
-                  background: "var(--color-surface-base)",
-                  boxShadow: "var(--shadow-sm)",
-                  color: isActive ? "var(--color-primary-accessible)" : "var(--color-text-secondary)",
-                  opacity: isHovered || isActive ? 1 : 0,
+                  transform: isVisible
+                    ? "translateY(-50%) translateX(0)"
+                    : "translateY(-50%) translateX(10px)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "6px 14px 6px 10px",
+                  borderRadius: "12px",
+                  background: "rgba(255, 255, 255, 0.94)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1px solid",
+                  borderColor: isVisible ? "#17c65c" : "rgba(23, 198, 92, 0.25)",
+                  boxShadow: isActive
+                    ? "0 8px 30px -4px rgba(23, 198, 92, 0.28), 0 4px 12px rgba(0, 0, 0, 0.06)"
+                    : "0 6px 20px -4px rgba(0, 0, 0, 0.08)",
+                  opacity: isVisible ? 1 : 0,
                   pointerEvents: "none",
-                  transition: "opacity 150ms ease",
+                  transition: "opacity 180ms ease, transform 220ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  whiteSpace: "nowrap",
+                  zIndex: 20,
                 }}
               >
-                {item.label}
-              </span>
+                {/* Number chip in vibrant #17c65c */}
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "10.5px",
+                    fontWeight: 800,
+                    fontFamily: "var(--font-mono, monospace)",
+                    letterSpacing: "0.04em",
+                    color: "#17c65c",
+                    background: "rgba(23, 198, 92, 0.12)",
+                    border: "1px solid rgba(23, 198, 92, 0.28)",
+                    borderRadius: "6px",
+                    padding: "2px 6px",
+                    lineHeight: 1,
+                  }}
+                >
+                  {numText}
+                </span>
 
+                {/* Section title & contextual subtitle */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "1px", textAlign: "left" }}>
+                  <span
+                    style={{
+                      fontSize: "12.5px",
+                      fontWeight: 700,
+                      color: isActive ? "#0f172a" : "#334155",
+                      lineHeight: 1.25,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  {item.subtitle && (
+                    <span
+                      style={{
+                        fontSize: "10px",
+                        fontWeight: 600,
+                        color: isActive ? "#17c65c" : "#64748b",
+                        lineHeight: 1.15,
+                        letterSpacing: "0.01em",
+                      }}
+                    >
+                      {item.subtitle}
+                    </span>
+                  )}
+                </div>
+
+                {/* Arrow pointer pointing towards dot */}
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    right: "-5px",
+                    top: "50%",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    width: "8px",
+                    height: "8px",
+                    background: "rgba(255, 255, 255, 0.94)",
+                    borderTop: "1px solid",
+                    borderRight: "1px solid",
+                    borderColor: isVisible ? "#17c65c" : "rgba(23, 198, 92, 0.25)",
+                  }}
+                />
+              </div>
+
+              {/* Navigation Node Dot */}
               <a
                 ref={(el) => {
                   if (el) dotRefs.current.set(item.id, el);
                   else dotRefs.current.delete(item.id);
                 }}
                 href={`#${item.id}`}
-                aria-label={item.label}
+                aria-label={`${numText}: ${item.label}${item.subtitle ? ` — ${item.subtitle}` : ""}`}
                 aria-current={isActive ? "true" : undefined}
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 style={{
                   position: "relative",
-                  zIndex: 1,
-                  display: "block",
-                  width: "var(--radar-dot-size, 10px)",
-                  height: "var(--radar-dot-size, 10px)",
+                  zIndex: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "var(--radar-dot-size, 11px)",
+                  height: "var(--radar-dot-size, 11px)",
                   borderRadius: "var(--radius-full)",
-                  background: isActive ? "var(--color-primary-accessible)" : "var(--color-surface-base)",
-                  border: `var(--radar-border-width, 2px) solid ${isActive ? "var(--color-primary-accessible)" : "var(--color-border-medium)"}`,
-                  transition: "background 200ms ease, border-color 200ms ease",
+                  background: isActive ? "#17c65c" : "#ffffff",
+                  border: `var(--radar-border-width, 2px) solid ${
+                    isActive ? "#17c65c" : "rgba(23, 198, 92, 0.45)"
+                  }`,
+                  boxShadow: isActive
+                    ? "0 0 0 3.5px rgba(23, 198, 92, 0.25), 0 0 16px rgba(23, 198, 92, 0.6)"
+                    : isHovered
+                    ? "0 0 0 2.5px rgba(23, 198, 92, 0.2), 0 0 10px rgba(23, 198, 92, 0.35)"
+                    : "0 1px 3px rgba(0, 0, 0, 0.08)",
+                  transition: "background 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
+                  cursor: "pointer",
                 }}
-              />
+              >
+                {/* Active radar ping beacon */}
+                {isActive && (
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      inset: "-4px",
+                      borderRadius: "50%",
+                      border: "1.5px solid #17c65c",
+                      animation: "radarPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+                      pointerEvents: "none",
+                    }}
+                  />
+                )}
+              </a>
             </div>
           );
         })}

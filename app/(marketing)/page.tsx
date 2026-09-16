@@ -34,7 +34,9 @@ export default function LandingPage() {
     <>
       {/* 1. Hero — not wrapped in Reveal: loads immediately, matching the
           docs/index.html redesign (only sections below the hero fade in). */}
-      <Hero />
+      <div id="hero">
+        <Hero />
+      </div>
 
       {/* 2. Explain Problem — GSAP-driven internal reveal (ProblemSection.tsx),
           not wrapped in <Reveal>: stacking the plain CSS block-fade on top

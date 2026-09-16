@@ -199,7 +199,7 @@ export function Hero() {
                   display: "flex",
                   alignItems: "flex-start",
                   gap: "var(--space-3)",
-                  fontSize: "1.05rem",
+                  fontSize: "18px",
                   fontWeight: 600,
                   color: "var(--color-text-primary)",
                   lineHeight: 1.5,

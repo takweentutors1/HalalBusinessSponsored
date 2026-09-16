@@ -81,12 +81,20 @@ p {
   line-height: 1.6;
 }
 
-/* Hero headline wraps to ~6 lines at the default 42px on phone widths —
-   shrink it so it reads as a tighter 3-4 line block instead. */
-@media (max-width: 640px) {
+/* Hero headline wraps to 6+ lines on phone widths — shrink it to a tighter
+   4-line block instead. !important is required because Hero.tsx sets
+   font-size inline (for the desktop clamp()), and an inline style otherwise
+   always beats a stylesheet media query. Sized in vw rather than rem/px:
+   devices with a larger OS/browser text-size preference (common default on
+   many Android phones, ~125%) scale rem-based font-size right back up to
+   the original overflow — vw is tied to physical viewport width, not font
+   metrics, so it stays a tight 4 lines regardless of that setting. Matches
+   the single-column breakpoint (ui-hero-grid's max-width: 960px) so there's
+   no gap where neither this nor the desktop clamp() has taken over. */
+@media (max-width: 960px) {
   .ui-hero-heading {
-    font-size: 2.125rem; /* 34px */
-    line-height: 1.25;
+    font-size: 8.5vw !important;
+    line-height: 1.2 !important;
   }
 }
 
@@ -469,33 +477,44 @@ p {
    collides with content rather than floating clear of it. */
 @media (min-width: 961px) {
   .section-radar-nav {
-    --radar-dot-size: 16px;
-    --radar-border-width: 3px;
-    --radar-rail-width: 3px;
-    --radar-rail-inset: 9px;
-    --radar-gap: var(--space-8);
-    --radar-offset: var(--space-8);
-    --radar-label-font: var(--font-size-sm);
-    --radar-label-padding: 6px 14px;
+    --radar-dot-size: 11px;
+    --radar-border-width: 2px;
+    --radar-rail-width: 2px;
+    --radar-rail-inset: 8px;
+    --radar-gap: clamp(10px, 1.8vh, 18px);
+    --radar-offset: var(--space-6);
   }
 }
 
 @media (min-width: 640px) and (max-width: 960px) {
   .section-radar-nav {
-    --radar-dot-size: 14px;
+    --radar-dot-size: 10px;
     --radar-border-width: 2px;
     --radar-rail-width: 2px;
-    --radar-rail-inset: 8px;
-    --radar-gap: var(--space-6);
-    --radar-offset: var(--space-5);
-    --radar-label-font: var(--font-size-xs);
-    --radar-label-padding: 5px 12px;
+    --radar-rail-inset: 7px;
+    --radar-gap: clamp(8px, 1.4vh, 14px);
+    --radar-offset: var(--space-4);
   }
 }
 
 @media (max-width: 639px) {
   .section-radar-nav {
     display: none;
+  }
+}
+
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
   }
 }
 
