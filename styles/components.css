@@ -457,3 +457,38 @@
   }
 }
 
+/* Site header: floating inset card on desktop, full-bleed sticky bar
+   below that. SiteHeader.tsx itself is never edited (standing project
+   rule) — these rules override its inline background/border/padding via
+   the .ui-site-header hook it already renders, using !important since
+   inline styles otherwise win. .ui-header-scroll-wrap is the sticky
+   wrapper div rendered by ScrollHeader.tsx, which also sets
+   [data-scrolled] on scroll so the header can shrink slightly. */
+@media (min-width: 961px) {
+  .ui-header-scroll-wrap {
+    padding: var(--space-4) var(--space-6) 0;
+  }
+
+  .ui-header-scroll-wrap .ui-site-header {
+    border: 1px solid var(--color-border-light) !important;
+    border-radius: var(--radius-2xl) !important;
+    background: rgba(255, 255, 255, 0.86) !important;
+    box-shadow: var(--shadow-md);
+    transition: padding 200ms ease, box-shadow 200ms ease;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .ui-header-scroll-wrap .ui-site-header {
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(14px) saturate(1.4);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    }
+  }
+
+  .ui-header-scroll-wrap[data-scrolled="true"] .ui-site-header {
+    padding-top: var(--space-3) !important;
+    padding-bottom: var(--space-3) !important;
+    box-shadow: var(--shadow-lg);
+  }
+}
+

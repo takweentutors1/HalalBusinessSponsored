@@ -6,15 +6,19 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Scroll-aware behavior (hide on fast downscroll, reveal on upscroll,
- * shadow once past the hero) bolted on from the *outside* — components/
- * shared/SiteHeader.tsx itself is never touched. That's a standing
- * project rule (the header is treated as stable/already-correct), not a
- * stylistic choice, so new header behavior always arrives as a wrapper
- * like this one rather than an edit to SiteHeader.tsx.
+ * shadow once past the hero, plus a floating inset card on desktop via
+ * the .ui-header-scroll-wrap/[data-scrolled] hooks in components.css)
+ * bolted on from the *outside* — components/shared/SiteHeader.tsx itself
+ * is never touched. That's a standing project rule (the header is
+ * treated as stable/already-correct), not a stylistic choice, so new
+ * header behavior always arrives as a wrapper like this one rather than
+ * an edit to SiteHeader.tsx.
  *
  * If the user prefers reduced motion, this renders as an inert sticky
- * wrapper — no hide/show tween, no shadow tween — so the header just
- * behaves like a plain `position: sticky` header.
+ * wrapper — no hide/show tween, no shadow tween, [data-scrolled] never
+ * set — so the header just behaves like a plain `position: sticky`
+ * header (desktop still gets the static floating-card look from CSS,
+ * just without the scroll-shrink).
  */
 export function ScrollHeader({ children }: { children: ReactNode }) {
   const headerWrapRef = useRef<HTMLDivElement>(null);
@@ -32,6 +36,10 @@ export function ScrollHeader({ children }: { children: ReactNode }) {
         onUpdate: (self) => {
           const currentScrollY = self.scroll();
           const delta = currentScrollY - lastScrollY;
+
+          // Drives the desktop floating-header shrink (see .ui-header-scroll-wrap
+          // in components.css) independently of the hide/reveal branches below.
+          el.dataset.scrolled = currentScrollY > 40 ? "true" : "false";
 
           if (currentScrollY > 120 && delta > 4) {
             gsap.to(el, {
@@ -66,6 +74,7 @@ export function ScrollHeader({ children }: { children: ReactNode }) {
   return (
     <div
       ref={headerWrapRef}
+      className="ui-header-scroll-wrap"
       style={{
         position: "sticky",
         top: 0,
