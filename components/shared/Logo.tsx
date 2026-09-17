@@ -67,10 +67,10 @@ export function Logo({
           className="ui-logo-wordmark"
           style={{
             fontFamily: "var(--font-body)",
-            fontWeight: 700,
+            fontWeight: 900,
             fontSize: "var(--font-size-lg)",
             letterSpacing: "-0.01em",
-            color: wordmarkColor ?? "var(--color-accent)",
+            color: wordmarkColor ?? "var(--color-neutral-900, #0f172a)",
             whiteSpace: "nowrap",
             flexShrink: 0,
             display: "inline-block",
