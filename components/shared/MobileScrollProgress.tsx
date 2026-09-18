@@ -9,8 +9,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
  * page scroll progress — the mobile-native alternative to SectionRadar's
  * dot rail (SectionRadar is tablet/desktop only, hidden below 640px; see
  * app/globals.css). Fixed above the header (SiteHeader/ScrollHeader sit
- * at zIndex 100) so it stays visible even while the header hides itself
- * on downscroll.
+ * at zIndex 100) so the progress bar stays visible over the sticky bar.
  *
  * Not gated behind prefersReducedMotion() for the same reason as
  * SectionRadar's rail fill: `scrub: true` ties the fill directly 1:1 to

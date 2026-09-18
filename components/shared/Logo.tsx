@@ -5,6 +5,8 @@ export interface LogoProps {
   animated?: boolean;
   showWordmark?: boolean;
   wordmarkColor?: string;
+  /** Unique SVG gradient id — required when more than one Logo is on screen. */
+  gradientId?: string;
 }
 
 /**
@@ -25,6 +27,7 @@ export function Logo({
   animated = false,
   showWordmark = true,
   wordmarkColor,
+  gradientId = "logoGradient",
 }: LogoProps) {
   return (
     <span
@@ -48,18 +51,18 @@ export function Logo({
         style={{ flexShrink: 0 }}
       >
         <defs>
-          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="var(--color-accent)" />
             <stop offset="100%" stopColor="var(--color-accent-dark)" />
           </linearGradient>
         </defs>
-        <circle cx="50" cy="50" r="49" fill="url(#logoGradient)" />
+        <circle cx="50" cy="50" r="49" fill={`url(#${gradientId})`} />
         <g className={animated ? "ui-logo-spin" : undefined}>
           <polygon
             fill="#ffffff"
             points="50,4 57.65,31.52 82.53,17.47 68.48,42.35 96,50 68.48,57.65 82.53,82.53 57.65,68.48 50,96 42.35,68.48 17.47,82.53 31.52,57.65 4,50 31.52,42.35 17.47,17.47 42.35,31.52"
           />
-          <circle cx="50" cy="50" r="9" fill="url(#logoGradient)" />
+          <circle cx="50" cy="50" r="9" fill={`url(#${gradientId})`} />
         </g>
       </svg>
       {showWordmark && (

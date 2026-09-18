@@ -35,7 +35,8 @@ body {
 
 body {
   min-height: 100%;
-  font-family: var(--font-body);
+  /* font-family: var(--font-body); */
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
   font-size: 16px;
   color: var(--color-text-primary);
   background: var(--color-surface-elevated);
@@ -53,14 +54,15 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
+  /* font-family: var(--font-display); */
+  /* font-family: "DM Sans", "Inter", "Segoe UI", sans-serif; */
   color: #0f172a;
   letter-spacing: -0.02em;
 }
 
 h1 {
   font-size: 2.625rem; /* 42px */
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.15;
 }
 
@@ -128,21 +130,36 @@ p {
   }
 }
 
-/* MobileNav.tsx — hamburger toggle for the section links HeaderNav's
-   pill row hides below 640px. Opposite visibility of
-   .ui-header-nav-link above: hidden by default, shown only at the
-   same width HeaderNav disappears, so there's exactly one way to
-   reach these links at any given viewport width. */
-.ui-mobile-nav-toggle,
+/* MobileNav.tsx — hamburger + vertical overlay card. Hidden on desktop
+   (HeaderNav's horizontal pills own that width). Shown only below 640px,
+   the same breakpoint HeaderNav disappears, so there's exactly one way
+   to reach these links at any given viewport width. */
 .ui-mobile-nav {
-  display: none !important;
+  display: none;
+}
+
+.ui-mobile-nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
 }
 
 .ui-mobile-nav-bar {
-  width: 22px;
-  height: 2px;
+  display: block;
+  width: 18px;
+  height: 2.5px;
   border-radius: var(--radius-full);
-  background: var(--color-text-primary);
+  background: var(--color-neutral-800);
   transition: transform 200ms ease, opacity 200ms ease;
 }
 
@@ -158,35 +175,137 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Dropdown panel — positioned against .ui-site-header (the nearest
-   positioned ancestor, via its own position: sticky), not against
-   .ui-mobile-nav itself, so it spans the full header width regardless
-   of where in the header's flex layout the toggle button sits. */
-.ui-mobile-nav-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+.ui-mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 198;
+  background: rgba(17, 24, 39, 0.18);
+}
+
+.ui-mobile-nav-sheet {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 199;
   background: var(--color-surface-base);
-  border-bottom: 1px solid var(--color-border-light);
-  box-shadow: var(--shadow-sm);
-  z-index: 99;
+  border-radius: 28px;
+  box-shadow: var(--shadow-xl);
+  padding: 14px 16px 20px;
+}
+
+.ui-mobile-nav-sheet-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 4px 4px 12px;
+}
+
+.ui-mobile-nav-sheet-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.ui-mobile-nav-sheet-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.ui-mobile-nav-apply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.ui-mobile-nav-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  border-radius: var(--radius-full);
 }
 
 .ui-mobile-nav-list {
   list-style: none;
   margin: 0;
-  padding: var(--space-2) var(--space-4);
+  padding: 8px 8px 4px;
   display: flex;
   flex-direction: column;
 }
 
 .ui-mobile-nav-link {
   display: block;
-  padding: var(--space-3) var(--space-2);
-  font-size: var(--font-size-base);
+  padding: 14px 8px;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--color-neutral-800);
+  text-decoration: none;
+}
+
+.ui-mobile-nav-link:hover,
+.ui-mobile-nav-link:focus-visible {
+  color: var(--color-primary-accessible);
+}
+
+@media (max-width: 640px) {
+  .ui-mobile-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ui-site-header {
+    padding: 6px 8px 6px 14px;
+  }
+
+  .ui-site-logo-link {
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .ui-site-logo-link .ui-logo-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .ui-logo-wordmark {
+    display: inline-block !important;
+    font-size: 0.95rem !important;
+    font-weight: 900 !important;
+    color: var(--color-neutral-900, #0f172a) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .ui-header-cta {
+    display: none !important;
+  }
+
+  .ui-header-actions {
+    gap: 0;
+    flex-shrink: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -222,60 +341,9 @@ p {
   opacity: 1 !important;
 }
 
-/* Header and logo on mobile: wordmark stays clearly visible next to the logo in both
-   header and footer, and the Apply Now CTA is sized proportionally */
-@media (max-width: 640px) {
-  .ui-site-header {
-    padding: var(--space-3) var(--space-4);
-  }
-
-  .ui-site-logo-link {
-    gap: var(--space-2);
-    flex-shrink: 0;
-  }
-
-  .ui-site-logo-link .ui-logo-icon {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-  }
-
-  .ui-logo-wordmark {
-    display: inline-block !important;
-    font-size: 1.02rem !important;
-    font-weight: 900 !important;
-    color: var(--color-neutral-900, #0f172a) !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .ui-header-cta {
-    padding: 8px 16px !important;
-    font-size: 0.88rem !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-    min-height: 38px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .ui-header-actions {
-    gap: var(--space-3);
-    flex-shrink: 0;
-  }
-}
-
-/* Defensive clearance for ultra-compact mobile viewports (<= 360px) to guarantee
-   comfortable breathing room (>= 24px) between the logo and the Apply Now CTA */
+/* Header and logo on mobile: wordmark stays visible; Apply Now text
+   button is replaced by the circular apply icon in MobileNav. */
 @media (max-width: 360px) {
-  .ui-site-header {
-    padding: var(--space-2) 10px;
-    gap: 12px;
-  }
-
   .ui-site-logo-link {
     gap: 6px;
   }
@@ -286,13 +354,7 @@ p {
   }
 
   .ui-logo-wordmark {
-    font-size: 0.92rem !important;
-  }
-
-  .ui-header-cta {
-    padding: 6px 12px !important;
-    font-size: 0.82rem !important;
-    min-height: 36px !important;
+    font-size: 0.88rem !important;
   }
 }
 

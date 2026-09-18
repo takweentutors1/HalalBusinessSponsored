@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { HeaderNav } from "./HeaderNav";
+import { MobileNav } from "./MobileNav";
 import { Button } from "@/components/ui";
 import { brand } from "@/lib/config";
 
@@ -50,6 +51,7 @@ export function SiteHeader() {
         >
           Apply Now
         </Button>
+        <MobileNav />
       </nav>
     </header>
   );

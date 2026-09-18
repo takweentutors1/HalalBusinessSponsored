@@ -16,7 +16,7 @@
   border-radius: var(--radius-md);
   border: none;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   font-size: var(--font-size-base);
   transition: all 300ms ease-in-out;
@@ -465,6 +465,20 @@
    inline styles otherwise win. .ui-header-scroll-wrap is the sticky
    wrapper div rendered by ScrollHeader.tsx, which also sets
    [data-scrolled] on scroll so the header can shrink slightly. */
+@media (max-width: 640px) {
+  .ui-header-scroll-wrap {
+    padding: 10px 12px 0;
+  }
+
+  .ui-header-scroll-wrap .ui-site-header {
+    border: 0 !important;
+    border-radius: var(--radius-full) !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 28px rgba(17, 24, 39, 0.1);
+    padding: 6px 8px 6px 14px !important;
+  }
+}
+
 @media (min-width: 961px) {
   .ui-header-scroll-wrap {
     padding: var(--space-4) var(--space-6) 0;

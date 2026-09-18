@@ -41,7 +41,8 @@ interface HeaderNavProps {
  * that file is treated as stable and never edited directly (see
  * feedback_dont_touch_siteheader memory); dropping this in alongside
  * it, the same way ScrollHeader.tsx wraps it, is a follow-up wiring
- * decision, not part of building the component itself.
+ * decision, not part of building the component itself. 
+ *
  */
 export function HeaderNav({ items = DEFAULT_HEADER_NAV_ITEMS, className }: HeaderNavProps) {
   const [activeId, setActiveId] = useState<string | null>(null);

@@ -34,11 +34,11 @@ export function FinalCta() {
           {/* Headline */}
           <h2
             style={{
-              maxWidth: 900,
+              // maxWidth: 800,
               margin: "0 auto var(--space-4)",
               color: "var(--color-text-primary)",
               fontSize: "clamp(2rem, 3.7vw, 3.9rem)",
-              fontFamily: "var(--font-display)",
+              // fontFamily: "var(--font-display)",
               fontWeight: 800,
               letterSpacing: "-0.035em",
               lineHeight: 1.05,
