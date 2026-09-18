@@ -63,10 +63,10 @@ export function MobileNav({ items = DEFAULT_HEADER_NAV_ITEMS }: MobileNavProps) 
       >
         Apply Now
       </Link>
-      <button
+      {/* <button
         ref={toggleRef}
         type="button"
-        className="ui-mobile-nav-toggle"
+        className="ui-mobile-nav-toggle d-none"
         aria-expanded={open}
         aria-controls="ui-mobile-nav-sheet"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -75,7 +75,7 @@ export function MobileNav({ items = DEFAULT_HEADER_NAV_ITEMS }: MobileNavProps) 
         <span className="ui-mobile-nav-bar" data-open={open} />
         <span className="ui-mobile-nav-bar" data-open={open} />
         <span className="ui-mobile-nav-bar" data-open={open} />
-      </button>
+      </button> */}
 
       {open ? (
         <>
