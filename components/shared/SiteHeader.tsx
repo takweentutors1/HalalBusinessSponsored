@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { HeaderNav } from "./HeaderNav";
+import { DesktopHeaderNav } from "./DesktopHeaderNav";
 import { MobileNav } from "./MobileNav";
 import { Button } from "@/components/ui";
 import { brand } from "@/lib/config";
@@ -17,7 +17,7 @@ export function SiteHeader() {
         borderBottom: "1px solid var(--color-border-light)",
         minWidth: 0,
         background: "var(--color-surface-base)",
-        position: "sticky",
+        position: "relative",
         top: 0,
         zIndex: 100,
       }}
@@ -34,16 +34,7 @@ export function SiteHeader() {
         className="ui-header-actions"
         style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
       >
-        {/* Wrapped in a plain div (not passed straight to HeaderNav's own
-            className prop) because HeaderNav's root <ul> sets its own
-            inline display: flex — an inline style always wins over the
-            .ui-header-nav-link media query's `display: none`, which would
-            silently break the existing hide-below-640px behavior. The
-            wrapper div has no competing inline display, so the CSS class
-            controls it cleanly instead. */}
-        <div className="ui-header-nav-link">
-          <HeaderNav />
-        </div>
+        <DesktopHeaderNav />
         <Button
           href="/apply"
           variant="primary"

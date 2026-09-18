@@ -466,11 +466,10 @@
    wrapper div rendered by ScrollHeader.tsx; .ui-header-scroll-spacer
    reserves the same height in document flow. */
 .ui-header-scroll-spacer {
-  pointer-events: none;
-  height: 88px;
+  display: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1023px), (pointer: coarse) {
   .ui-header-scroll-wrap {
     padding: 10px 12px 0;
   }
@@ -482,18 +481,26 @@
     box-shadow: 0 10px 28px rgba(17, 24, 39, 0.1);
     padding: 6px 8px 6px 14px !important;
   }
-
-  .ui-header-scroll-spacer {
-    height: 72px;
-  }
 }
 
-@media (min-width: 961px) {
-  .ui-header-scroll-wrap {
+html[data-compact-ui="true"] .ui-header-scroll-wrap {
+  padding: 10px 12px 0;
+}
+
+html[data-compact-ui="true"] .ui-header-scroll-wrap .ui-site-header {
+  border: 0 !important;
+  border-radius: var(--radius-full) !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.1);
+  padding: 6px 8px 6px 14px !important;
+}
+
+@media (min-width: 1024px) {
+  html:not([data-compact-ui="true"]) .ui-header-scroll-wrap {
     padding: var(--space-4) var(--space-6) 0;
   }
 
-  .ui-header-scroll-wrap .ui-site-header {
+  html:not([data-compact-ui="true"]) .ui-header-scroll-wrap .ui-site-header {
     border: 1px solid var(--color-border-light) !important;
     border-radius: var(--radius-2xl) !important;
     background: rgba(255, 255, 255, 0.86) !important;
@@ -502,21 +509,17 @@
   }
 
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-    .ui-header-scroll-wrap .ui-site-header {
+    html:not([data-compact-ui="true"]) .ui-header-scroll-wrap .ui-site-header {
       background: rgba(255, 255, 255, 0.7) !important;
       backdrop-filter: blur(14px) saturate(1.4);
       -webkit-backdrop-filter: blur(14px) saturate(1.4);
     }
   }
 
-  .ui-header-scroll-wrap[data-scrolled="true"] .ui-site-header {
+  html:not([data-compact-ui="true"]) .ui-header-scroll-wrap[data-scrolled="true"] .ui-site-header {
     padding-top: var(--space-3) !important;
     padding-bottom: var(--space-3) !important;
     box-shadow: var(--shadow-lg);
-  }
-
-  .ui-header-scroll-spacer {
-    height: 104px;
   }
 }
 

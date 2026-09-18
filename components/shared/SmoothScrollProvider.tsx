@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { shouldUseSmoothScroll } from "./CompactUiSync";
 
 /**
  * Module-level singleton, not React context — the only other consumer
@@ -34,6 +35,7 @@ export function getLenis(): Lenis | null {
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (typeof window === "undefined" || prefersReducedMotion()) return;
+    if (!shouldUseSmoothScroll()) return;
 
     const lenis = new Lenis({
       duration: 1.15,

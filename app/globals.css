@@ -8,30 +8,7 @@
 }
 
 html {
-  height: 100%;
-  max-width: 100vw;
-}
-
-/*
- * overflow-x: hidden must live on body ONLY, not html. Setting it on
- * both independently triggers the CSS overflow computed-value fixup
- * (overflow-x non-visible forces overflow-y to compute as "auto" on
- * each element separately), turning both <html> and <body> into their
- * own nested scroll containers. That breaks the "body propagates its
- * overflow to the viewport" quirk, which only applies when <html> has
- * overflow: visible — and without it, position: sticky descendants of
- * body stick relative to body's own box (which itself just scrolls
- * away as an ordinary block inside html's scrolling), not the actual
- * viewport. Symptom: any sticky header silently stops sticking during
- * scroll. Found while wiring up ScrollHeader.tsx — this bug predates
- * that work and would have affected SiteHeader.tsx's own sticky
- * positioning on its own, undetected until scroll behavior was
- * actually measured mid-scroll rather than screenshotted at rest.
- */
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  overflow-x: clip;
+  min-height: 100%;
 }
 
 body {
@@ -44,6 +21,14 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clip wide sections without turning body into a scroll container.
+   overflow-x on body/html is what made the header scroll away on the
+   first mobile swipe after reload. */
+.ui-app-main {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 a {
@@ -120,15 +105,20 @@ p {
   }
 } */
 
-/* Hide secondary header nav link on narrow screens so the logo has room */
+/* Hide secondary header nav link on narrow / touch screens */
 .ui-header-nav-link {
   display: inline-block;
 }
 
-@media (max-width: 640px) {
-  .ui-header-nav-link {
-    display: none;
-  }
+.ui-header-scroll-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ui-header-scroll-wrap .ui-site-header {
+  position: relative !important;
+  top: auto !important;
 }
 
 /* MobileNav.tsx — hamburger + vertical overlay card. Hidden on desktop
@@ -221,11 +211,9 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   width: auto;
-  min-width: 40px;
   height: 40px;
-  padding: 0 12px;
+  padding: 0 14px;
   border-radius: var(--radius-full);
   background: var(--color-primary);
   color: #fff;
@@ -234,9 +222,7 @@ p {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-}
-
-.ui-mobile-nav-apply-text {
+  white-space: nowrap;
   line-height: 1;
 }
 
@@ -276,13 +262,44 @@ p {
   color: var(--color-primary-accessible);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1023px), (pointer: coarse) {
+  .ui-header-nav-link {
+    display: none !important;
+  }
+
   .ui-mobile-nav {
     display: flex;
     align-items: center;
     gap: 4px;
   }
 
+  .ui-header-cta {
+    display: none !important;
+  }
+
+  .ui-header-actions {
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .section-radar-nav {
+    display: none !important;
+  }
+}
+
+html[data-compact-ui="true"] .ui-header-nav-link,
+html[data-compact-ui="true"] .ui-header-cta,
+html[data-compact-ui="true"] .section-radar-nav {
+  display: none !important;
+}
+
+html[data-compact-ui="true"] .ui-mobile-nav {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 640px) {
   .ui-site-header {
     padding: 6px 8px 6px 14px;
   }
@@ -307,15 +324,6 @@ p {
     flex-shrink: 0 !important;
     visibility: visible !important;
     opacity: 1 !important;
-  }
-
-  .ui-header-cta {
-    display: none !important;
-  }
-
-  .ui-header-actions {
-    gap: 0;
-    flex-shrink: 0;
   }
 }
 
@@ -366,15 +374,6 @@ p {
 
   .ui-logo-wordmark {
     font-size: 0.88rem !important;
-  }
-
-  .ui-mobile-nav-apply-text {
-    display: none;
-  }
-
-  .ui-mobile-nav-apply {
-    width: 40px;
-    padding: 0;
   }
 }
 
@@ -614,7 +613,7 @@ p {
    desktop and tablet (was a single cramped 10px-dot size meant for
    desktop only); still hidden below 640px, where a fixed side rail
    collides with content rather than floating clear of it. */
-@media (min-width: 961px) {
+@media (min-width: 1024px) {
   .section-radar-nav {
     --radar-dot-size: 11px;
     --radar-border-width: 2px;
@@ -625,18 +624,7 @@ p {
   }
 }
 
-@media (min-width: 640px) and (max-width: 960px) {
-  .section-radar-nav {
-    --radar-dot-size: 10px;
-    --radar-border-width: 2px;
-    --radar-rail-width: 2px;
-    --radar-rail-inset: 7px;
-    --radar-gap: clamp(8px, 1.4vh, 14px);
-    --radar-offset: var(--space-4);
-  }
-}
-
-@media (max-width: 639px) {
+@media (max-width: 1023px) {
   .section-radar-nav {
     display: none;
   }
@@ -661,10 +649,14 @@ p {
    above — a top-pinned fill bar instead of a side dot rail. Hidden at
    the same 640px boundary where SectionRadar takes over, so exactly
    one scroll-progress indicator is ever visible at a time. */
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   .mobile-scroll-progress {
     display: none;
   }
+}
+
+html[data-compact-ui="true"] .mobile-scroll-progress {
+  display: block;
 }
 
 /* Eyebrow / Overline utility class */
