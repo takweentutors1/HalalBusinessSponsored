@@ -67,7 +67,7 @@ function StepCard({
           fontFamily: "var(--font-display)",
           marginBottom: "var(--space-2)",
           fontSize: "20px",
-          fontWeight: 700,
+          // fontWeight: 700,
           color: "#0f172a",
           lineHeight: 1.3,
         }}

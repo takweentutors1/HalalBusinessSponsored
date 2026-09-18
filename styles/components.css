@@ -458,13 +458,18 @@
   }
 }
 
-/* Site header: floating inset card on desktop, full-bleed sticky bar
-   below that. SiteHeader.tsx itself is never edited (standing project
-   rule) — these rules override its inline background/border/padding via
+/* Site header: floating inset card on desktop, pill bar on mobile.
+   SiteHeader.tsx itself is never edited (standing project rule) —
+   these rules override its inline background/border/padding via
    the .ui-site-header hook it already renders, using !important since
-   inline styles otherwise win. .ui-header-scroll-wrap is the sticky
-   wrapper div rendered by ScrollHeader.tsx, which also sets
-   [data-scrolled] on scroll so the header can shrink slightly. */
+   inline styles otherwise win. .ui-header-scroll-wrap is the fixed
+   wrapper div rendered by ScrollHeader.tsx; .ui-header-scroll-spacer
+   reserves the same height in document flow. */
+.ui-header-scroll-spacer {
+  pointer-events: none;
+  height: 88px;
+}
+
 @media (max-width: 640px) {
   .ui-header-scroll-wrap {
     padding: 10px 12px 0;
@@ -476,6 +481,10 @@
     background: #ffffff !important;
     box-shadow: 0 10px 28px rgba(17, 24, 39, 0.1);
     padding: 6px 8px 6px 14px !important;
+  }
+
+  .ui-header-scroll-spacer {
+    height: 72px;
   }
 }
 
@@ -504,6 +513,10 @@
     padding-top: var(--space-3) !important;
     padding-bottom: var(--space-3) !important;
     box-shadow: var(--shadow-lg);
+  }
+
+  .ui-header-scroll-spacer {
+    height: 104px;
   }
 }
 

@@ -74,7 +74,7 @@
    * the docs/index.html redesign; the fallback stacks only matter before
    * the webfont loads or if next/font's variable is ever missing.
    */
-  --font-display: var(--font-dm-sans), "Segoe UI", Arial, sans-serif;
+  --font-display: "Segoe UI", Arial, sans-serif;
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "Courier New", monospace;
 

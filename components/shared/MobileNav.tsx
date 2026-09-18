@@ -63,6 +63,7 @@ export function MobileNav({ items = DEFAULT_HEADER_NAV_ITEMS }: MobileNavProps) 
         aria-label="Apply Now"
       >
         <ApplyIcon />
+        <span className="ui-mobile-nav-apply-text">Apply</span>
       </Link>
       <button
         ref={toggleRef}
@@ -110,6 +111,7 @@ export function MobileNav({ items = DEFAULT_HEADER_NAV_ITEMS }: MobileNavProps) 
               onClick={() => setOpen(false)}
             >
               <ApplyIcon />
+              <span className="ui-mobile-nav-apply-text">Apply</span>
             </Link>
             <button
               ref={closeRef}
@@ -150,10 +152,10 @@ export function MobileNav({ items = DEFAULT_HEADER_NAV_ITEMS }: MobileNavProps) 
 
 function ApplyIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="8" r="3.25" stroke="currentColor" strokeWidth="1.8" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="5" y="3" width="14" height="18" rx="2.2" stroke="currentColor" strokeWidth="1.8" />
       <path
-        d="M5.5 19.2c.7-3.2 3.3-5.2 6.5-5.2s5.8 2 6.5 5.2"
+        d="M9 9h6M9 13h6M9 17h3.5"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
